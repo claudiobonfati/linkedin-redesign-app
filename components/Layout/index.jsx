@@ -1,11 +1,11 @@
 import React from 'react';
-import Header from '../components/Header';
+import Header from '../Header';
 
-const LayoutPrimary = (props) => (
+const Global = (props) => (
   <div className="layout-wrapper">
     <Header />
     {props.children}
   </div>
 );
 
-export default LayoutPrimary;
+export default Global;

@@ -1,10 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
-import LayoutPrimary from '../layouts/Primary';
+import Layout from '../components/Layout';
 
 export default function Home() {
   return (
-    <LayoutPrimary>
+    <Layout>
       <Head>
         <title>Linkedin Redesign</title>
         <link rel="icon" href="/favicon.ico" />
@@ -18,6 +18,6 @@ export default function Home() {
           </div>
         </main>
       </div>
-    </LayoutPrimary>
+    </Layout>
   );
 }
