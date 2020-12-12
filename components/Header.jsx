@@ -4,15 +4,26 @@ import { TweenMax, Power3 } from 'gsap';
 import styles from './Header.module.sass';
 import Search from './Search';
 import NotificationsButton from './NotificationsButton';
+import MessagesButton from './MessagesButton';
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.setActiveDrop = this.setActiveDrop.bind(this);
   }
 
   componentDidMount() {
     TweenMax.from(this.headerRef, 0.5, { css: { opacity: 0 }, ease: Power3.easeOut, delay: 0.2 });
+  }
+
+  setActiveDrop(target) {
+    if (target === 'messages') {
+      this.NotificationsButtonRef.hideDrop();
+    } else if (target === 'notifications') {
+      this.MessagesButtonRef.hideDrop();
+    }
   }
 
   render() {
@@ -41,14 +52,14 @@ class Header extends React.Component {
               <Search />
             </div>
             <div className="col-md-3 col-6 d-flex justify-content-end position-relative py-4">
-              <button
-                aria-expanded="false"
-                className={`${styles.navBarButtons}`}
-                type="button"
-              >
-                <span className="lnr lnr-bubble" />
-              </button>
-              <NotificationsButton />
+              <MessagesButton
+                setActiveDrop={this.setActiveDrop}
+                ref={(ref) => { this.MessagesButtonRef = ref; }}
+              />
+              <NotificationsButton
+                setActiveDrop={this.setActiveDrop}
+                ref={(ref) => { this.NotificationsButtonRef = ref; }}
+              />
               <button
                 aria-expanded="false"
                 className={`ml-3 ${styles.navBarButtons}`}

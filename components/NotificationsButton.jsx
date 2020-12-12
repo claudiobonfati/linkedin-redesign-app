@@ -47,28 +47,52 @@ class NotificationsButton extends React.Component {
     this.setState((prevState) => ({
       isVisible: !prevState.isVisible,
     }), () => {
-      this.toggleVisibility();
+      if (!this.state.isVisible) {
+        this.toggleVisibility();
+        this.props.setActiveDrop(null);
+      } else {
+        this.props.setActiveDrop('notifications');
+        setTimeout(() => {
+          this.toggleVisibility();
+        }, 200);
+      }
     });
   }
 
   toggleVisibility() {
     if (this.state.isVisible) {
-      TweenMax.to(this.dropRef, 0.2, {
-        css: {
-          opacity: 1, display: 'block', scale: 1,
-        },
-        ease: Power3.easeOut,
-      });
+      this.showDrop();
     } else {
-      TweenMax.to(this.dropRef, 0.2, {
-        css: {
-          opacity: 0, display: 'none', scale: 0.95,
-        },
-        ease: Power3.easeOut,
-      });
+      this.hideDrop();
     }
 
     this.activateTab(0);
+  }
+
+  showDrop() {
+    this.setState({
+      isVisible: true,
+    });
+
+    TweenMax.to(this.dropRef, 0.2, {
+      css: {
+        opacity: 1, display: 'block', scale: 1,
+      },
+      ease: Power3.easeOut,
+    });
+  }
+
+  hideDrop() {
+    this.setState({
+      isVisible: false,
+    });
+
+    TweenMax.to(this.dropRef, 0.2, {
+      css: {
+        opacity: 0, display: 'none', scale: 0.95,
+      },
+      ease: Power3.easeOut,
+    });
   }
 
   activateTab(tab) {
@@ -94,7 +118,7 @@ class NotificationsButton extends React.Component {
       <div className={`ml-3 ${styles.wrapper}`}>
         <button
           aria-expanded="false"
-          className={`${styles.navBarButtons} ${this.state.isVisible ? 'active' : ''}`}
+          className={`${styles.navBarButtons} ${this.state.isVisible ? styles.buttonActive : ''}`}
           type="button"
           onClick={this.onClickButton}
         >
@@ -122,8 +146,8 @@ class NotificationsButton extends React.Component {
                   7 people viewed you profile
                 </span>
                 <div className={styles.listProfilePics}>
-                  {[...Array(4)].map(() => (
-                    <div className="mr-2">
+                  {[...Array(4)].map((index) => (
+                    <div className="mr-2" key={index}>
                       <Image
                         src="https://i.pravatar.cc/300"
                         alt="Profile picture"
@@ -166,8 +190,8 @@ class NotificationsButton extends React.Component {
                   8 people viewed you profile
                 </span>
                 <div className={styles.listProfilePics}>
-                  {[...Array(4)].map(() => (
-                    <div className="mr-2">
+                  {[...Array(4)].map((index) => (
+                    <div className="mr-2" key={index}>
                       <Image
                         src="https://i.pravatar.cc/300"
                         alt="Profile picture"
