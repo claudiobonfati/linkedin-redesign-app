@@ -6,4 +6,7 @@ module.exports = {
       path.join(__dirname, 'styles')
     ],
   },
+  images: {
+    domains: ['i.pravatar.cc'],
+  },
 }
