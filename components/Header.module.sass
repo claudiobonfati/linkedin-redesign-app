@@ -1,28 +1,11 @@
 @import ../styles/_variables
 
+.wrapper
+  border-bottom: 1px solid $color-border
+
 .logo
   width: 30px
   height: 30px
-
-.buttonSelect
-  border-radius: 0
-  background: none
-  color: inherit
-  border: none
-  padding: 0
-  font: inherit
-  cursor: pointer
-  outline: inherit
-  transition: color .1s ease-out
-  &:hover,
-  &.active
-    color: $color-blue
-  span 
-    width: 15px
-    height: 15px
-    font-size: 10px
-    font-weight: bold
-    padding-left: 8px
 
 .navBarButtons
   border-radius: 0
@@ -43,55 +26,3 @@
   height: 35px !important
   min-width: initial !important
   min-height: initial !important
-
-.wrapperNotificationsDrop
-  width: 400px
-  position: absolute
-  top: 95%
-  right: 15px
-  background-color: white
-  box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075)
-  z-index: 5
-  border-radius: 3px
-  overflow: hidden
-
-  .NotificationsDropHeader
-    --gutter: 10px
-    background-color: $color-blue
-    margin: 0
-    padding: var(--gutter)
-    ul 
-      margin: 0
-      padding: 0
-      list-style: none
-      display: flex
-      flex-wrap: wrap
-      li
-        text-align: center
-        flex: 1 0 50%
-        white-space: nowrap
-        text-align: center
-        box-sizing: border-box
-        display: flex
-        flex-direction: row
-        flex-wrap: nowrap
-        justify-content: flex-start
-        align-content: stretch
-        align-items: flex-start
-        a
-          padding: var(--gutter)
-          order: 0
-          flex: 1 1 auto
-          align-self: stretch
-          border-radius: 3px
-          color: rgba(white, .7)
-          text-decoration: none
-          transition: color .1s ease-out
-          &:hover
-            text-decoration: none
-            color: white
-        &.activeItem
-          a 
-            color: white
-            background-color: rgba(black, .2)
-        

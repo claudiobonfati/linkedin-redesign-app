@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { TweenMax, Power3 } from 'gsap';
 import styles from './Header.module.sass';
 import Search from './Search';
+import DiscoverMenu from './DiscoverMenu';
 import NotificationsButton from './NotificationsButton';
 import MessagesButton from './MessagesButton';
 
@@ -21,17 +22,22 @@ class Header extends React.Component {
   setActiveDrop(target) {
     if (target === 'messages') {
       this.NotificationsButtonRef.hideDrop();
+      this.DiscoverMenuRef.hideDrop();
     } else if (target === 'notifications') {
+      this.MessagesButtonRef.hideDrop();
+      this.DiscoverMenuRef.hideDrop();
+    } else if (target === 'discover') {
+      this.NotificationsButtonRef.hideDrop();
       this.MessagesButtonRef.hideDrop();
     }
   }
 
   render() {
     return (
-      <header className={styles.wrapper} ref={(ref) => { this.headerRef = ref; }}>
+      <header className={`position-relative ${styles.wrapper}`} ref={(ref) => { this.headerRef = ref; }}>
         <div className="container">
           <div className="row align-items-center">
-            <div className="col-md-3 col-6 d-flex py-4">
+            <div className="col-md-3 col-6 d-flex py-4 position-static">
               <div className="align-self-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 504.4 504" className={`${styles.logo}`}>
                   <g id="linkedin" transform="translate(0 -0.2)">
@@ -42,10 +48,10 @@ class Header extends React.Component {
                 </svg>
               </div>
               <div className="border-left-gray align-self-center ml-4 pl-4">
-                <button type="button" className={`${styles.buttonSelect}`}>
-                  Discover
-                  <span className="lnr lnr-chevron-down" />
-                </button>
+                <DiscoverMenu
+                  setActiveDrop={this.setActiveDrop}
+                  ref={(ref) => { this.DiscoverMenuRef = ref; }}
+                />
               </div>
             </div>
             <div className="col-md-6 d-none d-md-block py-4">
