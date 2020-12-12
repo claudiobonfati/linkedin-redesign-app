@@ -1,7 +1,6 @@
 @import ../styles/_variables
 
-
-.searchWrapper
+.wrapper
   position: relative
 
 .searchIcon
@@ -27,3 +26,18 @@
   border: 1px solid $color-gray-semilight
   color: $color-gray-dark
   box-shadow: none
+  transition: border .1s ease-out
+  &:focus
+    border: 1px solid rgba($color-blue, .5)
+    outline: 0
+
+.wrapperDrop
+  width: 100%
+  position: absolute
+  top: calc(100% + 1px)
+  left: 0
+  background-color: white
+  border-bottom: 1px solid $color-border
+  z-index: 5
+  h6
+    margin-bottom: 20px 

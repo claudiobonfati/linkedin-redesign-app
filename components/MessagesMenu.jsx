@@ -49,7 +49,9 @@ class MessagesButton extends React.Component {
 
     TweenMax.to(this.dropRef, 0.2, {
       css: {
-        opacity: 1, display: 'block', scale: 1,
+        opacity: 1,
+        display: 'block',
+        scale: 1,
       },
       ease: Power3.easeOut,
     });
@@ -62,7 +64,9 @@ class MessagesButton extends React.Component {
 
     TweenMax.to(this.dropRef, 0.2, {
       css: {
-        opacity: 0, display: 'none', scale: 0.95,
+        opacity: 0,
+        display: 'none',
+        scale: 0.95,
       },
       ease: Power3.easeOut,
     });

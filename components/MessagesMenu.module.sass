@@ -26,7 +26,8 @@
   width: 400px
   position: absolute
   top: 95%
-  right: 25px
+  left: 50%
+  margin-left: 280px
   background-color: white
   box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075)
   z-index: 5
@@ -68,3 +69,23 @@
 
   .dropContentItem:not(:last-child)
     border-bottom: 1px solid $color-border
+
+@media (max-width: map-get($breakpoints, 'xl'))
+  .wrapperDrop
+    margin-left: 210px
+
+@media (max-width: map-get($breakpoints, 'lg'))
+  .wrapperDrop
+    margin-left: 70px
+
+@media (max-width: map-get($breakpoints, 'md'))
+  .wrapperDrop
+    margin-left: -40px
+
+@media (max-width: map-get($breakpoints, 'sm'))
+  .wrapperDrop
+    width: 100%
+    left: 0
+    margin-left: 0
+    border-radius: 0
+    top: 100%

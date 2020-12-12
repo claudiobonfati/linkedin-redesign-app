@@ -9,9 +9,11 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div className={styles.searchWrapper}>
-        <input className={styles.searchInput} placeholder="Search linkedin" role="combobox" aria-controls="" aria-autocomplete="list" aria-activedescendant="" aria-expanded="false" aria-owns="" aria-label="Search linkedin" type="text" />
-        <span className={`lnr lnr-magnifier ${styles.searchIcon}`} />
+      <div className={styles.wrapper}>
+        <div className={styles.searchInputWrapper}>
+          <input className={styles.searchInput} placeholder="Search linkedin" role="combobox" aria-controls="" aria-autocomplete="list" aria-activedescendant="" aria-expanded="false" aria-owns="" aria-label="Search linkedin" type="text" />
+          <span className={`lnr lnr-magnifier ${styles.searchIcon}`} />
+        </div>
       </div>
     );
   }

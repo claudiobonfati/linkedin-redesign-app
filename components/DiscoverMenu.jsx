@@ -1,6 +1,7 @@
 import React from 'react';
 import { TimelineMax, Power3 } from 'gsap';
 import styles from './DiscoverMenu.module.sass';
+import Search from './Search';
 
 class DiscoverMenu extends React.Component {
   constructor(props) {
@@ -19,8 +20,7 @@ class DiscoverMenu extends React.Component {
       .from(this.dropRef, 0.5, {
         css: {
           display: 'none',
-          transform: 'scaleY(0)',
-          transformOrigin: 'top center',
+          height: 0,
         },
       })
       .from(this.dropContentRef, 0.5, {
@@ -77,7 +77,6 @@ class DiscoverMenu extends React.Component {
   render() {
     return (
       <div className={`${styles.wrapper}`}>
-
         <button
           aria-expanded="false"
           className={`${styles.buttonSelect} ${this.state.isVisible ? styles.buttonActive : ''}`}
@@ -88,9 +87,12 @@ class DiscoverMenu extends React.Component {
           <span className="lnr lnr-chevron-down" />
         </button>
         <div className={styles.wrapperDrop} ref={(ref) => { this.dropRef = ref; }}>
-          <div className="container py-5">
+          <div className="container py-2 py-sm-5">
             <div className="row justify-content-center" ref={(ref) => { this.dropContentRef = ref; }}>
-              <div className="col-md-2 pl-0 align-self-center">
+              <div className="col-12 d-block d-md-none pt-3 pb-2">
+                <Search />
+              </div>
+              <div className="col-lg-2 col-md-3 d-none d-md-block pl-0 align-self-center">
                 <nav className={`border-right-gray ${styles.menuNav} ${styles.spaced}`}>
                   <ul>
                     <li><a href="https://google.com">Home</a></li>
@@ -101,7 +103,7 @@ class DiscoverMenu extends React.Component {
                   </ul>
                 </nav>
               </div>
-              <div className="col-md-2 py-3">
+              <div className="col-md-2 col-sm-3 col-12 py-3">
                 <h6>
                   Profile
                 </h6>
@@ -115,7 +117,7 @@ class DiscoverMenu extends React.Component {
                   </ul>
                 </nav>
               </div>
-              <div className="col-md-2 py-3">
+              <div className="col-md-2 col-sm-3 col-12 py-3">
                 <h6>
                   My network
                 </h6>
@@ -129,7 +131,7 @@ class DiscoverMenu extends React.Component {
                   </ul>
                 </nav>
               </div>
-              <div className="col-md-2 py-3">
+              <div className="col-md-2 col-sm-3 col-12 py-3">
                 <h6>
                   Interests
                 </h6>
@@ -142,7 +144,7 @@ class DiscoverMenu extends React.Component {
                   </ul>
                 </nav>
               </div>
-              <div className="col-md-2 py-3">
+              <div className="col-md-2 col-sm-3 col-12 py-3">
                 <h6>
                   Wiki
                 </h6>

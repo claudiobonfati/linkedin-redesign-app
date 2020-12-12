@@ -34,10 +34,10 @@ class Header extends React.Component {
 
   render() {
     return (
-      <header className={`position-relative ${styles.wrapper}`} ref={(ref) => { this.headerRef = ref; }}>
+      <header className={styles.wrapper} ref={(ref) => { this.headerRef = ref; }}>
         <div className="container">
           <div className="row align-items-center">
-            <div className="col-md-3 col-6 d-flex py-4 position-static">
+            <div className="col-md-3 col-6 d-flex py-3 py-sm-4 pr-0 position-static">
               <div className="align-self-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 504.4 504" className={`${styles.logo}`}>
                   <g id="linkedin" transform="translate(0 -0.2)">
@@ -47,17 +47,17 @@ class Header extends React.Component {
                   </g>
                 </svg>
               </div>
-              <div className="border-left-gray align-self-center ml-4 pl-4">
+              <div className="border-left-gray align-self-center ml-2 pl-2 ml-sm-4 pl-sm-4">
                 <DiscoverMenu
                   setActiveDrop={this.setActiveDrop}
                   ref={(ref) => { this.DiscoverMenuRef = ref; }}
                 />
               </div>
             </div>
-            <div className="col-md-6 d-none d-md-block py-4">
+            <div className="col-md-6 d-none d-md-block py-3 py-sm-4">
               <Search />
             </div>
-            <div className="col-md-3 col-6 d-flex justify-content-end position-relative py-4">
+            <div className="col-md-3 col-6 d-flex justify-content-end position-static py-3 py-sm-4 pl-0">
               <MessagesMenu
                 setActiveDrop={this.setActiveDrop}
                 ref={(ref) => { this.MessagesMenuRef = ref; }}

@@ -24,7 +24,7 @@ class NotificationsMenu extends React.Component {
         css: {
           opacity: 0,
           display: 'none',
-          scale: 0.95,
+          height: 0,
         },
         ease: Power3.easeOut,
       });
@@ -35,7 +35,7 @@ class NotificationsMenu extends React.Component {
         css: {
           opacity: 0,
           display: 'none',
-          scale: 0.95,
+          height: 0,
         },
         ease: Power3.easeOut,
       });
@@ -76,7 +76,9 @@ class NotificationsMenu extends React.Component {
 
     TweenMax.to(this.dropRef, 0.2, {
       css: {
-        opacity: 1, display: 'block', scale: 1,
+        opacity: 1,
+        display: 'block',
+        scale: 1,
       },
       ease: Power3.easeOut,
     });
@@ -89,7 +91,9 @@ class NotificationsMenu extends React.Component {
 
     TweenMax.to(this.dropRef, 0.2, {
       css: {
-        opacity: 0, display: 'none', scale: 0.95,
+        opacity: 0,
+        display: 'none',
+        scale: 0.95,
       },
       ease: Power3.easeOut,
     });
@@ -140,7 +144,7 @@ class NotificationsMenu extends React.Component {
             </ul>
           </nav>
           <div className="content px-4">
-            <div ref={(ref) => { this.tabContentNotificationRef = ref; }}>
+            <div ref={(ref) => { this.tabContentNotificationRef = ref; }} style={{ height: 431 }}>
               <div className={`py-4 ${styles.dropContentItem}`}>
                 <span className="d-block mb-3">
                   7 people viewed you profile
@@ -185,27 +189,6 @@ class NotificationsMenu extends React.Component {
               </div>
             </div>
             <div ref={(ref) => { this.tabContentRequestRef = ref; }}>
-              <div className={`py-4 ${styles.dropContentItem}`}>
-                <span className="d-block mb-3">
-                  8 people viewed you profile
-                </span>
-                <div className={styles.listProfilePics}>
-                  {[...Array(4)].map((index) => (
-                    <div className="mr-2" key={index}>
-                      <Image
-                        src="https://i.pravatar.cc/300"
-                        alt="Profile picture"
-                        className={`circle-image ${styles.profilePic}`}
-                        width={40}
-                        height={40}
-                      />
-                    </div>
-                  ))}
-                  <div className={`mr-2 small ${styles.profilePic}`}>
-                    <span>+3</span>
-                  </div>
-                </div>
-              </div>
               <div className={styles.dropContentItem}>
                 <ProfileDisplay
                   imgSize={50}
@@ -217,6 +200,13 @@ class NotificationsMenu extends React.Component {
                 <ProfileDisplay
                   imgSize={50}
                   title="Emily Kilimanjaro"
+                  subtitle="is now a connection"
+                />
+              </div>
+              <div className={styles.dropContentItem}>
+                <ProfileDisplay
+                  imgSize={50}
+                  title="Daniel Estienne"
                   subtitle="is now a connection"
                 />
               </div>
