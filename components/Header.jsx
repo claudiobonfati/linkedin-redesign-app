@@ -4,7 +4,7 @@ import { TweenMax, Power3 } from 'gsap';
 import styles from './Header.module.sass';
 import Search from './Search';
 import DiscoverMenu from './DiscoverMenu';
-import NotificationsButton from './NotificationsButton';
+import NotificationsMenu from './NotificationsMenu';
 import MessagesMenu from './MessagesMenu';
 
 class Header extends React.Component {
@@ -21,13 +21,13 @@ class Header extends React.Component {
 
   setActiveDrop(target) {
     if (target === 'messages') {
-      this.NotificationsButtonRef.hideDrop();
+      this.NotificationsMenuRef.hideDrop();
       this.DiscoverMenuRef.hideDrop();
     } else if (target === 'notifications') {
       this.MessagesMenuRef.hideDrop();
       this.DiscoverMenuRef.hideDrop();
     } else if (target === 'discover') {
-      this.NotificationsButtonRef.hideDrop();
+      this.NotificationsMenuRef.hideDrop();
       this.MessagesMenuRef.hideDrop();
     }
   }
@@ -62,9 +62,9 @@ class Header extends React.Component {
                 setActiveDrop={this.setActiveDrop}
                 ref={(ref) => { this.MessagesMenuRef = ref; }}
               />
-              <NotificationsButton
+              <NotificationsMenu
                 setActiveDrop={this.setActiveDrop}
-                ref={(ref) => { this.NotificationsButtonRef = ref; }}
+                ref={(ref) => { this.NotificationsMenuRef = ref; }}
               />
               <button
                 aria-expanded="false"

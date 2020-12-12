@@ -1,10 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
 import { TimelineMax, TweenMax, Power3 } from 'gsap';
-import styles from './NotificationsButton.module.sass';
+import styles from './NotificationsMenu.module.sass';
 import ProfileDisplay from './ProfileDisplay';
 
-class NotificationsButton extends React.Component {
+class NotificationsMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -235,4 +235,4 @@ class NotificationsButton extends React.Component {
   }
 }
 
-export default NotificationsButton;
+export default NotificationsMenu;
