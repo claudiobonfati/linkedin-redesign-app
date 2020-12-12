@@ -5,7 +5,7 @@ import styles from './Header.module.sass';
 import Search from './Search';
 import DiscoverMenu from './DiscoverMenu';
 import NotificationsButton from './NotificationsButton';
-import MessagesButton from './MessagesButton';
+import MessagesMenu from './MessagesMenu';
 
 class Header extends React.Component {
   constructor(props) {
@@ -24,11 +24,11 @@ class Header extends React.Component {
       this.NotificationsButtonRef.hideDrop();
       this.DiscoverMenuRef.hideDrop();
     } else if (target === 'notifications') {
-      this.MessagesButtonRef.hideDrop();
+      this.MessagesMenuRef.hideDrop();
       this.DiscoverMenuRef.hideDrop();
     } else if (target === 'discover') {
       this.NotificationsButtonRef.hideDrop();
-      this.MessagesButtonRef.hideDrop();
+      this.MessagesMenuRef.hideDrop();
     }
   }
 
@@ -58,9 +58,9 @@ class Header extends React.Component {
               <Search />
             </div>
             <div className="col-md-3 col-6 d-flex justify-content-end position-relative py-4">
-              <MessagesButton
+              <MessagesMenu
                 setActiveDrop={this.setActiveDrop}
-                ref={(ref) => { this.MessagesButtonRef = ref; }}
+                ref={(ref) => { this.MessagesMenuRef = ref; }}
               />
               <NotificationsButton
                 setActiveDrop={this.setActiveDrop}
