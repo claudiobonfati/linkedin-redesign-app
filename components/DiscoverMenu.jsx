@@ -90,7 +90,7 @@ class DiscoverMenu extends React.Component {
           <div className="container py-2 py-sm-5">
             <div className="row justify-content-center" ref={(ref) => { this.dropContentRef = ref; }}>
               <div className="col-12 d-block d-md-none pt-3 pb-2">
-                <Search />
+                <Search quickSearch={false} />
               </div>
               <div className="col-lg-2 col-md-3 d-none d-md-block pl-0 align-self-center">
                 <nav className={`border-right-gray ${styles.menuNav} ${styles.spaced}`}>

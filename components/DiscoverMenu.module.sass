@@ -30,6 +30,7 @@
     transition: transform .1s ease-out
 
 .wrapperDrop
+  --header-height: 94px
   width: 100%
   position: absolute
   top: calc(100% + 1px)
@@ -37,6 +38,8 @@
   background-color: white
   border-bottom: 1px solid $color-border
   z-index: 5
+  max-height: calc(100vh - var(--header-height))
+  overflow-y: scroll
   h6
     margin-bottom: 20px 
 
@@ -61,3 +64,7 @@
       padding: 10px 0
       color: $color-gray-dark
       font-weight: 500
+
+@media (max-width: map-get($breakpoints, 'sm'))
+  .wrapperDrop
+    --header-height: 67px
