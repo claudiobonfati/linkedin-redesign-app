@@ -20,15 +20,33 @@ class Header extends React.Component {
   }
 
   setActiveDrop(target) {
-    if (target === 'messages') {
-      this.NotificationsMenuRef.hideDrop();
-      this.DiscoverMenuRef.hideDrop();
-    } else if (target === 'notifications') {
-      this.MessagesMenuRef.hideDrop();
-      this.DiscoverMenuRef.hideDrop();
-    } else if (target === 'discover') {
-      this.NotificationsMenuRef.hideDrop();
-      this.MessagesMenuRef.hideDrop();
+    switch (target) {
+      case 'messages':
+        this.NotificationsMenuRef.hideDrop();
+        this.DiscoverMenuRef.hideDrop();
+        this.SearchRef.hideDrop();
+        break;
+      case 'notifications':
+        this.MessagesMenuRef.hideDrop();
+        this.DiscoverMenuRef.hideDrop();
+        this.SearchRef.hideDrop();
+        break;
+      case 'discover':
+        this.NotificationsMenuRef.hideDrop();
+        this.MessagesMenuRef.hideDrop();
+        this.SearchRef.hideDrop();
+        break;
+      case 'search':
+        this.NotificationsMenuRef.hideDrop();
+        this.MessagesMenuRef.hideDrop();
+        this.DiscoverMenuRef.hideDrop();
+        break;
+      default:
+        this.NotificationsMenuRef.hideDrop();
+        this.MessagesMenuRef.hideDrop();
+        this.DiscoverMenuRef.hideDrop();
+        this.SearchRef.hideDrop();
+        break;
     }
   }
 
@@ -37,7 +55,7 @@ class Header extends React.Component {
       <header className={styles.wrapper} ref={(ref) => { this.headerRef = ref; }}>
         <div className="container">
           <div className="row align-items-center">
-            <div className="col-md-3 col-6 d-flex py-3 py-sm-4 pr-0 position-static">
+            <div className="col-md-3 col-6 position-static d-flex py-3 py-sm-4 pr-0">
               <div className="align-self-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 504.4 504" className={`${styles.logo}`}>
                   <g id="linkedin" transform="translate(0 -0.2)">
@@ -54,10 +72,13 @@ class Header extends React.Component {
                 />
               </div>
             </div>
-            <div className="col-md-6 d-none d-md-block py-3 py-sm-4">
-              <Search />
+            <div className="col-md-6 position-static d-none d-md-block py-3 py-sm-4">
+              <Search
+                setActiveDrop={this.setActiveDrop}
+                ref={(ref) => { this.SearchRef = ref; }}
+              />
             </div>
-            <div className="col-md-3 col-6 d-flex justify-content-end position-static py-3 py-sm-4 pl-0">
+            <div className="col-md-3 col-6 position-static d-flex justify-content-end py-3 py-sm-4 pl-0">
               <MessagesMenu
                 setActiveDrop={this.setActiveDrop}
                 ref={(ref) => { this.MessagesMenuRef = ref; }}
