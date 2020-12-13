@@ -20,24 +20,22 @@ class NotificationsMenu extends React.Component {
   componentDidMount() {
     this.tlShowTabNotification = new TimelineMax({ paused: true });
     this.tlShowTabNotification
-      .from(this.tabContentNotificationRef, 0.2, {
+      .from(this.tabContentNotificationRef, 0.4, {
         css: {
           opacity: 0,
           display: 'none',
           height: 0,
         },
-        ease: Power3.easeOut,
       });
 
     this.tlShowTabRequest = new TimelineMax({ paused: true });
     this.tlShowTabRequest
-      .from(this.tabContentRequestRef, 0.2, {
+      .from(this.tabContentRequestRef, 0.4, {
         css: {
           opacity: 0,
           display: 'none',
           height: 0,
         },
-        ease: Power3.easeOut,
       });
 
     this.toggleVisibility();
@@ -108,12 +106,12 @@ class NotificationsMenu extends React.Component {
       this.tlShowTabRequest.reverse();
       setTimeout(() => {
         this.tlShowTabNotification.play();
-      }, 200);
+      }, this.tlShowTabRequest.duration() * 1000);
     } else if (tab === 1) {
       this.tlShowTabNotification.reverse();
       setTimeout(() => {
         this.tlShowTabRequest.play();
-      }, 200);
+      }, this.tlShowTabNotification.duration() * 1000);
     }
   }
 
@@ -166,21 +164,21 @@ class NotificationsMenu extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className={styles.dropContentItem}>
+              <div className={`py-4 ${styles.dropContentItem}`}>
                 <ProfileDisplay
                   imgSize={50}
                   title="Jenson Kent"
                   subtitle="published an article: 'What to do for'"
                 />
               </div>
-              <div className={styles.dropContentItem}>
+              <div className={`py-4 ${styles.dropContentItem}`}>
                 <ProfileDisplay
                   imgSize={50}
                   title="Emily Kilimanjaro"
                   subtitle="is now a connection"
                 />
               </div>
-              <div className={styles.dropContentItem}>
+              <div className={`py-4 ${styles.dropContentItem}`}>
                 <ProfileDisplay
                   imgSize={50}
                   title="Daniel Estienne"
@@ -189,28 +187,28 @@ class NotificationsMenu extends React.Component {
               </div>
             </div>
             <div ref={(ref) => { this.tabContentRequestRef = ref; }}>
-              <div className={styles.dropContentItem}>
+              <div className={`py-4 ${styles.dropContentItem}`}>
                 <ProfileDisplay
                   imgSize={50}
                   title="Jenson Kent"
                   subtitle="published an article: 'What to do for'"
                 />
               </div>
-              <div className={styles.dropContentItem}>
+              <div className={`py-4 ${styles.dropContentItem}`}>
                 <ProfileDisplay
                   imgSize={50}
                   title="Emily Kilimanjaro"
                   subtitle="is now a connection"
                 />
               </div>
-              <div className={styles.dropContentItem}>
+              <div className={`py-4 ${styles.dropContentItem}`}>
                 <ProfileDisplay
                   imgSize={50}
                   title="Daniel Estienne"
                   subtitle="is now a connection"
                 />
               </div>
-              <div className={styles.dropContentItem}>
+              <div className={`py-4 ${styles.dropContentItem}`}>
                 <ProfileDisplay
                   imgSize={50}
                   title="Daniel Estienne"

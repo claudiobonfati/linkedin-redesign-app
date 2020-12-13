@@ -95,21 +95,21 @@ class MessagesButton extends React.Component {
             </div>
           </div>
           <div className="content px-4">
-            <div className={styles.dropContentItem}>
+            <div className={`py-4 ${styles.dropContentItem}`}>
               <ProfileDisplay
                 imgSize={50}
                 title="Robert Tayler"
                 subtitle="Hi Claudio, would you mind sharing"
               />
             </div>
-            <div className={styles.dropContentItem}>
+            <div className={`py-4 ${styles.dropContentItem}`}>
               <ProfileDisplay
                 imgSize={50}
                 title="James Daniel"
                 subtitle="Im available now if its convenient?"
               />
             </div>
-            <div className={styles.dropContentItem}>
+            <div className={`py-4 ${styles.dropContentItem}`}>
               <ProfileDisplay
                 imgSize={50}
                 title="Jenny Gossuin"

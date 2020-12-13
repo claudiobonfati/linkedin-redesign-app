@@ -11,7 +11,7 @@ class NotificationsButton extends React.Component {
 
   render() {
     return (
-      <div className={`py-4 ${styles.wrapper}`}>
+      <div className={`${styles.wrapper}`}>
         <div className={styles.imageAside}>
           <Image
             src="https://i.pravatar.cc/300"
@@ -21,7 +21,7 @@ class NotificationsButton extends React.Component {
             height={this.props.imgSize}
           />
         </div>
-        <div className={`ml-2 ${styles.infoWrapper}`}>
+        <div className={`ml-3 ${styles.infoWrapper}`}>
           <div className={styles.infoTitle}>
             {this.props.title}
           </div>
