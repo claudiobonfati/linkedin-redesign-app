@@ -1,6 +1,6 @@
 import React from 'react';
 import { TweenMax } from 'gsap';
-import Header from './Header';
+import Header from './Header/Header';
 import styles from './Layout.module.sass';
 
 class Layout extends React.Component {
