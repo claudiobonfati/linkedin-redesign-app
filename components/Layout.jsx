@@ -19,7 +19,9 @@ class Layout extends React.Component {
       <div className={styles.layoutWrapper} ref={(ref) => { this.appRef = ref; }}>
         <Header />
         <MenuTab />
-        {this.props.children}
+        <div className={styles.contentWrapper}>
+          {this.props.children}
+        </div>
       </div>
     );
   }

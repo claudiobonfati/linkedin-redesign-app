@@ -23,7 +23,7 @@ $container-max-widths: (sm: map-get($max-width, 'sm'), md: map-get($max-width, '
 // Grid columns
 // Set the number of columns and specify the width of the gutters.
 $grid-columns: 12
-$grid-gutter-width: 50px
+$grid-gutter-width: 30px
 $enable-grid-classes: true
 
 @import "~bootstrap/scss/mixins"
@@ -57,3 +57,8 @@ button *
 
 body  
   background-color: $color-gray-light
+
+.sticky-aside-content
+  position: -webkit-sticky !important
+  position: sticky !important
+  top: 187px

@@ -30,14 +30,9 @@ class Tab extends React.Component {
       ease: Power3.easeOut,
       delay: 0.8,
     });
-
-    setTimeout(() => {
-      this.setMenu('account');
-    }, 5000);
   }
 
   setMenu(menu) {
-    console.log(menu);
     TweenMax.to(this.menuWrapperRef, 0.3, { opacity: 0 });
 
     setTimeout(() => {

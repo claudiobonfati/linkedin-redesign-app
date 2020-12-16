@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Layout from '../components/Layout';
+import ProfileOverview from '../components/ProfileOverview';
 
 export default function Home() {
   return (
@@ -11,34 +12,166 @@ export default function Home() {
       </Head>
       <div className="container">
         <main className="row">
-          <div className="col">
-            <h1>
-              Linkedin Redesign
-            </h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora harum, officia alias, eum aliquam natus cupiditate inventore illum placeat blanditiis quis perspiciatis iste nam iusto, praesentium sunt nobis doloribus.</p>
+          <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
+            <div className="sticky-aside-content">
+              <ProfileOverview
+                photo="/images/me.jpg"
+                name="Claudio Bonfati"
+                position="Software Engineer"
+                connections="658"
+                views="35"
+                actionMyProfile
+              />
+            </div>
+          </div>
+          <div className="col-lg-6 py-4">
+            <ProfileOverview
+              photo="/images/me.jpg"
+              name="Claudio Bonfati"
+              position="Software Engineer"
+              connections="658"
+              views="35"
+              actionMyProfile
+              email="claudio@example.com"
+              twitter="claudioexample"
+              skype="claudioexample"
+            />
+            <ProfileOverview
+              photo="/images/me.jpg"
+              name="Claudio Bonfati"
+              position="Software Engineer"
+              connections="658"
+              views="35"
+              actionMyProfile
+              email="claudio@example.com"
+              twitter="claudioexample"
+              skype="claudioexample"
+            />
+            <ProfileOverview
+              photo="/images/me.jpg"
+              name="Claudio Bonfati"
+              position="Software Engineer"
+              connections="658"
+              views="35"
+              actionMyProfile
+              email="claudio@example.com"
+              twitter="claudioexample"
+              skype="claudioexample"
+            />
+            <ProfileOverview
+              photo="/images/me.jpg"
+              name="Claudio Bonfati"
+              position="Software Engineer"
+              connections="658"
+              views="35"
+              actionMyProfile
+              email="claudio@example.com"
+              twitter="claudioexample"
+              skype="claudioexample"
+            />
+            <ProfileOverview
+              photo="/images/me.jpg"
+              name="Claudio Bonfati"
+              position="Software Engineer"
+              connections="658"
+              views="35"
+              actionMyProfile
+              email="claudio@example.com"
+              twitter="claudioexample"
+              skype="claudioexample"
+            />
+            <ProfileOverview
+              photo="/images/me.jpg"
+              name="Claudio Bonfati"
+              position="Software Engineer"
+              connections="658"
+              views="35"
+              actionMyProfile
+              email="claudio@example.com"
+              twitter="claudioexample"
+              skype="claudioexample"
+            />
+            <ProfileOverview
+              photo="/images/me.jpg"
+              name="Claudio Bonfati"
+              position="Software Engineer"
+              connections="658"
+              views="35"
+              actionMyProfile
+              email="claudio@example.com"
+              twitter="claudioexample"
+              skype="claudioexample"
+            />
+            <ProfileOverview
+              photo="/images/me.jpg"
+              name="Claudio Bonfati"
+              position="Software Engineer"
+              connections="658"
+              views="35"
+              actionMyProfile
+              email="claudio@example.com"
+              twitter="claudioexample"
+              skype="claudioexample"
+            />
+            <ProfileOverview
+              photo="/images/me.jpg"
+              name="Claudio Bonfati"
+              position="Software Engineer"
+              connections="658"
+              views="35"
+              actionMyProfile
+              email="claudio@example.com"
+              twitter="claudioexample"
+              skype="claudioexample"
+            />
+            <ProfileOverview
+              photo="/images/me.jpg"
+              name="Claudio Bonfati"
+              position="Software Engineer"
+              connections="658"
+              views="35"
+              actionMyProfile
+              email="claudio@example.com"
+              twitter="claudioexample"
+              skype="claudioexample"
+            />
+            <ProfileOverview
+              photo="/images/me.jpg"
+              name="Claudio Bonfati"
+              position="Software Engineer"
+              connections="658"
+              views="35"
+              actionMyProfile
+              email="claudio@example.com"
+              twitter="claudioexample"
+              skype="claudioexample"
+            />
+            <ProfileOverview
+              photo="/images/me.jpg"
+              name="Claudio Bonfati"
+              position="Software Engineer"
+              connections="658"
+              views="35"
+              actionMyProfile
+              email="claudio@example.com"
+              twitter="claudioexample"
+              skype="claudioexample"
+            />
+          </div>
+          <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
+            <div className="sticky-aside-content">
+              <ProfileOverview
+                photo="/images/me.jpg"
+                name="Claudio Bonfati"
+                position="Software Engineer"
+                connections="658"
+                views="35"
+                actionMyProfile
+                email="claudio@example.com"
+                twitter="claudioexample"
+                skype="claudioexample"
+              />
+            </div>
           </div>
         </main>
       </div>
