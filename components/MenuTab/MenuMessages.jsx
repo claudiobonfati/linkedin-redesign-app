@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Tab.module.sass';
 
-class MenuFeed extends React.Component {
+class MenuMessages extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -17,22 +17,17 @@ class MenuFeed extends React.Component {
         <ul className={styles.menu}>
           <li>
             <a href="https://google.com" className={styles.active}>
-              Posts
+              All messages
             </a>
           </li>
           <li>
             <a href="https://google.com">
-              Articles
+              Unread
             </a>
           </li>
           <li>
             <a href="https://google.com">
-              Companies
-            </a>
-          </li>
-          <li>
-            <a href="https://google.com">
-              Jobs
+              InMail
             </a>
           </li>
         </ul>
@@ -41,4 +36,4 @@ class MenuFeed extends React.Component {
   }
 }
 
-export default MenuFeed;
+export default MenuMessages;

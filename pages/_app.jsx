@@ -1,8 +1,17 @@
 import React from 'react';
+import NextApp from 'next/app';
 import '../styles/styles.sass';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+class App extends NextApp {
+  componentDidMount() {
+    // =)
+  }
+
+  render() {
+    const { Component, pageProps } = this.props;
+
+    return <Component {...pageProps} />;
+  }
 }
 
-export default MyApp;
+export default App;

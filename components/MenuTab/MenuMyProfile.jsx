@@ -17,22 +17,22 @@ class MenuFeed extends React.Component {
         <ul className={styles.menu}>
           <li>
             <a href="https://google.com" className={styles.active}>
+              Details
+            </a>
+          </li>
+          <li>
+            <a href="https://google.com">
               Posts
             </a>
           </li>
           <li>
             <a href="https://google.com">
-              Articles
+              Contacts
             </a>
           </li>
           <li>
             <a href="https://google.com">
-              Companies
-            </a>
-          </li>
-          <li>
-            <a href="https://google.com">
-              Jobs
+              Improve
             </a>
           </li>
         </ul>

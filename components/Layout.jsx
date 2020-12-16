@@ -1,6 +1,7 @@
 import React from 'react';
 import { TweenMax } from 'gsap';
 import Header from './Header/Header';
+import MenuTab from './MenuTab/Tab';
 import styles from './Layout.module.sass';
 
 class Layout extends React.Component {
@@ -17,6 +18,7 @@ class Layout extends React.Component {
     return (
       <div className={styles.layoutWrapper} ref={(ref) => { this.appRef = ref; }}>
         <Header />
+        <MenuTab />
         {this.props.children}
       </div>
     );

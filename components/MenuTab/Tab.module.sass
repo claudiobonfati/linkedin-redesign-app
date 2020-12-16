@@ -5,5 +5,49 @@
   position: fixed
   z-index: 5
   width: 100%
-  top: 94px
-  background-color: $color-gray-light
+  top: 78px
+  background: $color-gray-light
+
+
+.menu
+  margin: 0
+  padding: 0
+  list-style: none
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+  flex-direction: row
+  flex-wrap: nowrap
+  justify-content: center
+  align-content: stretch
+  align-items: stretch
+
+  li
+    marign: 0
+    padding: 0
+    a
+      display: block
+      padding: 30px
+      text-decoration: none
+      color: $color-gray-medium
+      position: relative
+      transition: color .1s ease-out
+      &:hover,
+      &.active
+        color: $color-gray-dark        
+      &::before
+        display: block
+        position: absolute
+        content: ''
+        width: calc(100% - 40px)
+        height: 3px
+        background-color: $color-blue
+        left: 20px
+        bottom: 0
+        opacity: 0
+        transition: opacity .1s ease-out
+      &.active::before
+        opacity: 1
+      
+
+        
