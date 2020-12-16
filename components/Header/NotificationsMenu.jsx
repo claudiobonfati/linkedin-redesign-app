@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { TimelineMax, TweenMax, Power3 } from 'gsap';
 import styles from './NotificationsMenu.module.sass';
-import ProfileDisplay from './ProfileDisplay';
+import ProfileDisplay from '../ProfileDisplay';
 
 class NotificationsMenu extends React.Component {
   constructor(props) {

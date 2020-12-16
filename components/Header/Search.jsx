@@ -2,7 +2,7 @@ import React from 'react';
 import { TimelineMax, Power3 } from 'gsap';
 import PropTypes from 'prop-types';
 import styles from './Search.module.sass';
-import ProfileDisplay from './ProfileDisplay';
+import ProfileDisplay from '../ProfileDisplay';
 
 class Search extends React.Component {
   constructor(props) {

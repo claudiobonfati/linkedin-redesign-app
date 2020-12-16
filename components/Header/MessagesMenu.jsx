@@ -1,7 +1,7 @@
 import React from 'react';
 import { TweenMax, Power3 } from 'gsap';
 import styles from './MessagesMenu.module.sass';
-import ProfileDisplay from './ProfileDisplay';
+import ProfileDisplay from '../ProfileDisplay';
 
 class MessagesButton extends React.Component {
   constructor(props) {

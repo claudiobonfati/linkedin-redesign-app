@@ -1,0 +1,23 @@
+@import ../styles/_variables
+
+.wrapper
+  display: flex
+  flex-direction: row
+  flex-wrap: nowrap
+  justify-content: flex-start
+  align-content: stretch
+  align-items: center
+  .imageAside
+    order: 0
+    flex: 0 1 auto
+    align-self: auto
+    line-height: 0
+  .infoWrapper
+    order: 0
+    flex: 1 1 auto
+    align-self: auto
+    .infoTitle
+      color: $color-gray-dark
+      // font-weight: bold
+    .infoSubtitle
+      color: $color-gray-semilight
