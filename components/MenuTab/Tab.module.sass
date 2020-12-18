@@ -1,13 +1,13 @@
 @import ../styles/_variables
 
 .wrapper
+  --header-height: 78px
   border-bottom: 1px solid $color-border
   position: fixed
-  z-index: 5
+  z-index: 10
   width: 100%
-  top: 78px
+  top: var(--header-height)
   background: $color-gray-light
-
 
 .menu
   margin: 0
@@ -34,7 +34,7 @@
       transition: color .1s ease-out
       &:hover,
       &.active
-        color: $color-gray-dark        
+        color: $color-gray-dark
       &::before
         display: block
         position: absolute
@@ -50,4 +50,19 @@
         opacity: 1
       
 
-        
+@media (max-width: map-get($breakpoints, 'xl'))
+
+@media (max-width: map-get($breakpoints, 'lg'))
+
+@media (max-width: map-get($breakpoints, 'md'))
+  .wrapper
+    --header-height: 68px
+
+@media (max-width: map-get($breakpoints, 'sm'))
+  .wrapper
+    --header-height: 51px
+
+  .menu
+    li
+      a
+        padding: 15px
