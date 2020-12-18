@@ -13,20 +13,18 @@ class MenuCompany extends React.Component {
 
   render() {
     return (
-      <nav>
-        <ul className={styles.menu}>
-          <li>
-            <a href="https://google.com" className={styles.active}>
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="https://google.com">
-              Carrers
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <ul className={styles.menu}>
+        <li>
+          <a href="https://google.com" className={styles.active}>
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="https://google.com">
+            Carrers
+          </a>
+        </li>
+      </ul>
     );
   }
 }

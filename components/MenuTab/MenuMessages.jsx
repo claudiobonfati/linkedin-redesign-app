@@ -13,25 +13,23 @@ class MenuMessages extends React.Component {
 
   render() {
     return (
-      <nav>
-        <ul className={styles.menu}>
-          <li>
-            <a href="https://google.com" className={styles.active}>
-              All messages
-            </a>
-          </li>
-          <li>
-            <a href="https://google.com">
-              Unread
-            </a>
-          </li>
-          <li>
-            <a href="https://google.com">
-              InMail
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <ul className={styles.menu}>
+        <li>
+          <a href="https://google.com" className={styles.active}>
+            All messages
+          </a>
+        </li>
+        <li>
+          <a href="https://google.com">
+            Unread
+          </a>
+        </li>
+        <li>
+          <a href="https://google.com">
+            InMail
+          </a>
+        </li>
+      </ul>
     );
   }
 }

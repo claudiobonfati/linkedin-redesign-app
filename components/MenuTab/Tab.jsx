@@ -44,7 +44,7 @@ class Tab extends React.Component {
 
   render() {
     return (
-      <header className={styles.wrapper} ref={(ref) => { this.tabRef = ref; }}>
+      <nav className={styles.wrapper} ref={(ref) => { this.tabRef = ref; }}>
         <div className="container">
           <div className="row align-items-center">
             <div className="col-12" ref={(ref) => { this.menuWrapperRef = ref; }}>
@@ -55,7 +55,7 @@ class Tab extends React.Component {
             </div>
           </div>
         </div>
-      </header>
+      </nav>
     );
   }
 }

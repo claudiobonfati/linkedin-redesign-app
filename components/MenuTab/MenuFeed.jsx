@@ -13,30 +13,28 @@ class MenuFeed extends React.Component {
 
   render() {
     return (
-      <nav>
-        <ul className={styles.menu}>
-          <li>
-            <a href="https://google.com" className={styles.active}>
-              Posts
-            </a>
-          </li>
-          <li>
-            <a href="https://google.com">
-              Articles
-            </a>
-          </li>
-          <li>
-            <a href="https://google.com">
-              Companies
-            </a>
-          </li>
-          <li>
-            <a href="https://google.com">
-              Jobs
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <ul className={styles.menu}>
+        <li>
+          <a href="https://google.com" className={styles.active}>
+            Posts
+          </a>
+        </li>
+        <li>
+          <a href="https://google.com">
+            Articles
+          </a>
+        </li>
+        <li>
+          <a href="https://google.com">
+            Companies
+          </a>
+        </li>
+        <li>
+          <a href="https://google.com">
+            Jobs
+          </a>
+        </li>
+      </ul>
     );
   }
 }
