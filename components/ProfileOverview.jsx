@@ -14,7 +14,7 @@ class ProfileOverview extends React.Component {
 
   render() {
     return (
-      <div className={`border-gray ${styles.wrapper}`}>
+      <div className={styles.wrapper}>
         <div className={styles.topInfoWrapper}>
           <div className={styles.photoWrapper}>
             <img src={this.props.photo} alt="Profile" />

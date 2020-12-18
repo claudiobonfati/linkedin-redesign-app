@@ -1,0 +1,149 @@
+@import ../styles/_variables
+
+.wrapper
+  display: block
+  width: 100%
+  background-color: white
+  border: 1px solid $color-border
+  position: relative
+
+.header
+  --gutter: 25px
+  margin: 0
+  ul 
+    margin: 0
+    padding: 0
+    list-style: none
+    display: flex
+    flex-wrap: wrap
+    border-bottom: 1px solid $color-border
+    li
+      text-align: center
+      flex: 1 0 33.3%
+      white-space: nowrap
+      text-align: center
+      box-sizing: border-box
+      display: flex
+      flex-direction: row
+      flex-wrap: nowrap
+      justify-content: flex-start
+      align-content: stretch
+      align-items: flex-start
+      button
+        position: relative
+        background: transparent
+        border: 0
+        padding: var(--gutter) calc(var(--gutter) / 2)
+        order: 0
+        flex: 1 1 auto
+        align-self: stretch
+        border-radius: 5px
+        color: $color-gray-medium
+        text-decoration: none
+        transition: all .1s ease-out
+        display: flex
+        flex-direction: row
+        flex-wrap: nowrap
+        justify-content: center
+        align-content: stretch
+        align-items: center
+        &:hover
+          text-decoration: none
+          color: $color-gray-dark        
+        &::before
+          display: block
+          position: absolute
+          content: ''
+          width: 100%
+          height: 3px
+          background-color: $color-blue
+          left: 0
+          bottom: 0
+          opacity: 0
+          transition: opacity .1s ease-out
+        .icon 
+          margin-right: 10px
+          font-weight: bold
+      &.activeItem
+        button 
+          color: $color-gray-dark
+          &::before
+            opacity: 1
+
+.textarea
+  display: block
+  background-color: transparent
+  border: 0
+  width: 100%
+  resize: none
+  &:focus,
+  &:active
+    border: 0
+    outline: 0
+
+.dropzone
+  flex: 1
+  padding: 20px
+  border-width: 2px
+  border-radius: 2px
+  border-color: #eeeeee
+  border-style: dashed
+  background-color: #fafafa
+  color: #bdbdbd
+  outline: none
+  transition: border .24s ease-in-out
+  cursor: pointer
+  user-select: none
+  display: flex
+  flex-direction: column
+  align-items: center
+  &:focus
+    border-color: $color-blue
+    color: $color-blue
+  p
+    transition: color .24s ease-in-out
+    margin: 0
+    padding: 0
+
+.imagePreview
+  position: relative
+  .removeImage
+    position: absolute
+    z-index: 5
+    width: 35px
+    height: 35px
+    border-radius: 50%
+    background: white
+    border: 1px solid $color-border
+    right: 15px
+    top: 15px
+    padding: 0
+
+.footerActions
+  border-top: 1px solid $color-border
+  display: flex
+  flex-direction: row
+  flex-wrap: nowrap
+  justify-content: space-between
+  align-content: stretch
+  align-items: flex-start
+  overflow: hidden
+
+  .button
+    position: relative
+    z-index: 5
+    background: white
+    border: 0
+    padding: 15px
+    color: $color-blue
+    transition: all .1s ease-out
+    font-weight: 500
+    flex: 0 1 50%
+    align-self: stretch
+
+    &:nth-child(1)
+      order: 0
+      border-right: 1px solid $color-border
+
+.articleContent
+  height: calc(400px + 1rem)

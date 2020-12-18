@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import ProfileOverview from '../components/ProfileOverview';
+import CreatePost from '../components/CreatePost';
 
 export default function Home() {
   return (
@@ -18,19 +19,22 @@ export default function Home() {
                 photo="/images/me.jpg"
                 name="Claudio Bonfati"
                 position="Software Engineer"
-                connections="658"
-                views="35"
+                connections={658}
+                views={35}
                 actionMyProfile
               />
             </div>
           </div>
           <div className="col-lg-6 py-4">
+            <div className="mb-4">
+              <CreatePost />
+            </div>
             <ProfileOverview
               photo="/images/me.jpg"
               name="Claudio Bonfati"
               position="Software Engineer"
-              connections="658"
-              views="35"
+              connections={658}
+              views={35}
               actionMyProfile
               email="claudio@example.com"
               twitter="claudioexample"
@@ -40,8 +44,8 @@ export default function Home() {
               photo="/images/me.jpg"
               name="Claudio Bonfati"
               position="Software Engineer"
-              connections="658"
-              views="35"
+              connections={658}
+              views={35}
               actionMyProfile
               email="claudio@example.com"
               twitter="claudioexample"
@@ -51,8 +55,8 @@ export default function Home() {
               photo="/images/me.jpg"
               name="Claudio Bonfati"
               position="Software Engineer"
-              connections="658"
-              views="35"
+              connections={658}
+              views={35}
               actionMyProfile
               email="claudio@example.com"
               twitter="claudioexample"
@@ -62,8 +66,8 @@ export default function Home() {
               photo="/images/me.jpg"
               name="Claudio Bonfati"
               position="Software Engineer"
-              connections="658"
-              views="35"
+              connections={658}
+              views={35}
               actionMyProfile
               email="claudio@example.com"
               twitter="claudioexample"
@@ -73,8 +77,8 @@ export default function Home() {
               photo="/images/me.jpg"
               name="Claudio Bonfati"
               position="Software Engineer"
-              connections="658"
-              views="35"
+              connections={658}
+              views={35}
               actionMyProfile
               email="claudio@example.com"
               twitter="claudioexample"
@@ -84,8 +88,8 @@ export default function Home() {
               photo="/images/me.jpg"
               name="Claudio Bonfati"
               position="Software Engineer"
-              connections="658"
-              views="35"
+              connections={658}
+              views={35}
               actionMyProfile
               email="claudio@example.com"
               twitter="claudioexample"
@@ -95,8 +99,8 @@ export default function Home() {
               photo="/images/me.jpg"
               name="Claudio Bonfati"
               position="Software Engineer"
-              connections="658"
-              views="35"
+              connections={658}
+              views={35}
               actionMyProfile
               email="claudio@example.com"
               twitter="claudioexample"
@@ -106,8 +110,8 @@ export default function Home() {
               photo="/images/me.jpg"
               name="Claudio Bonfati"
               position="Software Engineer"
-              connections="658"
-              views="35"
+              connections={658}
+              views={35}
               actionMyProfile
               email="claudio@example.com"
               twitter="claudioexample"
@@ -117,8 +121,8 @@ export default function Home() {
               photo="/images/me.jpg"
               name="Claudio Bonfati"
               position="Software Engineer"
-              connections="658"
-              views="35"
+              connections={658}
+              views={35}
               actionMyProfile
               email="claudio@example.com"
               twitter="claudioexample"
@@ -128,8 +132,8 @@ export default function Home() {
               photo="/images/me.jpg"
               name="Claudio Bonfati"
               position="Software Engineer"
-              connections="658"
-              views="35"
+              connections={658}
+              views={35}
               actionMyProfile
               email="claudio@example.com"
               twitter="claudioexample"
@@ -139,8 +143,8 @@ export default function Home() {
               photo="/images/me.jpg"
               name="Claudio Bonfati"
               position="Software Engineer"
-              connections="658"
-              views="35"
+              connections={658}
+              views={35}
               actionMyProfile
               email="claudio@example.com"
               twitter="claudioexample"
@@ -150,8 +154,8 @@ export default function Home() {
               photo="/images/me.jpg"
               name="Claudio Bonfati"
               position="Software Engineer"
-              connections="658"
-              views="35"
+              connections={658}
+              views={35}
               actionMyProfile
               email="claudio@example.com"
               twitter="claudioexample"
@@ -164,8 +168,8 @@ export default function Home() {
                 photo="/images/me.jpg"
                 name="Claudio Bonfati"
                 position="Software Engineer"
-                connections="658"
-                views="35"
+                connections={658}
+                views={35}
                 actionMyProfile
                 email="claudio@example.com"
                 twitter="claudioexample"
