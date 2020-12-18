@@ -141,14 +141,14 @@ class NotificationsMenu extends React.Component {
               </li>
             </ul>
           </nav>
-          <div className="content px-4">
+          <div className="px-4">
             <div ref={(ref) => { this.tabContentNotificationRef = ref; }} style={{ height: 431 }}>
               <div className={`py-4 ${styles.dropContentItem}`}>
                 <span className="d-block mb-3">
                   7 people viewed you profile
                 </span>
                 <div className={styles.listProfilePics}>
-                  {[...Array(4)].map((index) => (
+                  {[...Array(4)].map((item, index) => (
                     <div className="mr-2" key={index}>
                       <Image
                         src="https://i.pravatar.cc/300"
