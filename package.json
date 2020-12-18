@@ -8,12 +8,15 @@
     "start": "next start"
   },
   "dependencies": {
+    "@tinymce/tinymce-react": "^3.8.4",
     "bootstrap": "^4.5.3",
     "gsap": "^3.5.1",
     "next": "10.0.3",
     "prop-types": "^15.7.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-dropzone": "^11.2.4",
+    "react-textarea-autosize": "^8.3.0",
     "sass": "^1.30.0"
   },
   "devDependencies": {
