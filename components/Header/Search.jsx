@@ -172,21 +172,24 @@ class Search extends React.Component {
                   <div className="col-md-6 border-left-gray pl-4">
                     <div className="pb-4">
                       <ProfileDisplay
-                        imgSize={50}
+                        image="/images/me.jpg"
+                        imageSize={50}
                         title="Jenson Kent"
                         subtitle="Trainee - Corporate"
                       />
                     </div>
                     <div className="pb-4">
                       <ProfileDisplay
-                        imgSize={50}
+                        image="/images/me.jpg"
+                        imageSize={50}
                         title="Jenson Kent"
                         subtitle="Trainee - Corporate"
                       />
                     </div>
                     <div>
                       <ProfileDisplay
-                        imgSize={50}
+                        image="/images/me.jpg"
+                        imageSize={50}
                         title="Jenson Kent"
                         subtitle="Trainee - Corporate"
                       />
@@ -204,21 +207,24 @@ class Search extends React.Component {
                   <div className="col-md-6 border-left-gray pl-4">
                     <div className="pb-4">
                       <ProfileDisplay
-                        imgSize={50}
+                        image="/images/me.jpg"
+                        imageSize={50}
                         title="Jenson Kent"
                         subtitle="Trainee - Corporate"
                       />
                     </div>
                     <div className="pb-4">
                       <ProfileDisplay
-                        imgSize={50}
+                        image="/images/me.jpg"
+                        imageSize={50}
                         title="Jenson Kent"
                         subtitle="Trainee - Corporate"
                       />
                     </div>
                     <div>
                       <ProfileDisplay
-                        imgSize={50}
+                        image="/images/me.jpg"
+                        imageSize={50}
                         title="Jenson Kent"
                         subtitle="Trainee - Corporate"
                       />
@@ -236,21 +242,24 @@ class Search extends React.Component {
                   <div className="col-md-6 border-left-gray pl-4">
                     <div className="pb-4">
                       <ProfileDisplay
-                        imgSize={50}
+                        image="/images/me.jpg"
+                        imageSize={50}
                         title="Jenson Kent"
                         subtitle="Trainee - Corporate"
                       />
                     </div>
                     <div className="pb-4">
                       <ProfileDisplay
-                        imgSize={50}
+                        image="/images/me.jpg"
+                        imageSize={50}
                         title="Jenson Kent"
                         subtitle="Trainee - Corporate"
                       />
                     </div>
                     <div>
                       <ProfileDisplay
-                        imgSize={50}
+                        image="/images/me.jpg"
+                        imageSize={50}
                         title="Jenson Kent"
                         subtitle="Trainee - Corporate"
                       />

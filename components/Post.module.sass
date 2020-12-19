@@ -1,0 +1,93 @@
+@import ../styles/_variables
+
+.wrapper
+  display: block
+  width: 100%
+  background-color: white
+  border: 1px solid $color-border
+  position: relative
+
+.header
+  --gutter: 25px
+  margin: 0
+  border-bottom: 1px solid $color-border
+
+.content
+  --gutter: 25px
+  margin: 0
+  border-bottom: 1px solid $color-border
+  color: $color-gray-medium
+  font-weight: 300
+  &.withMedia
+    padding-bottom: 0 !important
+    border-bottom: 0 
+  &:not(.withMedia)
+    p
+      margin: 0
+
+.contentMedia
+  img 
+    width: 100%
+    max-height: 500px
+    object-fit: cover
+
+.playerWrapper
+  --plyr-color-main: #007fb2
+  --plyr-badge-text-color: #f7f8f9
+
+.footer
+  display: flex
+  align-items: center
+  justify-content: flex-start
+
+.footerInfo
+  background-color: transparent
+  position: relative
+  border: 0
+  padding-left: 0
+  color: $color-gray-medium
+  display: flex
+  align-items: center
+  font-weight: 300
+  position: relative
+  span
+    font-size: 20px
+  .buttonLabel
+    margin-left: 5px
+
+.loveButton
+  &::before 
+    display: block
+    content: ""
+    position: absolute
+    left: -23px
+    top: 4px
+    background-image: url(/images/heart-animation.png)
+    background-repeat: no-repeat
+    background-size: 2900%
+    background-position: left
+    height: 65px
+    width: 65px
+
+.heartAnimation::before 
+  animation: heart-burst .8s steps(28) forwards
+
+.commentsSection
+  background-color: white
+  border-top: 1px solid $color-border
+
+.commentItem:not(:last-child)
+  border-bottom: 1px solid $color-border
+
+@keyframes heart-burst
+  0%
+    background-position: left
+  100%
+    background-position: right
+
+
+@media (max-width: map-get($breakpoints, 'sm'))
+  .contentMedia
+    width: calc(100% + 3rem)
+    margin-left: -1.5rem
+

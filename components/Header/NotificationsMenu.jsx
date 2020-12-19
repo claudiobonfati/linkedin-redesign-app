@@ -166,21 +166,24 @@ class NotificationsMenu extends React.Component {
               </div>
               <div className={`py-4 ${styles.dropContentItem}`}>
                 <ProfileDisplay
-                  imgSize={50}
+                  image="/images/me.jpg"
+                  imageSize={50}
                   title="Jenson Kent"
                   subtitle="published an article: 'What to do for'"
                 />
               </div>
               <div className={`py-4 ${styles.dropContentItem}`}>
                 <ProfileDisplay
-                  imgSize={50}
+                  image="/images/me.jpg"
+                  imageSize={50}
                   title="Emily Kilimanjaro"
                   subtitle="is now a connection"
                 />
               </div>
               <div className={`py-4 ${styles.dropContentItem}`}>
                 <ProfileDisplay
-                  imgSize={50}
+                  image="/images/me.jpg"
+                  imageSize={50}
                   title="Daniel Estienne"
                   subtitle="is now a connection"
                 />
@@ -189,28 +192,32 @@ class NotificationsMenu extends React.Component {
             <div ref={(ref) => { this.tabContentRequestRef = ref; }}>
               <div className={`py-4 ${styles.dropContentItem}`}>
                 <ProfileDisplay
-                  imgSize={50}
+                  image="/images/me.jpg"
+                  imageSize={50}
                   title="Jenson Kent"
                   subtitle="published an article: 'What to do for'"
                 />
               </div>
               <div className={`py-4 ${styles.dropContentItem}`}>
                 <ProfileDisplay
-                  imgSize={50}
+                  image="/images/me.jpg"
+                  imageSize={50}
                   title="Emily Kilimanjaro"
                   subtitle="is now a connection"
                 />
               </div>
               <div className={`py-4 ${styles.dropContentItem}`}>
                 <ProfileDisplay
-                  imgSize={50}
+                  image="/images/me.jpg"
+                  imageSize={50}
                   title="Daniel Estienne"
                   subtitle="is now a connection"
                 />
               </div>
               <div className={`py-4 ${styles.dropContentItem}`}>
                 <ProfileDisplay
-                  imgSize={50}
+                  image="/images/me.jpg"
+                  imageSize={50}
                   title="Daniel Estienne"
                   subtitle="is now a connection"
                 />
