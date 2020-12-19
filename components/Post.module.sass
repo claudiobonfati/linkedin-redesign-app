@@ -67,10 +67,14 @@
     background-size: 2900%
     background-position: left
     height: 65px
-    width: 65px
+    width: 65px 
+    opacity: 0
+    transition: opacity .1s ease-out
 
-.heartAnimation::before 
+.heartAnimation::before
+  opacity: 1
   animation: heart-burst .8s steps(28) forwards
+
 
 .commentsSection
   background-color: white

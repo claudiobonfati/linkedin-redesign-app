@@ -8,7 +8,9 @@ import ProfileDisplay from './ProfileDisplay';
 class Post extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      liked: false,
+    };
 
     this.likePost = this.likePost.bind(this);
   }
@@ -18,8 +20,9 @@ class Post extends React.Component {
   }
 
   likePost() {
-    console.log(this.likePost);
-    console.log('LOVED!');
+    this.setState((prevState) => ({
+      liked: !prevState.liked,
+    }));
   }
 
   render() {
@@ -72,13 +75,13 @@ class Post extends React.Component {
           </div>
           <div className={`${styles.footer}`}>
             <button
-              className={`py-4 ${styles.footerInfo} ${styles.loveButton} ${styles.heartAnimation}`}
+              className={`py-4 ${styles.footerInfo} ${styles.loveButton} ${this.state.liked ? styles.heartAnimation : styles.reverseHeartAnimation}`}
               type="button"
               onClick={this.likePost}
             >
               <span className="lnr lnr-heart" />
               <div className={styles.buttonLabel}>
-                {this.props.postLikes}
+                {this.state.liked ? (this.props.postLikes + 1) : this.props.postLikes }
               </div>
             </button>
             { (Array.isArray(this.props.postComments) && this.props.postComments.length > 0)
