@@ -3,7 +3,7 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 import styles from './ProfileDisplay.module.sass';
 
-class NotificationsButton extends React.Component {
+class ProfileDisplay extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -12,13 +12,13 @@ class NotificationsButton extends React.Component {
   render() {
     return (
       <div className={`${styles.wrapper}`}>
-        <div className={styles.imageAside}>
+        <div className={`${styles.imageAside} ${this.props.imageOnTop ? 'align-self-start mt-1' : ''}`} style={{ flexBasis: this.props.imageSize }}>
           <Image
-            src="https://i.pravatar.cc/300"
+            src={this.props.image}
             alt="Profile picture"
             className={`circle-image ${styles.profilePic}`}
-            width={this.props.imgSize}
-            height={this.props.imgSize}
+            width={this.props.imageSize}
+            height={this.props.imageSize}
           />
         </div>
         <div className={`ml-3 ${styles.infoWrapper}`}>
@@ -29,19 +29,32 @@ class NotificationsButton extends React.Component {
             {this.props.subtitle}
           </div>
         </div>
+        {this.props.rightContent
+        && (
+          <div className={`ml-3 ${styles.rightWrapper} ${this.props.rightContentOnTop ? 'align-self-start' : ''}`}>
+            {this.props.rightContent}
+          </div>
+        )}
       </div>
     );
   }
 }
 
-NotificationsButton.propTypes = {
-  imgSize: PropTypes.number,
+ProfileDisplay.propTypes = {
+  image: PropTypes.string.isRequired,
+  imageOnTop: PropTypes.bool,
+  imageSize: PropTypes.number,
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,
+  rightContent: PropTypes.string,
+  rightContentOnTop: PropTypes.bool,
 };
 
-NotificationsButton.defaultProps = {
-  imgSize: 40,
+ProfileDisplay.defaultProps = {
+  imageSize: 40,
+  rightContent: null,
+  rightContentOnTop: false,
+  imageOnTop: false,
 };
 
-export default NotificationsButton;
+export default ProfileDisplay;
