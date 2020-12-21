@@ -15,10 +15,6 @@ class Post extends React.Component {
     this.likePost = this.likePost.bind(this);
   }
 
-  componentDidMount() {
-    console.log(this.props.postComments);
-  }
-
   likePost() {
     this.setState((prevState) => ({
       liked: !prevState.liked,
@@ -99,9 +95,8 @@ class Post extends React.Component {
         && (
           <div className={`px-4 ${styles.commentsSection}`}>
             {this.props.postComments.map((comment) => (
-              <div className={`py-4 ${styles.commentItem}`}>
+              <div className={`py-4 ${styles.commentItem}`} key={comment.id}>
                 <ProfileDisplay
-                  key={comment.id}
                   image={comment.User.photo}
                   imageOnTop
                   imageSize={40}
@@ -122,17 +117,18 @@ class Post extends React.Component {
 Post.propTypes = {
   opPhoto: PropTypes.string.isRequired,
   opName: PropTypes.string.isRequired,
-  opSubtitle: PropTypes.string.isRequired,
+  opSubtitle: PropTypes.string,
   opLink: PropTypes.string.isRequired,
   postTime: PropTypes.string.isRequired,
   postBody: PropTypes.string.isRequired,
   postImage: PropTypes.string,
-  postVimeo: PropTypes.string,
-  postLikes: PropTypes.string.isRequired,
+  postVimeo: PropTypes.number,
+  postLikes: PropTypes.number.isRequired,
   postComments: PropTypes.array,
 };
 
 Post.defaultProps = {
+  opSubtitle: null,
   postImage: null,
   postVimeo: null,
   postComments: null,
