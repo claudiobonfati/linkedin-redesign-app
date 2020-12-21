@@ -25,9 +25,12 @@ class ProfileDisplay extends React.Component {
           <div className={styles.infoTitle}>
             {this.props.title}
           </div>
-          <div className={styles.infoSubtitle}>
-            {this.props.subtitle}
-          </div>
+          { this.props.subtitle
+          && (
+            <div className={styles.infoSubtitle}>
+              {this.props.subtitle}
+            </div>
+          )}
         </div>
         {this.props.rightContent
         && (
@@ -45,7 +48,7 @@ ProfileDisplay.propTypes = {
   imageOnTop: PropTypes.bool,
   imageSize: PropTypes.number,
   title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
   rightContent: PropTypes.string,
   rightContentOnTop: PropTypes.bool,
 };
@@ -55,6 +58,7 @@ ProfileDisplay.defaultProps = {
   rightContent: null,
   rightContentOnTop: false,
   imageOnTop: false,
+  subtitle: null,
 };
 
 export default ProfileDisplay;
