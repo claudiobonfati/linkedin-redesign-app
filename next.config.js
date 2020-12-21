@@ -7,6 +7,10 @@ module.exports = {
     ],
   },
   images: {
-    domains: ['i.pravatar.cc', 'media-exp1.licdn.com'],
+    domains: [
+      'i.pravatar.cc',
+      'media-exp1.licdn.com',
+      'linkedinconcept.s3.amazonaws.com',
+    ],
   },
 };
