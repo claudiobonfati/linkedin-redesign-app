@@ -34,6 +34,74 @@ export const GET_POSTS = gql`
   }
 `;
 
+export const GET_COMPANIES_POSTS = gql`
+  query GetPosts($page: Int!, $perPage: Int!) {
+    allPosts(page: $page, perPage: $perPage, filter: { user_id: null }) {
+      id
+      body
+      image
+      video
+      time
+      likes
+      User {
+        id
+        name
+        photo
+        headline
+      }
+      Company {
+        id
+        logo
+        name
+      }
+      Comments {
+        id
+        body
+        time
+        User {
+          id
+          name
+          photo
+        }
+      }
+    }
+  }
+`;
+
+export const GET_USERS_POSTS = gql`
+  query GetPosts($page: Int!, $perPage: Int!) {
+    allPosts(page: $page, perPage: $perPage, filter: { company_id: null }) {
+      id
+      body
+      image
+      video
+      time
+      likes
+      User {
+        id
+        name
+        photo
+        headline
+      }
+      Company {
+        id
+        logo
+        name
+      }
+      Comments {
+        id
+        body
+        time
+        User {
+          id
+          name
+          photo
+        }
+      }
+    }
+  }
+`;
+
 export const GET_PROFILE = gql`
   query GetUser($id: ID!) {
     User(id: $id) {

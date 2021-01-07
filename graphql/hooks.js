@@ -1,5 +1,7 @@
 import { useQuery } from '@apollo/client';
-import { GET_POSTS, GET_PROFILE, GET_SIMPLE_USER } from './queries';
+import {
+  GET_POSTS, GET_USERS_POSTS, GET_COMPANIES_POSTS, GET_PROFILE, GET_SIMPLE_USER,
+} from './queries';
 import ApolloClient from './apollo';
 
 export const usePosts = (page, perPage) => {
@@ -25,9 +27,37 @@ export const usePosts = (page, perPage) => {
   };
 };
 
-export const fetchMore = async (page, perPage) => {
+export const fetchMorePosts = async (page, perPage) => {
   let result = await ApolloClient.query({
     query: GET_POSTS,
+    variables: {
+      page,
+      perPage,
+    },
+  });
+
+  result.data = result.data.allPosts;
+
+  return result;
+};
+
+export const fetchMoreUsersPosts = async (page, perPage) => {
+  let result = await ApolloClient.query({
+    query: GET_USERS_POSTS,
+    variables: {
+      page,
+      perPage,
+    },
+  });
+
+  result.data = result.data.allPosts;
+
+  return result;
+};
+
+export const fetchMoreCompaniesPosts = async (page, perPage) => {
+  let result = await ApolloClient.query({
+    query: GET_COMPANIES_POSTS,
     variables: {
       page,
       perPage,
