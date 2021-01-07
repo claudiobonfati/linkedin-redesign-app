@@ -4,6 +4,7 @@ import Plyr from 'plyr-react';
 import 'plyr-react/dist/plyr.css';
 import styles from './Post.module.sass';
 import ProfileDisplay from './ProfileDisplay';
+import LikeButton from './LikeButton';
 
 class Post extends React.Component {
   constructor(props) {
@@ -69,16 +70,7 @@ class Post extends React.Component {
             )}
           </div>
           <div className={`${styles.footer}`}>
-            <button
-              className={`py-4 ${styles.footerInfo} ${styles.loveButton} ${this.state.liked ? styles.heartAnimation : styles.reverseHeartAnimation}`}
-              type="button"
-              onClick={this.likePost}
-            >
-              <span className="lnr lnr-heart" />
-              <div className={styles.buttonLabel}>
-                {this.state.liked ? (this.props.postLikes + 1) : this.props.postLikes }
-              </div>
-            </button>
+            <LikeButton likes={this.props.postLikes} />
             { (Array.isArray(this.props.postComments) && this.props.postComments.length > 0)
             && (
               <div className={`py-4 pl-3 ${styles.footerInfo}`}>

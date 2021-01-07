@@ -1,0 +1,41 @@
+@import ../styles/_variables
+
+.likeButton
+  background-color: transparent
+  position: relative
+  border: 0
+  padding-left: 0
+  color: $color-gray-medium
+  display: flex
+  align-items: center
+  font-weight: 300
+  position: relative
+  span
+    font-size: 20px
+  .buttonLabel
+    margin-left: 5px
+  &::before 
+    display: block
+    content: ""
+    position: absolute
+    left: -23px
+    top: 4px
+    background-image: url(/images/heart-animation.png)
+    background-repeat: no-repeat
+    background-size: 2900%
+    background-position: left
+    height: 65px
+    width: 65px 
+    opacity: 0
+    transition: opacity .1s ease-out
+
+.heartAnimation::before
+  opacity: 1
+  animation: heart-burst .8s steps(28) forwards
+
+@keyframes heart-burst
+  0%
+    background-position: left
+  100%
+    background-position: right
+

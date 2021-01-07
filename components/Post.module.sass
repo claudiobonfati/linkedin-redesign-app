@@ -55,40 +55,12 @@
   .buttonLabel
     margin-left: 5px
 
-.loveButton
-  &::before 
-    display: block
-    content: ""
-    position: absolute
-    left: -23px
-    top: 4px
-    background-image: url(/images/heart-animation.png)
-    background-repeat: no-repeat
-    background-size: 2900%
-    background-position: left
-    height: 65px
-    width: 65px 
-    opacity: 0
-    transition: opacity .1s ease-out
-
-.heartAnimation::before
-  opacity: 1
-  animation: heart-burst .8s steps(28) forwards
-
-
 .commentsSection
   background-color: white
   border-top: 1px solid $color-border
 
 .commentItem:not(:last-child)
   border-bottom: 1px solid $color-border
-
-@keyframes heart-burst
-  0%
-    background-position: left
-  100%
-    background-position: right
-
 
 @media (max-width: map-get($breakpoints, 'sm'))
   .contentMedia
