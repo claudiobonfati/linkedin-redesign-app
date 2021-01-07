@@ -34,30 +34,65 @@ export const GET_POSTS = gql`
   }
 `;
 
-export const GET_USER = gql`
-  query User($id: Int!) {
+export const GET_PROFILE = gql`
+  query GetUser($id: ID!) {
     User(id: $id) {
       id
       name
+      photo
+      headline
       email
+      twitter
+      skype
+      place
+      summary
       Experiences {
         title
         description
+        period
         Company {
+          id
+          logo
           name
         }
       }
       Recommendations {
         description
+        Author {
+          id
+          name
+          photo
+          headline
+        }
       }
       Courses {
         title
         period
         description
         Company {
+          id
+          logo
           name
         }
       }
+      Follows {
+        Company {
+          id
+          name
+          cover
+        }
+      }
+    }
+  }
+`;
+
+export const GET_SIMPLE_USER = gql`
+  query GetSimpleUser($id: ID!) {
+    User(id: $id) {
+      id
+      name
+      photo
+      headline
     }
   }
 `;
