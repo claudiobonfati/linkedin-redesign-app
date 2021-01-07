@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import Head from 'next/head';
 import { Waypoint } from 'react-waypoint';
-import Layout from '../components/Layout';
 import ProfileOverview from '../components/ProfileOverview';
 import CreatePost from '../components/CreatePost';
 import Post from '../components/Post';
@@ -58,14 +57,14 @@ class Home extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <>
         <Head>
           <title>Linkedin Redesign</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className="container">
           <main className="row">
-            <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
+            <div className="col-lg-3 col-md-3 col-sm-6 pt-4 d-none d-sm-block">
               <div className="sticky-aside-content">
                 <ProfileOverview
                   photo="/images/me.jpg"
@@ -77,7 +76,22 @@ class Home extends React.Component {
                 />
               </div>
             </div>
-            <div className="col-lg-6 py-4">
+            <div className="col-6 pt-4 d-none d-sm-block d-md-none">
+              <div className="sticky-aside-content">
+                <ProfileOverview
+                  photo="/images/me.jpg"
+                  name="Claudio Bonfati"
+                  position="Software Engineer"
+                  connections={658}
+                  views={35}
+                  actionMyProfile
+                  email="claudio@example.com"
+                  twitter="claudioexample"
+                  skype="claudioexample"
+                />
+              </div>
+            </div>
+            <div className="col-lg-6 col-md-9 py-4">
               <div className="mb-4">
                 <CreatePost />
               </div>
@@ -127,7 +141,7 @@ class Home extends React.Component {
             </div>
           </main>
         </div>
-      </Layout>
+      </>
     );
   }
 }

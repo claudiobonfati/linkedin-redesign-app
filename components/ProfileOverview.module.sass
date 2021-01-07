@@ -7,7 +7,7 @@
   border: 1px solid $color-border
   
 .topInfoWrapper
-  padding: 40px
+  padding: 40px 20px
   border-bottom: 1px solid $color-border
   text-align: center
   display: flex
@@ -97,3 +97,10 @@
       font-weight: bold
       vertical-align: text-bottom
       margin-right: 10px
+
+
+@media (max-width: map-get($breakpoints, 'lg'))
+  .photoWrapper
+    width: 80px
+    height: 80px
+    margin-bottom: 15px 

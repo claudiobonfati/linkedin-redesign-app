@@ -1,16 +1,44 @@
 import React from 'react';
 import { TweenMax, Power3 } from 'gsap';
+import { Router, withRouter } from 'next/router';
 import styles from './Tab.module.sass';
 import MenuFeed from './MenuFeed';
 import MenuMyProfile from './MenuMyProfile';
 import MenuAccount from './MenuAccount';
 import MenuCompany from './MenuCompany';
+import nthIndex from '../../utils/nthIndex';
 
 class Tab extends React.Component {
+  // Find correct tab menu to display based on pathname
+  static findMenuName(url) {
+    const pathName = url.substring(0, nthIndex(url, '/', 2));
+    let menu;
+
+    switch (pathName) {
+      case '/feed':
+        menu = 'feed';
+        break;
+      case '/me':
+        menu = 'myProfile';
+        break;
+      case '/profile':
+        menu = 'account';
+        break;
+      case '/company':
+        menu = 'company';
+        break;
+      default:
+        menu = 'feed'; // FIX this
+        break;
+    }
+
+    return menu;
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      menuName: 'feed',
+      menuName: Tab.findMenuName(this.props.router.pathname),
     };
 
     this.menus = {
@@ -20,7 +48,12 @@ class Tab extends React.Component {
       company: MenuCompany,
     };
 
-    this.setMenu = this.setMenu.bind(this);
+    this.updateMenu = this.updateMenu.bind(this);
+    this.findMenuMane = this.updateMenu.bind(this);
+
+    Router.events.on('routeChangeComplete', (url) => {
+      this.updateMenu(Tab.findMenuName(url));
+    });
   }
 
   componentDidMount() {
@@ -32,14 +65,16 @@ class Tab extends React.Component {
     });
   }
 
-  setMenu(menu) {
-    TweenMax.to(this.menuWrapperRef, 0.3, { opacity: 0 });
+  updateMenu(target) {
+    if (target !== this.state.menuName) {
+      TweenMax.to(this.menuWrapperRef, 0.3, { opacity: 0 });
 
-    setTimeout(() => {
-      this.setState({ menuName: menu }, () => {
-        TweenMax.to(this.menuWrapperRef, 0.3, { opacity: 1 });
-      });
-    }, 300);
+      setTimeout(() => {
+        this.setState({ menuName: target }, () => {
+          TweenMax.to(this.menuWrapperRef, 0.3, { opacity: 1 });
+        });
+      }, 300);
+    }
   }
 
   render() {
@@ -50,7 +85,7 @@ class Tab extends React.Component {
             <div className="col-12" ref={(ref) => { this.menuWrapperRef = ref; }}>
               {(() => {
                 const Menu = this.menus[this.state.menuName];
-                return <Menu />;
+                return <Menu router={this.props.router} />;
               })()}
             </div>
           </div>
@@ -60,4 +95,4 @@ class Tab extends React.Component {
   }
 }
 
-export default Tab;
+export default withRouter(Tab);

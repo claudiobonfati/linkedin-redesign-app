@@ -22,6 +22,7 @@ module.exports = {
     'react/prop-types': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/destructuring-assignment': 'off',
+    'react/forbid-prop-types': 'off',
     'no-console': 'off',
     'prefer-const': 'off',
     'import/prefer-default-export': 'off',

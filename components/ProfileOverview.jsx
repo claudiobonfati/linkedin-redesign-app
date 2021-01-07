@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import styles from './ProfileOverview.module.sass';
 
 class ProfileOverview extends React.Component {
@@ -49,9 +50,11 @@ class ProfileOverview extends React.Component {
         </div>
         { this.props.actionMyProfile
         && (
-          <a href="https://google.com" className={styles.footerAction}>
-            View my profile
-          </a>
+          <Link href="/me/details">
+            <a href="#" className={styles.footerAction}>
+              View my profile
+            </a>
+          </Link>
         )}
         { !this.props.actionMyProfile
         && (

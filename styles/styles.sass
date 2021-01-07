@@ -34,6 +34,14 @@ $enable-grid-classes: true
 @import "~bootstrap/scss/utilities"
 
 // global personalizations
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;1,400&display=swap')
+
+body
+  font-family: 'Montserrat', Helvetica, Arial, sans-serif
+  font-size: .85rem 
+  line-height: 1.7
+
+
 .border-gray
   border: 1px solid $color-border
 .border-left-gray
@@ -98,6 +106,9 @@ body
 .color-yellow *:focus, 
 .color-yellow *:visited
   color: $color-yellow
+
+.bg-gray-lighter
+  background-color: $color-gray-lighter
 
 // TinyMCE override
 .tox-statusbar__branding
