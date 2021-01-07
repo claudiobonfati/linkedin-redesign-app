@@ -31,7 +31,7 @@ class Post extends React.Component {
               imageSize={60}
               title={this.props.opName}
               subtitle={this.props.opSubtitle}
-              rightContent={this.props.postTime}
+              sideContent={this.props.postTime}
             />
           </div>
           <div className={`py-4 ${styles.content} ${styles.withMedia}`}>
@@ -60,7 +60,6 @@ class Post extends React.Component {
                           },
                         ],
                       }}
-                      autoPlay
                       volume={0}
                       muted
                     />
@@ -102,8 +101,8 @@ class Post extends React.Component {
                   imageSize={40}
                   title={comment.User.name}
                   subtitle={comment.body}
-                  rightContent={comment.time}
-                  rightContentOnTop
+                  sideContent={comment.time}
+                  sideContentOnTop
                 />
               </div>
             ))}
@@ -118,7 +117,7 @@ Post.propTypes = {
   opPhoto: PropTypes.string.isRequired,
   opName: PropTypes.string.isRequired,
   opSubtitle: PropTypes.string,
-  opLink: PropTypes.string.isRequired,
+  // opLink: PropTypes.string.isRequired,
   postTime: PropTypes.string.isRequired,
   postBody: PropTypes.string.isRequired,
   postImage: PropTypes.string,
