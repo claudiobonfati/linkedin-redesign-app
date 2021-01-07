@@ -7,10 +7,6 @@ class MenuFeed extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {
-
-  }
-
   render() {
     return (
       <ul className={styles.menu}>
