@@ -1,5 +1,6 @@
 import React from 'react';
 import { TimelineMax, Power3 } from 'gsap';
+import Link from 'next/link';
 import styles from './DiscoverMenu.module.sass';
 import Search from './Search';
 
@@ -95,7 +96,7 @@ class DiscoverMenu extends React.Component {
               <div className="col-lg-2 col-md-3 d-none d-md-block pl-0 align-self-center">
                 <nav className={`border-right-gray ${styles.menuNav} ${styles.spaced}`}>
                   <ul>
-                    <li><a href="https://google.com">Home</a></li>
+                    <li><Link href="/">Home</Link></li>
                     <li><a href="https://google.com">Messages</a></li>
                     <li><a href="https://google.com">Calendar</a></li>
                     <li><a href="https://google.com">Requests</a></li>
@@ -109,7 +110,7 @@ class DiscoverMenu extends React.Component {
                 </h6>
                 <nav className={styles.menuNav}>
                   <ul>
-                    <li><a href="https://google.com">Home</a></li>
+                    <li><Link href="/me/details">Home</Link></li>
                     <li><a href="https://google.com">Messages</a></li>
                     <li><a href="https://google.com">Calendar</a></li>
                     <li><a href="https://google.com">Requests</a></li>
