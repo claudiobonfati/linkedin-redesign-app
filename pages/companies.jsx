@@ -2,9 +2,8 @@ import React, { Fragment } from 'react';
 import Head from 'next/head';
 import { Waypoint } from 'react-waypoint';
 import ProfileOverview from '../components/ProfileOverview';
-import CreatePost from '../components/CreatePost';
 import Post from '../components/Post';
-import { fetchMorePosts } from '../graphql/hooks';
+import { fetchMoreCompaniesPosts } from '../graphql/hooks';
 
 class Home extends React.Component {
   constructor(props) {
@@ -29,7 +28,7 @@ class Home extends React.Component {
   }
 
   fetchPosts() {
-    fetchMorePosts(this.state.feedPage, this.state.feedPerPage).then((result) => {
+    fetchMoreCompaniesPosts(this.state.feedPage, this.state.feedPerPage).then((result) => {
       if (!result.loading) {
         if (!result || result.data.length === 0) {
           this.setState({
@@ -92,9 +91,6 @@ class Home extends React.Component {
               </div>
             </div>
             <div className="col-lg-6 col-md-9 py-4">
-              <div className="mb-4">
-                <CreatePost />
-              </div>
               {(this.state.feed.data
               && Array.isArray(this.state.feed.data)
               && this.state.feed.data.length > 0)
