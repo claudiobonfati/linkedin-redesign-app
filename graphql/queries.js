@@ -164,3 +164,29 @@ export const GET_SIMPLE_USER = gql`
     }
   }
 `;
+
+export const GET_ARTICLES = gql`
+  query GetArticles($page: Int!, $perPage: Int!) {
+    allArticles(page: $page, perPage: $perPage) {
+      id
+      title
+      body
+      image
+      video
+      fullArticle
+      likes
+      time
+      User {
+        id
+        name
+        photo
+        headline
+      }
+      Company {
+        id
+        logo
+        name
+      }
+    }
+  }
+`;
