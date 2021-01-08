@@ -1,7 +1,9 @@
 import React from 'react';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import Plyr from 'plyr-react';
 import 'plyr-react/dist/plyr.css';
+import ReactHtmlParser from 'react-html-parser';
 import styles from './Post.module.sass';
 import ProfileDisplay from './ProfileDisplay';
 import LikeButton from './LikeButton';
@@ -35,9 +37,13 @@ class Post extends React.Component {
               sideContent={this.props.postTime}
             />
           </div>
-          <div className={`py-4 ${styles.content} ${styles.withMedia}`}>
-            <p>{this.props.postBody}</p>
-            { (this.props.postImage || this.props.postVimeo)
+          <section className={`py-4 ${styles.content} ${styles.withMedia}`}>
+            {(this.props.postTitle)
+            && (
+              <h3 className="h5 mb-3 color-gray-dark">{this.props.postTitle}</h3>
+            )}
+            <p>{ReactHtmlParser(this.props.postBody)}</p>
+            {(this.props.postImage || this.props.postVimeo)
             && (
               <div className={`${styles.contentMedia}`}>
                 { this.props.postImage
@@ -47,7 +53,7 @@ class Post extends React.Component {
                     alt="Post banner"
                   />
                 )}
-                { this.props.postVimeo
+                {this.props.postVimeo
                 && (
                   <div className={styles.playerWrapper}>
                     <Plyr
@@ -68,10 +74,18 @@ class Post extends React.Component {
                 )}
               </div>
             )}
-          </div>
+            {this.props.postBottomLink
+            && (
+              <div className={styles.bottomLinkWrapper}>
+                <Link href={this.props.postBottomLink}>
+                  <a target="_blank">{this.props.postBottomLinkText ? this.props.postBottomLinkText : 'Read more'}</a>
+                </Link>
+              </div>
+            )}
+          </section>
           <div className={`${styles.footer}`}>
             <LikeButton likes={this.props.postLikes} />
-            { (Array.isArray(this.props.postComments) && this.props.postComments.length > 0)
+            {(Array.isArray(this.props.postComments) && this.props.postComments.length > 0)
             && (
               <div className={`py-4 pl-3 ${styles.footerInfo}`}>
                 <span className="lnr lnr-bubble" />
@@ -111,6 +125,9 @@ Post.propTypes = {
   opSubtitle: PropTypes.string,
   // opLink: PropTypes.string.isRequired,
   postTime: PropTypes.string.isRequired,
+  postBottomLinkText: PropTypes.string,
+  postBottomLink: PropTypes.string,
+  postTitle: PropTypes.string,
   postBody: PropTypes.string.isRequired,
   postImage: PropTypes.string,
   postVimeo: PropTypes.number,
@@ -123,6 +140,9 @@ Post.defaultProps = {
   postImage: null,
   postVimeo: null,
   postComments: null,
+  postTitle: null,
+  postBottomLinkText: null,
+  postBottomLink: null,
 };
 
 export default Post;
