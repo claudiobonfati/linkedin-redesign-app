@@ -1,6 +1,12 @@
 import { useQuery } from '@apollo/client';
 import {
-  GET_POSTS, GET_USERS_POSTS, GET_COMPANIES_POSTS, GET_PROFILE, GET_SIMPLE_USER, GET_ARTICLES,
+  GET_POSTS,
+  GET_USERS_POSTS,
+  GET_COMPANIES_POSTS,
+  GET_PROFILE,
+  GET_SIMPLE_USER,
+  GET_ARTICLES,
+  GET_USER_POSTS,
 } from './queries';
 import ApolloClient from './apollo';
 
@@ -123,6 +129,21 @@ export const fetchMoreArticles = async (page, perPage) => {
   });
 
   result.data = result.data.allArticles;
+
+  return result;
+};
+
+export const fetchMoreUserPosts = async (page, perPage, userId) => {
+  let result = await ApolloClient.query({
+    query: GET_USER_POSTS,
+    variables: {
+      page,
+      perPage,
+      userId,
+    },
+  });
+
+  result.data = result.data.allPosts;
 
   return result;
 };

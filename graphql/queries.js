@@ -190,3 +190,39 @@ export const GET_ARTICLES = gql`
     }
   }
 `;
+
+export const GET_USER_POSTS = gql`
+  query GetPosts($page: Int!, $perPage: Int!, $userId: ID!) {
+    allPosts(page: $page, perPage: $perPage, filter: {
+      user_id: $userId
+    }) {
+      id
+      body
+      image
+      video
+      time
+      likes
+      User {
+        id
+        name
+        photo
+        headline
+      }
+      Company {
+        id
+        logo
+        name
+      }
+      Comments {
+        id
+        body
+        time
+        User {
+          id
+          name
+          photo
+        }
+      }
+    }
+  }
+`;
