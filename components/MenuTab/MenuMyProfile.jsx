@@ -1,4 +1,5 @@
 import React from 'react';
+import ActiveLink from '../../utils/ActiveLink';
 import styles from './Tab.module.sass';
 
 class MenuFeed extends React.Component {
@@ -11,14 +12,14 @@ class MenuFeed extends React.Component {
     return (
       <ul className={styles.menu}>
         <li>
-          <a href="https://google.com" className={styles.active}>
-            Details
-          </a>
+          <ActiveLink href="/me/details" activeClassName={styles.active}>
+            <a>Details</a>
+          </ActiveLink>
         </li>
         <li>
-          <a href="https://google.com">
-            Posts
-          </a>
+          <ActiveLink href="/me/posts" activeClassName={styles.active}>
+            <a>Posts</a>
+          </ActiveLink>
         </li>
         <li>
           <a href="https://google.com">

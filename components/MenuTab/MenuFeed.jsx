@@ -1,5 +1,4 @@
 import React from 'react';
-// import Link from 'next/link';
 import ActiveLink from '../../utils/ActiveLink';
 import styles from './Tab.module.sass';
 

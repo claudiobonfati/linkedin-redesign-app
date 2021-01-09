@@ -161,6 +161,9 @@ export const GET_SIMPLE_USER = gql`
       name
       photo
       headline
+      email
+      twitter
+      skype
     }
   }
 `;

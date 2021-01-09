@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
-import Head from 'next/head';
 import { Waypoint } from 'react-waypoint';
-import ProfileOverview from '../components/ProfileOverview';
-import Post from '../components/Post';
-import { fetchMoreArticles } from '../graphql/hooks';
+import ProfileOverview from '../../components/ProfileOverview';
+import CreatePost from '../../components/CreatePost';
+import Post from '../../components/Post';
+import { fetchMoreUserPosts, getSimpleUser } from '../../graphql/hooks';
 
-class Home extends React.Component {
+class MeDetails extends React.Component {
   constructor(props) {
     super(props);
 
@@ -18,31 +18,38 @@ class Home extends React.Component {
         error: false,
         data: [],
       },
+      user: null,
     };
 
-    this.fetchArticles = this.fetchArticles.bind(this);
+    this.fetchPosts = this.fetchPosts.bind(this);
   }
 
-  componentDidMount() {
-    this.fetchArticles();
+  async componentDidMount() {
+    this.fetchPosts();
+    let userData = await getSimpleUser(1);
+
+    this.setState({
+      user: userData,
+    });
   }
 
-  fetchArticles() {
-    fetchMoreArticles(this.state.feedPage, this.state.feedPerPage).then((result) => {
+  fetchPosts() {
+    fetchMoreUserPosts(
+      this.state.feedPage,
+      this.state.feedPerPage,
+      1,
+    ).then((result) => {
       if (!result.loading) {
         if (!result || result.data.length === 0) {
           this.setState({
             feedEnded: true,
           });
         } else {
-          let shuffledResult = result.data.map((x) => x);
-          shuffledResult = shuffledResult.sort(() => Math.random() - 0.5);
-
           this.setState((prevState) => ({
             feed: {
               loading: result.loading,
               error: result.error,
-              data: prevState.feed.data.concat(shuffledResult),
+              data: prevState.feed.data.concat(result.data),
             },
           }));
         }
@@ -57,40 +64,29 @@ class Home extends React.Component {
   render() {
     return (
       <>
-        <Head>
-          <title>Linkedin Redesign</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
         <div className="container">
           <main className="row">
-            <div className="col-lg-3 col-md-3 col-sm-6 pt-4 d-none d-sm-block">
+            <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
               <div className="sticky-aside-content">
-                <ProfileOverview
-                  photo="/images/me.jpg"
-                  name="Claudio Bonfati"
-                  position="Software Engineer"
-                  connections={658}
-                  views={35}
-                  actionMyProfile
-                />
-              </div>
-            </div>
-            <div className="col-6 pt-4 d-none d-sm-block d-md-none">
-              <div className="sticky-aside-content">
-                <ProfileOverview
-                  photo="/images/me.jpg"
-                  name="Claudio Bonfati"
-                  position="Software Engineer"
-                  connections={658}
-                  views={35}
-                  actionMyProfile
-                  email="claudio@example.com"
-                  twitter="claudioexample"
-                  skype="claudioexample"
-                />
+                {(this.state.user && !this.state.user.error && !this.state.user.loading)
+                && (
+                  <ProfileOverview
+                    photo={this.state.user.data.photo}
+                    name={this.state.user.data.name}
+                    position={this.state.user.data.headline}
+                    connections={658}
+                    views={35}
+                    email={this.state.user.data.email}
+                    twitter={this.state.user.data.twitter}
+                    skype={this.state.user.data.skype}
+                  />
+                )}
               </div>
             </div>
             <div className="col-lg-6 col-md-9 py-4">
+              <div className="mb-4">
+                <CreatePost />
+              </div>
               {(this.state.feed.data
               && Array.isArray(this.state.feed.data)
               && this.state.feed.data.length > 0)
@@ -104,10 +100,7 @@ class Home extends React.Component {
                         opSubtitle={post.User ? post.User.headline : null}
                         opLink="https://google.com"
                         postTime={post.time}
-                        postTitle={post.title}
                         postBody={post.body}
-                        postBottomLinkText="Read article"
-                        postBottomLink={post.fullArticle}
                         postImage={post.image}
                         postVimeo={post.video}
                         postLikes={post.likes}
@@ -115,7 +108,7 @@ class Home extends React.Component {
                       />
                       {(index === this.state.feed.data.length - 1 && !this.state.feedEnded) && (
                         <Waypoint
-                          onEnter={() => (!this.state.feedEnded ? this.fetchArticles() : null)}
+                          onEnter={() => (!this.state.feedEnded ? this.fetchPosts() : null)}
                         />
                       )}
                     </div>
@@ -145,4 +138,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default MeDetails;

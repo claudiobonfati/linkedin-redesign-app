@@ -97,26 +97,17 @@ export const useUser = (id) => {
   };
 };
 
-export const useSimpleUser = (id) => {
-  const { loading, error, data } = useQuery(GET_SIMPLE_USER, {
+export const getSimpleUser = async (id) => {
+  let result = await ApolloClient.query({
+    query: GET_SIMPLE_USER,
     variables: {
       id,
     },
   });
 
-  if (!loading && data) {
-    return {
-      loading,
-      error,
-      data: data.User,
-    };
-  }
+  result.data = result.data.User;
 
-  return {
-    loading,
-    error,
-    data,
-  };
+  return result;
 };
 
 export const fetchMoreArticles = async (page, perPage) => {

@@ -4,7 +4,7 @@ import { Waypoint } from 'react-waypoint';
 import ProfileOverview from '../components/ProfileOverview';
 import CreatePost from '../components/CreatePost';
 import Post from '../components/Post';
-import { fetchMorePosts } from '../graphql/hooks';
+import { fetchMorePosts, getSimpleUser } from '../graphql/hooks';
 
 class Home extends React.Component {
   constructor(props) {
@@ -19,13 +19,19 @@ class Home extends React.Component {
         error: false,
         data: [],
       },
+      user: null,
     };
 
     this.fetchPosts = this.fetchPosts.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.fetchPosts();
+    let userData = await getSimpleUser(1);
+
+    this.setState({
+      user: userData,
+    });
   }
 
   fetchPosts() {
@@ -66,14 +72,17 @@ class Home extends React.Component {
           <main className="row">
             <div className="col-lg-3 col-md-3 col-sm-6 pt-4 d-none d-sm-block">
               <div className="sticky-aside-content">
-                <ProfileOverview
-                  photo="/images/me.jpg"
-                  name="Claudio Bonfati"
-                  position="Software Engineer"
-                  connections={658}
-                  views={35}
-                  actionMyProfile
-                />
+                {(this.state.user && !this.state.user.error && !this.state.user.loading)
+                && (
+                  <ProfileOverview
+                    photo={this.state.user.data.photo}
+                    name={this.state.user.data.name}
+                    position={this.state.user.data.headline}
+                    connections={658}
+                    views={35}
+                    actionMyProfile
+                  />
+                )}
               </div>
             </div>
             <div className="col-6 pt-4 d-none d-sm-block d-md-none">
