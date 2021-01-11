@@ -1,0 +1,90 @@
+@import ../styles/_variables
+
+.wrapper
+  display: block
+  width: 100%
+  background-color: white
+  border: 1px solid $color-border
+
+.description
+  padding-left: 15px
+  p 
+    color: $color-gray-medium
+
+.formWrapper
+  overflow: hidden
+  border-radius: 40px
+  width: 80px
+  height: 80px
+  position: relative
+  .openButton
+    position: absolute
+    background: transparent
+    border: 0
+    border-radius: 40px
+    padding: 0
+    width: 80px
+    height: 80px
+    top: 0
+    left: 0
+    outline: 0
+  .icon
+    color: white
+    font-size: 40px
+    position: absolute
+    width: 38px
+    height: 38px
+    left: calc(50% - 19px)
+    top: calc(50% - 19px)
+  .formContentWrapper
+    display: none
+    opacity: 0
+    header
+      background-color: rgba(0, 0, 0, .05)
+      height: 80px
+      position: relative
+      display: flex
+      align-items: center
+      padding-left: 35px
+      h6
+        color: white
+        margin: 0
+      .closeButton
+        position: absolute
+        background: transparent
+        border: 0
+        border-radius: 40px
+        padding: 0
+        width: 80px
+        height: 80px
+        color: white
+        top: 0
+        right: 0
+        outline: 0
+    .form
+      padding: 35px
+      input
+        display: block
+        width: 100%
+        padding: 10px 0
+        border: 0
+        background-color: transparent 
+        transition: all .2s ease-out
+        border-bottom: 1px solid rgba(white, .5)
+        color: white
+        &:focus
+          border-bottom: 1px solid white
+          outline: 0
+        &::placeholder
+          color: white
+          opacity: 1
+        &:-ms-input-placeholder
+          color: white
+        &::-ms-input-placeholder
+          color: white
+      .saveButton
+        padding: 10px 25px
+        background-color: white
+        border: 0
+        border-radius: 30px
+        font-weight: 500
