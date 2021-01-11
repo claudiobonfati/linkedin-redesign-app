@@ -5,7 +5,7 @@ import CreatePost from '../../components/CreatePost';
 import Post from '../../components/Post';
 import { fetchMoreUserPosts, getSimpleUser } from '../../graphql/hooks';
 
-class MeDetails extends React.Component {
+class MePosts extends React.Component {
   constructor(props) {
     super(props);
 
@@ -93,7 +93,7 @@ class MeDetails extends React.Component {
               && (
                 <>
                   {this.state.feed.data.map((post, index) => (
-                    <div className="mb-4" key={`${post.id}`}>
+                    <div className="mb-4" key={post.id}>
                       <Post
                         opPhoto={post.User ? post.User.photo : post.Company.logo}
                         opName={post.User ? post.User.name : post.Company.name}
@@ -138,4 +138,4 @@ class MeDetails extends React.Component {
   }
 }
 
-export default MeDetails;
+export default MePosts;
