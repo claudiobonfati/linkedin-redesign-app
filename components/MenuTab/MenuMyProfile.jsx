@@ -27,9 +27,9 @@ class MenuFeed extends React.Component {
           </a>
         </li>
         <li>
-          <a href="https://google.com">
-            Improve
-          </a>
+          <ActiveLink href="/me/improve" activeClassName={styles.active}>
+            <a>Improve</a>
+          </ActiveLink>
         </li>
       </ul>
     );

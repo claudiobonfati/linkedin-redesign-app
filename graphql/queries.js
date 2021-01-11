@@ -144,6 +144,7 @@ export const GET_PROFILE = gql`
         }
       }
       Follows {
+        id
         Company {
           id
           name
