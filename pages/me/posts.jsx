@@ -3,7 +3,9 @@ import { Waypoint } from 'react-waypoint';
 import ProfileOverview from '../../components/ProfileOverview';
 import CreatePost from '../../components/CreatePost';
 import Post from '../../components/Post';
+import SimpleCard from '../../components/SimpleCard';
 import { fetchMoreUserPosts, getSimpleUser } from '../../graphql/hooks';
+import ProfileDisplay from '../../components/ProfileDisplay';
 
 class MePosts extends React.Component {
   constructor(props) {
@@ -83,7 +85,7 @@ class MePosts extends React.Component {
                 )}
               </div>
             </div>
-            <div className="col-lg-6 col-md-9 py-4">
+            <div className="col-lg-6 col-md-8 py-4">
               <div className="mb-4">
                 <CreatePost />
               </div>
@@ -116,20 +118,43 @@ class MePosts extends React.Component {
                 </>
               )}
             </div>
-            <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
-              <div className="sticky-aside-content">
-                <ProfileOverview
-                  photo="/images/me.jpg"
-                  name="Claudio Bonfati"
-                  position="Software Engineer"
-                  connections={658}
-                  views={35}
-                  actionMyProfile
-                  email="claudio@example.com"
-                  twitter="claudioexample"
-                  skype="claudioexample"
-                />
-              </div>
+            <div className="col-lg-3 col-md-4 py-4 d-none d-lg-block">
+              <SimpleCard title="Keep in touch">
+                <div className="w-100">
+                  <div className="pb-3">
+                    <ProfileDisplay
+                      image="/images/me.jpg"
+                      imageSize={50}
+                      title="Jenson Kent"
+                      subtitle="CEO and founder"
+                    />
+                  </div>
+                  <div className="py-3">
+                    <ProfileDisplay
+                      image="/images/me.jpg"
+                      imageSize={50}
+                      title="Emily Kilimanjaro"
+                      subtitle="UI designer"
+                    />
+                  </div>
+                  <div className="py-3">
+                    <ProfileDisplay
+                      image="/images/me.jpg"
+                      imageSize={50}
+                      title="James Johns"
+                      subtitle="Project manager"
+                    />
+                  </div>
+                  <div className="pt-3">
+                    <ProfileDisplay
+                      image="/images/me.jpg"
+                      imageSize={50}
+                      title="CTO"
+                      subtitle="is now a connection"
+                    />
+                  </div>
+                </div>
+              </SimpleCard>
             </div>
           </main>
         </div>

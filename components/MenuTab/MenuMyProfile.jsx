@@ -22,9 +22,9 @@ class MenuFeed extends React.Component {
           </ActiveLink>
         </li>
         <li>
-          <a href="https://google.com">
-            Contacts
-          </a>
+          <ActiveLink href="/me/contacts" activeClassName={styles.active}>
+            <a>Contacts</a>
+          </ActiveLink>
         </li>
         <li>
           <ActiveLink href="/me/improve" activeClassName={styles.active}>

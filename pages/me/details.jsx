@@ -11,7 +11,7 @@ function MeDetails() {
   return (
     <div className="container">
       <main className="row">
-        <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
+        <div className="col-lg-3 col-md-4 py-4">
           <div className="sticky-aside-content">
             {(user && !user.error && !user.loading)
             && (
@@ -28,11 +28,9 @@ function MeDetails() {
             )}
           </div>
         </div>
-        <div className="col-lg-6 py-4">
+        <div className="col-lg-6 col-md-8 py-4">
           <div className="mb-4">
-            <SimpleCard
-              title="Summary"
-            >
+            <SimpleCard title="Summary">
               {(user && !user.error && !user.loading)
               && (
                 <p>{user.data.summary}</p>
@@ -117,7 +115,7 @@ function MeDetails() {
             <div className="mb-4">
               <SimpleCard title="Following">
                 <div className="row">
-                  {user.data.Follows.map((item, index) => (
+                  {user.data.Follows.map((item) => (
                     <div className="col-lg-4 col-sm-3 col-6 mb-3 mb-sm-0">
                       <Polaroid
                         image={item.Company.cover}
@@ -130,20 +128,45 @@ function MeDetails() {
             </div>
           )}
         </div>
-        <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
-          <div className="sticky-aside-content">
-            <ProfileOverview
-              photo="/images/me.jpg"
-              name="Claudio Bonfati"
-              position="Software Engineer"
-              connections={658}
-              views={35}
-              actionMyProfile
-              email="claudio@example.com"
-              twitter="claudioexample"
-              skype="claudioexample"
-            />
-          </div>
+        <div className="col-lg-3 col-md-4 py-4 d-none d-lg-block">
+          <SimpleCard
+            title="Keep in touch"
+          >
+            <div className="w-100">
+              <div className="pb-3">
+                <ProfileDisplay
+                  image="/images/me.jpg"
+                  imageSize={50}
+                  title="Jenson Kent"
+                  subtitle="CEO and founder"
+                />
+              </div>
+              <div className="py-3">
+                <ProfileDisplay
+                  image="/images/me.jpg"
+                  imageSize={50}
+                  title="Emily Kilimanjaro"
+                  subtitle="UI designer"
+                />
+              </div>
+              <div className="py-3">
+                <ProfileDisplay
+                  image="/images/me.jpg"
+                  imageSize={50}
+                  title="James Johns"
+                  subtitle="Project manager"
+                />
+              </div>
+              <div className="pt-3">
+                <ProfileDisplay
+                  image="/images/me.jpg"
+                  imageSize={50}
+                  title="CTO"
+                  subtitle="is now a connection"
+                />
+              </div>
+            </div>
+          </SimpleCard>
         </div>
       </main>
     </div>
