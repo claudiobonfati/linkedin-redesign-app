@@ -6,7 +6,7 @@ import ProfileDisplay from '../../components/ProfileDisplay';
 import { useUser } from '../../graphql/hooks';
 
 function MeDetails() {
-  const user = useUser(1);
+  const user = useUser('claudiobonfati');
 
   return (
     <div className="container">
@@ -94,7 +94,7 @@ function MeDetails() {
             <div className="mb-4">
               <SimpleCard title="Recommendations">
                 {user.data.Recommendations.map((item, index) => (
-                  <div className={`p-3 border-gray bg-gray-lighter ${index + 1 !== user.data.Recommendations.length ? 'mb-4' : ''}`}>
+                  <div className={`p-3 border-gray bg-gray-lighter ${index + 1 !== user.data.Recommendations.length ? 'mb-4' : ''}`} key={item.id}>
                     <ProfileDisplay
                       image={item.Author.photo}
                       imageSize={47}
@@ -109,14 +109,13 @@ function MeDetails() {
               </SimpleCard>
             </div>
           )}
-
           {(user && !user.error && !user.loading && user.data.Follows)
           && (
             <div className="mb-4">
               <SimpleCard title="Following">
                 <div className="row">
                   {user.data.Follows.map((item) => (
-                    <div className="col-lg-4 col-sm-3 col-6 mb-3 mb-sm-0">
+                    <div className="col-lg-4 col-sm-3 col-6 mb-3 mb-sm-0" key={item.id}>
                       <Polaroid
                         image={item.Company.cover}
                         title={item.Company.name}
@@ -129,9 +128,7 @@ function MeDetails() {
           )}
         </div>
         <div className="col-lg-3 col-md-4 py-4 d-none d-lg-block">
-          <SimpleCard
-            title="Keep in touch"
-          >
+          <SimpleCard title="Keep in touch">
             <div className="w-100">
               <div className="pb-3">
                 <ProfileDisplay
@@ -147,22 +144,6 @@ function MeDetails() {
                   imageSize={50}
                   title="Emily Kilimanjaro"
                   subtitle="UI designer"
-                />
-              </div>
-              <div className="py-3">
-                <ProfileDisplay
-                  image="/images/me.jpg"
-                  imageSize={50}
-                  title="James Johns"
-                  subtitle="Project manager"
-                />
-              </div>
-              <div className="pt-3">
-                <ProfileDisplay
-                  image="/images/me.jpg"
-                  imageSize={50}
-                  title="CTO"
-                  subtitle="is now a connection"
                 />
               </div>
             </div>

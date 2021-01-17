@@ -5,10 +5,8 @@ import ProfileDisplay from '../../components/ProfileDisplay';
 import { useUser, useContacts } from '../../graphql/hooks';
 
 function MeContacts() {
-  const user = useUser(1);
+  const user = useUser('claudiobonfati');
   const contacts = useContacts(0, -1, '1');
-
-  console.log(contacts);
 
   return (
     <div className="container">
@@ -44,7 +42,7 @@ function MeContacts() {
                 && (
                   <>
                     {contacts.data.map((contact, index) => (
-                      <div className={`${(index < contacts.data.length - 1) ? 'border-bottom-gray' : 'pb-0'} ${(index === 0) ? 'pb-3' : ' py-3'}`}>
+                      <div className={`${(index < contacts.data.length - 1) ? 'border-bottom-gray' : 'pb-0'} ${(index === 0) ? 'pb-3' : ' py-3'}`} key={contact.id}>
                         <ProfileDisplay
                           image={contact.photo}
                           imageSize={60}

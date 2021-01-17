@@ -12,6 +12,7 @@ export const GET_POSTS = gql`
       User {
         id
         name
+        username
         photo
         headline
       }
@@ -46,6 +47,7 @@ export const GET_COMPANIES_POSTS = gql`
       User {
         id
         name
+        username
         photo
         headline
       }
@@ -80,6 +82,7 @@ export const GET_USERS_POSTS = gql`
       User {
         id
         name
+        username
         photo
         headline
       }
@@ -103,10 +106,11 @@ export const GET_USERS_POSTS = gql`
 `;
 
 export const GET_PROFILE = gql`
-  query GetUser($id: ID!) {
-    User(id: $id) {
+  query GetUser($username: String!) {
+    allUsers(page: 0, perPage: 1, filter: { username: $username }) {
       id
       name
+      username
       photo
       headline
       email
@@ -115,6 +119,7 @@ export const GET_PROFILE = gql`
       place
       summary
       Experiences {
+        id
         title
         description
         period
@@ -125,6 +130,7 @@ export const GET_PROFILE = gql`
         }
       }
       Recommendations {
+        id
         description
         Author {
           id
@@ -134,6 +140,7 @@ export const GET_PROFILE = gql`
         }
       }
       Courses {
+        id
         title
         period
         description
@@ -160,6 +167,7 @@ export const GET_SIMPLE_USER = gql`
     User(id: $id) {
       id
       name
+      username
       photo
       headline
       email
@@ -183,6 +191,7 @@ export const GET_ARTICLES = gql`
       User {
         id
         name
+        username
         photo
         headline
       }
@@ -209,6 +218,7 @@ export const GET_USER_POSTS = gql`
       User {
         id
         name
+        username
         photo
         headline
       }
@@ -236,6 +246,7 @@ export const GET_USERS = gql`
     allUsers(page: $page, perPage: $perPage) {
       id
       name
+      username
       photo
       headline
     }

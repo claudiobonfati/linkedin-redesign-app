@@ -76,10 +76,10 @@ export const fetchMoreCompaniesPosts = async (page, perPage) => {
   return result;
 };
 
-export const useUser = (id) => {
+export const useUser = (username) => {
   const { loading, error, data } = useQuery(GET_PROFILE, {
     variables: {
-      id,
+      username,
     },
   });
 
@@ -87,7 +87,7 @@ export const useUser = (id) => {
     return {
       loading,
       error,
-      data: data.User,
+      data: data.allUsers[0],
     };
   }
 
