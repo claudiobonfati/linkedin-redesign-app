@@ -230,3 +230,14 @@ export const GET_USER_POSTS = gql`
     }
   }
 `;
+
+export const GET_USERS = gql`
+  query GetUsers($page: Int!, $perPage: Int!) {
+    allUsers(page: $page, perPage: $perPage) {
+      id
+      name
+      photo
+      headline
+    }
+  }
+`;

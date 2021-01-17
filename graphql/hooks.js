@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
 import {
   GET_POSTS,
+  GET_USERS,
   GET_USERS_POSTS,
   GET_COMPANIES_POSTS,
   GET_PROFILE,
@@ -137,4 +138,27 @@ export const fetchMoreUserPosts = async (page, perPage, userId) => {
   result.data = result.data.allPosts;
 
   return result;
+};
+
+export const useContacts = (page, perPage, exclude) => {
+  const { loading, error, data } = useQuery(GET_USERS, {
+    variables: {
+      page,
+      perPage,
+    },
+  });
+
+  if (!loading && data) {
+    return {
+      loading,
+      error,
+      data: data.allUsers.filter((user) => user.id !== exclude),
+    };
+  }
+
+  return {
+    loading,
+    error,
+    data,
+  };
 };
