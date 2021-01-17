@@ -12,19 +12,22 @@
     color: $color-gray-medium
 
 .formWrapper
+  --button-diameter: 80px
   overflow: hidden
   border-radius: 40px
-  width: 80px
-  height: 80px
+  width: var(--button-diameter)
+  height: var(--button-diameter)
   position: relative
+  flex-grow: 0
+  flex-shrink: 0
   .openButton
     position: absolute
     background: transparent
     border: 0
     border-radius: 40px
     padding: 0
-    width: 80px
-    height: 80px
+    width: var(--button-diameter)
+    height: var(--button-diameter)
     top: 0
     left: 0
     outline: 0
@@ -41,11 +44,12 @@
     opacity: 0
     header
       background-color: rgba(0, 0, 0, .05)
-      height: 80px
+      height: var(--button-diameter)
       position: relative
       display: flex
       align-items: center
       padding-left: 35px
+      padding-right: 60px
       h6
         color: white
         margin: 0
@@ -55,8 +59,8 @@
         border: 0
         border-radius: 40px
         padding: 0
-        width: 80px
-        height: 80px
+        width: var(--button-diameter)
+        height: var(--button-diameter)
         color: white
         top: 0
         right: 0
@@ -88,3 +92,14 @@
         border: 0
         border-radius: 30px
         font-weight: 500
+
+@media (max-width: map-get($breakpoints, 'sm'))
+  .formWrapper
+    --button-diameter: 70px
+    button
+      .icon
+        font-size: 30px
+        width: 30px
+        height: 30px
+        left: calc(50% - 15px)
+        top: calc(50% - 15px)

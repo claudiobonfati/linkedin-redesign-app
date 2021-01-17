@@ -60,7 +60,7 @@ function FormAddDetail(props) {
   return (
     <div className={styles.wrapper}>
       <div className="p-4">
-        <div className="w-100 d-flex align-items-center">
+        <div className="w-100 d-flex align-items-sm-center">
           <div
             className={`${styles.formWrapper} bg-${props.color}`}
             ref={(ref) => { formWrapperRef = ref; }}
