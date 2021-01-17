@@ -1,5 +1,11 @@
+@import ../styles/_variables
+
 .layoutWrapper
   visibility: hidden
 
 .contentWrapper
   padding-top: 163px
+
+@media (max-width: map-get($breakpoints, 'sm'))
+  .contentWrapper
+    padding-top: 95px
