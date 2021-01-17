@@ -34,3 +34,15 @@
     align-self: auto
     color: $color-gray-medium
     font-weight: 300
+    a
+      display: block
+      padding: 6px 20px
+      border: 2px solid $color-blue
+      border-radius: 30px
+      text-decoration: none
+
+@media (max-width: map-get($breakpoints, 'sm'))
+  .wrapper
+    .rightWrapper
+      a
+        padding: 3px 10px

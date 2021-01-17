@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import styles from './ProfileDisplay.module.sass';
 import ConditionalWrapper from '../utils/ConditionalWrapper';
 
@@ -53,6 +54,14 @@ class ProfileDisplay extends React.Component {
             {this.props.sideContent}
           </div>
         )}
+        {(this.props.rightButtonText && this.props.rightButtonLink)
+        && (
+          <div className={`ml-3 ${styles.rightWrapper}`}>
+            <Link href={this.props.rightButtonLink}>
+              {this.props.rightButtonText}
+            </Link>
+          </div>
+        )}
       </div>
     );
   }
@@ -68,6 +77,8 @@ ProfileDisplay.propTypes = {
   blueLine: PropTypes.string,
   sideContent: PropTypes.string,
   sideContentOnTop: PropTypes.bool,
+  rightButtonText: PropTypes.string,
+  rightButtonLink: PropTypes.string,
 };
 
 ProfileDisplay.defaultProps = {
@@ -78,6 +89,8 @@ ProfileDisplay.defaultProps = {
   imageOnTop: false,
   subtitle: null,
   blueLine: null,
+  rightButtonText: null,
+  rightButtonLink: null,
 };
 
 export default ProfileDisplay;
