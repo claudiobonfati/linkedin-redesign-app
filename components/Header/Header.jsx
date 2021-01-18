@@ -90,19 +90,17 @@ class Header extends React.Component {
                 setActiveDrop={this.setActiveDrop}
                 ref={(ref) => { this.NotificationsMenuRef = ref; }}
               />
-              <button
-                aria-expanded="false"
-                className={`ml-3 ${styles.navBarButtons}`}
-                type="button"
-              >
-                <Image
-                  src="/images/me.jpg"
-                  alt="Profile picture"
-                  className={`circle-image ${styles.profilePic}`}
-                  width={35}
-                  height={35}
-                />
-              </button>
+              <Link href="/me/details">
+                <a className={`ml-3 ${styles.navBarButtons}`}>
+                  <Image
+                    src="/images/me.jpg"
+                    alt="Profile picture"
+                    className={`circle-image ${styles.profilePic}`}
+                    width={35}
+                    height={35}
+                  />
+                </a>
+              </Link>
             </div>
           </div>
         </div>
