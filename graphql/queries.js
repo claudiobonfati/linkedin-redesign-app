@@ -28,6 +28,7 @@ export const GET_POSTS = gql`
         User {
           id
           name
+          username
           photo
         }
       }
@@ -63,6 +64,7 @@ export const GET_COMPANIES_POSTS = gql`
         User {
           id
           name
+          username
           photo
         }
       }
@@ -98,6 +100,7 @@ export const GET_USERS_POSTS = gql`
         User {
           id
           name
+          username
           photo
         }
       }
@@ -107,7 +110,9 @@ export const GET_USERS_POSTS = gql`
 
 export const GET_PROFILE = gql`
   query GetUser($username: String!) {
-    allUsers(page: 0, perPage: 1, filter: { username: $username }) {
+    allUsers(page: 0, perPage: 1, filter: { 
+      username: $username 
+    }) {
       id
       name
       username
@@ -135,6 +140,7 @@ export const GET_PROFILE = gql`
         Author {
           id
           name
+          username
           photo
           headline
         }
@@ -163,8 +169,10 @@ export const GET_PROFILE = gql`
 `;
 
 export const GET_SIMPLE_USER = gql`
-  query GetSimpleUser($id: ID!) {
-    User(id: $id) {
+  query GetSimpleUser($username: String!) {
+    allUsers(page: 0, perPage: 1, filter: { 
+      username: $username 
+    }) {
       id
       name
       username
@@ -234,6 +242,7 @@ export const GET_USER_POSTS = gql`
         User {
           id
           name
+          username
           photo
         }
       }

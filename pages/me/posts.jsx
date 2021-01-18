@@ -27,19 +27,20 @@ class MePosts extends React.Component {
   }
 
   async componentDidMount() {
-    this.fetchPosts();
-    let userData = await getSimpleUser(1);
+    let userData = await getSimpleUser('claudiobonfati');
 
     this.setState({
       user: userData,
     });
+
+    this.fetchPosts();
   }
 
   fetchPosts() {
     fetchMoreUserPosts(
       this.state.feedPage,
       this.state.feedPerPage,
-      1,
+      this.state.user.data.id,
     ).then((result) => {
       if (!result.loading) {
         if (!result || result.data.length === 0) {
@@ -56,6 +57,8 @@ class MePosts extends React.Component {
           }));
         }
       }
+    }).catch((err) => {
+      console.log('error', err);
     });
 
     this.setState((prevState) => ({
@@ -100,7 +103,7 @@ class MePosts extends React.Component {
                         opPhoto={post.User ? post.User.photo : post.Company.logo}
                         opName={post.User ? post.User.name : post.Company.name}
                         opSubtitle={post.User ? post.User.headline : null}
-                        opLink="https://google.com"
+                        opLink="/me/details"
                         postTime={post.time}
                         postBody={post.body}
                         postImage={post.image}

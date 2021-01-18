@@ -7,7 +7,7 @@ import ProfileDisplay from '../../components/ProfileDisplay';
 import { useUser } from '../../graphql/hooks';
 
 function MeImprove() {
-  const user = useUser(1);
+  const user = useUser('claudiobonfati');
 
   return (
     <div className="container">
@@ -47,9 +47,7 @@ function MeImprove() {
             />
           </div>
           <div className="mb-4">
-            <SimpleCard
-              title="Summary"
-            >
+            <SimpleCard title="Summary">
               {(user && !user.error && !user.loading)
               && (
                 <p>{user.data.summary}</p>
@@ -113,7 +111,7 @@ function MeImprove() {
             <div className="mb-4">
               <SimpleCard title="Recommendations">
                 {user.data.Recommendations.map((item, index) => (
-                  <div className={`p-3 border-gray bg-gray-lighter ${index + 1 !== user.data.Recommendations.length ? 'mb-4' : ''}`}>
+                  <div className={`p-3 border-gray bg-gray-lighter ${index + 1 !== user.data.Recommendations.length ? 'mb-4' : ''}`} key={item.id}>
                     <ProfileDisplay
                       image={item.Author.photo}
                       imageSize={47}
@@ -128,7 +126,6 @@ function MeImprove() {
               </SimpleCard>
             </div>
           )}
-
           {(user && !user.error && !user.loading && user.data.Follows)
           && (
             <div className="mb-4">
@@ -148,9 +145,7 @@ function MeImprove() {
           )}
         </div>
         <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
-          <SimpleCard
-            title="Keep in touch"
-          >
+          <SimpleCard title="Keep in touch">
             {(user && !user.error && !user.loading)
             && (
               <div className="w-100">
@@ -168,22 +163,6 @@ function MeImprove() {
                     imageSize={50}
                     title="Emily Kilimanjaro"
                     subtitle="UI designer"
-                  />
-                </div>
-                <div className="py-3">
-                  <ProfileDisplay
-                    image="/images/me.jpg"
-                    imageSize={50}
-                    title="James Johns"
-                    subtitle="Project manager"
-                  />
-                </div>
-                <div className="pt-3">
-                  <ProfileDisplay
-                    image="/images/me.jpg"
-                    imageSize={50}
-                    title="CTO"
-                    subtitle="is now a connection"
                   />
                 </div>
               </div>

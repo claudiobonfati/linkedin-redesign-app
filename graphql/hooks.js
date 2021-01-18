@@ -98,15 +98,16 @@ export const useUser = (username) => {
   };
 };
 
-export const getSimpleUser = async (id) => {
+export const getSimpleUser = async (username) => {
   let result = await ApolloClient.query({
     query: GET_SIMPLE_USER,
     variables: {
-      id,
+      username,
     },
   });
 
-  result.data = result.data.User;
+  let data = result.data.allUsers[0];
+  result.data = data;
 
   return result;
 };

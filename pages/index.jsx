@@ -27,7 +27,7 @@ class Home extends React.Component {
 
   async componentDidMount() {
     this.fetchPosts();
-    let userData = await getSimpleUser(1);
+    let userData = await getSimpleUser('claudiobonfati');
 
     this.setState({
       user: userData,
@@ -115,7 +115,7 @@ class Home extends React.Component {
                         opPhoto={post.User ? post.User.photo : post.Company.logo}
                         opName={post.User ? post.User.name : post.Company.name}
                         opSubtitle={post.User ? post.User.headline : null}
-                        opLink="https://google.com"
+                        opLink={post.User ? `/profile/${post.User.username}/details` : `/company/${post.Company.name}`}
                         postTime={post.time}
                         postBody={post.body}
                         postImage={post.image}
