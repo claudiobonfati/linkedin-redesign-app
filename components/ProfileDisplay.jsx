@@ -18,18 +18,32 @@ class ProfileDisplay extends React.Component {
           className={`${styles.imageAside} ${this.props.imageOnTop ? 'align-self-start mt-1' : ''} ${this.props.imageSide === 'right' ? styles.imageRight : ''}`}
           style={{ flexBasis: this.props.imageSize }}
         >
-          <Image
-            src={this.props.image}
-            alt="Profile picture"
-            className={`circle-image ${styles.profilePic}`}
-            width={this.props.imageSize}
-            height={this.props.imageSize}
-          />
+          <ConditionalWrapper
+            condition={this.props.link}
+            wrapper={
+              (children) => <Link href={this.props.link}><a>{children}</a></Link>
+            }
+          >
+            <Image
+              src={this.props.image}
+              alt="Profile picture"
+              className={`circle-image ${styles.profilePic}`}
+              width={this.props.imageSize}
+              height={this.props.imageSize}
+            />
+          </ConditionalWrapper>
         </div>
         <div className={`${styles.infoWrapper} ${this.props.imageSide === 'left' ? 'ml-3' : 'mr-3'}`}>
-          <div className={styles.infoTitle}>
-            {this.props.title}
-          </div>
+          <ConditionalWrapper
+            condition={this.props.link}
+            wrapper={
+              (children) => <Link href={this.props.link}><a>{children}</a></Link>
+            }
+          >
+            <div className={styles.infoTitle}>
+              {this.props.title}
+            </div>
+          </ConditionalWrapper>
           { this.props.blueLine
           && (
             <div className={styles.infoBlueLine}>
@@ -68,6 +82,7 @@ class ProfileDisplay extends React.Component {
 }
 
 ProfileDisplay.propTypes = {
+  link: PropTypes.string,
   image: PropTypes.string.isRequired,
   imageOnTop: PropTypes.bool,
   imageSize: PropTypes.number,
@@ -82,6 +97,7 @@ ProfileDisplay.propTypes = {
 };
 
 ProfileDisplay.defaultProps = {
+  link: null,
   imageSize: 40,
   sideContent: null,
   sideContentOnTop: false,

@@ -44,6 +44,7 @@ function MeContacts() {
                     {contacts.data.map((contact, index) => (
                       <div className={`${(index < contacts.data.length - 1) ? 'border-bottom-gray' : 'pb-0'} ${(index === 0) ? 'pb-3' : ' py-3'}`} key={contact.id}>
                         <ProfileDisplay
+                          link={`/profile/${contact.username}/details`}
                           image={contact.photo}
                           imageSize={60}
                           title={contact.name}

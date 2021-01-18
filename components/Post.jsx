@@ -30,6 +30,7 @@ class Post extends React.Component {
         <div className="px-4">
           <div className={`py-4 ${styles.header}`}>
             <ProfileDisplay
+              link={this.props.opLink}
               image={this.props.opPhoto}
               imageSize={60}
               title={this.props.opName}
@@ -102,6 +103,7 @@ class Post extends React.Component {
             {this.props.postComments.map((comment) => (
               <div className={`py-4 ${styles.commentItem}`} key={comment.id}>
                 <ProfileDisplay
+                  link={`/profile/${comment.User.username}/details`}
                   image={comment.User.photo}
                   imageOnTop
                   imageSize={40}
@@ -123,7 +125,7 @@ Post.propTypes = {
   opPhoto: PropTypes.string.isRequired,
   opName: PropTypes.string.isRequired,
   opSubtitle: PropTypes.string,
-  // opLink: PropTypes.string.isRequired,
+  opLink: PropTypes.string,
   postTime: PropTypes.string.isRequired,
   postBottomLinkText: PropTypes.string,
   postBottomLink: PropTypes.string,
@@ -136,6 +138,7 @@ Post.propTypes = {
 };
 
 Post.defaultProps = {
+  opLink: null,
   opSubtitle: null,
   postImage: null,
   postVimeo: null,
