@@ -8,6 +8,36 @@ function MeContacts() {
   const user = useUser('claudiobonfati');
   const contacts = useContacts(0, -1, '1');
 
+  let jsxContactsList = null;
+
+  if (contacts
+      && !contacts.error
+      && !contacts.loading) {
+    jsxContactsList = (
+      <>
+        {(Array.isArray(contacts.data)
+        && contacts.data.length > 0)
+        && (
+          <>
+            {contacts.data.map((contact, index) => (
+              <div className={`${(index < contacts.data.length - 1) ? 'border-bottom-gray' : 'pb-0'} ${(index === 0) ? 'pb-3' : ' py-3'}`} key={contact.id}>
+                <ProfileDisplay
+                  link={`/profile/${contact.username}/details`}
+                  image={contact.photo}
+                  imageSize={60}
+                  title={contact.name}
+                  subtitle={contact.headline}
+                  rightButtonText="Message"
+                  rightButtonLink="https://www.google.com/"
+                />
+              </div>
+            ))}
+          </>
+        )}
+      </>
+    );
+  }
+
   return (
     <div className="container">
       <main className="row">
@@ -33,31 +63,7 @@ function MeContacts() {
             title="People"
             rightText="685 connections"
           >
-            {(contacts && !contacts.error && !contacts.loading)
-            && (
-              <div className="w-100">
-                {(contacts
-                && Array.isArray(contacts.data)
-                && contacts.data.length > 0)
-                && (
-                  <>
-                    {contacts.data.map((contact, index) => (
-                      <div className={`${(index < contacts.data.length - 1) ? 'border-bottom-gray' : 'pb-0'} ${(index === 0) ? 'pb-3' : ' py-3'}`} key={contact.id}>
-                        <ProfileDisplay
-                          link={`/profile/${contact.username}/details`}
-                          image={contact.photo}
-                          imageSize={60}
-                          title={contact.name}
-                          subtitle={contact.headline}
-                          rightButtonText="Message"
-                          rightButtonLink="https://www.google.com/"
-                        />
-                      </div>
-                    ))}
-                  </>
-                )}
-              </div>
-            )}
+            {jsxContactsList}
           </SimpleCard>
         </div>
       </main>

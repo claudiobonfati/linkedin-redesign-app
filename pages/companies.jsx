@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import Head from 'next/head';
 import { Waypoint } from 'react-waypoint';
 import ProfileOverview from '../components/ProfileOverview';
 import Post from '../components/Post';
@@ -89,61 +88,55 @@ class Companies extends React.Component {
     }
 
     return (
-      <>
-        <Head>
-          <title>Linkedin Redesign</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <div className="container">
-          <main className="row">
-            <div className="col-lg-3 col-md-3 col-sm-6 pt-4 d-none d-sm-block">
-              <div className="sticky-aside-content">
-                <ProfileOverview
-                  photo="/images/me.jpg"
-                  name="Claudio Bonfati"
-                  position="Software Engineer"
-                  connections={658}
-                  views={35}
-                  actionMyProfile
-                />
-              </div>
+      <div className="container">
+        <main className="row">
+          <div className="col-lg-3 col-md-3 col-sm-6 pt-4 d-none d-sm-block">
+            <div className="sticky-aside-content">
+              <ProfileOverview
+                photo="/images/me.jpg"
+                name="Claudio Bonfati"
+                position="Software Engineer"
+                connections={658}
+                views={35}
+                actionMyProfile
+              />
             </div>
-            <div className="col-6 pt-4 d-none d-sm-block d-md-none">
-              <div className="sticky-aside-content">
-                <ProfileOverview
-                  photo="/images/me.jpg"
-                  name="Claudio Bonfati"
-                  position="Software Engineer"
-                  connections={658}
-                  views={35}
-                  actionMyProfile
-                  email="claudio@example.com"
-                  twitter="claudioexample"
-                  skype="claudioexample"
-                />
-              </div>
+          </div>
+          <div className="col-6 pt-4 d-none d-sm-block d-md-none">
+            <div className="sticky-aside-content">
+              <ProfileOverview
+                photo="/images/me.jpg"
+                name="Claudio Bonfati"
+                position="Software Engineer"
+                connections={658}
+                views={35}
+                actionMyProfile
+                email="claudio@example.com"
+                twitter="claudioexample"
+                skype="claudioexample"
+              />
             </div>
-            <div className="col-lg-6 col-md-9 py-4">
-              {jsxPostsList}
+          </div>
+          <div className="col-lg-6 col-md-9 py-4">
+            {jsxPostsList}
+          </div>
+          <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
+            <div className="sticky-aside-content">
+              <ProfileOverview
+                photo="/images/me.jpg"
+                name="Claudio Bonfati"
+                position="Software Engineer"
+                connections={658}
+                views={35}
+                actionMyProfile
+                email="claudio@example.com"
+                twitter="claudioexample"
+                skype="claudioexample"
+              />
             </div>
-            <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
-              <div className="sticky-aside-content">
-                <ProfileOverview
-                  photo="/images/me.jpg"
-                  name="Claudio Bonfati"
-                  position="Software Engineer"
-                  connections={658}
-                  views={35}
-                  actionMyProfile
-                  email="claudio@example.com"
-                  twitter="claudioexample"
-                  skype="claudioexample"
-                />
-              </div>
-            </div>
-          </main>
-        </div>
-      </>
+          </div>
+        </main>
+      </div>
     );
   }
 }
