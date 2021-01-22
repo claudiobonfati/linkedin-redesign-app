@@ -26,17 +26,24 @@ class Home extends React.Component {
 
   async componentDidMount() {
     this.fetchPosts();
-    let userData = await getSimpleUser('claudiobonfati');
 
-    this.setState({
-      user: userData,
-    });
+    try {
+      let userData = await getSimpleUser('claudiobonfati');
+
+      this.setState({
+        user: userData,
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }
 
-  fetchPosts() {
-    fetchMorePosts(this.state.feedPage, this.state.feedPerPage).then((result) => {
-      if (!result.loading) {
-        if (!result || result.data.length === 0) {
+  async fetchPosts() {
+    try {
+      let result = await fetchMorePosts(this.state.feedPage, this.state.feedPerPage);
+
+      if (!result.loading && !result.error) {
+        if (!result.data || result.data.length === 0) {
           this.setState({
             feedEnded: true,
           });
@@ -50,14 +57,13 @@ class Home extends React.Component {
               error: result.error,
               data: prevState.feed.data.concat(shuffledResult),
             },
+            feedPage: prevState.feedPage + 1,
           }));
         }
       }
-    });
-
-    this.setState((prevState) => ({
-      feedPage: prevState.feedPage + 1,
-    }));
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   render() {

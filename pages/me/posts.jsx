@@ -36,14 +36,16 @@ class MePosts extends React.Component {
     this.fetchPosts();
   }
 
-  fetchPosts() {
-    fetchMoreUserPosts(
-      this.state.feedPage,
-      this.state.feedPerPage,
-      this.state.user.data.id,
-    ).then((result) => {
-      if (!result.loading) {
-        if (!result || result.data.length === 0) {
+  async fetchPosts() {
+    try {
+      let result = await fetchMoreUserPosts(
+        this.state.feedPage,
+        this.state.feedPerPage,
+        this.state.user.data.id,
+      );
+
+      if (!result.loading && !result.error) {
+        if (!result.data || result.data.length === 0) {
           this.setState({
             feedEnded: true,
           });
@@ -54,16 +56,13 @@ class MePosts extends React.Component {
               error: result.error,
               data: prevState.feed.data.concat(result.data),
             },
+            feedPage: prevState.feedPage + 1,
           }));
         }
       }
-    }).catch((err) => {
-      console.log('error', err);
-    });
-
-    this.setState((prevState) => ({
-      feedPage: prevState.feedPage + 1,
-    }));
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   render() {

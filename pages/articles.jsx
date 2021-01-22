@@ -26,10 +26,12 @@ class Articles extends React.Component {
     this.fetchArticles();
   }
 
-  fetchArticles() {
-    fetchMoreArticles(this.state.feedPage, this.state.feedPerPage).then((result) => {
-      if (!result.loading) {
-        if (!result || result.data.length === 0) {
+  async fetchArticles() {
+    try {
+      let result = await fetchMoreArticles(this.state.feedPage, this.state.feedPerPage);
+
+      if (!result.loading && !result.error) {
+        if (!result.data || result.data.length === 0) {
           this.setState({
             feedEnded: true,
           });
@@ -43,26 +45,23 @@ class Articles extends React.Component {
               error: result.error,
               data: prevState.feed.data.concat(shuffledResult),
             },
+            feedPage: prevState.feedPage + 1,
           }));
         }
       }
-    }).catch((err) => {
-      console.log('error', err);
-    });
-
-    this.setState((prevState) => ({
-      feedPage: prevState.feedPage + 1,
-    }));
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   render() {
-    // Main posts list
-    let jsxPostsList = null;
+    // Main articles list
+    let jsxArticlesList = null;
 
     if (this.state.feed.data
         && Array.isArray(this.state.feed.data)
         && this.state.feed.data.length > 0) {
-      jsxPostsList = (
+      jsxArticlesList = (
         <>
           {this.state.feed.data.map((post, index) => (
             <div className="mb-4" key={post.id}>
@@ -124,7 +123,7 @@ class Articles extends React.Component {
             </div>
           </div>
           <div className="col-lg-6 col-md-9 py-4">
-            {jsxPostsList}
+            {jsxArticlesList}
           </div>
           <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
             <div className="sticky-aside-content">
