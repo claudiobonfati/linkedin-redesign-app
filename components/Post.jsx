@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import Plyr from 'plyr-react';
@@ -8,62 +8,51 @@ import styles from './Post.module.sass';
 import ProfileDisplay from './ProfileDisplay';
 import LikeButton from './LikeButton';
 
-class Post extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      liked: false,
-    };
+const post = (props) => {
+  const [liked, setLiked] = useState(false);
 
-    this.likePost = this.likePost.bind(this);
-  }
+  const likePost = () => {
+    setLiked((preState) => !preState);
+  };
 
-  likePost() {
-    this.setState((prevState) => ({
-      liked: !prevState.liked,
-    }));
-  }
-
-  render() {
-    return (
-      <div className={styles.wrapper}>
-        <div className="px-4">
-          <div className={`py-4 ${styles.header}`}>
-            <ProfileDisplay
-              link={this.props.opLink}
-              image={this.props.opPhoto}
-              imageSize={60}
-              title={this.props.opName}
-              subtitle={this.props.opSubtitle}
-              sideContent={this.props.postTime}
-            />
-          </div>
-          <section className={`py-4 ${styles.content} ${styles.withMedia}`}>
-            {(this.props.postTitle)
+  return (
+    <div className={styles.wrapper}>
+      <div className="px-4">
+        <div className={`py-4 ${styles.header}`}>
+          <ProfileDisplay
+            link={props.opLink}
+            image={props.opPhoto}
+            imageSize={60}
+            title={props.opName}
+            subtitle={props.opSubtitle}
+            sideContent={props.postTime}
+          />
+        </div>
+        <section className={`py-4 ${styles.content} ${styles.withMedia}`}>
+          {(props.postTitle)
             && (
-              <h3 className="h5 mb-3 color-gray-dark">{this.props.postTitle}</h3>
+              <h3 className="h5 mb-3 color-gray-dark">{props.postTitle}</h3>
             )}
-            <p>{ReactHtmlParser(this.props.postBody)}</p>
-            {(this.props.postImage || this.props.postVimeo)
+          <p>{ReactHtmlParser(props.postBody)}</p>
+          {(props.postImage || props.postVimeo)
             && (
               <div className={`${styles.contentMedia}`}>
-                { this.props.postImage
+                { props.postImage
                 && (
                   <img
-                    src={this.props.postImage}
+                    src={props.postImage}
                     alt="Post banner"
                   />
                 )}
-                {this.props.postVimeo
+                {props.postVimeo
                 && (
                   <div className={styles.playerWrapper}>
                     <Plyr
-                      ref={(ref) => { this.plyrRef = ref; }}
                       source={{
                         type: 'video',
                         sources: [
                           {
-                            src: this.props.postVimeo,
+                            src: props.postVimeo,
                             provider: 'vimeo',
                           },
                         ],
@@ -75,53 +64,56 @@ class Post extends React.Component {
                 )}
               </div>
             )}
-            {this.props.postBottomLink
+          {props.postBottomLink
             && (
               <div className={styles.bottomLinkWrapper}>
-                <Link href={this.props.postBottomLink}>
-                  <a target="_blank">{this.props.postBottomLinkText ? this.props.postBottomLinkText : 'Read more'}</a>
+                <Link href={props.postBottomLink}>
+                  <a target="_blank">{props.postBottomLinkText ? props.postBottomLinkText : 'Read more'}</a>
                 </Link>
               </div>
             )}
-          </section>
-          <div className={`${styles.footer}`}>
-            <LikeButton likes={this.props.postLikes} />
-            {(Array.isArray(this.props.postComments) && this.props.postComments.length > 0)
+        </section>
+        <div className={`${styles.footer}`}>
+          <LikeButton
+            likes={props.postLikes}
+            liked={liked}
+            action={likePost}
+          />
+          {(Array.isArray(props.postComments) && props.postComments.length > 0)
             && (
               <div className={`py-4 pl-3 ${styles.footerInfo}`}>
                 <span className="lnr lnr-bubble" />
                 <div className={styles.buttonLabel}>
-                  {this.props.postComments.length}
+                  {props.postComments.length}
                 </div>
               </div>
             )}
-          </div>
         </div>
-        {(Array.isArray(this.props.postComments) && this.props.postComments.length > 0)
-        && (
-          <div className={`px-4 ${styles.commentsSection}`}>
-            {this.props.postComments.map((comment) => (
-              <div className={`py-4 ${styles.commentItem}`} key={comment.id}>
-                <ProfileDisplay
-                  link={`/profile/${comment.User.username}/details`}
-                  image={comment.User.photo}
-                  imageOnTop
-                  imageSize={40}
-                  title={comment.User.name}
-                  subtitle={comment.body}
-                  sideContent={comment.time}
-                  sideContentOnTop
-                />
-              </div>
-            ))}
-          </div>
-        )}
       </div>
-    );
-  }
-}
+      {(Array.isArray(props.postComments) && props.postComments.length > 0)
+      && (
+        <div className={`px-4 ${styles.commentsSection}`}>
+          {props.postComments.map((comment) => (
+            <div className={`py-4 ${styles.commentItem}`} key={comment.id}>
+              <ProfileDisplay
+                link={`/profile/${comment.User.username}/details`}
+                image={comment.User.photo}
+                imageOnTop
+                imageSize={40}
+                title={comment.User.name}
+                subtitle={comment.body}
+                sideContent={comment.time}
+                sideContentOnTop
+              />
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
-Post.propTypes = {
+post.propTypes = {
   opPhoto: PropTypes.string.isRequired,
   opName: PropTypes.string.isRequired,
   opSubtitle: PropTypes.string,
@@ -137,7 +129,7 @@ Post.propTypes = {
   postComments: PropTypes.array,
 };
 
-Post.defaultProps = {
+post.defaultProps = {
   opLink: null,
   opSubtitle: null,
   postImage: null,
@@ -148,4 +140,4 @@ Post.defaultProps = {
   postBottomLink: null,
 };
 
-export default Post;
+export default post;
