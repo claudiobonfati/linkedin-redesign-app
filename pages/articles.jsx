@@ -47,6 +47,8 @@ class Articles extends React.Component {
           }));
         }
       }
+    }).catch((err) => {
+      console.log('error', err);
     });
 
     this.setState((prevState) => ({
@@ -55,6 +57,43 @@ class Articles extends React.Component {
   }
 
   render() {
+    // Main posts list
+    let jsxPostsList = null;
+
+    if (this.state.feed.data
+        && Array.isArray(this.state.feed.data)
+        && this.state.feed.data.length > 0) {
+      jsxPostsList = (
+        <>
+          {this.state.feed.data.map((post, index) => (
+            <div className="mb-4" key={post.id}>
+              <Post
+                opPhoto={post.User ? post.User.photo : post.Company.logo}
+                opName={post.User ? post.User.name : post.Company.name}
+                opSubtitle={post.User ? post.User.headline : null}
+                opLink={post.User ? `/profile/${post.User.username}/details` : `/company/${post.Company.name}`}
+                postTime={post.time}
+                postTitle={post.title}
+                postBody={post.body}
+                postBottomLinkText="Read article"
+                postBottomLink={post.fullArticle}
+                postImage={post.image}
+                postVimeo={post.video}
+                postLikes={post.likes}
+                postComments={post.Comments}
+              />
+              {(index === this.state.feed.data.length - 1 && !this.state.feedEnded)
+              && (
+                <Waypoint
+                  onEnter={() => (!this.state.feedEnded ? this.fetchArticles() : null)}
+                />
+              )}
+            </div>
+          ))}
+        </>
+      );
+    }
+
     return (
       <>
         <Head>
@@ -91,37 +130,7 @@ class Articles extends React.Component {
               </div>
             </div>
             <div className="col-lg-6 col-md-9 py-4">
-              {(this.state.feed.data
-              && Array.isArray(this.state.feed.data)
-              && this.state.feed.data.length > 0)
-              && (
-                <>
-                  {this.state.feed.data.map((post, index) => (
-                    <div className="mb-4" key={post.id}>
-                      <Post
-                        opPhoto={post.User ? post.User.photo : post.Company.logo}
-                        opName={post.User ? post.User.name : post.Company.name}
-                        opSubtitle={post.User ? post.User.headline : null}
-                        opLink="https://google.com"
-                        postTime={post.time}
-                        postTitle={post.title}
-                        postBody={post.body}
-                        postBottomLinkText="Read article"
-                        postBottomLink={post.fullArticle}
-                        postImage={post.image}
-                        postVimeo={post.video}
-                        postLikes={post.likes}
-                        postComments={post.Comments}
-                      />
-                      {(index === this.state.feed.data.length - 1 && !this.state.feedEnded) && (
-                        <Waypoint
-                          onEnter={() => (!this.state.feedEnded ? this.fetchArticles() : null)}
-                        />
-                      )}
-                    </div>
-                  ))}
-                </>
-              )}
+              {jsxPostsList}
             </div>
             <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
               <div className="sticky-aside-content">
