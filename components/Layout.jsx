@@ -1,30 +1,25 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { TweenMax } from 'gsap';
 import Header from './Header/Header';
 import MenuTab from './MenuTab/Tab';
 import styles from './Layout.module.sass';
 
-class Layout extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+const layout = (props) => {
+  let appRef = useRef(null);
 
-  componentDidMount() {
-    TweenMax.to(this.appRef, 0, { css: { visibility: 'visible' } });
-  }
+  useEffect(() => {
+    TweenMax.to(appRef, 0.5, { css: { opacity: 1 } }).delay(0.5);
+  });
 
-  render() {
-    return (
-      <div className={styles.layoutWrapper} ref={(ref) => { this.appRef = ref; }}>
-        <Header />
-        <MenuTab />
-        <div className={styles.contentWrapper}>
-          {this.props.children}
-        </div>
+  return (
+    <div className={styles.layoutWrapper} ref={(ref) => { appRef = ref; }}>
+      <Header />
+      <MenuTab />
+      <div className={styles.contentWrapper}>
+        {props.children}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
-export default Layout;
+export default layout;
