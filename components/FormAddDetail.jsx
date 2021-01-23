@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { TimelineMax, Power3 } from 'gsap';
 import styles from './FormAddDetail.module.sass';
 
-function FormAddDetail(props) {
+const formAddDetail = (props) => {
   let showFormTl = new TimelineMax({ paused: true });
   let hideDescription = new TimelineMax({ paused: true });
   let formWrapperRef = useRef(null);
@@ -126,18 +126,18 @@ function FormAddDetail(props) {
       </div>
     </div>
   );
-}
+};
 
-FormAddDetail.propTypes = {
+formAddDetail.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,
   color: PropTypes.string,
   button: PropTypes.string,
 };
 
-FormAddDetail.defaultProps = {
+formAddDetail.defaultProps = {
   color: 'green',
   button: 'Save',
 };
 
-export default FormAddDetail;
+export default formAddDetail;
