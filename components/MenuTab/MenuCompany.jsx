@@ -1,28 +1,19 @@
 import React from 'react';
 import styles from './Tab.module.sass';
 
-class MenuCompany extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+const menuCompany = () => (
+  <ul className={styles.menu}>
+    <li>
+      <a href="https://google.com" className={styles.active}>
+        Home
+      </a>
+    </li>
+    <li>
+      <a href="https://google.com">
+        Carrers
+      </a>
+    </li>
+  </ul>
+);
 
-  render() {
-    return (
-      <ul className={styles.menu}>
-        <li>
-          <a href="https://google.com" className={styles.active}>
-            Home
-          </a>
-        </li>
-        <li>
-          <a href="https://google.com">
-            Carrers
-          </a>
-        </li>
-      </ul>
-    );
-  }
-}
-
-export default MenuCompany;
+export default menuCompany;

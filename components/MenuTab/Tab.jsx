@@ -15,7 +15,10 @@ class Tab extends React.Component {
     let menu;
 
     switch (pathName) {
-      case '/feed':
+      case '/':
+      case '/articles':
+      case '/companies':
+      case '/jobs':
         menu = 'feed';
         break;
       case '/me':
@@ -28,7 +31,7 @@ class Tab extends React.Component {
         menu = 'company';
         break;
       default:
-        menu = 'feed'; // FIX this
+        menu = 'feed';
         break;
     }
 
