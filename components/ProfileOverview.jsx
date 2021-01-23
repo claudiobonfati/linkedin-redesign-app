@@ -3,91 +3,78 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import styles from './ProfileOverview.module.sass';
 
-class ProfileOverview extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  componentDidMount() {
-    // =)
-  }
-
-  render() {
-    return (
-      <div className={styles.wrapper}>
-        <div className={styles.topInfoWrapper}>
-          <div className={styles.photoWrapper}>
-            <img src={this.props.photo} alt="Profile" />
-          </div>
-          <div className={styles.name}>
-            {this.props.name}
-          </div>
-          <div className={styles.position}>
-            {this.props.position}
-          </div>
+const profileOverview = (props) => (
+  <div className={styles.wrapper}>
+    <div className={styles.topInfoWrapper}>
+      <div className={styles.photoWrapper}>
+        <img src={props.photo} alt="Profile" />
+      </div>
+      <div className={styles.name}>
+        {props.name}
+      </div>
+      <div className={styles.position}>
+        {props.position}
+      </div>
+    </div>
+    <div className={styles.infoWrapper}>
+      <div className={styles.infoLeft}>
+        <div className={`${props.views ? styles.fullWidth : ''} ${styles.value}`}>
+          {props.connections}
         </div>
-        <div className={styles.infoWrapper}>
-          <div className={styles.infoLeft}>
-            <div className={`${this.props.views ? styles.fullWidth : ''} ${styles.value}`}>
-              {this.props.connections}
-            </div>
-            <span className={styles.title}>
-              Connections
-            </span>
-          </div>
-          { this.props.views
-          && (
-          <div className={styles.infoRight}>
-            <div className={styles.value}>
-              {this.props.views}
-            </div>
-            <span className={styles.title}>
-              Views
-            </span>
-          </div>
-          )}
+        <span className={styles.title}>
+          Connections
+        </span>
+      </div>
+      {props.views
+      && (
+      <div className={styles.infoRight}>
+        <div className={styles.value}>
+          {props.views}
         </div>
-        { this.props.actionMyProfile
+        <span className={styles.title}>
+          Views
+        </span>
+      </div>
+      )}
+    </div>
+    {props.actionMyProfile
+    && (
+      <Link href="/me/details">
+        <a className={styles.footerAction} title="View my profile">
+          View my profile
+        </a>
+      </Link>
+    )}
+    {!props.actionMyProfile
+    && (
+      <div className={styles.socialNetworks}>
+        {props.email
         && (
-          <Link href="/me/details">
-            <a href="#" className={styles.footerAction}>
-              View my profile
-            </a>
-          </Link>
+          <a href="https://google.com" className={styles.item}>
+            <span className="lnr lnr-earth" />
+            {props.email}
+          </a>
         )}
-        { !this.props.actionMyProfile
+        {props.twitter
         && (
-          <div className={styles.socialNetworks}>
-            { this.props.email
-            && (
-              <a href="https://google.com" className={styles.item}>
-                <span className="lnr lnr-earth" />
-                {this.props.email}
-              </a>
-            )}
-            { this.props.twitter
-            && (
-              <a href="https://google.com" className={styles.item}>
-                <span className="lnr lnr-earth" />
-                {this.props.twitter}
-              </a>
-            )}
-            { this.props.skype
-            && (
-              <a href="https://google.com" className={styles.item}>
-                <span className="lnr lnr-earth" />
-                {this.props.skype}
-              </a>
-            )}
-          </div>
+          <a href="https://google.com" className={styles.item}>
+            <span className="lnr lnr-earth" />
+            {props.twitter}
+          </a>
+        )}
+        {props.skype
+        && (
+          <a href="https://google.com" className={styles.item}>
+            <span className="lnr lnr-earth" />
+            {props.skype}
+          </a>
         )}
       </div>
-    );
-  }
-}
+    )}
+  </div>
+);
 
-ProfileOverview.propTypes = {
+profileOverview.propTypes = {
   photo: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   position: PropTypes.string.isRequired,
@@ -99,7 +86,7 @@ ProfileOverview.propTypes = {
   skype: PropTypes.string,
 };
 
-ProfileOverview.defaultProps = {
+profileOverview.defaultProps = {
   actionMyProfile: false,
   views: null,
   email: null,
@@ -107,4 +94,4 @@ ProfileOverview.defaultProps = {
   skype: null,
 };
 
-export default ProfileOverview;
+export default profileOverview;

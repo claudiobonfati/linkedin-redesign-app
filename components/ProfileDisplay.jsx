@@ -5,83 +5,70 @@ import Link from 'next/link';
 import styles from './ProfileDisplay.module.sass';
 import ConditionalWrapper from '../utils/ConditionalWrapper';
 
-class ProfileDisplay extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    return (
-      <div className={`${styles.wrapper}`}>
-        <div
-          className={`${styles.imageAside} ${this.props.imageOnTop ? 'align-self-start mt-1' : ''} ${this.props.imageSide === 'right' ? styles.imageRight : ''}`}
-          style={{ flexBasis: this.props.imageSize }}
+const profileDisplay = (props) => (
+  <div className={`${styles.wrapper}`}>
+    <div
+      className={`${styles.imageAside} ${props.imageOnTop ? 'align-self-start mt-1' : ''} ${props.imageSide === 'right' ? styles.imageRight : ''}`}
+      style={{ flexBasis: props.imageSize }}
+    >
+      <ConditionalWrapper
+        condition={props.link}
+        wrapper={(children) => <Link href={props.link}><a>{children}</a></Link>}
+      >
+        <Image
+          src={props.image}
+          alt="Profile picture"
+          className={`circle-image ${styles.profilePic}`}
+          width={props.imageSize}
+          height={props.imageSize}
+        />
+      </ConditionalWrapper>
+    </div>
+    <div className={`${styles.infoWrapper} ${props.imageSide === 'left' ? 'ml-3' : 'mr-3'}`}>
+      <ConditionalWrapper
+        condition={props.link}
+        wrapper={(children) => <Link href={props.link}><a>{children}</a></Link>}
+      >
+        <div className={styles.infoTitle}>
+          {props.title}
+        </div>
+      </ConditionalWrapper>
+      { props.blueLine
+      && (
+        <div className={styles.infoBlueLine}>
+          {props.blueLine}
+        </div>
+      )}
+      { props.subtitle
+      && (
+        <ConditionalWrapper
+          condition={props.imageSide === 'right'}
+          wrapper={(children) => <i>{children}</i>}
         >
-          <ConditionalWrapper
-            condition={this.props.link}
-            wrapper={
-              (children) => <Link href={this.props.link}><a>{children}</a></Link>
-            }
-          >
-            <Image
-              src={this.props.image}
-              alt="Profile picture"
-              className={`circle-image ${styles.profilePic}`}
-              width={this.props.imageSize}
-              height={this.props.imageSize}
-            />
-          </ConditionalWrapper>
-        </div>
-        <div className={`${styles.infoWrapper} ${this.props.imageSide === 'left' ? 'ml-3' : 'mr-3'}`}>
-          <ConditionalWrapper
-            condition={this.props.link}
-            wrapper={
-              (children) => <Link href={this.props.link}><a>{children}</a></Link>
-            }
-          >
-            <div className={styles.infoTitle}>
-              {this.props.title}
-            </div>
-          </ConditionalWrapper>
-          { this.props.blueLine
-          && (
-            <div className={styles.infoBlueLine}>
-              {this.props.blueLine}
-            </div>
-          )}
-          { this.props.subtitle
-          && (
-            <ConditionalWrapper
-              condition={this.props.imageSide === 'right'}
-              wrapper={(children) => <i>{children}</i>}
-            >
-              <div className={styles.infoSubtitle}>
-                {this.props.subtitle}
-              </div>
-            </ConditionalWrapper>
-          )}
-        </div>
-        {this.props.sideContent
-        && (
-          <div className={`ml-3 ${styles.rightWrapper} ${this.props.sideContentOnTop ? 'align-self-start' : ''}`}>
-            {this.props.sideContent}
+          <div className={styles.infoSubtitle}>
+            {props.subtitle}
           </div>
-        )}
-        {(this.props.rightButtonText && this.props.rightButtonLink)
-        && (
-          <div className={`ml-3 ${styles.rightWrapper}`}>
-            <Link href={this.props.rightButtonLink}>
-              {this.props.rightButtonText}
-            </Link>
-          </div>
-        )}
+        </ConditionalWrapper>
+      )}
+    </div>
+    {props.sideContent
+    && (
+      <div className={`ml-3 ${styles.rightWrapper} ${props.sideContentOnTop ? 'align-self-start' : ''}`}>
+        {props.sideContent}
       </div>
-    );
-  }
-}
+    )}
+    {(props.rightButtonText && props.rightButtonLink)
+    && (
+      <div className={`ml-3 ${styles.rightWrapper}`}>
+        <Link href={props.rightButtonLink}>
+          {props.rightButtonText}
+        </Link>
+      </div>
+    )}
+  </div>
+);
 
-ProfileDisplay.propTypes = {
+profileDisplay.propTypes = {
   link: PropTypes.string,
   image: PropTypes.string.isRequired,
   imageOnTop: PropTypes.bool,
@@ -96,7 +83,7 @@ ProfileDisplay.propTypes = {
   rightButtonLink: PropTypes.string,
 };
 
-ProfileDisplay.defaultProps = {
+profileDisplay.defaultProps = {
   link: null,
   imageSize: 40,
   sideContent: null,
@@ -109,4 +96,4 @@ ProfileDisplay.defaultProps = {
   rightButtonLink: null,
 };
 
-export default ProfileDisplay;
+export default profileDisplay;
