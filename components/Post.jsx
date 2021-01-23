@@ -30,48 +30,48 @@ const post = (props) => {
         </div>
         <section className={`py-4 ${styles.content} ${styles.withMedia}`}>
           {(props.postTitle)
-            && (
-              <h3 className="h5 mb-3 color-gray-dark">{props.postTitle}</h3>
-            )}
+          && (
+            <h3 className="h5 mb-3 color-gray-dark">{props.postTitle}</h3>
+          )}
           <p>{ReactHtmlParser(props.postBody)}</p>
           {(props.postImage || props.postVimeo)
-            && (
-              <div className={`${styles.contentMedia}`}>
-                { props.postImage
-                && (
-                  <img
-                    src={props.postImage}
-                    alt="Post banner"
+          && (
+            <div className={`${styles.contentMedia}`}>
+              { props.postImage
+              && (
+                <img
+                  src={props.postImage}
+                  alt="Post banner"
+                />
+              )}
+              {props.postVimeo
+              && (
+                <div className={styles.playerWrapper}>
+                  <Plyr
+                    source={{
+                      type: 'video',
+                      sources: [
+                        {
+                          src: props.postVimeo,
+                          provider: 'vimeo',
+                        },
+                      ],
+                    }}
+                    volume={0}
+                    muted
                   />
-                )}
-                {props.postVimeo
-                && (
-                  <div className={styles.playerWrapper}>
-                    <Plyr
-                      source={{
-                        type: 'video',
-                        sources: [
-                          {
-                            src: props.postVimeo,
-                            provider: 'vimeo',
-                          },
-                        ],
-                      }}
-                      volume={0}
-                      muted
-                    />
-                  </div>
-                )}
-              </div>
-            )}
+                </div>
+              )}
+            </div>
+          )}
           {props.postBottomLink
-            && (
-              <div className={styles.bottomLinkWrapper}>
-                <Link href={props.postBottomLink}>
-                  <a target="_blank">{props.postBottomLinkText ? props.postBottomLinkText : 'Read more'}</a>
-                </Link>
-              </div>
-            )}
+          && (
+            <div className={styles.bottomLinkWrapper}>
+              <Link href={props.postBottomLink}>
+                <a target="_blank">{props.postBottomLinkText ? props.postBottomLinkText : 'Read more'}</a>
+              </Link>
+            </div>
+          )}
         </section>
         <div className={`${styles.footer}`}>
           <LikeButton
