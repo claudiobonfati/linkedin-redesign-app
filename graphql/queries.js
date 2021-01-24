@@ -20,6 +20,7 @@ export const GET_POSTS = gql`
         id
         logo
         name
+        nameslug
       }
       Comments {
         id
@@ -56,6 +57,7 @@ export const GET_COMPANIES_POSTS = gql`
         id
         logo
         name
+        nameslug
       }
       Comments {
         id
@@ -92,6 +94,7 @@ export const GET_USERS_POSTS = gql`
         id
         logo
         name
+        nameslug
       }
       Comments {
         id
@@ -132,6 +135,7 @@ export const GET_PROFILE = gql`
           id
           logo
           name
+          nameslug
         }
       }
       Recommendations {
@@ -154,6 +158,7 @@ export const GET_PROFILE = gql`
           id
           logo
           name
+          nameslug
         }
       }
       Follows {
@@ -161,6 +166,7 @@ export const GET_PROFILE = gql`
         Company {
           id
           name
+          nameslug
           cover
         }
       }
@@ -207,6 +213,7 @@ export const GET_ARTICLES = gql`
         id
         logo
         name
+        nameslug
       }
     }
   }
@@ -234,6 +241,7 @@ export const GET_USER_POSTS = gql`
         id
         logo
         name
+        nameslug
       }
       Comments {
         id
@@ -258,6 +266,46 @@ export const GET_USERS = gql`
       username
       photo
       headline
+    }
+  }
+`;
+
+export const GET_COMPANY = gql`
+  query GetCompany($nameslug: String!) {
+    allCompanies(page: 0, perPage: 1, filter: { 
+      nameslug: $nameslug 
+    }) {
+      id
+      name
+      nameslug
+      industry
+      headquartes
+      founded
+      mission
+      followers
+      employees
+      logo
+      cover
+      description
+      Posts {
+        id
+        body
+        image
+        video
+        time
+        likes
+        Comments {
+          id
+          body
+          time
+          User {
+            id
+            name
+            username
+            photo
+          }
+        }
+      }
     }
   }
 `;

@@ -8,6 +8,7 @@ import {
   GET_SIMPLE_USER,
   GET_ARTICLES,
   GET_USER_POSTS,
+  GET_COMPANY,
 } from './queries';
 import ApolloClient from './apollo';
 
@@ -154,6 +155,28 @@ export const useContacts = (page, perPage, exclude) => {
       loading,
       error,
       data: data.allUsers.filter((user) => user.id !== exclude),
+    };
+  }
+
+  return {
+    loading,
+    error,
+    data,
+  };
+};
+
+export const useCompany = (nameslug) => {
+  const { loading, error, data } = useQuery(GET_COMPANY, {
+    variables: {
+      nameslug,
+    },
+  });
+
+  if (!loading && data) {
+    return {
+      loading,
+      error,
+      data: data.allCompanies[0],
     };
   }
 
