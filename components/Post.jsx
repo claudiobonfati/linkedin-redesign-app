@@ -1,24 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import Plyr from 'plyr-react';
 import 'plyr-react/dist/plyr.css';
 import ReactHtmlParser from 'react-html-parser';
+import { Image } from 'react-image-and-background-image-fade';
 import styles from './Post.module.sass';
 import ProfileDisplay from './ProfileDisplay';
 import LikeButton from './LikeButton';
 
-const post = (props) => {
-  const [liked, setLiked] = useState(false);
-
-  const likePost = () => {
-    setLiked((preState) => !preState);
-  };
-
-  return (
-    <div className={`${styles.wrapper} ${props.noBorder ? styles.noBorder : ''}`}>
-      <div className={`${!props.noPadding ? 'px-4' : ''}`}>
-        {props.opPhoto
+const post = (props) => (
+  <div className={`${styles.wrapper} ${props.noBorder ? styles.noBorder : ''}`}>
+    <div className={`${!props.noPadding ? 'px-4' : ''}`}>
+      {props.opPhoto
         && props.opName
         && (
           <div className={`${!props.noPadding ? 'py-4' : ''} ${styles.header}`}>
@@ -32,18 +26,18 @@ const post = (props) => {
             />
           </div>
         )}
-        <section className={`${!props.noPadding ? 'py-4' : ''} ${styles.content} ${styles.withMedia}`}>
-          {(props.postTitle)
+      <section className={`${!props.noPadding ? 'py-4' : ''} ${styles.content} ${styles.withMedia}`}>
+        {(props.postTitle)
           && (
             <h3 className="h5 mb-3 color-gray-dark">{props.postTitle}</h3>
           )}
-          <p>{ReactHtmlParser(props.postBody)}</p>
-          {(props.postImage || props.postVimeo)
+        <p>{ReactHtmlParser(props.postBody)}</p>
+        {(props.postImage || props.postVimeo)
           && (
             <div className={`${styles.contentMedia}`}>
               { props.postImage
               && (
-                <img
+                <Image
                   src={props.postImage}
                   alt="Post banner"
                 />
@@ -68,7 +62,7 @@ const post = (props) => {
               )}
             </div>
           )}
-          {props.postBottomLink
+        {props.postBottomLink
           && (
             <div className={styles.bottomLinkWrapper}>
               <Link href={props.postBottomLink}>
@@ -76,14 +70,12 @@ const post = (props) => {
               </Link>
             </div>
           )}
-        </section>
-        <div className={`${styles.footer}`}>
-          <LikeButton
-            likes={props.postLikes}
-            liked={liked}
-            action={likePost}
-          />
-          {(Array.isArray(props.postComments) && props.postComments.length > 0)
+      </section>
+      <div className={`${styles.footer}`}>
+        <LikeButton
+          likes={props.postLikes}
+        />
+        {(Array.isArray(props.postComments) && props.postComments.length > 0)
           && (
             <div className={`py-4 pl-3 ${styles.footerInfo}`}>
               <span className="lnr lnr-bubble" />
@@ -92,9 +84,9 @@ const post = (props) => {
               </div>
             </div>
           )}
-        </div>
       </div>
-      {(Array.isArray(props.postComments) && props.postComments.length > 0)
+    </div>
+    {(Array.isArray(props.postComments) && props.postComments.length > 0)
       && (
         <div className={`${!props.noPadding ? 'px-4' : ''} ${styles.commentsSection}`}>
           {props.postComments.map((comment) => (
@@ -113,9 +105,8 @@ const post = (props) => {
           ))}
         </div>
       )}
-    </div>
-  );
-};
+  </div>
+);
 
 post.propTypes = {
   opPhoto: PropTypes.string,

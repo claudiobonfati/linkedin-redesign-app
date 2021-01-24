@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import { Image } from 'react-image-and-background-image-fade';
 import styles from './ProfileOverview.module.sass';
 
 const profileOverview = (props) => (
   <div className={styles.wrapper}>
     <div className={styles.topInfoWrapper}>
       <div className={styles.photoWrapper}>
-        <img src={props.photo} alt="Profile" />
+        <Image
+          src={props.photo}
+          alt="Profile"
+        />
       </div>
       <div className={styles.name}>
         {props.name}

@@ -20,6 +20,7 @@
     "react-dom": "17.0.1",
     "react-dropzone": "^11.2.4",
     "react-html-parser": "^2.0.2",
+    "react-image-and-background-image-fade": "^1.0.6",
     "react-textarea-autosize": "^8.3.0",
     "react-waypoint": "^9.0.3",
     "sass": "^1.30.0"

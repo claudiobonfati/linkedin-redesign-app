@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import { Image } from 'react-image-and-background-image-fade';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import styles from './ProfileDisplay.module.sass';
@@ -17,10 +17,10 @@ const profileDisplay = (props) => (
       >
         <Image
           src={props.image}
-          alt="Profile picture"
+          alt={props.title}
           className={`circle-image ${styles.profilePic}`}
-          width={props.imageSize}
-          height={props.imageSize}
+          width={`${props.imageSize}px`}
+          height={`${props.imageSize}px`}
         />
       </ConditionalWrapper>
     </div>
@@ -33,13 +33,13 @@ const profileDisplay = (props) => (
           {props.title}
         </div>
       </ConditionalWrapper>
-      { props.blueLine
+      {props.blueLine
       && (
         <div className={styles.infoBlueLine}>
           {props.blueLine}
         </div>
       )}
-      { props.subtitle
+      {props.subtitle
       && (
         <ConditionalWrapper
           condition={props.imageSide === 'right'}
