@@ -81,7 +81,7 @@ class Home extends React.Component {
                 opPhoto={post.User ? post.User.photo : post.Company.logo}
                 opName={post.User ? post.User.name : post.Company.name}
                 opSubtitle={post.User ? post.User.headline : null}
-                opLink={post.User ? `/profile/${post.User.username}/details` : `/company/${post.Company.name}`}
+                opLink={post.User ? `/profile/${post.User.username}/details` : `/company/${post.Company.nameslug}/home`}
                 postTime={post.time}
                 postBody={post.body}
                 postImage={post.image}

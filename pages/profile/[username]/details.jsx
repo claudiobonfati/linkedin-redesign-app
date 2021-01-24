@@ -6,7 +6,7 @@ import ProfileOverview from '../../../components/ProfileOverview';
 import ProfileDisplay from '../../../components/ProfileDisplay';
 import { useUser } from '../../../graphql/hooks';
 
-function ProfileDetails() {
+const profileDetails = () => {
   const router = useRouter();
   const { username } = router.query;
   const user = useUser(username);
@@ -16,7 +16,9 @@ function ProfileDetails() {
       <main className="row">
         <div className="col-lg-3 col-md-4 pt-4">
           <div className="sticky-aside-content">
-            {(user && !user.error && !user.loading)
+            {(user
+            && !user.error
+            && !user.loading)
             && (
               <ProfileOverview
                 photo={user.data.photo}
@@ -40,7 +42,11 @@ function ProfileDetails() {
               )}
             </SimpleCard>
           </div>
-          {(user && !user.error && !user.loading && user.data.Experiences)
+          {(user
+          && !user.error
+          && !user.loading
+          && user.data.Experiences
+          && user.data.Experiences.length > 0)
           && (
             <div className="mb-4">
               <SimpleCard title="Experience">
@@ -48,11 +54,12 @@ function ProfileDetails() {
                   <Fragment key={item.id}>
                     <div className="mb-2">
                       <ProfileDisplay
+                        link={`/company/${item.Company.nameslug}/home`}
                         image={item.Company.logo}
                         imageSize={45}
                         imageSide="right"
-                        title={item.title}
-                        blueLine={item.Company.name}
+                        title={item.Company.name}
+                        blueLine={item.title}
                         subtitle={item.period}
                       />
                     </div>
@@ -66,7 +73,11 @@ function ProfileDetails() {
               </SimpleCard>
             </div>
           )}
-          {(user && !user.error && !user.loading && user.data.Courses)
+          {(user
+          && !user.error
+          && !user.loading
+          && user.data.Courses
+          && user.data.Courses.length > 0)
           && (
             <div className="mb-4">
               <SimpleCard title="Education">
@@ -74,6 +85,7 @@ function ProfileDetails() {
                   <Fragment key={item.id}>
                     <div className="mb-2">
                       <ProfileDisplay
+                        link={`/company/${item.Company.nameslug}/home`}
                         image={item.Company.logo}
                         imageSize={45}
                         imageSide="right"
@@ -92,12 +104,16 @@ function ProfileDetails() {
               </SimpleCard>
             </div>
           )}
-          {(user && !user.error && !user.loading && user.data.Recommendations)
+          {(user
+          && !user.error
+          && !user.loading
+          && user.data.Recommendations
+          && user.data.Recommendations.length > 0)
           && (
             <div className="mb-4">
               <SimpleCard title="Recommendations">
                 {user.data.Recommendations.map((item, index) => (
-                  <div className={`p-3 border-gray bg-gray-lighter ${index + 1 !== user.data.Recommendations.length ? 'mb-4' : ''}`}>
+                  <div className={`p-3 border-gray bg-gray-lighter ${index + 1 !== user.data.Recommendations.length ? 'mb-4' : ''}`} key={item.id}>
                     <ProfileDisplay
                       link={`/profile/${item.Author.username}/details`}
                       image={item.Author.photo}
@@ -115,14 +131,15 @@ function ProfileDetails() {
           )}
           {(user && !user.error && !user.loading && user.data.Follows)
           && (
-            <div className="mb-4">
+            <div>
               <SimpleCard title="Following">
                 <div className="row">
                   {user.data.Follows.map((item) => (
-                    <div className="col-lg-4 col-sm-3 col-6 mb-3 mb-sm-0">
+                    <div className="col-lg-4 col-sm-3 col-6 mb-4" key={item.id}>
                       <Polaroid
                         image={item.Company.cover}
                         title={item.Company.name}
+                        link={`/company/${item.Company.nameslug}/home`}
                       />
                     </div>
                   ))}
@@ -172,6 +189,6 @@ function ProfileDetails() {
       </main>
     </div>
   );
-}
+};
 
-export default ProfileDetails;
+export default profileDetails;

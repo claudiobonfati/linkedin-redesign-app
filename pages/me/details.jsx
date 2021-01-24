@@ -33,7 +33,7 @@ function MeDetails() {
             <SimpleCard title="Summary">
               {(user && !user.error && !user.loading)
               && (
-                <p>{user.data.summary}</p>
+                <p className="m-0">{user.data.summary}</p>
               )}
             </SimpleCard>
           </div>
@@ -45,6 +45,7 @@ function MeDetails() {
                   <Fragment key={item.id}>
                     <div className="mb-2">
                       <ProfileDisplay
+                        link={`/company/${item.Company.nameslug}/home`}
                         image={item.Company.logo}
                         imageSize={45}
                         imageSide="right"
@@ -71,6 +72,7 @@ function MeDetails() {
                   <Fragment key={item.id}>
                     <div className="mb-2">
                       <ProfileDisplay
+                        link={`/company/${item.Company.nameslug}/home`}
                         image={item.Company.logo}
                         imageSize={45}
                         imageSide="right"
@@ -96,6 +98,7 @@ function MeDetails() {
                 {user.data.Recommendations.map((item, index) => (
                   <div className={`p-3 border-gray bg-gray-lighter ${index + 1 !== user.data.Recommendations.length ? 'mb-4' : ''}`} key={item.id}>
                     <ProfileDisplay
+                      link={`/profile/${item.Author.username}/details`}
                       image={item.Author.photo}
                       imageSize={47}
                       title={item.Author.name}

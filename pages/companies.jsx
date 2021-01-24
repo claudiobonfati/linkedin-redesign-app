@@ -69,7 +69,7 @@ class Companies extends React.Component {
                 opPhoto={post.User ? post.User.photo : post.Company.logo}
                 opName={post.User ? post.User.name : post.Company.name}
                 opSubtitle={post.User ? post.User.headline : null}
-                opLink={`/company/${post.Company.name}`}
+                opLink={`/company/${post.Company.nameslug}/home`}
                 postTime={post.time}
                 postBody={post.body}
                 postImage={post.image}

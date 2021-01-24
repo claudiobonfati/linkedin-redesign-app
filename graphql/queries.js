@@ -278,6 +278,7 @@ export const GET_COMPANY = gql`
       id
       name
       nameslug
+      website
       industry
       headquartes
       founded

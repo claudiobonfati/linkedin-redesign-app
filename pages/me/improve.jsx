@@ -62,6 +62,7 @@ function MeImprove() {
                   <Fragment key={item.id}>
                     <div className="mb-2">
                       <ProfileDisplay
+                        link={`/company/${item.Company.nameslug}/home`}
                         image={item.Company.logo}
                         imageSize={45}
                         imageSide="right"
@@ -88,6 +89,7 @@ function MeImprove() {
                   <Fragment key={item.id}>
                     <div className="mb-2">
                       <ProfileDisplay
+                        link={`/company/${item.Company.nameslug}/home`}
                         image={item.Company.logo}
                         imageSize={45}
                         imageSide="right"
