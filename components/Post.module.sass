@@ -6,6 +6,8 @@
   background-color: white
   border: 1px solid $color-border
   position: relative
+  &.noBorder
+    border: 0
 
 .header
   --gutter: 25px
@@ -26,14 +28,18 @@
       margin: 0
 
 .contentMedia
+  overflow: hidden
   img 
     width: 100%
     max-height: 700px
     object-fit: cover
 
 .playerWrapper
+  margin-top: -1px
+  --plyr-control-radius: 8px
   --plyr-color-main: #007fb2
   --plyr-badge-text-color: #f7f8f9
+  --plyr-video-controls-background: rgba(0, 87, 121, .85)
 
 .footer
   display: flex

@@ -16,19 +16,23 @@ const post = (props) => {
   };
 
   return (
-    <div className={styles.wrapper}>
-      <div className="px-4">
-        <div className={`py-4 ${styles.header}`}>
-          <ProfileDisplay
-            link={props.opLink}
-            image={props.opPhoto}
-            imageSize={60}
-            title={props.opName}
-            subtitle={props.opSubtitle}
-            sideContent={props.postTime}
-          />
-        </div>
-        <section className={`py-4 ${styles.content} ${styles.withMedia}`}>
+    <div className={`${styles.wrapper} ${props.noBorder ? styles.noBorder : ''}`}>
+      <div className={`${!props.noPadding ? 'px-4' : ''}`}>
+        {props.opPhoto
+        && props.opName
+        && (
+          <div className={`${!props.noPadding ? 'py-4' : ''} ${styles.header}`}>
+            <ProfileDisplay
+              link={props.opLink}
+              image={props.opPhoto}
+              imageSize={60}
+              title={props.opName}
+              subtitle={props.opSubtitle}
+              sideContent={props.postTime}
+            />
+          </div>
+        )}
+        <section className={`${!props.noPadding ? 'py-4' : ''} ${styles.content} ${styles.withMedia}`}>
           {(props.postTitle)
           && (
             <h3 className="h5 mb-3 color-gray-dark">{props.postTitle}</h3>
@@ -80,19 +84,19 @@ const post = (props) => {
             action={likePost}
           />
           {(Array.isArray(props.postComments) && props.postComments.length > 0)
-            && (
-              <div className={`py-4 pl-3 ${styles.footerInfo}`}>
-                <span className="lnr lnr-bubble" />
-                <div className={styles.buttonLabel}>
-                  {props.postComments.length}
-                </div>
+          && (
+            <div className={`py-4 pl-3 ${styles.footerInfo}`}>
+              <span className="lnr lnr-bubble" />
+              <div className={styles.buttonLabel}>
+                {props.postComments.length}
               </div>
-            )}
+            </div>
+          )}
         </div>
       </div>
       {(Array.isArray(props.postComments) && props.postComments.length > 0)
       && (
-        <div className={`px-4 ${styles.commentsSection}`}>
+        <div className={`${!props.noPadding ? 'px-4' : ''} ${styles.commentsSection}`}>
           {props.postComments.map((comment) => (
             <div className={`py-4 ${styles.commentItem}`} key={comment.id}>
               <ProfileDisplay
@@ -114,11 +118,11 @@ const post = (props) => {
 };
 
 post.propTypes = {
-  opPhoto: PropTypes.string.isRequired,
-  opName: PropTypes.string.isRequired,
+  opPhoto: PropTypes.string,
+  opName: PropTypes.string,
   opSubtitle: PropTypes.string,
   opLink: PropTypes.string,
-  postTime: PropTypes.string.isRequired,
+  postTime: PropTypes.string,
   postBottomLinkText: PropTypes.string,
   postBottomLink: PropTypes.string,
   postTitle: PropTypes.string,
@@ -127,17 +131,24 @@ post.propTypes = {
   postVimeo: PropTypes.number,
   postLikes: PropTypes.number.isRequired,
   postComments: PropTypes.array,
+  noPadding: PropTypes.bool,
+  noBorder: PropTypes.bool,
 };
 
 post.defaultProps = {
+  opPhoto: null,
+  opName: null,
   opLink: null,
   opSubtitle: null,
+  postTime: null,
   postImage: null,
   postVimeo: null,
   postComments: null,
   postTitle: null,
   postBottomLinkText: null,
   postBottomLink: null,
+  noPadding: false,
+  noBorder: false,
 };
 
 export default post;
