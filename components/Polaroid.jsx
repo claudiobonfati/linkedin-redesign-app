@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styles from './Polaroid.module.sass';
 import ConditionalWrapper from '../utils/ConditionalWrapper';
@@ -7,7 +8,9 @@ const polaroid = (props) => (
   <div className={styles.wrapper}>
     <ConditionalWrapper
       condition={props.link}
-      wrapper={(children) => <a href={props.link} className={styles.linkWrapper}>{children}</a>}
+      wrapper={
+        (inner) => (<Link href={props.link}><a className={styles.linkWrapper}>{inner}</a></Link>)
+      }
     >
       {props.image
       && (
