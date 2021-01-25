@@ -1,15 +1,28 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import SimpleCard from '../../components/SimpleCard';
 import Polaroid from '../../components/Polaroid';
 import ProfileOverview from '../../components/ProfileOverview';
 import ProfileDisplay from '../../components/ProfileDisplay';
 import { useUser } from '../../graphql/hooks';
+import defaultVariants from '../../utils/FramerMotionDefault';
 
 function MeDetails() {
   const user = useUser('claudiobonfati');
 
+  useEffect(() => {
+    // Resetins scroll manually (FramerMotion)
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="container">
+    <motion.div
+      className="container"
+      variants={defaultVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <main className="row">
         <div className="col-lg-3 col-md-4 py-4">
           <div className="sticky-aside-content">
@@ -29,15 +42,23 @@ function MeDetails() {
           </div>
         </div>
         <div className="col-lg-6 col-md-8 py-4">
-          <div className="mb-4">
-            <SimpleCard title="Summary">
-              {(user && !user.error && !user.loading)
-              && (
+          {(user
+          && user.data
+          && !user.error
+          && !user.loading)
+          && (
+            <div className="mb-4">
+              <SimpleCard title="Summary">
                 <p className="m-0">{user.data.summary}</p>
-              )}
-            </SimpleCard>
-          </div>
-          {(user && !user.error && !user.loading && user.data.Experiences)
+              </SimpleCard>
+            </div>
+          )}
+          {(user
+          && user.data
+          && !user.error
+          && !user.loading
+          && user.data.Experiences
+          && user.data.Experiences.length > 0)
           && (
             <div className="mb-4">
               <SimpleCard title="Experience">
@@ -64,7 +85,12 @@ function MeDetails() {
               </SimpleCard>
             </div>
           )}
-          {(user && !user.error && !user.loading && user.data.Courses)
+          {(user
+          && user.data
+          && !user.error
+          && !user.loading
+          && user.data.Courses
+          && user.data.Courses.length > 0)
           && (
             <div className="mb-4">
               <SimpleCard title="Education">
@@ -91,7 +117,12 @@ function MeDetails() {
               </SimpleCard>
             </div>
           )}
-          {(user && !user.error && !user.loading && user.data.Recommendations)
+          {(user
+          && user.data
+          && !user.error
+          && !user.loading
+          && user.data.Recommendations
+          && user.data.Recommendations.length > 0)
           && (
             <div className="mb-4">
               <SimpleCard title="Recommendations">
@@ -112,16 +143,22 @@ function MeDetails() {
               </SimpleCard>
             </div>
           )}
-          {(user && !user.error && !user.loading && user.data.Follows)
+          {(user
+          && user.data
+          && !user.error
+          && !user.loading
+          && user.data.Follows
+          && user.data.Follows.length > 0)
           && (
-            <div className="mb-4">
+            <div>
               <SimpleCard title="Following">
                 <div className="row">
                   {user.data.Follows.map((item) => (
-                    <div className="col-lg-4 col-sm-3 col-6 mb-3 mb-sm-0" key={item.id}>
+                    <div className="col-lg-4 col-sm-3 col-6 mb-4" key={item.id}>
                       <Polaroid
                         image={item.Company.cover}
                         title={item.Company.name}
+                        link={`/company/${item.Company.nameslug}/home`}
                       />
                     </div>
                   ))}
@@ -153,7 +190,7 @@ function MeDetails() {
           </SimpleCard>
         </div>
       </main>
-    </div>
+    </motion.div>
   );
 }
 

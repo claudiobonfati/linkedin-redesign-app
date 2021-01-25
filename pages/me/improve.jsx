@@ -1,16 +1,29 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import SimpleCard from '../../components/SimpleCard';
 import FormAddDetail from '../../components/FormAddDetail';
 import Polaroid from '../../components/Polaroid';
 import ProfileOverview from '../../components/ProfileOverview';
 import ProfileDisplay from '../../components/ProfileDisplay';
 import { useUser } from '../../graphql/hooks';
+import defaultVariants from '../../utils/FramerMotionDefault';
 
 function MeImprove() {
   const user = useUser('claudiobonfati');
 
+  useEffect(() => {
+    // Resetins scroll manually (FramerMotion)
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="container">
+    <motion.div
+      className="container"
+      variants={defaultVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <main className="row">
         <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
           <div className="sticky-aside-content">
@@ -172,7 +185,7 @@ function MeImprove() {
           </SimpleCard>
         </div>
       </main>
-    </div>
+    </motion.div>
   );
 }
 

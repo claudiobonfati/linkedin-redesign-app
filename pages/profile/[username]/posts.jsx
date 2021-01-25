@@ -1,11 +1,13 @@
 import React, { Fragment } from 'react';
 import { Waypoint } from 'react-waypoint';
 import { withRouter } from 'next/router';
+import { motion } from 'framer-motion';
 import ProfileOverview from '../../../components/ProfileOverview';
 import Post from '../../../components/Post';
 import SimpleCard from '../../../components/SimpleCard';
 import { fetchMoreUserPosts, getSimpleUser } from '../../../graphql/hooks';
 import ProfileDisplay from '../../../components/ProfileDisplay';
+import defaultVariants from '../../../utils/FramerMotionDefault';
 
 class ProfilePosts extends React.Component {
   constructor(props) {
@@ -27,6 +29,9 @@ class ProfilePosts extends React.Component {
   }
 
   async componentDidMount() {
+    // Resetins scroll manually (FramerMotion)
+    window.scrollTo(0, 0);
+
     let userData = await getSimpleUser(this.props.router.query.username);
 
     this.setState({
@@ -100,7 +105,13 @@ class ProfilePosts extends React.Component {
     }
 
     return (
-      <div className="container">
+      <motion.div
+        className="container"
+        variants={defaultVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+      >
         <main className="row">
           <div className="col-lg-3 col-md-4 pt-4 d-none d-md-block">
             <div className="sticky-aside-content">
@@ -161,7 +172,7 @@ class ProfilePosts extends React.Component {
             </SimpleCard>
           </div>
         </main>
-      </div>
+      </motion.div>
     );
   }
 }

@@ -1,22 +1,42 @@
-import React, { Fragment } from 'react';
-import { useRouter } from 'next/router';
+import React, { Fragment, useEffect } from 'react';
+import { withRouter } from 'next/router';
+import { motion } from 'framer-motion';
 import SimpleCard from '../../../components/SimpleCard';
 import Polaroid from '../../../components/Polaroid';
 import ProfileOverview from '../../../components/ProfileOverview';
 import ProfileDisplay from '../../../components/ProfileDisplay';
 import { useUser } from '../../../graphql/hooks';
+import defaultVariants from '../../../utils/FramerMotionDefault';
 
-const profileDetails = () => {
-  const router = useRouter();
-  const { username } = router.query;
+const checkRouterRerender = (prevProps, nextProps) => {
+  if (!nextProps.router?.query?.username) {
+    return true;
+  }
+  return false;
+};
+
+const profileDetails = (props) => {
+  const { username } = props.router.query;
   const user = useUser(username);
 
+  useEffect(() => {
+    // Resetins scroll manually (FramerMotion)
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="container">
+    <motion.div
+      className="container"
+      variants={defaultVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <main className="row">
         <div className="col-lg-3 col-md-4 pt-4">
           <div className="sticky-aside-content">
             {(user
+            && user.data
             && !user.error
             && !user.loading)
             && (
@@ -34,15 +54,19 @@ const profileDetails = () => {
           </div>
         </div>
         <div className="col-lg-6 col-md-8 py-4">
-          <div className="mb-4">
-            <SimpleCard title="Summary">
-              {(user && !user.error && !user.loading)
-              && (
-                <p>{user.data.summary}</p>
-              )}
-            </SimpleCard>
-          </div>
           {(user
+          && user.data
+          && !user.error
+          && !user.loading)
+          && (
+            <div className="mb-4">
+              <SimpleCard title="Summary">
+                <p>{user.data.summary}</p>
+              </SimpleCard>
+            </div>
+          )}
+          {(user
+          && user.data
           && !user.error
           && !user.loading
           && user.data.Experiences
@@ -74,6 +98,7 @@ const profileDetails = () => {
             </div>
           )}
           {(user
+          && user.data
           && !user.error
           && !user.loading
           && user.data.Courses
@@ -105,6 +130,7 @@ const profileDetails = () => {
             </div>
           )}
           {(user
+          && user.data
           && !user.error
           && !user.loading
           && user.data.Recommendations
@@ -129,7 +155,12 @@ const profileDetails = () => {
               </SimpleCard>
             </div>
           )}
-          {(user && !user.error && !user.loading && user.data.Follows)
+          {(user
+          && user.data
+          && !user.error
+          && !user.loading
+          && user.data.Follows
+          && user.data.Follows.length > 0)
           && (
             <div>
               <SimpleCard title="Following">
@@ -187,8 +218,8 @@ const profileDetails = () => {
           </SimpleCard>
         </div>
       </main>
-    </div>
+    </motion.div>
   );
 };
 
-export default profileDetails;
+export default withRouter(React.memo(profileDetails, checkRouterRerender));

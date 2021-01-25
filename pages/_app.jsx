@@ -3,12 +3,13 @@ import NextApp from 'next/app';
 import Head from 'next/head';
 import '../styles/styles.sass';
 import { ApolloProvider } from '@apollo/client';
+import { AnimatePresence } from 'framer-motion';
 import ApolloClient from '../graphql/apollo';
 import Layout from '../components/Layout';
 
 class App extends NextApp {
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, router } = this.props;
 
     return (
       <Layout>
@@ -32,7 +33,9 @@ class App extends NextApp {
           <title>Linkedin Redesign</title>
         </Head>
         <ApolloProvider client={ApolloClient}>
-          <Component {...pageProps} />
+          <AnimatePresence exitBeforeEnter>
+            <Component {...pageProps} key={router.route} />
+          </AnimatePresence>
         </ApolloProvider>
       </Layout>
     );

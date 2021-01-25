@@ -9,7 +9,7 @@ const polaroid = (props) => (
     <ConditionalWrapper
       condition={props.link}
       wrapper={
-        (inner) => (<Link href={props.link}><a className={styles.linkWrapper}>{inner}</a></Link>)
+        (inner) => (<Link href={props.link} scroll={false}><a className={styles.linkWrapper}>{inner}</a></Link>)
       }
     >
       {props.image

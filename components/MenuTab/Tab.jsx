@@ -64,7 +64,7 @@ class Tab extends React.Component {
       opacity: 0,
       transform: 'translateY(-30px)',
       ease: Power3.easeOut,
-      delay: 0.8,
+      delay: 0.3,
     });
   }
 

@@ -43,7 +43,7 @@ const profileOverview = (props) => (
     </div>
     {props.actionMyProfile
     && (
-      <Link href="/me/details">
+      <Link href="/me/details" scroll={false}>
         <a className={styles.footerAction} title="View my profile">
           View my profile
         </a>

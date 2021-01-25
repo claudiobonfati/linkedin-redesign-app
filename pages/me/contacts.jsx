@@ -1,8 +1,10 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import SimpleCard from '../../components/SimpleCard';
 import ProfileOverview from '../../components/ProfileOverview';
 import ProfileDisplay from '../../components/ProfileDisplay';
 import { useUser, useContacts } from '../../graphql/hooks';
+import defaultVariants from '../../utils/FramerMotionDefault';
 
 function MeContacts() {
   const user = useUser('claudiobonfati');
@@ -38,8 +40,19 @@ function MeContacts() {
     );
   }
 
+  useEffect(() => {
+    // Resetins scroll manually (FramerMotion)
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="container">
+    <motion.div
+      className="container"
+      variants={defaultVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <main className="row">
         <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
           <div className="sticky-aside-content">
@@ -67,7 +80,7 @@ function MeContacts() {
           </SimpleCard>
         </div>
       </main>
-    </div>
+    </motion.div>
   );
 }
 

@@ -13,7 +13,7 @@ const profileDisplay = (props) => (
     >
       <ConditionalWrapper
         condition={props.link}
-        wrapper={(children) => <Link href={props.link}><a>{children}</a></Link>}
+        wrapper={(children) => <Link href={props.link} scroll={false}><a>{children}</a></Link>}
       >
         <Image
           src={props.image}
@@ -27,7 +27,7 @@ const profileDisplay = (props) => (
     <div className={`${styles.infoWrapper} ${props.imageSide === 'left' ? 'ml-3' : 'mr-3'}`}>
       <ConditionalWrapper
         condition={props.link}
-        wrapper={(children) => <Link href={props.link}><a>{children}</a></Link>}
+        wrapper={(children) => <Link href={props.link} scroll={false}><a>{children}</a></Link>}
       >
         <div className={styles.infoTitle}>
           {props.title}
@@ -60,7 +60,7 @@ const profileDisplay = (props) => (
     {(props.rightButtonText && props.rightButtonLink)
     && (
       <div className={`ml-3 ${styles.rightWrapper}`}>
-        <Link href={props.rightButtonLink}>
+        <Link href={props.rightButtonLink} scroll={false}>
           {props.rightButtonText}
         </Link>
       </div>

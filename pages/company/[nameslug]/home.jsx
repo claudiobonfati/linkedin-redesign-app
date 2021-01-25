@@ -1,19 +1,38 @@
-import React, { Fragment } from 'react';
-import { useRouter } from 'next/router';
+import React, { Fragment, useEffect } from 'react';
+import { withRouter } from 'next/router';
+import { motion } from 'framer-motion';
 import ReactHtmlParser from 'react-html-parser';
 import SimpleCard from '../../../components/SimpleCard';
 import Jumbotron from '../../../components/Jumbotron';
 import Post from '../../../components/Post';
 import ProfileDisplay from '../../../components/ProfileDisplay';
 import { useCompany } from '../../../graphql/hooks';
+import defaultVariants from '../../../utils/FramerMotionDefault';
 
-const companyHome = () => {
-  const router = useRouter();
-  const { nameslug } = router.query;
+const checkRouterRerender = (prevProps, nextProps) => {
+  if (!nextProps.router?.query?.nameslug) {
+    return true;
+  }
+  return false;
+};
+
+const companyHome = (props) => {
+  const { nameslug } = props.router.query;
   const company = useCompany(nameslug);
 
+  useEffect(() => {
+    // Resetins scroll manually (FramerMotion)
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="container">
+    <motion.div
+      className="container"
+      variants={defaultVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <main className="row">
         <div className="col-12 pt-4">
           {(company
@@ -152,8 +171,8 @@ const companyHome = () => {
           </SimpleCard>
         </div>
       </main>
-    </div>
+    </motion.div>
   );
 };
 
-export default companyHome;
+export default withRouter(React.memo(companyHome, checkRouterRerender));

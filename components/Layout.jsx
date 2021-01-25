@@ -8,7 +8,7 @@ const layout = (props) => {
   let appRef = useRef(null);
 
   useEffect(() => {
-    TweenMax.to(appRef, 0.5, { css: { opacity: 1 } }).delay(0.5);
+    TweenMax.to(appRef, 0.5, { css: { opacity: 1 } }).delay(0.1);
   });
 
   return (

@@ -4,7 +4,7 @@ import styles from './Tab.module.sass';
 const menuMessages = () => (
   <ul className={styles.menu}>
     <li>
-      <a href="https://google.com" className={styles.active}>
+      <a href="https://google.com" className={styles.active} scroll={false}>
         All messages
       </a>
     </li>

@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react';
 import { Waypoint } from 'react-waypoint';
+import { motion } from 'framer-motion';
 import ProfileOverview from '../components/ProfileOverview';
 import Post from '../components/Post';
 import { fetchMoreCompaniesPosts } from '../graphql/hooks';
+import defaultVariants from '../utils/FramerMotionDefault';
 
 class Companies extends React.Component {
   constructor(props) {
@@ -23,6 +25,9 @@ class Companies extends React.Component {
   }
 
   componentDidMount() {
+    // Resetins scroll manually (FramerMotion)
+    window.scrollTo(0, 0);
+
     this.fetchPosts();
   }
 
@@ -89,7 +94,13 @@ class Companies extends React.Component {
     }
 
     return (
-      <div className="container">
+      <motion.div
+        className="container"
+        variants={defaultVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+      >
         <main className="row">
           <div className="col-lg-3 col-md-3 col-sm-6 pt-4 d-none d-sm-block">
             <div className="sticky-aside-content">
@@ -137,7 +148,7 @@ class Companies extends React.Component {
             </div>
           </div>
         </main>
-      </div>
+      </motion.div>
     );
   }
 }

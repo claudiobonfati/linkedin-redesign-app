@@ -1,9 +1,11 @@
 import React, { Fragment } from 'react';
 import { Waypoint } from 'react-waypoint';
+import { motion } from 'framer-motion';
 import ProfileOverview from '../components/ProfileOverview';
 import CreatePost from '../components/CreatePost';
 import Post from '../components/Post';
 import { fetchMorePosts, getSimpleUser } from '../graphql/hooks';
+import defaultVariants from '../utils/FramerMotionDefault';
 
 class Home extends React.Component {
   constructor(props) {
@@ -25,6 +27,9 @@ class Home extends React.Component {
   }
 
   async componentDidMount() {
+    // Resetins scroll manually (FramerMotion)
+    window.scrollTo(0, 0);
+
     this.fetchPosts();
 
     try {
@@ -101,7 +106,13 @@ class Home extends React.Component {
     }
 
     return (
-      <div className="container">
+      <motion.div
+        className="container"
+        variants={defaultVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+      >
         <main className="row">
           <div className="col-lg-3 col-md-3 col-sm-6 pt-4 d-none d-sm-block">
             <div className="sticky-aside-content">
@@ -155,7 +166,7 @@ class Home extends React.Component {
             </div>
           </div>
         </main>
-      </div>
+      </motion.div>
     );
   }
 }

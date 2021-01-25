@@ -10,12 +10,12 @@ const menuAccount = () => {
   return (
     <ul className={styles.menu}>
       <li>
-        <ActiveLink href={`/profile/${username}/details`} activeClassName={styles.active}>
+        <ActiveLink href={`/profile/${username}/details`} activeClassName={styles.active} scroll={false}>
           <a>Details</a>
         </ActiveLink>
       </li>
       <li>
-        <ActiveLink href={`/profile/${username}/posts`} activeClassName={styles.active}>
+        <ActiveLink href={`/profile/${username}/posts`} activeClassName={styles.active} scroll={false}>
           <a>Posts</a>
         </ActiveLink>
       </li>
