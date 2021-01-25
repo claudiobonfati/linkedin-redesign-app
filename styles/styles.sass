@@ -138,6 +138,40 @@ a
   opacity: 0
   transform: translateX(-50px)
 
+.wrapper-not-found
+  background-color: $color-gray-light
+  width: 100%
+  height: calc(100vh - 163px)
+  background-image: url('/images/404.svg')
+  background-repeat: no-repeat
+  background-position: center bottom
+  background-size: cover 
+  text-align: center
+  .heading
+    font-style: normal
+    font-weight: 200
+    color: $color-gray-dark
+    font-size: 1.5rem
+    line-height: 1.2
+    margin: 24px 0
+  .subheading
+    color: $color-gray-medium
+    font-weight: normal
+    line-height: 1.4
+    font-size: 1rem
+    margin-bottom: 20px
+
+
+.not-found-cta
+  display: inline-block
+  padding: 6px 20px
+  background-color: transparent
+  border: 2px solid $color-blue
+  color: $color-blue
+  border-radius: 30px
+  text-decoration: none
+  font-weight: 500
+
 // TinyMCE override
 .tox-statusbar__branding
   display: none
@@ -145,3 +179,7 @@ a
 // PLYR override
 .plyr__controls
   padding-top: 10px !important
+
+@media (max-width: map-get($breakpoints, 'sm'))
+  .wrapper-not-found
+    height: calc(100vh - 106px)
