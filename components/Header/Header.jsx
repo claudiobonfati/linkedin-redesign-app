@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Router from 'next/router';
 import { TweenMax, Power3 } from 'gsap';
 import Link from 'next/link';
 import styles from './Header.module.sass';
@@ -11,41 +12,43 @@ import MessagesMenu from './MessagesMenu';
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
 
     this.setActiveDrop = this.setActiveDrop.bind(this);
   }
 
   componentDidMount() {
+    // Closing all tabs when route changes
+    // Router.events.on('routeChangeComplete', this.setActiveDrop);
+
     TweenMax.from(this.headerRef, 0.5, { css: { opacity: 0 }, ease: Power3.easeOut, delay: 0.2 });
   }
 
   setActiveDrop(target) {
     switch (target) {
       case 'messages':
-        this.NotificationsMenuRef.hideDrop();
-        this.DiscoverMenuRef.hideDrop();
+        this.NotificationsRef.hideDrop();
+        this.DiscoverRef.hideDrop();
         this.SearchRef.hideDrop();
         break;
       case 'notifications':
-        this.MessagesMenuRef.hideDrop();
-        this.DiscoverMenuRef.hideDrop();
+        this.MessagesRef.hideDrop();
+        this.DiscoverRef.hideDrop();
         this.SearchRef.hideDrop();
         break;
       case 'discover':
-        this.NotificationsMenuRef.hideDrop();
-        this.MessagesMenuRef.hideDrop();
+        this.NotificationsRef.hideDrop();
+        this.MessagesRef.hideDrop();
         this.SearchRef.hideDrop();
         break;
       case 'search':
-        this.NotificationsMenuRef.hideDrop();
-        this.MessagesMenuRef.hideDrop();
-        this.DiscoverMenuRef.hideDrop();
+        this.NotificationsRef.hideDrop();
+        this.MessagesRef.hideDrop();
+        this.DiscoverRef.hideDrop();
         break;
       default:
-        this.NotificationsMenuRef.hideDrop();
-        this.MessagesMenuRef.hideDrop();
-        this.DiscoverMenuRef.hideDrop();
+        this.NotificationsRef.hideDrop();
+        this.MessagesRef.hideDrop();
+        this.DiscoverRef.hideDrop();
         this.SearchRef.hideDrop();
         break;
     }
@@ -67,7 +70,7 @@ class Header extends React.Component {
               <div className="border-left-gray align-self-center ml-2 pl-2 ml-sm-4 pl-sm-4">
                 <DiscoverMenu
                   setActiveDrop={this.setActiveDrop}
-                  ref={(ref) => { this.DiscoverMenuRef = ref; }}
+                  ref={(ref) => { this.DiscoverRef = ref; }}
                 />
               </div>
             </div>
@@ -80,11 +83,11 @@ class Header extends React.Component {
             <div className="col-md-3 col-6 position-static d-flex justify-content-end py-2 py-sm-3 pl-0">
               <MessagesMenu
                 setActiveDrop={this.setActiveDrop}
-                ref={(ref) => { this.MessagesMenuRef = ref; }}
+                ref={(ref) => { this.MessagesRef = ref; }}
               />
               <NotificationsMenu
                 setActiveDrop={this.setActiveDrop}
-                ref={(ref) => { this.NotificationsMenuRef = ref; }}
+                ref={(ref) => { this.NotificationsRef = ref; }}
               />
               <Link href="/me/details" scroll={false}>
                 <a className={`ml-3 ${styles.navBarButtons}`}>

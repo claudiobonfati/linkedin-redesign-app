@@ -8,7 +8,7 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      field: '', // Store serach while being typed
+      field: '', // Store search while typing
       term: null, // Save term searched
     };
 

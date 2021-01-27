@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Waypoint } from 'react-waypoint';
 import { motion } from 'framer-motion';
-import ProfileOverview from '../components/ProfileOverview';
+import CurrentProfileOverview from '../components/CurrentProfileOverview';
 import Post from '../components/Post';
 import { fetchMoreArticles } from '../graphql/hooks';
 import defaultVariants from '../utils/FramerMotionDefault';
@@ -25,7 +25,7 @@ class Articles extends React.Component {
   }
 
   componentDidMount() {
-    // Resetins scroll manually (FramerMotion)
+    // Reseting scroll manually (FramerMotion dependency)
     window.scrollTo(0, 0);
 
     this.fetchArticles();
@@ -108,29 +108,12 @@ class Articles extends React.Component {
         <main className="row">
           <div className="col-lg-3 col-md-3 col-sm-6 pt-4 d-none d-sm-block">
             <div className="sticky-aside-content">
-              <ProfileOverview
-                photo="/images/me.jpg"
-                name="Claudio Bonfati"
-                position="Software Engineer"
-                connections={658}
-                views={35}
-                actionMyProfile
-              />
+              <CurrentProfileOverview simple />
             </div>
           </div>
           <div className="col-6 pt-4 d-none d-sm-block d-md-none">
             <div className="sticky-aside-content">
-              <ProfileOverview
-                photo="/images/me.jpg"
-                name="Claudio Bonfati"
-                position="Software Engineer"
-                connections={658}
-                views={35}
-                actionMyProfile
-                email="claudio@example.com"
-                twitter="claudioexample"
-                skype="claudioexample"
-              />
+              <CurrentProfileOverview simple />
             </div>
           </div>
           <div className="col-lg-6 col-md-9 py-4">
@@ -138,17 +121,7 @@ class Articles extends React.Component {
           </div>
           <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
             <div className="sticky-aside-content">
-              <ProfileOverview
-                photo="/images/me.jpg"
-                name="Claudio Bonfati"
-                position="Software Engineer"
-                connections={658}
-                views={35}
-                actionMyProfile
-                email="claudio@example.com"
-                twitter="claudioexample"
-                skype="claudioexample"
-              />
+              <CurrentProfileOverview simple />
             </div>
           </div>
         </main>

@@ -20,7 +20,7 @@ const profileDetails = (props) => {
   const user = useUser(username);
 
   useEffect(() => {
-    // Resetins scroll manually (FramerMotion)
+    // Reseting scroll manually (FramerMotion dependency)
     window.scrollTo(0, 0);
   }, []);
 
@@ -44,8 +44,7 @@ const profileDetails = (props) => {
                 photo={user.data.photo}
                 name={user.data.name}
                 position={user.data.headline}
-                connections={658}
-                views={35}
+                connections={user.data.connections}
                 email={user.data.email}
                 twitter={user.data.twitter}
                 skype={user.data.skype}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Image } from 'react-image-and-background-image-fade';
 import styles from './ProfileOverview.module.sass';
+import MaskNumber from '../utils/MaskNumber';
 
 const profileOverview = (props) => (
   <div className={styles.wrapper}>
@@ -21,19 +22,19 @@ const profileOverview = (props) => (
       </div>
     </div>
     <div className={styles.infoWrapper}>
-      <div className={styles.infoLeft}>
-        <div className={`${props.views ? styles.fullWidth : ''} ${styles.value}`}>
-          {props.connections}
+      <div className={`${!props.views ? styles.fullWidth : ''} ${styles.infoLeft}`}>
+        <div className={styles.value}>
+          {MaskNumber(props.connections)}
         </div>
         <span className={styles.title}>
-          Connections
+          {props.views ? 'Connections' : 'Followers'}
         </span>
       </div>
       {props.views
       && (
       <div className={styles.infoRight}>
         <div className={styles.value}>
-          {props.views}
+          {MaskNumber(props.views)}
         </div>
         <span className={styles.title}>
           Views

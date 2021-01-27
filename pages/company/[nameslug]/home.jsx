@@ -21,7 +21,7 @@ const companyHome = (props) => {
   const company = useCompany(nameslug);
 
   useEffect(() => {
-    // Resetins scroll manually (FramerMotion)
+    // Reseting scroll manually (FramerMotion dependency)
     window.scrollTo(0, 0);
   }, []);
 

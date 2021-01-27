@@ -1,13 +1,12 @@
 import React, { Fragment, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SimpleCard from '../../components/SimpleCard';
-import ProfileOverview from '../../components/ProfileOverview';
+import CurrentProfileOverview from '../../components/CurrentProfileOverview';
 import ProfileDisplay from '../../components/ProfileDisplay';
-import { useUser, useContacts } from '../../graphql/hooks';
+import { useContacts } from '../../graphql/hooks';
 import defaultVariants from '../../utils/FramerMotionDefault';
 
 function MeContacts() {
-  const user = useUser('claudiobonfati');
   const contacts = useContacts(0, -1, '1');
 
   let jsxContactsList = null;
@@ -41,7 +40,7 @@ function MeContacts() {
   }
 
   useEffect(() => {
-    // Resetins scroll manually (FramerMotion)
+    // Reseting scroll manually (FramerMotion dependency)
     window.scrollTo(0, 0);
   }, []);
 
@@ -56,19 +55,7 @@ function MeContacts() {
       <main className="row">
         <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
           <div className="sticky-aside-content">
-            {(user && !user.error && !user.loading)
-            && (
-              <ProfileOverview
-                photo={user.data.photo}
-                name={user.data.name}
-                position={user.data.headline}
-                connections={658}
-                views={35}
-                email={user.data.email}
-                twitter={user.data.twitter}
-                skype={user.data.skype}
-              />
-            )}
+            <CurrentProfileOverview />
           </div>
         </div>
         <div className="col-lg-9 col-md-8 py-4">

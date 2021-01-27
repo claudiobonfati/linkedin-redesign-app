@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import { Waypoint } from 'react-waypoint';
 import { motion } from 'framer-motion';
-import ProfileOverview from '../components/ProfileOverview';
+import CurrentProfileOverview from '../components/CurrentProfileOverview';
 import CreatePost from '../components/CreatePost';
 import Post from '../components/Post';
-import { fetchMorePosts, getSimpleUser } from '../graphql/hooks';
+import { fetchMorePosts } from '../graphql/hooks';
 import defaultVariants from '../utils/FramerMotionDefault';
 
 class Home extends React.Component {
@@ -20,27 +20,16 @@ class Home extends React.Component {
         error: false,
         data: [],
       },
-      user: null,
     };
 
     this.fetchPosts = this.fetchPosts.bind(this);
   }
 
   async componentDidMount() {
-    // Resetins scroll manually (FramerMotion)
+    // Reseting scroll manually (FramerMotion dependency)
     window.scrollTo(0, 0);
 
     this.fetchPosts();
-
-    try {
-      let userData = await getSimpleUser('claudiobonfati');
-
-      this.setState({
-        user: userData,
-      });
-    } catch (e) {
-      console.error(e);
-    }
   }
 
   async fetchPosts() {
@@ -116,32 +105,12 @@ class Home extends React.Component {
         <main className="row">
           <div className="col-lg-3 col-md-3 col-sm-6 pt-4 d-none d-sm-block">
             <div className="sticky-aside-content">
-              {(this.state.user && !this.state.user.error && !this.state.user.loading)
-                && (
-                  <ProfileOverview
-                    photo={this.state.user.data.photo}
-                    name={this.state.user.data.name}
-                    position={this.state.user.data.headline}
-                    connections={658}
-                    views={35}
-                    actionMyProfile
-                  />
-                )}
+              <CurrentProfileOverview simple />
             </div>
           </div>
           <div className="col-6 pt-4 d-none d-sm-block d-md-none">
             <div className="sticky-aside-content">
-              <ProfileOverview
-                photo="/images/me.jpg"
-                name="Claudio Bonfati"
-                position="Software Engineer"
-                connections={658}
-                views={35}
-                actionMyProfile
-                email="claudio@example.com"
-                twitter="claudioexample"
-                skype="claudioexample"
-              />
+              <CurrentProfileOverview simple />
             </div>
           </div>
           <div className="col-lg-6 col-md-9 py-4">
@@ -152,17 +121,7 @@ class Home extends React.Component {
           </div>
           <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
             <div className="sticky-aside-content">
-              <ProfileOverview
-                photo="/images/me.jpg"
-                name="Claudio Bonfati"
-                position="Software Engineer"
-                connections={658}
-                views={35}
-                actionMyProfile
-                email="claudio@example.com"
-                twitter="claudioexample"
-                skype="claudioexample"
-              />
+              <CurrentProfileOverview simple />
             </div>
           </div>
         </main>

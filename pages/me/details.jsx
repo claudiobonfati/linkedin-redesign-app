@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SimpleCard from '../../components/SimpleCard';
 import Polaroid from '../../components/Polaroid';
-import ProfileOverview from '../../components/ProfileOverview';
+import CurrentProfileOverview from '../../components/CurrentProfileOverview';
 import ProfileDisplay from '../../components/ProfileDisplay';
 import { useUser } from '../../graphql/hooks';
 import defaultVariants from '../../utils/FramerMotionDefault';
@@ -11,7 +11,7 @@ function MeDetails() {
   const user = useUser('claudiobonfati');
 
   useEffect(() => {
-    // Resetins scroll manually (FramerMotion)
+    // Reseting scroll manually (FramerMotion dependency)
     window.scrollTo(0, 0);
   }, []);
 
@@ -26,19 +26,7 @@ function MeDetails() {
       <main className="row">
         <div className="col-lg-3 col-md-4 py-4">
           <div className="sticky-aside-content">
-            {(user && !user.error && !user.loading)
-            && (
-              <ProfileOverview
-                photo={user.data.photo}
-                name={user.data.name}
-                position={user.data.headline}
-                connections={658}
-                views={35}
-                email={user.data.email}
-                twitter={user.data.twitter}
-                skype={user.data.skype}
-              />
-            )}
+            <CurrentProfileOverview />
           </div>
         </div>
         <div className="col-lg-6 col-md-8 py-4">

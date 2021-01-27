@@ -16,7 +16,7 @@ const jumbotron = (props) => (
       </div>
       <div className={styles.content}>
         <div className={styles.photoWrapper}>
-          <img src={props.profileImage} alt={props.profileName} />
+          <Image src={props.profileImage} alt={props.profileName} />
         </div>
         <h1 className={styles.profileName}>
           {props.profileName}

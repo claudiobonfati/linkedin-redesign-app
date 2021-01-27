@@ -29,7 +29,7 @@ class ProfilePosts extends React.Component {
   }
 
   async componentDidMount() {
-    // Resetins scroll manually (FramerMotion)
+    // Reseting scroll manually (FramerMotion dependency)
     window.scrollTo(0, 0);
 
     let userData = await getSimpleUser(this.props.router.query.username);
@@ -121,8 +121,7 @@ class ProfilePosts extends React.Component {
                     photo={this.state.user.data.photo}
                     name={this.state.user.data.name}
                     position={this.state.user.data.headline}
-                    connections={658}
-                    views={35}
+                    connections={this.state.user.data.connections}
                     email={this.state.user.data.email}
                     twitter={this.state.user.data.twitter}
                     skype={this.state.user.data.skype}

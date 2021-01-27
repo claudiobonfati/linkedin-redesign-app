@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { Image } from 'react-image-and-background-image-fade';
 import PropTypes from 'prop-types';
 import styles from './Polaroid.module.sass';
 import ConditionalWrapper from '../utils/ConditionalWrapper';
@@ -16,7 +17,7 @@ const polaroid = (props) => (
       && (
         <div className={styles.imageWrapper} style={{ padding: props.imagePadding }}>
           <div className={styles.imageBox}>
-            <img
+            <Image
               src={props.image}
               alt="Cover"
               className={styles.image}

@@ -124,6 +124,7 @@ export const GET_PROFILE = gql`
       email
       twitter
       skype
+      connections
       place
       summary
       Experiences {
@@ -187,6 +188,7 @@ export const GET_SIMPLE_USER = gql`
       email
       twitter
       skype
+      connections
     }
   }
 `;
