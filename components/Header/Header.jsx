@@ -18,7 +18,7 @@ class Header extends React.Component {
 
   componentDidMount() {
     // Closing all tabs when route changes
-    // Router.events.on('routeChangeComplete', this.setActiveDrop);
+    Router.events.on('routeChangeComplete', this.setActiveDrop);
 
     TweenMax.from(this.headerRef, 0.5, { css: { opacity: 0 }, ease: Power3.easeOut, delay: 0.2 });
   }

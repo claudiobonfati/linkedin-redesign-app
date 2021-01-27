@@ -98,9 +98,10 @@ class DiscoverMenu extends React.Component {
                   <ul>
                     <li><Link href="/">Home</Link></li>
                     <li><a href="https://google.com">Messages</a></li>
-                    <li><a href="https://google.com">Calendar</a></li>
-                    <li><a href="https://google.com">Requests</a></li>
-                    <li><a href="https://google.com">Wiki</a></li>
+                    <li><Link href="/articles">Articles</Link></li>
+                    <li><Link href="/companies">Companies</Link></li>
+                    <li><span className={styles.disabled}>Jobs</span></li>
+                    <li><span className={styles.disabled}>Premium</span></li>
                   </ul>
                 </nav>
               </div>
@@ -110,11 +111,11 @@ class DiscoverMenu extends React.Component {
                 </h6>
                 <nav className={styles.menuNav}>
                   <ul>
-                    <li><Link href="/me/details">Home</Link></li>
-                    <li><a href="https://google.com">Messages</a></li>
-                    <li><a href="https://google.com">Calendar</a></li>
-                    <li><a href="https://google.com">Requests</a></li>
-                    <li><a href="https://google.com">Wiki</a></li>
+                    <li><Link href="/me/improve">Edit profile</Link></li>
+                    <li><Link href="/me/details">My profile</Link></li>
+                    <li><Link href="/me/improve">Improve</Link></li>
+                    <li><span className={styles.disabled}>Updates</span></li>
+                    <li><span className={styles.disabled}>Who viewed</span></li>
                   </ul>
                 </nav>
               </div>
@@ -124,11 +125,10 @@ class DiscoverMenu extends React.Component {
                 </h6>
                 <nav className={styles.menuNav}>
                   <ul>
-                    <li><a href="https://google.com">Connections</a></li>
-                    <li><a href="https://google.com">Add contacts</a></li>
-                    <li><a href="https://google.com">Alumnis</a></li>
-                    <li><a href="https://google.com">People you know</a></li>
-                    <li><a href="https://google.com">Statics</a></li>
+                    <li><Link href="/me/contacts">Connections</Link></li>
+                    <li><Link href="/me/contacts">Add contacts</Link></li>
+                    <li><Link href="/me/contacts">People you know</Link></li>
+                    <li><span className={styles.disabled}>Statics</span></li>
                   </ul>
                 </nav>
               </div>
@@ -138,23 +138,23 @@ class DiscoverMenu extends React.Component {
                 </h6>
                 <nav className={styles.menuNav}>
                   <ul>
-                    <li><a href="https://google.com">Companies</a></li>
-                    <li><a href="https://google.com">Groups</a></li>
-                    <li><a href="https://google.com">Slideshare</a></li>
-                    <li><a href="https://google.com">Learning</a></li>
+                    <li><span className={styles.disabled}>Companies</span></li>
+                    <li><span className={styles.disabled}>Groups</span></li>
+                    <li><span className={styles.disabled}>Slideshare</span></li>
+                    <li><span className={styles.disabled}>Learning</span></li>
                   </ul>
                 </nav>
               </div>
               <div className="col-md-2 col-sm-3 col-12 py-3">
                 <h6>
-                  Wiki
+                  Business
                 </h6>
                 <nav className={styles.menuNav}>
                   <ul>
-                    <li><a href="https://google.com">Our partners</a></li>
-                    <li><a href="https://google.com">Top clients</a></li>
-                    <li><a href="https://google.com">Manifesto</a></li>
-                    <li><a href="https://google.com">Pitching</a></li>
+                    <li><span className={styles.disabled}>Post a job</span></li>
+                    <li><span className={styles.disabled}>Talent solution</span></li>
+                    <li><span className={styles.disabled}>Advertise</span></li>
+                    <li><span className={styles.disabled}>Sale solutions</span></li>
                   </ul>
                 </nav>
               </div>

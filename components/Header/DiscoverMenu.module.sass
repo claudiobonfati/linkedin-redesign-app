@@ -50,20 +50,28 @@
     margin: 0
     padding: 0
     list-style: none
-    a
+    a,
+    span
       color: $color-gray-medium
       display: block
       padding: 4px 0
       transition: color .1s ease-out
       text-decoration: none
+      font-weight: 500
+    a 
       &:hover
         color: $color-gray-dark
         text-decoration: none
+    span 
+      cursor: not-allowed
+      opacity: .3
   &.spaced
-    ul li a
-      padding: 10px 0
-      color: $color-gray-dark
-      font-weight: 500
+    ul li 
+      a,
+      span
+        padding: 10px 0
+        color: $color-gray-dark
+        font-weight: 500
 
 @media (max-width: map-get($breakpoints, 'sm'))
   .wrapperDrop
