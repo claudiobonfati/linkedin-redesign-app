@@ -39,6 +39,11 @@
   justify-content: center
   align-content: stretch
   align-items: center
+  z-index: 5
+
+@-moz-document url-prefix() // Since backdrop doesnt work on firefox, increase background color
+  .content
+    background-color: rgba($color-gray-dark, .5)
 
 .photoWrapper
   width: 115px
