@@ -2,40 +2,30 @@ import React from 'react';
 import { TweenMax, Power3 } from 'gsap';
 import styles from './MessagesMenu.module.sass';
 import ProfileDisplay from '../ProfileDisplay';
+import { HeaderStateContext } from '../../context/Header';
 
 class MessagesButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isVisible: false,
-    };
 
     this.onClickButton = this.onClickButton.bind(this);
-    this.toggleVisibility = this.toggleVisibility.bind(this);
   }
 
-  componentDidMount() {
-    this.toggleVisibility();
-  }
+  static contextType = HeaderStateContext;
 
   onClickButton() {
-    this.setState((prevState) => ({
-      isVisible: !prevState.isVisible,
-    }), () => {
-      if (!this.state.isVisible) {
-        this.toggleVisibility();
-        this.props.setActiveDrop(null);
-      } else {
-        this.props.setActiveDrop('messages');
-        setTimeout(() => {
-          this.toggleVisibility();
-        }, 200);
-      }
-    });
+    if (this.context.data.tab === 'messages') {
+      this.context.dispatch({ type: 'CLOSE_TAB' });
+    } else {
+      this.context.dispatch({
+        type: 'SET_TAB',
+        payload: 'messages'
+      });
+    }
   }
 
-  toggleVisibility() {
-    if (this.state.isVisible) {
+  componentDidUpdate() {
+    if (this.context.data.tab === 'messages') {
       this.showDrop();
     } else {
       this.hideDrop();
@@ -43,10 +33,6 @@ class MessagesButton extends React.Component {
   }
 
   showDrop() {
-    this.setState({
-      isVisible: true,
-    });
-
     TweenMax.to(this.dropRef, 0.2, {
       css: {
         opacity: 1,
@@ -58,10 +44,6 @@ class MessagesButton extends React.Component {
   }
 
   hideDrop() {
-    this.setState({
-      isVisible: false,
-    });
-
     TweenMax.to(this.dropRef, 0.2, {
       css: {
         opacity: 0,
@@ -77,7 +59,7 @@ class MessagesButton extends React.Component {
       <div className={`ml-3 ${styles.wrapper}`}>
         <button
           aria-expanded="false"
-          className={`${styles.navBarButtons} ${this.state.isVisible ? styles.buttonActive : ''}`}
+          className={`${styles.navBarButtons} ${this.context.data.tab === 'messages' ? styles.buttonActive : ''}`}
           type="button"
           onClick={this.onClickButton}
         >
@@ -89,8 +71,8 @@ class MessagesButton extends React.Component {
               Messages
             </div>
             <div className={styles.dropHeaderButton}>
-              <button type="button" onClick={() => this.activateTab(0)}>
-                <span className="lnr lnr-plus-circle" />
+              <button type="button" onClick={this.onClickButton}>
+                <span className="lnr lnr-cross" />
               </button>
             </div>
           </div>

@@ -1,8 +1,9 @@
 import React from 'react';
 import { TimelineMax, Power3 } from 'gsap';
 import PropTypes from 'prop-types';
-import styles from './Search.module.sass';
 import ProfileDisplay from '../ProfileDisplay';
+import styles from './Search.module.sass';
+import { HeaderStateContext } from '../../context/Header';
 
 class Search extends React.Component {
   constructor(props) {
@@ -12,6 +13,9 @@ class Search extends React.Component {
       term: null, // Save term searched
     };
 
+    this.tlShowTerm = new TimelineMax({ paused: true });
+    this.tlShowQuickResult = new TimelineMax({ paused: true });
+
     this.handleChangeInput = this.handleChangeInput.bind(this);
     this.handleKeyDownInput = this.handleKeyDownInput.bind(this);
     this.handleClearTerm = this.handleClearTerm.bind(this);
@@ -19,8 +23,9 @@ class Search extends React.Component {
     this.search = this.search.bind(this);
   }
 
+  static contextType = HeaderStateContext;
+
   componentDidMount() {
-    this.tlShowTerm = new TimelineMax({ paused: true });
     this.tlShowTerm.from(this.termBoxRef, 0.2, {
       css: {
         opacity: 0,
@@ -30,21 +35,28 @@ class Search extends React.Component {
       ease: Power3.easeOut,
     });
 
-    this.tlShowQuickResult = new TimelineMax({ paused: true });
     this.tlShowQuickResult
-      .from(this.dropRef, 0.5, {
-        css: {
-          display: 'none',
-          height: 0,
-        },
-      })
-      .from(this.dropContentRef, 0.5, {
-        css: {
-          opacity: 0,
-          transform: 'translateY(-20px)',
-        },
-        ease: Power3.easeOut,
-      });
+    .from(this.dropRef, 0.5, {
+      css: {
+        display: 'none',
+        height: 0,
+      },
+    })
+    .from(this.dropContentRef, 0.5, {
+      css: {
+        opacity: 0,
+        transform: 'translateY(-20px)',
+      },
+      ease: Power3.easeOut,
+    });
+  }
+
+  componentDidUpdate() {
+    if (this.context.data.tab === 'search') {
+      this.tlShowQuickResult.play();
+    } else {
+      this.tlShowQuickResult.reverse();
+    }
   }
 
   handleChangeInput({ target }) {
@@ -55,8 +67,7 @@ class Search extends React.Component {
         if (target.value.length > 4) {
           this.quickSearch();
         } else {
-          this.props.setActiveDrop(null);
-          this.hideDrop();
+          this.context.dispatch({ type: 'CLOSE_TAB' });
         }
       }
     });
@@ -71,8 +82,7 @@ class Search extends React.Component {
         this.search();
         this.tlShowTerm.play();
         if (this.props.quickSearch) {
-          this.props.setActiveDrop(null);
-          this.hideDrop();
+          this.context.dispatch({ type: 'CLOSE_TAB' });
         }
       });
     } else if (event.key === 'Backspace') {
@@ -108,22 +118,10 @@ class Search extends React.Component {
    * Function to fetch bests results while user is typing
    */
   quickSearch() {
-    this.props.setActiveDrop('search');
-    this.showDrop();
-  }
-
-  /**
-   * Must be a separated function because Header must be able to trigger it
-   */
-  showDrop() {
-    this.tlShowQuickResult.play();
-  }
-
-  /**
-   * Must be a separated function because Header must be able to trigger it
-   */
-  hideDrop() {
-    this.tlShowQuickResult.reverse();
+    this.context.dispatch({
+      type: 'SET_TAB',
+      payload: 'search'
+    });
   }
 
   render() {

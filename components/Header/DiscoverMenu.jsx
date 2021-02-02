@@ -3,76 +3,53 @@ import { TimelineMax, Power3 } from 'gsap';
 import Link from 'next/link';
 import styles from './DiscoverMenu.module.sass';
 import Search from './Search';
+import { HeaderStateContext } from '../../context/Header';
 
 class DiscoverMenu extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isVisible: false,
-    };
+
+    this.tlShowMenu = new TimelineMax({ paused: true });
 
     this.onClickButton = this.onClickButton.bind(this);
-    this.toggleVisibility = this.toggleVisibility.bind(this);
   }
+
+  static contextType = HeaderStateContext;
 
   componentDidMount() {
-    this.tlShowMenu = new TimelineMax({ paused: true });
     this.tlShowMenu
-      .from(this.dropRef, 0.5, {
-        css: {
-          display: 'none',
-          height: 0,
-        },
-      })
-      .from(this.dropContentRef, 0.5, {
-        css: {
-          opacity: 0,
-          transform: 'translateY(-20px)',
-        },
-        ease: Power3.easeOut,
-      });
-
-    this.toggleVisibility();
-  }
-
-  onClickButton() {
-    this.setState((prevState) => ({
-      isVisible: !prevState.isVisible,
-    }), () => {
-      if (!this.state.isVisible) {
-        this.toggleVisibility();
-        this.props.setActiveDrop(null);
-      } else {
-        this.props.setActiveDrop('discover');
-        setTimeout(() => {
-          this.toggleVisibility();
-        }, 200);
-      }
+    .from(this.dropRef, 0.5, {
+      css: {
+        display: 'none',
+        height: 0,
+      },
+    })
+    .from(this.dropContentRef, 0.5, {
+      css: {
+        opacity: 0,
+        transform: 'translateY(-20px)',
+      },
+      ease: Power3.easeOut,
     });
   }
 
-  toggleVisibility() {
-    if (this.state.isVisible) {
+  onClickButton() {
+    if (this.context.data.tab === 'discover') {
+      this.context.dispatch({ type: 'CLOSE_TAB' });
+    } else {
+      this.context.dispatch({
+        type: 'SET_TAB',
+        payload: 'discover'
+      });
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.context.data.tab === 'discover') {
       this.tlShowMenu.play();
     } else {
       this.tlShowMenu.reverse();
     }
-  }
-
-  showDrop() {
-    this.setState({
-      isVisible: true,
-    });
-
-    this.tlShowMenu.play();
-  }
-
-  hideDrop() {
-    this.setState({
-      isVisible: false,
-    });
-
-    this.tlShowMenu.reverse();
   }
 
   render() {
@@ -80,7 +57,7 @@ class DiscoverMenu extends React.Component {
       <div className={`${styles.wrapper}`}>
         <button
           aria-expanded="false"
-          className={`${styles.buttonSelect} ${this.state.isVisible ? styles.buttonActive : ''}`}
+          className={`${styles.buttonSelect} ${this.context.data.tab === 'discover' ? styles.buttonActive : ''}`}
           type="button"
           onClick={this.onClickButton}
         >

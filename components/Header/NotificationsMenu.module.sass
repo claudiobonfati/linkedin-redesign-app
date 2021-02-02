@@ -77,21 +77,59 @@
           button 
             color: white
             background-color: rgba(black, .2)
-  .dropContentItem:not(:last-child)
-    border-bottom: 1px solid $color-border
-  .dropContentItem
-    .listProfilePics
+  .dropContentOuter
+    height: 400px
+    &.tabNotifications
+      .dropContentInner
+        transform: translateX(0%)
+    &.tabRequests
+      .dropContentInner
+        transform: translateX(-50%)
+    .dropContentInner
+      width: 200%
+      height: 100%
+      transition: transform .4s ease-in-out
+      display: -ms-flexbox
+      display: -webkit-flex
       display: flex
-      .profilePic
-        width: 40px
-        height: 40px
-        background-color: $color-gray-semilight
-        color: $color-gray-medium
-        border-radius: 50%
-        overflow: hidden
-        display: flex
-        justify-content: center
-        align-items: center
+      -webkit-flex-direction: row
+      -ms-flex-direction: row
+      flex-direction: row
+      -webkit-flex-wrap: nowrap
+      -ms-flex-wrap: nowrap
+      flex-wrap: nowrap
+      -webkit-justify-content: flex-start
+      -ms-flex-pack: start
+      justify-content: flex-start
+      -webkit-align-content: stretch
+      -ms-flex-line-pack: stretch
+      align-content: stretch
+      -webkit-align-items: stretch
+      -ms-flex-align: stretch
+      align-items: stretch
+      .dropContent
+        -webkit-order: 0
+        -ms-flex-order: 0
+        order: 0
+        -webkit-flex: 1 1 auto
+        -ms-flex: 1 1 auto
+        flex: 1 1 auto
+        overflow-y: scroll
+        .dropContentItem:not(:last-child)
+          border-bottom: 1px solid $color-border
+        .dropContentItem
+          .listProfilePics
+            display: flex
+            .profilePic
+              width: 40px
+              height: 40px
+              background-color: $color-gray-semilight
+              color: $color-gray-medium
+              border-radius: 50%
+              overflow: hidden
+              display: flex
+              justify-content: center
+              align-items: center
 
 @media (max-width: map-get($breakpoints, 'xl'))
   .wrapperDrop
@@ -112,3 +150,4 @@
     margin-left: 0
     border-radius: 0
     top: 100%
+    box-shadow: rgba(0, 0, 0, .5) 0px 900px 0px 900px
