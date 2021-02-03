@@ -1,6 +1,6 @@
 import React, { useReducer, useContext, createContext } from 'react';
 
-export const HeaderStateContext = createContext();
+export const HeaderContext = createContext();
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -17,10 +17,10 @@ export const HeaderProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, { tab: null });
 
   return (
-    <HeaderStateContext.Provider value={{ data: state, dispatch }}>
+    <HeaderContext.Provider value={{ data: state, dispatch }}>
       {children}
-    </HeaderStateContext.Provider>
+    </HeaderContext.Provider>
   );
 };
 
-export const useHeader = () => useContext(HeaderStateContext);
+export const useHeader = () => useContext(HeaderContext);
