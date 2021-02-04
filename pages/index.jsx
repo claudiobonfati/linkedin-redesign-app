@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Waypoint } from 'react-waypoint';
 import { motion } from 'framer-motion';
+import Sticky from 'react-sticky-el';
 import CurrentProfileOverview from '../components/CurrentProfileOverview';
 import CreatePost from '../components/CreatePost';
 import Post from '../components/Post';
@@ -105,12 +106,9 @@ class Home extends React.Component {
         <main className="row">
           <div className="col-lg-3 col-md-3 col-sm-6 pt-4 d-none d-sm-block">
             <div className="sticky-aside-content">
-              <CurrentProfileOverview simple />
-            </div>
-          </div>
-          <div className="col-6 pt-4 d-none d-sm-block d-md-none">
-            <div className="sticky-aside-content">
-              <CurrentProfileOverview simple />
+              <Sticky topOffset={-20} scrollElement=".stickyArea">
+                <CurrentProfileOverview simple />
+              </Sticky>
             </div>
           </div>
           <div className="col-lg-6 col-md-9 py-4">

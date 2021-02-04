@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Waypoint } from 'react-waypoint';
 import { motion } from 'framer-motion';
+import Sticky from 'react-sticky-el';
 import CurrentProfileOverview from '../../components/CurrentProfileOverview';
 import CreatePost from '../../components/CreatePost';
 import Post from '../../components/Post';
@@ -108,20 +109,9 @@ class MePosts extends React.Component {
         <main className="row">
           <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
             <div className="sticky-aside-content">
-              <CurrentProfileOverview />
-              {/* {(this.state.user && !this.state.user.error && !this.state.user.loading)
-                && (
-                  <ProfileOverview
-                    photo={this.state.user.data.photo}
-                    name={this.state.user.data.name}
-                    position={this.state.user.data.headline}
-                    connections={658}
-                    views={35}
-                    email={this.state.user.data.email}
-                    twitter={this.state.user.data.twitter}
-                    skype={this.state.user.data.skype}
-                  />
-                )} */}
+              <Sticky topOffset={-20} scrollElement=".stickyArea">
+                <CurrentProfileOverview />
+              </Sticky>
             </div>
           </div>
           <div className="col-lg-6 col-md-8 py-4">

@@ -6,6 +6,7 @@ import MenuFeed from './MenuFeed';
 import MenuMyProfile from './MenuMyProfile';
 import MenuAccount from './MenuAccount';
 import MenuCompany from './MenuCompany';
+import MenuMessages from './MenuMessages';
 import nthIndex from '../../utils/nthIndex';
 
 class Tab extends React.Component {
@@ -30,6 +31,9 @@ class Tab extends React.Component {
       case '/company':
         menu = 'company';
         break;
+      case '/messages':
+        menu = 'messages';
+        break;
       default:
         menu = 'feed';
         break;
@@ -49,6 +53,7 @@ class Tab extends React.Component {
       myProfile: MenuMyProfile,
       account: MenuAccount,
       company: MenuCompany,
+      messages: MenuMessages,
     };
 
     this.updateMenu = this.updateMenu.bind(this);

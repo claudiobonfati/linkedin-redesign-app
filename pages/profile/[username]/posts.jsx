@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Waypoint } from 'react-waypoint';
 import { withRouter } from 'next/router';
 import { motion } from 'framer-motion';
+import Sticky from 'react-sticky-el';
 import ProfileOverview from '../../../components/ProfileOverview';
 import Post from '../../../components/Post';
 import SimpleCard from '../../../components/SimpleCard';
@@ -115,8 +116,11 @@ class ProfilePosts extends React.Component {
         <main className="row">
           <div className="col-lg-3 col-md-4 pt-4 d-none d-md-block">
             <div className="sticky-aside-content">
-              {(this.state.user && !this.state.user.error && !this.state.user.loading)
-                && (
+              {(this.state.user
+              && !this.state.user.error
+              && !this.state.user.loading)
+              && (
+                <Sticky topOffset={-20} scrollElement=".stickyArea">
                   <ProfileOverview
                     photo={this.state.user.data.photo}
                     name={this.state.user.data.name}
@@ -126,7 +130,8 @@ class ProfilePosts extends React.Component {
                     twitter={this.state.user.data.twitter}
                     skype={this.state.user.data.skype}
                   />
-                )}
+                </Sticky>
+              )}
             </div>
           </div>
           <div className="col-lg-6 col-md-8 py-4">

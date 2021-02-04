@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Sticky from 'react-sticky-el';
 import SimpleCard from '../../components/SimpleCard';
 import Polaroid from '../../components/Polaroid';
 import CurrentProfileOverview from '../../components/CurrentProfileOverview';
@@ -26,7 +27,9 @@ function MeDetails() {
       <main className="row">
         <div className="col-lg-3 col-md-4 py-4">
           <div className="sticky-aside-content">
-            <CurrentProfileOverview />
+            <Sticky topOffset={-20} scrollElement=".stickyArea">
+              <CurrentProfileOverview />
+            </Sticky>
           </div>
         </div>
         <div className="col-lg-6 col-md-8 py-4">

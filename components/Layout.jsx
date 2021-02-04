@@ -16,7 +16,9 @@ const layout = (props) => {
       <Header />
       <MenuTab />
       <div className={styles.contentWrapper}>
-        {props.children}
+        <div className={`${styles.scrollWrapper} stickyArea`}>
+          {props.children}
+        </div>
       </div>
     </div>
   );

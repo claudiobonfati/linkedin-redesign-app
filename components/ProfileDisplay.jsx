@@ -24,7 +24,7 @@ const profileDisplay = (props) => (
         />
       </ConditionalWrapper>
     </div>
-    <div className={`${styles.infoWrapper} ${props.imageSide === 'left' ? 'ml-3' : 'mr-3'}`}>
+    <div className={`${styles.infoWrapper} ${props.imageSide === 'left' ? `ml-${props.imagePadding}` : `mr-${props.imagePadding}`}`}>
       <ConditionalWrapper
         condition={props.link}
         wrapper={(children) => <Link href={props.link} scroll={false}><a>{children}</a></Link>}
@@ -74,6 +74,7 @@ profileDisplay.propTypes = {
   imageOnTop: PropTypes.bool,
   imageSize: PropTypes.number,
   imageSide: PropTypes.oneOf(['right', 'left']),
+  imagePadding: PropTypes.string,
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
   blueLine: PropTypes.string,
@@ -90,6 +91,7 @@ profileDisplay.defaultProps = {
   sideContentOnTop: false,
   imageSide: 'left',
   imageOnTop: false,
+  imagePadding: '3',
   subtitle: null,
   blueLine: null,
   rightButtonText: null,

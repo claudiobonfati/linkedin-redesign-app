@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import { withRouter } from 'next/router';
 import { motion } from 'framer-motion';
+import Sticky from 'react-sticky-el';
 import SimpleCard from '../../../components/SimpleCard';
 import Polaroid from '../../../components/Polaroid';
 import ProfileOverview from '../../../components/ProfileOverview';
@@ -40,15 +41,17 @@ const profileDetails = (props) => {
             && !user.error
             && !user.loading)
             && (
-              <ProfileOverview
-                photo={user.data.photo}
-                name={user.data.name}
-                position={user.data.headline}
-                connections={user.data.connections}
-                email={user.data.email}
-                twitter={user.data.twitter}
-                skype={user.data.skype}
-              />
+              <Sticky topOffset={-20} scrollElement=".stickyArea">
+                <ProfileOverview
+                  photo={user.data.photo}
+                  name={user.data.name}
+                  position={user.data.headline}
+                  connections={user.data.connections}
+                  email={user.data.email}
+                  twitter={user.data.twitter}
+                  skype={user.data.skype}
+                />
+              </Sticky>
             )}
           </div>
         </div>

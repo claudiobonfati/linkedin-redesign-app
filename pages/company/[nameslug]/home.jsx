@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import { withRouter } from 'next/router';
 import { motion } from 'framer-motion';
+import Sticky from 'react-sticky-el';
 import ReactHtmlParser from 'react-html-parser';
 import SimpleCard from '../../../components/SimpleCard';
 import Jumbotron from '../../../components/Jumbotron';
@@ -55,41 +56,43 @@ const companyHome = (props) => {
         </div>
         <div className="col-lg-3 col-md-4 pt-4">
           <div className="sticky-aside-content">
-            <SimpleCard title="About" noContentPadding>
-              {(company
-              && !company.error
-              && !company.loading)
-              && (
-                <>
-                  <div>
-                    {company.data.industry
-                    && (
+            <Sticky topOffset={-20} scrollElement=".stickyArea">
+              <SimpleCard title="About" noContentPadding>
+                {(company
+                && !company.error
+                && !company.loading)
+                && (
+                  <>
+                    <div>
+                      {company.data.industry
+                      && (
+                        <p className="pb-2">
+                          Indutry
+                          <br />
+                          <strong className="color-gray-dark">{company.data.industry}</strong>
+                        </p>
+                      )}
+                      {company.data.founded
+                      && (
                       <p className="pb-2">
-                        Indutry
+                        Founded
                         <br />
-                        <strong className="color-gray-dark">{company.data.industry}</strong>
+                        <strong className="color-gray-dark">{company.data.founded}</strong>
                       </p>
-                    )}
-                    {company.data.founded
-                    && (
-                    <p className="pb-2">
-                      Founded
-                      <br />
-                      <strong className="color-gray-dark">{company.data.founded}</strong>
-                    </p>
-                    )}
-                    {company.data.headquartes
-                    && (
-                    <p className="m-0">
-                      Headquarters
-                      <br />
-                      <strong className="color-gray-dark">{company.data.headquartes}</strong>
-                    </p>
-                    )}
-                  </div>
-                </>
-              )}
-            </SimpleCard>
+                      )}
+                      {company.data.headquartes
+                      && (
+                      <p className="m-0">
+                        Headquarters
+                        <br />
+                        <strong className="color-gray-dark">{company.data.headquartes}</strong>
+                      </p>
+                      )}
+                    </div>
+                  </>
+                )}
+              </SimpleCard>
+            </Sticky>
           </div>
         </div>
         <div className="col-lg-6 col-md-8 py-4">
