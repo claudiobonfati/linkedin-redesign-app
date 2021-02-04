@@ -103,17 +103,17 @@ class Companies extends React.Component {
         exit="exit"
       >
         <main className="row">
-          <div className="col-lg-3 col-md-3 col-sm-6 pt-4 d-none d-sm-block">
+          <div className="col-lg-3 col-md-3 col-sm-6 pt-4 order-sm-1 d-none d-sm-block">
             <div className="sticky-aside-content">
               <Sticky topOffset={-20} scrollElement=".stickyArea">
                 <CurrentProfileOverview simple />
               </Sticky>
             </div>
           </div>
-          <div className="col-lg-6 col-md-9 py-4">
+          <div className="col-lg-6 col-md-9 py-4 order-sm-2">
             {jsxPostsList}
           </div>
-          <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
+          <div className="col-lg-3 col-md-4 col-sm-6 pt-4 order-sm-2 d-none d-sm-block">
             <div className="sticky-aside-content">
               <Sticky topOffset={-20} scrollElement=".stickyArea">
                 <CurrentProfileOverview simple />

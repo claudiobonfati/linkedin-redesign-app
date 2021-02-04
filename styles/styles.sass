@@ -70,12 +70,6 @@ body
   background-color: $color-gray-light
 
 .sticky-aside-content
-  position: -webkit-sticky !important
-  position: -moz-sticky !important
-  position: -ms-sticky !important
-  position: -o-sticky !important
-  position: sticky !important
-  top: 1.5rem !important
   .sticky
     top: 185px !important
 
@@ -199,6 +193,11 @@ a
 @media (max-width: map-get($breakpoints, 'md'))
   body
     --header-height: 152px
+
+  .sticky-aside-content
+    .sticky
+      position: relative !important
+      top: 0 !important
 
 @media (max-width: map-get($breakpoints, 'sm'))
   body

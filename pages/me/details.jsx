@@ -25,7 +25,7 @@ function MeDetails() {
       exit="exit"
     >
       <main className="row">
-        <div className="col-lg-3 col-md-4 py-4">
+        <div className="col-lg-3 col-md-4 pt-4">
           <div className="sticky-aside-content">
             <Sticky topOffset={-20} scrollElement=".stickyArea">
               <CurrentProfileOverview />

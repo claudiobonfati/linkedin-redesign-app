@@ -114,7 +114,7 @@ class ProfilePosts extends React.Component {
         exit="exit"
       >
         <main className="row">
-          <div className="col-lg-3 col-md-4 pt-4 d-none d-md-block">
+          <div className="col-lg-3 col-md-4 d-none d-md-block">
             <div className="sticky-aside-content">
               {(this.state.user
               && !this.state.user.error
@@ -137,7 +137,7 @@ class ProfilePosts extends React.Component {
           <div className="col-lg-6 col-md-8 py-4">
             {jsxPostsList}
           </div>
-          <div className="col-lg-3 col-md-4 py-4 d-none d-lg-block">
+          <div className="col-lg-3 col-md-4 pt-4 d-none d-md-block">
             <SimpleCard title="Keep in touch">
               <div className="w-100">
                 <div className="pb-3">
