@@ -1,0 +1,332 @@
+@import ../styles/_variables
+
+.wrapper
+  --spacer-items: 30px
+  --header-height: 70px
+  height: 100%
+  -webkit-flex: 1 1 auto
+  -ms-flex: 1 1 auto
+  flex: 1 1 auto
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+  -webkit-flex-direction: column
+  -ms-flex-direction: column
+  flex-direction: column
+  -webkit-flex-wrap: nowrap
+  -ms-flex-wrap: nowrap
+  flex-wrap: nowrap
+  -webkit-justify-content: flex-start
+  -ms-flex-pack: start
+  justify-content: flex-start
+  -webkit-align-content: stretch
+  -ms-flex-line-pack: stretch
+  align-content: stretch
+  -webkit-align-items: stretch
+  -ms-flex-align: stretch
+  align-items: stretch
+  max-width: 100%
+  .mobileHeader
+    -webkit-flex-direction: row
+    -ms-flex-direction: row
+    flex-direction: row
+    -webkit-flex-wrap: nowrap
+    -ms-flex-wrap: nowrap
+    flex-wrap: nowrap
+    -webkit-justify-content: flex-start
+    -ms-flex-pack: start
+    justify-content: flex-start
+    -webkit-align-content: center
+    -ms-flex-line-pack: center
+    align-content: center
+    -webkit-align-items: stretch
+    -ms-flex-align: stretch
+    align-items: stretch
+    width: 100%
+    background-color: white
+    border: 0
+    border-bottom: 1px solid $color-border
+    z-index: 5
+    display: none
+    .mobileHeaderUser
+      display: -ms-flexbox
+      display: -webkit-flex
+      display: flex
+      -webkit-flex-direction: row
+      -ms-flex-direction: row
+      flex-direction: row
+      -webkit-flex-wrap: nowrap
+      -ms-flex-wrap: nowrap
+      flex-wrap: nowrap
+      -webkit-justify-content: flex-start
+      -ms-flex-pack: start
+      justify-content: flex-start
+      -webkit-align-content: center
+      -ms-flex-line-pack: center
+      align-content: center
+      -webkit-align-items: stretch
+      -ms-flex-align: stretch
+      align-items: stretch
+      -webkit-flex: 1 1 auto
+      -ms-flex: 1 1 auto
+      flex: 1 1 auto
+      border: 0
+      background-color: transparent
+      padding: 0 var(--spacer-items)
+      height: var(--header-height)
+      .backButton
+        margin-left: -3px
+        border: 0
+        background-color: transparent
+        display: none
+        height: var(--header-height)
+      .profileButton
+        border: 0
+        background-color: transparent
+        padding: 0
+        height: var(--header-height)
+    .buttonFullScreen
+      border: 0
+      background-color: transparent
+      color: $color-gray-dark
+      padding: 0 var(--spacer-items)
+      -webkit-flex: 0 1 auto
+      -ms-flex: 0 1 auto
+      flex: 0 1 auto
+      height: var(--header-height)
+  .conversationWrapper
+    -webkit-order: 0
+    -ms-flex-order: 0
+    order: 0
+    -webkit-flex: 1 1 auto
+    -ms-flex: 1 1 auto
+    flex: 1 1 auto
+    -webkit-align-self: auto
+    -ms-flex-item-align: auto
+    align-self: auto
+    overflow: scroll
+    padding: var(--spacer-items) var(--spacer-items) 0 var(--spacer-items)
+    position: relative
+    display: -ms-flexbox
+    display: -webkit-flex
+    display: flex
+    -webkit-flex-direction: column-reverse
+    -ms-flex-direction: column-reverse
+    flex-direction: column-reverse
+    > div 
+      padding-top: var(--spacer-items)
+    .timeBreaker
+      width: 100%
+      color: $color-gray-medium
+      font-weight: 300
+      text-align: center
+      margin-bottom: var(--spacer-items)
+    .interaction
+      display: -ms-flexbox
+      display: -webkit-flex
+      display: flex
+      -webkit-flex-direction: row
+      -ms-flex-direction: row
+      flex-direction: row
+      -webkit-flex-wrap: nowrap
+      -ms-flex-wrap: nowrap
+      flex-wrap: nowrap
+      -webkit-align-content: stretch
+      -ms-flex-line-pack: stretch
+      align-content: stretch
+      width: 100%
+      margin-bottom: var(--spacer-items)
+      position: relative
+      .userPhoto
+        --image-size: 40px
+        width: var(--image-size)
+        height: var(--image-size)
+        border-radius: 50% 
+        overflow: hidden
+        background-color: $color-gray-light
+        img 
+          width: 100%
+          height: 100%
+      .userPhoto,
+      .baloom
+        -webkit-order: 0
+        -ms-flex-order: 0
+        order: 0
+        -webkit-flex: 0 0 auto
+        -ms-flex: 0 0 auto
+        flex: 0 0 auto
+        -webkit-align-self: auto
+        -ms-flex-item-align: auto
+        align-self: auto
+        max-width: 70%
+        .baloomInner
+          width: 100%
+          max-width: 500px
+          background-color: $color-gray-light
+          padding: 15px
+          color: $color-gray-medium
+          border-radius: 4px
+          position: relative
+          .tailOut
+            position: absolute
+            top: 0
+            display: block
+            width: 8px
+            height: 13px
+            display: none
+            svg
+              display: block
+              pointer-events: none
+          p 
+            margin: 0
+      &.fromOther
+        -webkit-justify-content: flex-start
+        -ms-flex-pack: start
+        justify-content: flex-start
+        .userPhoto
+          margin-right: calc(var(--spacer-items) - 5px)
+          -webkit-order: 0
+          -ms-flex-order: 0
+          order: 0
+        .baloom
+          .baloomInner
+            .tailOut
+              color: $color-border
+              left: -8px
+              transform: scaleX(-1)
+      &.fromMe
+        -webkit-justify-content: flex-end
+        -ms-flex-pack: end
+        justify-content: flex-end
+        .userPhoto
+          margin-left: calc(var(--spacer-items) - 5px)
+          -webkit-order: 1
+          -ms-flex-order: 1
+          order: 1
+        .baloom
+          .baloomInner
+            background-color: $color-blue
+            color: white 
+            .tailOut
+              right: -8px
+              color: $color-blue
+  .footerWrapper
+    padding-left: var(--spacer-items) 
+    padding-right: var(--spacer-items) 
+    .actionsWrapper
+      -webkit-order: 0
+      -ms-flex-order: 0
+      order: 0
+      -webkit-flex: 0 1 auto
+      -ms-flex: 0 1 auto
+      flex: 0 1 auto
+      -webkit-align-self: auto
+      -ms-flex-item-align: auto
+      align-self: auto
+      border-top: 1px solid $color-border
+      display: -ms-flexbox
+      display: -webkit-flex
+      display: flex
+      -webkit-flex-direction: row
+      -ms-flex-direction: row
+      flex-direction: row
+      -webkit-flex-wrap: nowrap
+      -ms-flex-wrap: nowrap
+      flex-wrap: nowrap
+      -webkit-justify-content: flex-start
+      -ms-flex-pack: start
+      justify-content: flex-start
+      -webkit-align-content: stretch
+      -ms-flex-line-pack: stretch
+      align-content: stretch
+      -webkit-align-items: flex-start
+      -ms-flex-align: start
+      align-items: flex-start
+      .messageTextarea
+        display: block
+        background-color: transparent
+        border: 0
+        width: 100%
+        resize: none
+        font-weight: 300
+        padding-top: var(--spacer-items) 
+        padding-bottom: var(--spacer-items) 
+        -webkit-order: 0
+        -ms-flex-order: 0
+        order: 0
+        -webkit-flex: 1 1 auto
+        -ms-flex: 1 1 auto
+        flex: 1 1 auto
+        -webkit-align-self: stretch
+        -ms-flex-item-align: stretch
+        align-self: stretch
+        &:focus,
+        &:active
+          border: 0
+          outline: 0
+      .sendButton
+        -webkit-order: 0
+        -ms-flex-order: 0
+        order: 0
+        -webkit-flex: 0 1 auto
+        -ms-flex: 0 1 auto
+        flex: 0 1 auto
+        -webkit-align-self: stretch
+        -ms-flex-item-align: stretch
+        align-self: stretch
+        border: 0
+        background-color: transparent
+        padding: 0 30px
+        font-size: 20px
+        line-height: 20px
+        margin-right: -30px
+        color: $color-gray-medium
+        transition: color .2s ease-out
+        &:hover
+          color: $color-gray-dark
+
+@media (max-width: map-get($breakpoints, 'lg'))
+  .wrapper
+    .mobileHeader
+      display: -ms-flexbox
+      display: -webkit-flex
+      display: flex
+
+@media (max-width: map-get($breakpoints, 'lg'))
+  .wrapper
+    .conversationWrapper
+      .interaction
+        .baloom
+          .baloomInner
+            max-width: 300px
+
+@media (max-width: map-get($breakpoints, 'md'))
+  .wrapper
+    --spacer-items: 20px
+
+@media (max-width: map-get($breakpoints, 'sm'))
+  .wrapper
+    .mobileHeader
+      .mobileHeaderUser
+        .backButton
+          display: block
+    .conversationWrapper
+      .interaction
+        .userPhoto
+          --image-size: 30px
+          display: none
+        .baloom
+          max-width: 80%
+          .baloomInner
+            background-color: $color-border
+            .tailOut
+              display: block
+        &.fromOther
+          .baloom
+            .baloomInner
+              border-top-left-radius: 0
+              color: $color-gray-dark
+        &.fromMe
+          .baloom
+            .baloomInner
+              border-top-right-radius: 0
