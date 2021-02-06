@@ -1,0 +1,90 @@
+@import ../styles/_variables
+
+.wrapper
+  --spacer-items: 20px
+  -webkit-flex: 1 1 auto
+  -ms-flex: 1 1 auto
+  flex: 1 1 auto
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+  -webkit-flex-direction: column
+  -ms-flex-direction: column
+  flex-direction: column
+  -webkit-flex-wrap: nowrap
+  -ms-flex-wrap: nowrap
+  flex-wrap: nowrap
+  -webkit-justify-content: flex-start
+  -ms-flex-pack: start
+  justify-content: flex-start
+  -webkit-align-content: stretch
+  -ms-flex-line-pack: stretch
+  align-content: stretch
+  -webkit-align-items: stretch
+  -ms-flex-align: stretch
+  align-items: stretch
+  max-width: 100%
+  .searchBox
+    -webkit-order: 0
+    -ms-flex-order: 0
+    order: 0
+    -webkit-flex: 0 1 auto
+    -ms-flex: 0 1 auto
+    flex: 0 1 auto
+    -webkit-align-self: auto
+    -ms-flex-item-align: auto
+    align-self: auto
+    border-bottom: 1px solid $color-border
+    position: relative
+    width: 100%
+    .searchInput
+      border: 0
+      background: white
+      padding-right: var(--spacer-items)
+      padding-left: calc(var(--spacer-items) + 25px)
+      height: 70px
+      width: 100%
+      &:focus,
+      &:active
+        border: 0
+        outline: 0
+
+    .searchIcon
+      position: absolute
+      width: 16px
+      height: 16px
+      color: $color-gray-medium
+      top: 50%
+      margin-top: -9px
+      left: var(--spacer-items)
+      font-size: 16px
+      z-index: 15
+
+  .userListBox
+    -webkit-order: 0
+    -ms-flex-order: 0
+    order: 0
+    -webkit-flex: 1 1 auto
+    -ms-flex: 1 1 auto
+    flex: 1 1 auto
+    -webkit-align-self: auto
+    -ms-flex-item-align: auto
+    align-self: auto
+    overflow: scroll
+    .userButton
+      border: 0
+      background-color: transparent
+      border-bottom: 1px solid $color-border
+      display: block
+      width: 100%
+      text-align: left
+      padding: calc(var(--spacer-items) - 5px) var(--spacer-items)
+      cursor: pointer
+      *
+        cursor: pointer
+      &.userActive
+        background-color: rgba($color-gray-light, .5)
+
+@media (max-width: map-get($breakpoints, 'md'))
+  .wrapper
+    --spacer-items: 15px
