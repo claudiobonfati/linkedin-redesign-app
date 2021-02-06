@@ -1,15 +1,15 @@
 import React, {
-  useEffect, useState, useContext, useRef,
+  useEffect, useState, useRef,
 } from 'react';
 import Image from 'next/image';
 import { TweenMax, Power3 } from 'gsap';
 import styles from './NotificationsMenu.module.sass';
 import ProfileDisplay from '../ProfileDisplay';
-import { HeaderContext } from '../../context/Header';
+import { useHeader } from '../../context/Header';
 
 const notificationsMenu = () => {
   const [tab, setTab] = useState('notifications');
-  const context = useContext(HeaderContext);
+  const context = useHeader();
   let dropRef = useRef(null);
 
   const onClickButton = () => {

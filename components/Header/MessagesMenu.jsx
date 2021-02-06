@@ -1,11 +1,11 @@
-import React, { useEffect, useContext, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { TweenMax, Power3 } from 'gsap';
 import styles from './MessagesMenu.module.sass';
 import ProfileDisplay from '../ProfileDisplay';
-import { HeaderContext } from '../../context/Header';
+import { useHeader } from '../../context/Header';
 
 const messagesButton = () => {
-  const context = useContext(HeaderContext);
+  const context = useHeader();
   let dropRef = useRef(null);
 
   const onClickButton = () => {

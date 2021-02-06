@@ -1,14 +1,14 @@
 import React, {
-  useContext, useState, useRef, useEffect, useMemo,
+  useState, useRef, useEffect, useMemo,
 } from 'react';
 import { TimelineMax, Power3 } from 'gsap';
 import PropTypes from 'prop-types';
 import ProfileDisplay from '../ProfileDisplay';
 import styles from './Search.module.sass';
-import { HeaderContext } from '../../context/Header';
+import { useHeader } from '../../context/Header';
 
 const search = (props) => {
-  const context = useContext(HeaderContext);
+  const context = useHeader();
 
   const [field, setField] = useState(''); // Store search while typing
   const [term, setTerm] = useState(null); // Save term searched

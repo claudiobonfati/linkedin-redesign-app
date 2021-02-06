@@ -1,14 +1,14 @@
 import React, {
-  useEffect, useContext, useRef, useMemo,
+  useEffect, useRef, useMemo,
 } from 'react';
 import { TimelineMax, Power3 } from 'gsap';
 import Link from 'next/link';
 import styles from './DiscoverMenu.module.sass';
 import Search from './Search';
-import { HeaderContext } from '../../context/Header';
+import { useHeader } from '../../context/Header';
 
 const discoverMenu = () => {
-  const context = useContext(HeaderContext);
+  const context = useHeader();
   let dropRef = useRef(null);
   let dropContentRef = useRef(null);
 
