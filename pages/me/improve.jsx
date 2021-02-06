@@ -52,13 +52,18 @@ function MeImprove() {
           </div>
           <div className="mb-4">
             <SimpleCard title="Summary">
-              {(user && !user.error && !user.loading)
+              {(user
+              && !user.error
+              && !user.loading)
               && (
                 <p>{user.data.summary}</p>
               )}
             </SimpleCard>
           </div>
-          {(user && !user.error && !user.loading && user.data.Experiences)
+          {(user
+          && !user.error
+          && !user.loading
+          && user.data.Experiences)
           && (
             <div className="mb-4">
               <SimpleCard title="Experience">
@@ -85,7 +90,10 @@ function MeImprove() {
               </SimpleCard>
             </div>
           )}
-          {(user && !user.error && !user.loading && user.data.Courses)
+          {(user
+          && !user.error
+          && !user.loading
+          && user.data.Courses)
           && (
             <div className="mb-4">
               <SimpleCard title="Education">
@@ -112,7 +120,10 @@ function MeImprove() {
               </SimpleCard>
             </div>
           )}
-          {(user && !user.error && !user.loading && user.data.Recommendations)
+          {(user
+          && !user.error
+          && !user.loading
+          && user.data.Recommendations)
           && (
             <div className="mb-4">
               <SimpleCard title="Recommendations">
@@ -132,7 +143,10 @@ function MeImprove() {
               </SimpleCard>
             </div>
           )}
-          {(user && !user.error && !user.loading && user.data.Follows)
+          {(user
+          && !user.error
+          && !user.loading
+          && user.data.Follows)
           && (
             <div className="mb-4">
               <SimpleCard title="Following">
@@ -152,7 +166,9 @@ function MeImprove() {
         </div>
         <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
           <SimpleCard title="Keep in touch">
-            {(user && !user.error && !user.loading)
+            {(user
+            && !user.error
+            && !user.loading)
             && (
               <div className="w-100">
                 <div className="pb-3">
