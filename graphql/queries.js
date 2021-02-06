@@ -312,3 +312,35 @@ export const GET_COMPANY = gql`
     }
   }
 `;
+
+export const GET_CHAT_USERS_LIST = gql`
+  query GetChatUsersList($userId: ID!) {
+    allChats(page: 0, perPage: 100, filter: { 
+      author_id: $userId 
+    }) {
+      id
+      preview
+      User {
+        id,
+        name,
+        username,
+        photo,
+        skype,
+        twitter,
+        email,
+        lastOnline
+      }
+    }
+  }
+`;
+
+export const GET_CHAT_CONVERSATION = gql`
+  query GetChatConversation($userId: ID!, $targetId: ID!) {
+    allChats(page: 0, perPage: 1000, filter: { 
+      author_id: $userId,
+      user_id: $targetId,
+    }) {
+      interactions
+    }
+  }
+`;

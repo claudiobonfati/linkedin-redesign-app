@@ -9,6 +9,8 @@ import {
   GET_ARTICLES,
   GET_USER_POSTS,
   GET_COMPANY,
+  GET_CHAT_USERS_LIST,
+  GET_CHAT_CONVERSATION,
 } from './queries';
 import ApolloClient from './apollo';
 
@@ -177,6 +179,51 @@ export const useCompany = (nameslug) => {
       loading,
       error,
       data: data.allCompanies[0],
+    };
+  }
+
+  return {
+    loading,
+    error,
+    data,
+  };
+};
+
+export const useChatUsersList = (userId) => {
+  const { loading, error, data } = useQuery(GET_CHAT_USERS_LIST, {
+    variables: {
+      userId,
+    },
+  });
+
+  if (!loading && data) {
+    return {
+      loading,
+      error,
+      data: data.allChats,
+    };
+  }
+
+  return {
+    loading,
+    error,
+    data,
+  };
+};
+
+export const useChatConversation = (userId, targetId) => {
+  const { loading, error, data } = useQuery(GET_CHAT_CONVERSATION, {
+    variables: {
+      userId,
+      targetId,
+    },
+  });
+
+  if (!loading && data) {
+    return {
+      loading,
+      error,
+      data: data.allChats,
     };
   }
 
