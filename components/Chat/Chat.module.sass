@@ -1,0 +1,180 @@
+@import ../styles/_variables
+
+.wrapper
+  --width-bar-left: 300px
+  --width-bar-right: 300px
+  width: 100%
+  height: 100%
+  display: flex
+  border: 1px solid $color-border
+  background-color: white
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+  -webkit-flex-direction: row
+  -ms-flex-direction: row
+  flex-direction: row
+  -webkit-flex-wrap: nowrap
+  -ms-flex-wrap: nowrap
+  flex-wrap: nowrap
+  -webkit-justify-content: flex-start
+  -ms-flex-pack: start
+  justify-content: flex-start
+  -webkit-align-content: stretch
+  -ms-flex-line-pack: stretch
+  align-content: stretch
+  align-items: stretch
+  position: relative
+  &::before 
+    display: block
+    position: absolute
+    width: calc(100% - var(--width-bar-left))
+    height: 100%
+    top: 0
+    left: var(--width-bar-left)
+    content: ' '
+    z-index: 0
+    background-color: #f6fcff
+    background-image: url('/images/chat.svg')
+    background-repeat: no-repeat
+    background-position: center bottom
+    background-size: cover 
+    text-align: center
+    opacity: 0
+    transition: opacity .2s ease-out
+  &.fullScreen
+    position: absolute
+    top: 0
+    left: 0
+    z-index: 20
+  &.noUser
+    &::before 
+      opacity: 1
+    .center,
+    .sideBarRight
+      opacity: 0
+    .sideBarRight
+      transform: translateX(50px)
+
+.sideBarLeft,
+.center,
+.sideBarRight
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+  -webkit-flex-direction: row
+  -ms-flex-direction: row
+  flex-direction: row
+  -webkit-flex-wrap: nowrap
+  -ms-flex-wrap: nowrap
+  flex-wrap: nowrap
+  -webkit-justify-content: flex-start
+  -ms-flex-pack: start
+  justify-content: flex-start
+  -webkit-align-content: stretch
+  -ms-flex-line-pack: stretch
+  align-content: stretch
+  -webkit-align-items: stretch
+  -ms-flex-align: stretch
+  align-items: stretch
+  z-index: 1
+
+.sideBarLeft
+  -webkit-flex: 0 0 auto
+  -ms-flex: 0 0 auto
+  flex: 0 0 auto
+  border-right: 1px solid $color-border
+  background-color: white
+  width: var(--width-bar-left)
+
+.center
+  -webkit-flex: 1 1 auto
+  -ms-flex: 1 1 auto
+  flex: 1 1 auto
+  transition: opacity .2s ease-out
+
+.sideBarRight
+  -webkit-flex: 0 0 auto
+  -ms-flex: 0 0 auto
+  flex: 0 0 auto
+  border-left: 1px solid $color-border
+  width: var(--width-bar-right)
+  transition: transform .4s ease-in-out, opacity .2s ease-out
+  transform: translateX(0)
+
+@media (max-width: map-get($breakpoints, 'lg'))
+  .wrapper
+    --width-bar-left: 250px
+    --width-bar-right: 220px
+    .sideBarRight
+      margin-right: -220px
+      transition: margin-right .4s ease-in-out
+    &.PageDescription
+      .sideBarRight
+        margin-right: 0px
+    &.fullScreen
+      .sideBarRight
+        margin-right: 0px
+
+
+@media (max-width: map-get($breakpoints, 'md'))
+  .wrapper
+    --width-bar-right: 250px
+    .sideBarRight
+      margin-right: -250px !important
+    .sideBarLeft
+      margin-left: 0
+      transition: margin-left .4s ease-in-out
+    &.PageDescription
+      .sideBarRight
+        margin-right: 0px !important
+      .sideBarLeft
+        margin-left: -250px
+
+@media (max-width: map-get($breakpoints, 'sm'))
+  .wrapper
+    &::before
+      display: none
+    .sideBarLeft,
+    .center,
+    .sideBarRight
+      transition: transform .4s ease-in-out, opacity .2s ease-out
+    .sideBarLeft
+      width: 100%
+      margin-left: -100% !important
+    .sideBarRight
+      display: -webkit-flex
+      display: -moz-box
+      display: flex
+      width: 100%
+      margin-right: -100% !important
+    &.PageContacts
+      .sideBarLeft,
+      .center
+        transform: translateX(100%) !important
+      .sideBarLeft
+        margin-left: -100% !important
+      .sideBarRight
+        margin-right: -100% !important
+    &.PageChat
+      .sideBarLeft,
+      .center
+        transform: translateX(0%) !important
+      .sideBarLeft
+        margin-left: -100% !important
+      .sideBarRight
+        margin-right: -100% !important
+    &.PageDescription
+      .sideBarRight,
+      .center
+        transform: translateX(-100%) !important
+      .sideBarLeft
+        margin-left: -100% !important
+      .sideBarRight
+        margin-right: -100% !important
+  .center
+    .chatWrapper
+      .mobileHeader
+        display: -ms-flexbox
+        display: -webkit-flex
+        display: flex
