@@ -45,7 +45,12 @@ const profileDisplay = (props) => (
           condition={props.imageSide === 'right'}
           wrapper={(children) => <i>{children}</i>}
         >
-          <div className={styles.infoSubtitle}>
+          <div
+            className={`
+              ${styles.infoSubtitle}
+              ${props.subtitleNowrap ? styles.nowrap : ''}
+            `}
+          >
             {props.subtitle}
           </div>
         </ConditionalWrapper>
@@ -77,6 +82,7 @@ profileDisplay.propTypes = {
   imagePadding: PropTypes.string,
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
+  subtitleNowrap: PropTypes.bool,
   blueLine: PropTypes.string,
   sideContent: PropTypes.string,
   sideContentOnTop: PropTypes.bool,
@@ -93,6 +99,7 @@ profileDisplay.defaultProps = {
   imageOnTop: false,
   imagePadding: '3',
   subtitle: null,
+  subtitleNowrap: false,
   blueLine: null,
   rightButtonText: null,
   rightButtonLink: null,

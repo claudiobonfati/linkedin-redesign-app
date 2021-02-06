@@ -20,12 +20,17 @@
     order: 0
     flex: 1 1 auto
     align-self: auto
+    width: 10px
     .infoTitle
       color: $color-gray-dark
       font-weight: 500
     .infoSubtitle
       color: $color-gray-medium
       font-weight: 300
+      &.nowrap
+        text-overflow: ellipsis
+        overflow: hidden 
+        white-space: nowrap
     .infoBlueLine
       color: $color-blue
   .rightWrapper
