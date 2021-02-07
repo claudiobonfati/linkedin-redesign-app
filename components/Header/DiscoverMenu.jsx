@@ -70,10 +70,10 @@ const discoverMenu = () => {
             <div className="col-lg-2 col-md-3 d-none d-md-block pl-0 align-self-center">
               <nav className={`border-right-gray ${styles.menuNav} ${styles.spaced}`}>
                 <ul>
-                  <li><Link href="/">Home</Link></li>
-                  <li><a href="https://google.com">Messages</a></li>
-                  <li><Link href="/articles">Articles</Link></li>
-                  <li><Link href="/companies">Companies</Link></li>
+                  <li><Link href="/" scroll={false}>Home</Link></li>
+                  <li><Link href="/messages/all" scroll={false}>Messages</Link></li>
+                  <li><Link href="/articles" scroll={false}>Articles</Link></li>
+                  <li><Link href="/companies" scroll={false}>Companies</Link></li>
                   <li><span className={styles.disabled}>Jobs</span></li>
                   <li><span className={styles.disabled}>Premium</span></li>
                 </ul>

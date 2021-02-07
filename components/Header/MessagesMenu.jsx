@@ -70,7 +70,7 @@ const messagesButton = () => {
             </button>
           </div>
         </div>
-        <div className="content px-4">
+        <div className="px-4">
           <div className={`py-4 ${styles.dropContentItem}`}>
             <ProfileDisplay
               image="/images/me.jpg"

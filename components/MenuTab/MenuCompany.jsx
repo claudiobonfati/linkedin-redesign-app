@@ -1,19 +1,26 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import styles from './Tab.module.sass';
+import ActiveLink from '../../utils/ActiveLink';
 
-const menuCompany = () => (
-  <ul className={styles.menu}>
-    <li>
-      <a href="https://google.com" className={styles.active} scroll={false}>
-        Home
-      </a>
-    </li>
-    <li>
-      <a href="https://google.com">
-        Carrers
-      </a>
-    </li>
-  </ul>
-);
+const menuCompany = () => {
+  const router = useRouter();
+  const { nameslug } = router.query;
+
+  return (
+    <ul className={styles.menu}>
+      <li>
+        <ActiveLink href={`/company/${nameslug}/home`} activeClassName={styles.active} scroll={false}>
+          <a>Home</a>
+        </ActiveLink>
+      </li>
+      <li>
+        <a href="https://google.com">
+          Carrers
+        </a>
+      </li>
+    </ul>
+  );
+};
 
 export default menuCompany;
