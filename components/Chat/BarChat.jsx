@@ -1,16 +1,51 @@
-import React, { Fragment, useEffect, useRef } from 'react';
-import { Image } from 'react-image-and-background-image-fade';
+import React, { Fragment, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
+import { motion } from 'framer-motion';
 import ProfileDisplay from '../ProfileDisplay';
 import styles from './BarChat.module.sass';
 import { useChat } from '../../context/Chat';
-import { useChatConversation } from '../../graphql/hooks';
 
 const barChat = () => {
   const context = useChat();
-  console.log('context', context);
-  const conversation = useChatConversation(1, context.data.contact.User.id);
   const currentUser = JSON.parse(localStorage.getItem('current-user-preview'));
+  const [field, setField] = useState('');
+
+  const sendMessage = () => {
+    const cleanedField = field.replace(/(\r\n|\n|\r)/gm, '');
+    if (cleanedField === '') {
+      return;
+    }
+
+    const message = {
+      id: Math.random().toString(36).substr(2, 9), // Random uniq key
+      from: 'me',
+      content: field,
+    };
+
+    context.dispatch({
+      type: 'SEND_MESSAGE',
+      payload: message,
+    });
+
+    setField('');
+  };
+
+  const handleChangeInput = ({ target }) => {
+    const cleanedField = target.value.replace(/(\r\n|\n|\r)/gm, '');
+
+    if (cleanedField === '') {
+      setField('');
+    } else {
+      setField(target.value);
+    }
+  };
+
+  const handleKeyDownInput = (e) => {
+    if ((e.ctrlKey || e.shiftKey || e.code === 'MetaLeft' || e.code === 'MetaRight')
+        && [10, 13].includes(e.keyCode)) {
+      sendMessage();
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -51,52 +86,50 @@ const barChat = () => {
               {context.data.contact.User.lastOnline}
             </span>
           </div>
-          {(conversation
-          && conversation.data
-          && !conversation.error
-          && !conversation.loading
-          && conversation.data[0].interactions
-          && conversation.data[0].interactions.length > 0)
+          {(context.data.dialogue
+          && context.data.dialogue.length > 0)
           && (
             <>
-              {conversation.data[0].interactions.map((item) => (
-                <>
-                  <div
-                    className={`
-                      ${styles.interaction} 
-                      ${item.from === 'target' ? styles.fromOther : styles.fromMe}
-                    `}
-                  >
-                    <div className={styles.userPhoto}>
-                      {(item.from === 'target')
-                      && (
-                        <Image
-                          src={context.data.contact.User.photo}
-                          alt={context.data.contact.User.name}
-                        />
-                      )}
-                      {(item.from === 'me')
-                      && (
-                        <Image
-                          src={currentUser.data.photo}
-                          alt={currentUser.data.name}
-                        />
-                      )}
-                    </div>
-                    <div className={styles.baloom}>
-                      <div className={styles.baloomInner}>
-                        <span className={styles.tailOut}>
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 13" width="8" height="13">
-                            <path fill="currentColor" d="M5.188 0H0v11.193l6.467-8.625C7.526 1.156 6.958 0 5.188 0z" />
-                          </svg>
-                        </span>
-                        <p>
-                          {item.content}
-                        </p>
-                      </div>
+              {context.data.dialogue.map((item) => (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0 }}
+                  className={`
+                    ${styles.interaction} 
+                    ${item.from === 'target' ? styles.fromOther : styles.fromMe}
+                  `}
+                  key={item.id}
+                >
+                  <div className={styles.userPhoto}>
+                    {(item.from === 'target')
+                    && (
+                      <img
+                        src={context.data.contact.User.photo}
+                        alt={context.data.contact.User.name}
+                      />
+                    )}
+                    {(item.from === 'me')
+                    && (
+                      <img
+                        src={currentUser.data.photo}
+                        alt={currentUser.data.name}
+                      />
+                    )}
+                  </div>
+                  <div className={styles.baloom}>
+                    <div className={styles.baloomInner}>
+                      <span className={styles.tailOut}>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 13" width="8" height="13">
+                          <path fill="currentColor" d="M5.188 0H0v11.193l6.467-8.625C7.526 1.156 6.958 0 5.188 0z" />
+                        </svg>
+                      </span>
+                      <p>
+                        {item.content}
+                      </p>
                     </div>
                   </div>
-                </>
+                </motion.div>
               ))}
             </>
           )}
@@ -106,11 +139,18 @@ const barChat = () => {
         <div className={styles.actionsWrapper}>
           <TextareaAutosize
             className={styles.messageTextarea}
+            onChange={handleChangeInput}
+            onKeyDown={handleKeyDownInput}
             minRows={1}
-            maxRows={15}
+            maxRows={5}
             placeholder="Write a message"
+            value={field}
           />
-          <button className={styles.sendButton} type="submit">
+          <button
+            className={styles.sendButton}
+            type="submit"
+            onClick={sendMessage}
+          >
             <span className="lnr lnr-location" />
           </button>
         </div>

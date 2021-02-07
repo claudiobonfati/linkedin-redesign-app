@@ -32,7 +32,7 @@
     height: 100%
     top: 0
     left: var(--width-bar-left)
-    content: ' '
+    content: ''
     z-index: 0
     background-color: #f6fcff
     background-image: url('/images/chat.svg')
@@ -133,6 +133,8 @@
 
 @media (max-width: map-get($breakpoints, 'sm'))
   .wrapper
+    border-left: 0
+    border-right: 0
     &::before
       display: none
     .sideBarLeft,

@@ -80,10 +80,24 @@
       text-align: left
       padding: calc(var(--spacer-items) - 5px) var(--spacer-items)
       cursor: pointer
+      transition: background-color .2s ease-out
+      position: relative
+      &::before 
+        content: ''
+        position: absolute
+        width: 3px
+        height: 100%
+        left: 0
+        top: 0
+        background-color: $color-blue
+        transition: opacity .2s ease-out
+        opacity: 0
       *
         cursor: pointer
       &.userActive
         background-color: rgba($color-gray-light, .5)
+        &::before 
+          opacity: 1
 
 @media (max-width: map-get($breakpoints, 'md'))
   .wrapper

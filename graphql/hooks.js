@@ -223,7 +223,7 @@ export const useChatConversation = (userId, targetId) => {
     return {
       loading,
       error,
-      data: data.allChats,
+      data: data.allChats[0],
     };
   }
 

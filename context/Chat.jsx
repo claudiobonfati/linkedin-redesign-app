@@ -6,6 +6,7 @@ const initialValue = {
   page: 'Contacts',
   contact: null,
   fullScreen: false,
+  dialogue: [],
 };
 
 const reducer = (state, action) => {
@@ -30,6 +31,16 @@ const reducer = (state, action) => {
         ...state,
         contact: action.payload,
         page: 'Chat',
+      };
+    case 'SET_DIALOGUE':
+      return {
+        ...state,
+        dialogue: action.payload,
+      };
+    case 'SEND_MESSAGE':
+      return {
+        ...state,
+        dialogue: [...state.dialogue, action.payload],
       };
     default:
       throw new Error(`Unknown action: ${action.type}`);
