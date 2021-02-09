@@ -1,7 +1,6 @@
 import React, {
-  useReducer, useContext, createContext, useEffect,
+  useReducer, useContext, createContext,
 } from 'react';
-import Router from 'next/router';
 
 export const HeaderContext = createContext();
 
@@ -18,16 +17,6 @@ const reducer = (state, action) => {
 
 export const HeaderProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, { tab: null });
-
-  const closeTabs = () => {
-    dispatch({ type: 'CLOSE_TAB' });
-  };
-
-  Router.events.on('routeChangeStart', closeTabs);
-
-  useEffect(() => () => {
-    Router.events.off('routeChangeStart', closeTabs);
-  }, []);
 
   return (
     <HeaderContext.Provider value={{ data: state, dispatch }}>

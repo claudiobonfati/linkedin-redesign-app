@@ -8,6 +8,10 @@ const messagesButton = () => {
   const context = useHeader();
   let dropRef = useRef(null);
 
+  useEffect(() => {
+    console.log('header - messages monted');
+  }, []);
+
   const onClickButton = () => {
     if (context.data.tab === 'messages') {
       context.dispatch({ type: 'CLOSE_TAB' });

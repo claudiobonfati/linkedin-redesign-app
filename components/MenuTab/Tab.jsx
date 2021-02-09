@@ -67,9 +67,9 @@ class Tab extends React.Component {
   componentDidMount() {
     TweenMax.from(this.tabRef, 0.5, {
       opacity: 0,
-      transform: 'translateY(-30px)',
+      transform: 'translateY(-20px)',
       ease: Power3.easeOut,
-      delay: 0.3,
+      delay: 0.6,
     });
   }
 

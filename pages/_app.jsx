@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import NextApp from 'next/app';
 import Head from 'next/head';
-import '../styles/styles.sass';
 import { ApolloProvider } from '@apollo/client';
 import { AnimatePresence } from 'framer-motion';
 import ApolloClient from '../graphql/apollo';
 import Layout from '../components/Layout';
+import '../styles/styles.sass';
 
 class App extends NextApp {
   render() {
     const { Component, pageProps, router } = this.props;
 
     return (
-      <Layout>
+      <>
         <Head>
           <link rel="apple-touch-icon" sizes="57x57" href="/images/favicon/apple-icon-57x57.png" />
           <link rel="apple-touch-icon" sizes="60x60" href="/images/favicon/apple-icon-60x60.png" />
@@ -32,12 +32,14 @@ class App extends NextApp {
           <meta name="theme-color" content="#007FB2" />
           <title>Linkedin Redesign</title>
         </Head>
-        <ApolloProvider client={ApolloClient}>
-          <AnimatePresence exitBeforeEnter>
-            <Component {...pageProps} key={router.route} />
-          </AnimatePresence>
-        </ApolloProvider>
-      </Layout>
+        <Layout>
+          <ApolloProvider client={ApolloClient}>
+            <AnimatePresence exitBeforeEnter>
+              <Component {...pageProps} key={router.route} />
+            </AnimatePresence>
+          </ApolloProvider>
+        </Layout>
+      </>
     );
   }
 }
