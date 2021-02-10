@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ProfileDisplay from '../ProfileDisplay';
 import styles from './BarContacts.module.sass';
@@ -8,6 +8,7 @@ import ApolloClient from '../../graphql/apollo';
 
 const barContacts = (props) => {
   const context = useChat();
+  const [search, setSearch] = useState('');
 
   const selectContact = async (contact) => {
     if (contact.id === context?.data?.contact?.id) {
@@ -33,48 +34,63 @@ const barContacts = (props) => {
     });
   };
 
-  // Contacts list
-  let jsxContactList = null;
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+  };
 
-  if (props.contacts
-      && Array.isArray(props.contacts)
-      && props.contacts.length > 0) {
-    jsxContactList = (
-      <>
-        {props.contacts.map((contact) => (
-          <button
-            type="button"
-            className={`
-              ${styles.userButton}
-              ${contact.id === context.data?.contact?.id ? styles.userActive : ''}
-            `}
-            key={contact.id}
-            onClick={() => { selectContact(contact); }}
-          >
-            <ProfileDisplay
-              image={contact.User.photo}
-              imageSize={50}
-              title={contact.User.name}
-              subtitle={contact.preview}
-              subtitleNowrap
-            />
-          </button>
-        ))}
-      </>
-    );
-  }
+  // Return the current contact list to be displayed
+  const getContactList = () => {
+    if (props.contacts
+        && Array.isArray(props.contacts)
+        && props.contacts.length > 0) {
+      if (search === '' || search.length < 3) {
+        return props.contacts;
+      }
+
+      // Filtering contacts based on search imput
+      return props.contacts.filter((contact) => contact.User.name.includes(search));
+    }
+
+    return [];
+  };
+
+  // JSX for contacts list
+  const jsxContactList = (
+    <>
+      {getContactList().map((contact) => (
+        <button
+          type="button"
+          className={`
+            ${styles.userButton}
+            ${contact.id === context.data?.contact?.id ? styles.userActive : ''}
+          `}
+          key={contact.id}
+          onClick={() => { selectContact(contact); }}
+        >
+          <ProfileDisplay
+            image={contact.User.photo}
+            imageSize={50}
+            title={contact.User.name}
+            subtitle={contact.preview}
+            subtitleNowrap
+          />
+        </button>
+      ))}
+    </>
+  );
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.searchBox}>
         <input
           className={styles.searchInput}
-          placeholder="Search message"
+          onChange={handleSearchChange}
+          placeholder="Search contact"
           role="combobox"
           aria-controls=""
           aria-autocomplete="list"
           aria-expanded="false"
-          aria-label="Search message"
+          aria-label="Search contact"
           type="text"
         />
         <span className={`lnr lnr-magnifier ${styles.searchIcon}`} />

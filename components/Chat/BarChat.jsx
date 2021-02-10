@@ -17,7 +17,7 @@ const barChat = () => {
     }
 
     const message = {
-      id: Math.random().toString(36).substr(2, 9), // Random uniq key
+      id: Math.random().toString(36).substr(2, 9), // Random unique key
       from: 'me',
       content: field,
     };
