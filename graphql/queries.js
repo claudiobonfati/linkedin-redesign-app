@@ -344,3 +344,24 @@ export const GET_CHAT_CONVERSATION = gql`
     }
   }
 `;
+
+export const SEARCH_USERS_COMPANIES = gql`
+  query QuickSearch($search: String!, $limit: Int!) {
+    allUsers(page: 0, perPage: $limit, filter: {
+      q: $search,
+    }) {
+      name
+      username
+      photo
+      headline
+    }
+    allCompanies(page: 0, perPage: $limit, filter: {
+      q: $search,
+    }) {
+      name
+      nameslug
+      logo
+      headquartes
+    }
+  }
+`;
