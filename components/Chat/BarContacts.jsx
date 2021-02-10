@@ -48,7 +48,8 @@ const barContacts = (props) => {
       }
 
       // Filtering contacts based on search imput
-      return props.contacts.filter((contact) => contact.User.name.includes(search));
+      let term = search.toLowerCase();
+      return props.contacts.filter((contact) => contact.User.name.toLowerCase().includes(term));
     }
 
     return [];

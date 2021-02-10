@@ -6,12 +6,16 @@ import PropTypes from 'prop-types';
 import ProfileDisplay from '../ProfileDisplay';
 import styles from './Search.module.sass';
 import { useHeader } from '../../context/Header';
+import { SEARCH_USERS_COMPANIES } from '../../graphql/queries';
+import ApolloClient from '../../graphql/apollo';
 
 const search = (props) => {
   const context = useHeader();
+  const resultsLimit = 3;
 
   const [field, setField] = useState(''); // Store search while typing
   const [term, setTerm] = useState(null); // Save term searched
+  const [result, setResult] = useState(null); // Store quick search result
 
   let termBoxRef = useRef(null);
   let inputRef = useRef(null);
@@ -28,7 +32,17 @@ const search = (props) => {
   /**
    * Function to fetch bests results while user is typing
    */
-  const quickSearch = () => {
+  const quickSearch = async () => {
+    let response = await ApolloClient.query({
+      query: SEARCH_USERS_COMPANIES,
+      variables: {
+        search: field,
+        limit: resultsLimit,
+      },
+    });
+
+    setResult(response.data);
+
     context.dispatch({
       type: 'SET_TAB',
       payload: 'search',
@@ -49,7 +63,8 @@ const search = (props) => {
       .from(dropRef, 0.5, {
         css: {
           display: 'none',
-          height: 0,
+          opacity: 0,
+          transform: 'scaleY(0)',
         },
       })
       .from(dropContentRef, 0.5, {
@@ -82,7 +97,7 @@ const search = (props) => {
 
   const handleChangeInput = ({ target }) => {
     if (props.quickSearch) {
-      if (target.value.length > 4) {
+      if (target.value.length > 3) {
         quickSearch();
       } else {
         context.dispatch({ type: 'CLOSE_TAB' });
@@ -150,113 +165,60 @@ const search = (props) => {
         <span className={`lnr lnr-magnifier ${styles.searchIcon}`} />
       </div>
       <div className={styles.wrapperDrop} ref={(ref) => { dropRef = ref; }}>
-        <div className="container py-2 py-sm-4">
+        <div className="container py-2 py-sm-5">
           <div className="row justify-content-center" ref={(ref) => { dropContentRef = ref; }}>
-            <div className="col-md-12 mb-5">
-              <div className="row align-items-center">
-                <div className="col-md-3 text-left text-md-right pr-5 py-3 ">
-                  <h6 className={styles.dropSectionTitle}>
-                    People
-                  </h6>
-                </div>
-                <div className="col-md-6 border-left-gray pl-4">
-                  <div className="pb-4">
-                    <ProfileDisplay
-                      image="/images/me.jpg"
-                      imageSize={50}
-                      title="Jenson Kent"
-                      subtitle="Trainee - Corporate"
-                    />
+            {(result?.allUsers
+            && result.allUsers.length > 0)
+            && (
+              <div className={`col-md-12 ${result.allCompanies.length > 0 ? 'mb-5' : ''}`}>
+                <div className="row align-items-center">
+                  <div className="col-md-3 text-left text-md-right pr-5 py-3 ">
+                    <h6 className={`${styles.dropSectionTitle} mb-0`}>
+                      People
+                    </h6>
                   </div>
-                  <div className="pb-4">
-                    <ProfileDisplay
-                      image="/images/me.jpg"
-                      imageSize={50}
-                      title="Jenson Kent"
-                      subtitle="Trainee - Corporate"
-                    />
-                  </div>
-                  <div>
-                    <ProfileDisplay
-                      image="/images/me.jpg"
-                      imageSize={50}
-                      title="Jenson Kent"
-                      subtitle="Trainee - Corporate"
-                    />
+                  <div className="col-md-6 border-left-gray pl-4">
+                    {result.allUsers.map((user, index) => (
+                      <div className={`${index !== result.allUsers.length - 1 ? 'pb-4' : ''}`}>
+                        <ProfileDisplay
+                          image={user.photo}
+                          imageSize={50}
+                          title={user.name}
+                          subtitle={user.headline}
+                          link={`/profile/${user.username}/details`}
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-md-12 mb-5">
-              <div className="row align-items-center">
-                <div className="col-md-3 text-right pr-5">
-                  <h6 className={styles.dropSectionTitle}>
-                    Companies
-                  </h6>
-                </div>
-                <div className="col-md-6 border-left-gray pl-4">
-                  <div className="pb-4">
-                    <ProfileDisplay
-                      image="/images/me.jpg"
-                      imageSize={50}
-                      title="Jenson Kent"
-                      subtitle="Trainee - Corporate"
-                    />
+            )}
+            {(result?.allCompanies
+            && result.allCompanies.length > 0)
+            && (
+              <div className="col-md-12">
+                <div className="row align-items-center">
+                  <div className="col-md-3 text-right pr-5">
+                    <h6 className={`${styles.dropSectionTitle} mb-0`}>
+                      Companies
+                    </h6>
                   </div>
-                  <div className="pb-4">
-                    <ProfileDisplay
-                      image="/images/me.jpg"
-                      imageSize={50}
-                      title="Jenson Kent"
-                      subtitle="Trainee - Corporate"
-                    />
-                  </div>
-                  <div>
-                    <ProfileDisplay
-                      image="/images/me.jpg"
-                      imageSize={50}
-                      title="Jenson Kent"
-                      subtitle="Trainee - Corporate"
-                    />
+                  <div className="col-md-6 border-left-gray pl-4">
+                    {result.allCompanies.map((company, index) => (
+                      <div className={`${index !== result.allCompanies.length - 1 ? 'pb-4' : ''}`}>
+                        <ProfileDisplay
+                          image={company.logo}
+                          imageSize={50}
+                          title={company.name}
+                          subtitle={company.headquartes}
+                          link={`/company/${company.nameslug}/home`}
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-md-12">
-              <div className="row align-items-center">
-                <div className="col-md-3 text-right pr-5">
-                  <h6 className={styles.dropSectionTitle}>
-                    Clients
-                  </h6>
-                </div>
-                <div className="col-md-6 border-left-gray pl-4">
-                  <div className="pb-4">
-                    <ProfileDisplay
-                      image="/images/me.jpg"
-                      imageSize={50}
-                      title="Jenson Kent"
-                      subtitle="Trainee - Corporate"
-                    />
-                  </div>
-                  <div className="pb-4">
-                    <ProfileDisplay
-                      image="/images/me.jpg"
-                      imageSize={50}
-                      title="Jenson Kent"
-                      subtitle="Trainee - Corporate"
-                    />
-                  </div>
-                  <div>
-                    <ProfileDisplay
-                      image="/images/me.jpg"
-                      imageSize={50}
-                      title="Jenson Kent"
-                      subtitle="Trainee - Corporate"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
