@@ -97,34 +97,36 @@ class Home extends React.Component {
 
     return (
       <motion.div
-        className="container"
+        className="w-100"
         variants={defaultVariants}
         initial="initial"
         animate="animate"
         exit="exit"
       >
-        <main className="row">
-          <div className="col-lg-3 col-md-3 col-sm-6 pt-4 order-md-1 order-sm-1 d-none d-sm-block">
-            <div className="sticky-aside-content">
-              <Sticky topOffset={-20} scrollElement=".stickyArea">
-                <CurrentProfileOverview simple />
-              </Sticky>
+        <div className="container">
+          <main className="row">
+            <div className="col-lg-3 col-md-3 col-sm-6 pt-4 order-md-1 order-sm-1 d-none d-sm-block">
+              <div className="sticky-aside-content">
+                <Sticky topOffset={-20} scrollElement=".stickyArea">
+                  <CurrentProfileOverview simple />
+                </Sticky>
+              </div>
             </div>
-          </div>
-          <div className="col-lg-6 col-md-9 py-4 order-md-2 order-sm-3">
-            <div className="mb-4">
-              <CreatePost />
+            <div className="col-lg-6 col-md-9 py-4 order-md-2 order-sm-3">
+              <div className="mb-4">
+                <CreatePost />
+              </div>
+              {jsxPostsList}
             </div>
-            {jsxPostsList}
-          </div>
-          <div className="col-lg-3 col-md-4 col-sm-6 pt-4 order-md-3 order-sm-2 d-none d-sm-block">
-            <div className="sticky-aside-content">
-              <Sticky topOffset={-20} scrollElement=".stickyArea">
-                <CurrentProfileOverview simple />
-              </Sticky>
+            <div className="col-lg-3 col-md-4 col-sm-6 pt-4 order-md-3 order-sm-2 d-none d-sm-block">
+              <div className="sticky-aside-content">
+                <Sticky topOffset={-20} scrollElement=".stickyArea">
+                  <CurrentProfileOverview simple />
+                </Sticky>
+              </div>
             </div>
-          </div>
-        </main>
+          </main>
+        </div>
       </motion.div>
     );
   }

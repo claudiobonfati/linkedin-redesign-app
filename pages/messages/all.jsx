@@ -16,21 +16,23 @@ function messagesAll() {
 
   return (
     <motion.div
-      className="container full-screen"
+      className="w-100"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <main className="row h-100">
-        <div className="col-12 py-0 py-sm-4 px-0 py-sm-3 h-100 position-static">
-          {contactsList
-          && (
-            <ChatProvider>
-              <Chat contacts={contactsList} />
-            </ChatProvider>
-          )}
-        </div>
-      </main>
+      <div className="container full-screen">
+        <main className="row h-100">
+          <div className="col-12 py-0 py-sm-4 px-0 py-sm-3 h-100 position-static">
+            {contactsList
+            && (
+              <ChatProvider>
+                <Chat contacts={contactsList} />
+              </ChatProvider>
+            )}
+          </div>
+        </main>
+      </div>
     </motion.div>
   );
 }

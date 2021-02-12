@@ -47,29 +47,31 @@ function MeContacts() {
 
   return (
     <motion.div
-      className="container"
+      className="w-100"
       variants={defaultVariants}
       initial="initial"
       animate="animate"
       exit="exit"
     >
-      <main className="row">
-        <div className="col-lg-3 col-md-4 pt-4 d-none d-md-block">
-          <div className="sticky-aside-content">
-            <Sticky topOffset={-20} scrollElement=".stickyArea">
-              <CurrentProfileOverview />
-            </Sticky>
+      <div className="container">
+        <main className="row">
+          <div className="col-lg-3 col-md-4 pt-4 d-none d-md-block">
+            <div className="sticky-aside-content">
+              <Sticky topOffset={-20} scrollElement=".stickyArea">
+                <CurrentProfileOverview />
+              </Sticky>
+            </div>
           </div>
-        </div>
-        <div className="col-lg-9 col-md-8 py-4">
-          <SimpleCard
-            title="People"
-            rightText="685 connections"
-          >
-            {jsxContactsList}
-          </SimpleCard>
-        </div>
-      </main>
+          <div className="col-lg-9 col-md-8 py-4">
+            <SimpleCard
+              title="People"
+              rightText="685 connections"
+            >
+              {jsxContactsList}
+            </SimpleCard>
+          </div>
+        </main>
+      </div>
     </motion.div>
   );
 }

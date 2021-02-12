@@ -107,75 +107,77 @@ class ProfilePosts extends React.Component {
 
     return (
       <motion.div
-        className="container"
+        className="w-100"
         variants={defaultVariants}
         initial="initial"
         animate="animate"
         exit="exit"
       >
-        <main className="row">
-          <div className="col-lg-3 col-md-4 d-none d-md-block">
-            <div className="sticky-aside-content">
-              {(this.state.user
-              && !this.state.user.error
-              && !this.state.user.loading)
-              && (
-                <Sticky topOffset={-20} scrollElement=".stickyArea">
-                  <ProfileOverview
-                    photo={this.state.user.data.photo}
-                    name={this.state.user.data.name}
-                    position={this.state.user.data.headline}
-                    connections={this.state.user.data.connections}
-                    email={this.state.user.data.email}
-                    twitter={this.state.user.data.twitter}
-                    skype={this.state.user.data.skype}
-                  />
-                </Sticky>
-              )}
-            </div>
-          </div>
-          <div className="col-lg-6 col-md-8 py-4">
-            {jsxPostsList}
-          </div>
-          <div className="col-lg-3 col-md-4 pt-4 d-none d-md-block">
-            <SimpleCard title="Keep in touch">
-              <div className="w-100">
-                <div className="pb-3">
-                  <ProfileDisplay
-                    image="/images/me.jpg"
-                    imageSize={50}
-                    title="Jenson Kent"
-                    subtitle="CEO and founder"
-                  />
-                </div>
-                <div className="py-3">
-                  <ProfileDisplay
-                    image="/images/me.jpg"
-                    imageSize={50}
-                    title="Emily Kilimanjaro"
-                    subtitle="UI designer"
-                  />
-                </div>
-                <div className="py-3">
-                  <ProfileDisplay
-                    image="/images/me.jpg"
-                    imageSize={50}
-                    title="James Johns"
-                    subtitle="Project manager"
-                  />
-                </div>
-                <div className="pt-3">
-                  <ProfileDisplay
-                    image="/images/me.jpg"
-                    imageSize={50}
-                    title="CTO"
-                    subtitle="is now a connection"
-                  />
-                </div>
+        <div className="container">
+          <main className="row">
+            <div className="col-lg-3 col-md-4 d-none d-md-block">
+              <div className="sticky-aside-content">
+                {(this.state.user
+                && !this.state.user.error
+                && !this.state.user.loading)
+                && (
+                  <Sticky topOffset={-20} scrollElement=".stickyArea">
+                    <ProfileOverview
+                      photo={this.state.user.data.photo}
+                      name={this.state.user.data.name}
+                      position={this.state.user.data.headline}
+                      connections={this.state.user.data.connections}
+                      email={this.state.user.data.email}
+                      twitter={this.state.user.data.twitter}
+                      skype={this.state.user.data.skype}
+                    />
+                  </Sticky>
+                )}
               </div>
-            </SimpleCard>
-          </div>
-        </main>
+            </div>
+            <div className="col-lg-6 col-md-8 py-4">
+              {jsxPostsList}
+            </div>
+            <div className="col-lg-3 col-md-4 pt-4 d-none d-md-block">
+              <SimpleCard title="Keep in touch">
+                <div className="w-100">
+                  <div className="pb-3">
+                    <ProfileDisplay
+                      image="/images/me.jpg"
+                      imageSize={50}
+                      title="Jenson Kent"
+                      subtitle="CEO and founder"
+                    />
+                  </div>
+                  <div className="py-3">
+                    <ProfileDisplay
+                      image="/images/me.jpg"
+                      imageSize={50}
+                      title="Emily Kilimanjaro"
+                      subtitle="UI designer"
+                    />
+                  </div>
+                  <div className="py-3">
+                    <ProfileDisplay
+                      image="/images/me.jpg"
+                      imageSize={50}
+                      title="James Johns"
+                      subtitle="Project manager"
+                    />
+                  </div>
+                  <div className="pt-3">
+                    <ProfileDisplay
+                      image="/images/me.jpg"
+                      imageSize={50}
+                      title="CTO"
+                      subtitle="is now a connection"
+                    />
+                  </div>
+                </div>
+              </SimpleCard>
+            </div>
+          </main>
+        </div>
       </motion.div>
     );
   }

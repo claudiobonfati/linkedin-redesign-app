@@ -4,11 +4,11 @@ const duration = 0.3;
 const defaultVariants = {
   initial: {
     opacity: 0,
-    x: +80,
+    marginLeft: +80,
   },
   animate: {
     opacity: 1,
-    x: 0,
+    marginLeft: 0,
     transition: {
       duration,
       when: 'beforeChildren',
@@ -16,7 +16,7 @@ const defaultVariants = {
   },
   exit: {
     opacity: 0,
-    x: -80,
+    marginLeft: -80,
     transition: {
       duration,
     },
