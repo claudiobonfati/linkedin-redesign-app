@@ -11,6 +11,7 @@ import {
   GET_COMPANY,
   GET_CHAT_USERS_LIST,
   GET_CHAT_CONVERSATION,
+  SEARCH_USERS_COMPANIES,
 } from './queries';
 import ApolloClient from './apollo';
 
@@ -224,6 +225,30 @@ export const useChatConversation = (userId, targetId) => {
       loading,
       error,
       data: data.allChats[0],
+    };
+  }
+
+  return {
+    loading,
+    error,
+    data,
+  };
+};
+
+export const useSearchUsersCompanies = (search, page = 0, limit = 100) => {
+  const { loading, error, data } = useQuery(SEARCH_USERS_COMPANIES, {
+    variables: {
+      search,
+      page,
+      limit,
+    },
+  });
+
+  if (!loading && data) {
+    return {
+      loading,
+      error,
+      data,
     };
   }
 

@@ -282,7 +282,7 @@ export const GET_COMPANY = gql`
       nameslug
       website
       industry
-      headquartes
+      headquarters
       founded
       mission
       followers
@@ -346,10 +346,15 @@ export const GET_CHAT_CONVERSATION = gql`
 `;
 
 export const SEARCH_USERS_COMPANIES = gql`
-  query QuickSearch($search: String!, $limit: Int!) {
-    allUsers(page: 0, perPage: $limit, filter: {
-      q: $search,
-    }) {
+  query QuickSearch($search: String!, $page: Int!, $limit: Int!) {
+    allUsers(
+      page: $page, 
+      perPage: $limit, 
+      filter: {
+        q: $search,
+      }
+    ) {
+      id
       name
       username
       photo
@@ -358,10 +363,11 @@ export const SEARCH_USERS_COMPANIES = gql`
     allCompanies(page: 0, perPage: $limit, filter: {
       q: $search,
     }) {
+      id
       name
       nameslug
       logo
-      headquartes
+      headquarters
     }
   }
 `;
