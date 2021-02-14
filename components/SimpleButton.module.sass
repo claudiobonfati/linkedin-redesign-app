@@ -1,0 +1,20 @@
+@import ../styles/_variables
+
+.button
+  display: block
+  width: 100%
+  text-align: center
+  color: $color-blue
+  font-weight: 500
+  background-color: white
+  border: 1px solid $color-border
+  padding: 15px
+  transition: background-color .2s ease-out
+  &:active,
+  &:visited,
+  &:hover
+    color: $color-blue
+    text-decoration: none
+  &:active
+    background-color: rgba($color-border, .5)
+
