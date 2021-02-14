@@ -72,6 +72,13 @@ body
 .sticky-aside-content
   .sticky
     top: 185px !important
+    animation: sticking-sidebar .2s forwards
+
+@keyframes sticking-sidebar
+  0%
+    margin-top: -10px
+  100%
+    margin-top: 0px
 
 .color-blue, 
 .color-blue:hover, 
@@ -198,6 +205,7 @@ a
     .sticky
       position: relative !important
       top: 0 !important
+      animation: none
 
 @media (max-width: map-get($breakpoints, 'sm'))
   body
