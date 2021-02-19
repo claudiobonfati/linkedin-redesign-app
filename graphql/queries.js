@@ -371,3 +371,46 @@ export const SEARCH_USERS_COMPANIES = gql`
     }
   }
 `;
+
+export const SEARCH_POSTS = gql`
+  query SearchPosts($page: Int!, $perPage: Int!, $search: String!) {
+    allPosts(
+      page: $page, 
+      perPage: $perPage
+      filter: {
+        q: $search,
+      }
+    ) {
+      id
+      body
+      image
+      video
+      time
+      likes
+      User {
+        id
+        name
+        username
+        photo
+        headline
+      }
+      Company {
+        id
+        logo
+        name
+        nameslug
+      }
+      Comments {
+        id
+        body
+        time
+        User {
+          id
+          name
+          username
+          photo
+        }
+      }
+    }
+  }
+`;

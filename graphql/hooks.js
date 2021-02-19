@@ -12,6 +12,7 @@ import {
   GET_CHAT_USERS_LIST,
   GET_CHAT_CONVERSATION,
   SEARCH_USERS_COMPANIES,
+  SEARCH_POSTS,
 } from './queries';
 import ApolloClient from './apollo';
 
@@ -257,4 +258,19 @@ export const useSearchUsersCompanies = (search, page = 0, limit = 100) => {
     error,
     data,
   };
+};
+
+export const fetchMoreSearchPosts = async (page, perPage, search) => {
+  let result = await ApolloClient.query({
+    query: SEARCH_POSTS,
+    variables: {
+      page,
+      perPage,
+      search,
+    },
+  });
+
+  result.data = result.data.allPosts;
+
+  return result;
 };
