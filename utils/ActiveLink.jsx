@@ -4,14 +4,15 @@ import Link from 'next/link';
 import React, { Children } from 'react';
 
 const ActiveLink = ({ children, activeClassName, ...props }) => {
-  const { asPath } = useRouter();
+  const { pathname } = useRouter();
   const child = Children.only(children);
   const childClassName = child.props.className || '';
 
   // pages/index.js will be matched via props.href
   // pages/about.js will be matched via props.href
   // pages/[slug].js will be matched via props.as
-  const className = asPath === props.href || asPath === props.as
+  const href = props.href?.pathname || props.href;
+  const className = pathname === href || pathname === props.as
     ? `${childClassName} ${activeClassName}`.trim()
     : childClassName;
 
