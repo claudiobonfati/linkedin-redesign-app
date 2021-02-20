@@ -33,6 +33,19 @@ class ProfilePosts extends React.Component {
     // Reseting scroll manually (FramerMotion dependency)
     window.scrollTo(0, 0);
 
+    if (this.props.router.query.username) {
+      this.getInitialPosts();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.router.query.username !== prevProps.router.query.username 
+    && this.props.router.query.username !== undefined) {
+      this.getInitialPosts();
+    }
+  }
+
+  async getInitialPosts() {
     let userData = await getSimpleUser(this.props.router.query.username);
 
     this.setState({
