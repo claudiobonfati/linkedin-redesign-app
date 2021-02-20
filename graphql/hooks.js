@@ -10,6 +10,7 @@ import {
   GET_USER_POSTS,
   GET_COMPANY,
   GET_CHAT_USERS_LIST,
+  GET_CHAT_UNREAD_USERS_LIST,
   GET_CHAT_CONVERSATION,
   SEARCH_USERS_COMPANIES,
   SEARCH_POSTS,
@@ -193,6 +194,28 @@ export const useCompany = (nameslug) => {
 
 export const useChatUsersList = (userId) => {
   const { loading, error, data } = useQuery(GET_CHAT_USERS_LIST, {
+    variables: {
+      userId,
+    },
+  });
+
+  if (!loading && data) {
+    return {
+      loading,
+      error,
+      data: data.allChats,
+    };
+  }
+
+  return {
+    loading,
+    error,
+    data,
+  };
+};
+
+export const useChatUnreadUsersList = (userId) => {
+  const { loading, error, data } = useQuery(GET_CHAT_UNREAD_USERS_LIST, {
     variables: {
       userId,
     },

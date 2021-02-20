@@ -320,6 +320,30 @@ export const GET_CHAT_USERS_LIST = gql`
     }) {
       id
       preview
+      unread
+      User {
+        id,
+        name,
+        username,
+        photo,
+        skype,
+        twitter,
+        email,
+        lastOnline
+      }
+    }
+  }
+`;
+
+export const GET_CHAT_UNREAD_USERS_LIST = gql`
+  query GetChatUnreadUsersList($userId: ID!) {
+    allChats(page: 0, perPage: 100, filter: { 
+      author_id: $userId,
+      unread: true 
+    }) {
+      id
+      preview
+      unread
       User {
         id,
         name,
