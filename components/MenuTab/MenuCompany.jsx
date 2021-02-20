@@ -15,9 +15,9 @@ const menuCompany = () => {
         </ActiveLink>
       </li>
       <li>
-        <a href="https://google.com">
+        <span className={styles.disabled}>
           Carrers
-        </a>
+        </span>
       </li>
     </ul>
   );

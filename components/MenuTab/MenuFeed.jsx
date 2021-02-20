@@ -20,9 +20,9 @@ const menuFeed = () => (
       </ActiveLink>
     </li>
     <li>
-      <a href="https://google.com">
+      <span className={styles.disabled}>
         Jobs
-      </a>
+      </span>
     </li>
   </ul>
 );
