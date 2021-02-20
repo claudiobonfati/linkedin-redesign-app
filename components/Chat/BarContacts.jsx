@@ -63,6 +63,7 @@ const barContacts = (props) => {
           type="button"
           className={`
             ${styles.userButton}
+            ${contact.unread ? styles.messageUnread : ''}
             ${contact.id === context.data?.contact?.id ? styles.userActive : ''}
           `}
           key={contact.id}

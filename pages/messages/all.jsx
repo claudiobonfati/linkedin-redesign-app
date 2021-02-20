@@ -17,9 +17,9 @@ function messagesAll() {
   return (
     <motion.div
       className="w-100 full-screen"
-      initial={{ opacity: 0 }}
+      initial={{ opacity: 0.3 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      exit={{ opacity: 0.3 }}
     >
       <div className="container full-screen">
         <main className="row h-100">

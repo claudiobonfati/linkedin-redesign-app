@@ -92,6 +92,13 @@
         background-color: $color-blue
         transition: opacity .2s ease-out
         opacity: 0
+        img
+          transition: border .2s ease-out
+      &.messageUnread
+        background: rgba($color-blue, .01)
+        img
+          border: 3px solid $color-blue
+          
       *
         cursor: pointer
       &.userActive

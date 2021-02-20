@@ -10,14 +10,9 @@ const menuMessages = () => (
       </ActiveLink>
     </li>
     <li>
-      <a href="https://google.com">
-        Unread
-      </a>
-    </li>
-    <li>
-      <a href="https://google.com">
-        InMail
-      </a>
+      <ActiveLink href="/messages/unread" activeClassName={styles.active} scroll={false}>
+        <a>Unread</a>
+      </ActiveLink>
     </li>
   </ul>
 );

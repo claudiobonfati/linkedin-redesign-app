@@ -146,7 +146,7 @@ function MeDetails() {
                 <SimpleCard title="Following">
                   <div className="row">
                     {user.data.Follows.map((item) => (
-                      <div className="col-lg-4 col-sm-3 col-6 mb-4" key={item.id}>
+                      <div className="col-lg-4 col-sm-4 col-6 mb-4" key={item.id}>
                         <Polaroid
                           image={item.Company.cover}
                           title={item.Company.name}

@@ -1,8 +1,9 @@
 import React, {
-  useEffect, useRef, useMemo,
+  useEffect, useRef, useMemo, useState,
 } from 'react';
 import { TimelineMax, Power3 } from 'gsap';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styles from './DiscoverMenu.module.sass';
 import Search from './Search';
 import { useHeader } from '../../context/Header';
@@ -11,6 +12,33 @@ const discoverMenu = () => {
   const context = useHeader();
   let dropRef = useRef(null);
   let dropContentRef = useRef(null);
+  const router = useRouter();
+  const [title, setTitle] = useState(null);
+
+  useEffect(() => {
+    let baseRouter = router.pathname.split('/')[1];
+
+    switch (baseRouter) {
+      case 'messages':
+        setTitle('Messages');
+        break;
+      case 'me':
+        setTitle('My Profile');
+        break;
+      case 'profile':
+        setTitle('People');
+        break;
+      case 'company':
+        setTitle('Companies');
+        break;
+      case 'search':
+        setTitle('Search');
+        break;
+      default:
+        setTitle('Discover');
+        break;
+    }
+  }, [router]);
 
   const tlShowMenu = useMemo(() => new TimelineMax({ paused: true }), []);
 
@@ -58,7 +86,7 @@ const discoverMenu = () => {
         type="button"
         onClick={onClickButton}
       >
-        Discover
+        {title}
         <span className="lnr lnr-chevron-down" />
       </button>
       <div className={styles.wrapperDrop} ref={(ref) => { dropRef = ref; }}>
@@ -75,7 +103,6 @@ const discoverMenu = () => {
                   <li><Link href="/articles" scroll={false}>Articles</Link></li>
                   <li><Link href="/companies" scroll={false}>Companies</Link></li>
                   <li><span className={styles.disabled}>Jobs</span></li>
-                  <li><span className={styles.disabled}>Premium</span></li>
                 </ul>
               </nav>
             </div>
@@ -88,7 +115,6 @@ const discoverMenu = () => {
                   <li><Link href="/me/improve">Edit profile</Link></li>
                   <li><Link href="/me/details">My profile</Link></li>
                   <li><Link href="/me/improve">Improve</Link></li>
-                  <li><span className={styles.disabled}>Updates</span></li>
                   <li><span className={styles.disabled}>Who viewed</span></li>
                 </ul>
               </nav>
@@ -102,7 +128,7 @@ const discoverMenu = () => {
                   <li><Link href="/me/contacts">Connections</Link></li>
                   <li><Link href="/me/contacts">Add contacts</Link></li>
                   <li><Link href="/me/contacts">People you know</Link></li>
-                  <li><span className={styles.disabled}>Statics</span></li>
+                  <li><Link href="/messages/all">Messages</Link></li>
                 </ul>
               </nav>
             </div>

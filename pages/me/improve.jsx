@@ -34,7 +34,7 @@ function MeImprove() {
               </Sticky>
             </div>
           </div>
-          <div className="col-lg-6 py-4">
+          <div className="col-lg-6 col-md-8 py-4">
             <div className="mb-4">
               <FormAddDetail
                 title="Add volunteering experience"
@@ -153,10 +153,11 @@ function MeImprove() {
                 <SimpleCard title="Following">
                   <div className="row">
                     {user.data.Follows.map((item) => (
-                      <div className="col-lg-4 col-sm-3 col-6 mb-3 mb-sm-0" key={item.id}>
+                      <div className="col-lg-4 col-sm-4 col-6 mb-4" key={item.id}>
                         <Polaroid
                           image={item.Company.cover}
                           title={item.Company.name}
+                          link={`/company/${item.Company.nameslug}/home`}
                         />
                       </div>
                     ))}
@@ -165,7 +166,7 @@ function MeImprove() {
               </div>
             )}
           </div>
-          <div className="col-lg-3 col-md-4 py-4 d-none d-md-block">
+          <div className="col-lg-3 col-md-4 py-4 d-none d-lg-block">
             <SimpleCard title="Keep in touch">
               {(user
               && !user.error
