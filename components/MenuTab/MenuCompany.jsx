@@ -10,7 +10,7 @@ const menuCompany = () => {
   return (
     <ul className={styles.menu}>
       <li>
-        <ActiveLink href={`/company/${nameslug}/home`} activeClassName={styles.active} scroll={false}>
+        <ActiveLink href="/company/[nameslug]/home" as={`/company/${nameslug}/home`} activeClassName={styles.active} scroll={false}>
           <a>Home</a>
         </ActiveLink>
       </li>

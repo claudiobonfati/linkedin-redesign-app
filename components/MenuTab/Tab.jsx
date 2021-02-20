@@ -2,6 +2,7 @@ import React from 'react';
 import { TweenMax, Power3 } from 'gsap';
 import { Router, withRouter } from 'next/router';
 import styles from './Tab.module.sass';
+import MenuSearch from './MenuSearch';
 import MenuFeed from './MenuFeed';
 import MenuMyProfile from './MenuMyProfile';
 import MenuAccount from './MenuAccount';
@@ -34,6 +35,9 @@ class Tab extends React.Component {
       case '/messages':
         menu = 'messages';
         break;
+      case '/search':
+        menu = 'search';
+        break;
       default:
         menu = 'feed';
         break;
@@ -54,6 +58,7 @@ class Tab extends React.Component {
       account: MenuAccount,
       company: MenuCompany,
       messages: MenuMessages,
+      search: MenuSearch,
     };
 
     this.updateMenu = this.updateMenu.bind(this);

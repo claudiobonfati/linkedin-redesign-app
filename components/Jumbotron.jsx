@@ -53,7 +53,7 @@ const jumbotron = (props) => (
         </a>
       )}
       <button type="button" className={`${styles.button} align-self-end`}>
-        Follow company
+        Following
       </button>
     </div>
   </div>

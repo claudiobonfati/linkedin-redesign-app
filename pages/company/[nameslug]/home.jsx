@@ -81,12 +81,12 @@ const companyHome = (props) => {
                           <strong className="color-gray-dark">{company.data.founded}</strong>
                         </p>
                         )}
-                        {company.data.headquartes
+                        {company.data.headquarters
                         && (
                         <p className="m-0">
                           Headquarters
                           <br />
-                          <strong className="color-gray-dark">{company.data.headquartes}</strong>
+                          <strong className="color-gray-dark">{company.data.headquarters}</strong>
                         </p>
                         )}
                       </div>
