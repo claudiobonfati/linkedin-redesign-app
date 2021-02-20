@@ -1,6 +1,7 @@
 import React, {
   useState, useRef, useEffect, useMemo,
 } from 'react';
+import { useRouter } from 'next/router';
 import { TimelineMax, Power3 } from 'gsap';
 import PropTypes from 'prop-types';
 import ProfileDisplay from '../ProfileDisplay';
@@ -12,9 +13,10 @@ import ApolloClient from '../../graphql/apollo';
 const search = (props) => {
   const context = useHeader();
   const resultsLimit = 3;
+  const router = useRouter();
 
   const [field, setField] = useState(''); // Store search while typing
-  const [term, setTerm] = useState(null); // Save term searched
+  const [term, setTerm] = useState(router.query.keywords || null); // Save term searched
   const [result, setResult] = useState(null); // Store quick search result
 
   let termBoxRef = useRef(null);
@@ -25,9 +27,14 @@ const search = (props) => {
   const tlShowTerm = useMemo(() => new TimelineMax({ paused: true }), []);
   const tlShowQuickResult = useMemo(() => new TimelineMax({ paused: true }), []);
 
-  const searchAll = () => {
-    console.log('Searching for: ', term);
-  };
+  useEffect(() => {
+    if (router.query.keywords !== null
+        && router.query.keywords !== undefined
+        && router.query.keywords !== '') {
+      setTerm(router.query.keywords);
+      tlShowTerm.play();
+    }
+  }, [router.query.keywords]);
 
   /**
    * Function to fetch bests results while user is typing
@@ -37,16 +44,19 @@ const search = (props) => {
       query: SEARCH_USERS_COMPANIES,
       variables: {
         search: field,
+        page: 0,
         limit: resultsLimit,
       },
     });
 
-    setResult(response.data);
+    if (response.data.allUsers.length > 0 || response.data.allCompanies.length) {
+      setResult(response.data);
 
-    context.dispatch({
-      type: 'SET_TAB',
-      payload: 'search',
-    });
+      context.dispatch({
+        type: 'SET_TAB',
+        payload: 'search',
+      });
+    }
   };
 
   useEffect(() => {
@@ -86,7 +96,13 @@ const search = (props) => {
 
   useEffect(() => {
     if (field === '' && term) {
-      searchAll();
+      router.push({
+        pathname: '/search/people-companies',
+        query: {
+          keywords: term,
+        },
+      });
+
       tlShowTerm.play();
 
       if (props.quickSearch) {
@@ -96,16 +112,18 @@ const search = (props) => {
   }, [field]);
 
   const handleChangeInput = ({ target }) => {
+    setField(target.value);
+  };
+
+  useEffect(() => {
     if (props.quickSearch) {
-      if (target.value.length > 3) {
+      if (field.length > 2) {
         quickSearch();
       } else {
         context.dispatch({ type: 'CLOSE_TAB' });
       }
     }
-
-    setField(target.value);
-  };
+  }, [field]);
 
   const handleKeyDownInput = (event) => {
     if (event.key === 'Enter' && field !== '') {
@@ -129,6 +147,10 @@ const search = (props) => {
     setTimeout(() => {
       inputRef.focus();
       setTerm(null);
+
+      router.push({
+        pathname: '/',
+      });
     }, tlShowTerm.duration() * 1000);
   };
 
@@ -143,7 +165,7 @@ const search = (props) => {
             type="button"
             onClick={handleClearTerm}
           >
-            X
+            <span className="lnr lnr-cross" />
           </button>
         </div>
         <input
@@ -179,15 +201,20 @@ const search = (props) => {
                   </div>
                   <div className="col-md-6 border-left-gray pl-4">
                     {result.allUsers.map((user, index) => (
-                      <div className={`${index !== result.allUsers.length - 1 ? 'pb-4' : ''}`}>
-                        <ProfileDisplay
-                          image={user.photo}
-                          imageSize={50}
-                          title={user.name}
-                          subtitle={user.headline}
-                          link={`/profile/${user.username}/details`}
-                        />
-                      </div>
+                      <>
+                        {user.id !== '1'
+                        && (
+                          <div className={`${index !== result.allUsers.length - 1 ? 'pb-4' : ''}`} key={`user_${user.id}`}>
+                            <ProfileDisplay
+                              image={user.photo}
+                              imageSize={50}
+                              title={user.name}
+                              subtitle={user.headline}
+                              link={`/profile/${user.username}/details`}
+                            />
+                          </div>
+                        )}
+                      </>
                     ))}
                   </div>
                 </div>
@@ -205,12 +232,12 @@ const search = (props) => {
                   </div>
                   <div className="col-md-6 border-left-gray pl-4">
                     {result.allCompanies.map((company, index) => (
-                      <div className={`${index !== result.allCompanies.length - 1 ? 'pb-4' : ''}`}>
+                      <div className={`${index !== result.allCompanies.length - 1 ? 'pb-4' : ''}`} key={`company_${company.id}`}>
                         <ProfileDisplay
                           image={company.logo}
                           imageSize={50}
                           title={company.name}
-                          subtitle={company.headquartes}
+                          subtitle={company.headquarters}
                           link={`/company/${company.nameslug}/home`}
                         />
                       </div>
