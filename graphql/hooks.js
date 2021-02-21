@@ -17,6 +17,7 @@ import {
   GET_NOTIFICATIONS,
   GET_VIEWERS,
   GET_REQUESTS,
+  GET_NOTIFICATION_MESSAGES,
 } from './queries';
 import ApolloClient from './apollo';
 
@@ -360,6 +361,29 @@ export const useRequests = (page, perPage) => {
       loading,
       error,
       data: data.allRequests,
+    };
+  }
+
+  return {
+    loading,
+    error,
+    data,
+  };
+};
+
+export const useNotificationMessages = (page, perPage) => {
+  const { loading, error, data } = useQuery(GET_NOTIFICATION_MESSAGES, {
+    variables: {
+      page,
+      perPage,
+    },
+  });
+
+  if (!loading && data) {
+    return {
+      loading,
+      error,
+      data: data.allMessages,
     };
   }
 

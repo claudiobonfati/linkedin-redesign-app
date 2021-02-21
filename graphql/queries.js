@@ -492,3 +492,20 @@ export const GET_REQUESTS = gql`
     }
   }
 `;
+export const GET_NOTIFICATION_MESSAGES = gql`
+  query GetNotificationMessages($page: Int!, $perPage: Int!) {
+    allMessages(
+      page: $page,
+      perPage: $perPage
+    ) {
+      id
+      message
+      User {
+        id
+        name
+        username
+        photo
+      }
+    }
+  }
+`;
