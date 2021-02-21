@@ -99,7 +99,7 @@ function searchAll() {
           <div className="col-lg-3 col-md-4 pt-4 d-none d-md-block">
             <div className="sticky-aside-content">
               <Sticky topOffset={-20} scrollElement=".stickyArea">
-                <CurrentProfileOverview />
+                <CurrentProfileOverview simple />
               </Sticky>
             </div>
           </div>
