@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { TweenMax, Power3 } from 'gsap';
 import styles from './MessagesMenu.module.sass';
 import ProfileDisplay from '../ProfileDisplay';
@@ -7,6 +7,7 @@ import { useHeader } from '../../context/Header';
 const messagesButton = () => {
   const context = useHeader();
   let dropRef = useRef(null);
+  const [alert, setAlert] = useState(true);
 
   const onClickButton = () => {
     if (context.data.tab === 'messages') {
@@ -16,6 +17,8 @@ const messagesButton = () => {
         type: 'SET_TAB',
         payload: 'messages',
       });
+
+      setAlert(false);
     }
   };
 
@@ -53,7 +56,11 @@ const messagesButton = () => {
     <div className={`ml-3 ${styles.wrapper}`}>
       <button
         aria-expanded="false"
-        className={`${styles.navBarButtons} ${context.data.tab === 'messages' ? styles.buttonActive : ''}`}
+        className={`
+          ${styles.navBarButtons} 
+          ${context.data.tab === 'messages' ? styles.buttonActive : ''}
+          ${alert ? styles.alertIcon : ''}
+        `}
         type="button"
         onClick={onClickButton}
       >

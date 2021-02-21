@@ -11,6 +11,7 @@ import { useNotifications, useViewers, useRequests } from '../../graphql/hooks';
 
 const notificationsMenu = () => {
   const [tab, setTab] = useState('notifications');
+  const [alert, setAlert] = useState(true);
   const context = useHeader();
   let dropRef = useRef(null);
   const notifications = useNotifications(0, 10);
@@ -27,6 +28,8 @@ const notificationsMenu = () => {
         type: 'SET_TAB',
         payload: 'notifications',
       });
+
+      setAlert(false);
     }
   };
 
@@ -64,7 +67,11 @@ const notificationsMenu = () => {
     <div className={`ml-3 ${styles.wrapper}`}>
       <button
         aria-expanded="false"
-        className={`${styles.navBarButtons} ${context.data.tab === 'notifications' ? styles.buttonActive : ''}`}
+        className={`
+          ${styles.navBarButtons} 
+          ${context.data.tab === 'notifications' ? styles.buttonActive : ''}
+          ${alert ? styles.alertIcon : ''}
+        `}
         type="button"
         onClick={onClickButton}
       >
