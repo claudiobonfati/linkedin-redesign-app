@@ -438,3 +438,57 @@ export const SEARCH_POSTS = gql`
     }
   }
 `;
+
+export const GET_NOTIFICATIONS = gql`
+  query GetNotifications($page: Int!, $perPage: Int!) {
+    allNotifications(
+      page: $page,
+      perPage: $perPage
+    ) {
+      id
+      message
+      type
+      User {
+        id
+        name
+        username
+        photo
+      }
+    }
+  }
+`;
+
+export const GET_VIEWERS = gql`
+  query GetViewer($page: Int!, $perPage: Int!) {
+    allViewers(
+      page: $page,
+      perPage: $perPage
+    ) {
+      id
+      User {
+        id
+        name
+        username
+        photo
+      }
+    }
+  }
+`;
+
+export const GET_REQUESTS = gql`
+  query GetRequests($page: Int!, $perPage: Int!) {
+    allRequests(
+      page: $page,
+      perPage: $perPage
+    ) {
+      id
+      message
+      User {
+        id
+        name
+        username
+        photo
+      }
+    }
+  }
+`;

@@ -14,6 +14,9 @@ import {
   GET_CHAT_CONVERSATION,
   SEARCH_USERS_COMPANIES,
   SEARCH_POSTS,
+  GET_NOTIFICATIONS,
+  GET_VIEWERS,
+  GET_REQUESTS,
 } from './queries';
 import ApolloClient from './apollo';
 
@@ -296,4 +299,73 @@ export const fetchMoreSearchPosts = async (page, perPage, search) => {
   result.data = result.data.allPosts;
 
   return result;
+};
+
+export const useNotifications = (page, perPage) => {
+  const { loading, error, data } = useQuery(GET_NOTIFICATIONS, {
+    variables: {
+      page,
+      perPage,
+    },
+  });
+
+  if (!loading && data) {
+    return {
+      loading,
+      error,
+      data: data.allNotifications,
+    };
+  }
+
+  return {
+    loading,
+    error,
+    data,
+  };
+};
+
+export const useViewers = (page, perPage) => {
+  const { loading, error, data } = useQuery(GET_VIEWERS, {
+    variables: {
+      page,
+      perPage,
+    },
+  });
+
+  if (!loading && data) {
+    return {
+      loading,
+      error,
+      data: data.allViewers,
+    };
+  }
+
+  return {
+    loading,
+    error,
+    data,
+  };
+};
+
+export const useRequests = (page, perPage) => {
+  const { loading, error, data } = useQuery(GET_REQUESTS, {
+    variables: {
+      page,
+      perPage,
+    },
+  });
+
+  if (!loading && data) {
+    return {
+      loading,
+      error,
+      data: data.allRequests,
+    };
+  }
+
+  return {
+    loading,
+    error,
+    data,
+  };
 };
