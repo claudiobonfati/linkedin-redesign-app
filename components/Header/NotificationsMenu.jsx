@@ -3,14 +3,21 @@ import React, {
 } from 'react';
 import Image from 'next/image';
 import { TweenMax, Power3 } from 'gsap';
+import Link from 'next/link';
 import styles from './NotificationsMenu.module.sass';
 import ProfileDisplay from '../ProfileDisplay';
 import { useHeader } from '../../context/Header';
+import { useNotifications, useViewers, useRequests } from '../../graphql/hooks';
 
 const notificationsMenu = () => {
   const [tab, setTab] = useState('notifications');
   const context = useHeader();
   let dropRef = useRef(null);
+  const notifications = useNotifications(0, 10);
+  const viewers = useViewers(0, 10);
+  const requests = useRequests(0, 10);
+
+  console.log(notifications);
 
   const onClickButton = () => {
     if (context.data.tab === 'notifications') {
@@ -81,93 +88,77 @@ const notificationsMenu = () => {
         <div className={`${styles.dropContentOuter} ${tab === 'notifications' ? styles.tabNotifications : styles.tabRequests}`}>
           <div className={styles.dropContentInner}>
             <div className={`px-4 ${styles.dropContent}`}>
-              <div className={`py-4 ${styles.dropContentItem}`}>
-                <span className="d-block mb-3">
-                  7 people viewed you profile
-                </span>
-                <div className={styles.listProfilePics}>
-                  {[...Array(4)].map((item, index) => (
-                    <div className="mr-2" key={index}>
-                      <Image
-                        src="https://i.pravatar.cc/300"
-                        alt="Profile picture"
-                        className={`circle-image ${styles.profilePic}`}
-                        width={40}
-                        height={40}
-                      />
+              {(viewers.data
+              && viewers.data.length > 0)
+              && (
+                <div className={`py-4 ${styles.dropContentItem}`}>
+                  <span className="d-block mb-3">
+                    {`${viewers.data.length + 3} people viewed you profile`}
+                  </span>
+                  <div className={styles.listProfilePics}>
+                    {viewers.data.map((item) => (
+                      <div className="mr-2" key={item.id}>
+                        <Link href={`/profile/${item.User.username}/details`}>
+                          <a title={item.User.name}>
+                            <Image
+                              src={item.User.photo}
+                              alt="Profile picture"
+                              className={`circle-image ${styles.profilePic}`}
+                              width={40}
+                              height={40}
+                            />
+                          </a>
+                        </Link>
+                      </div>
+                    ))}
+                    <div className={`mr-2 small ${styles.profilePic}`}>
+                      <span>+3</span>
                     </div>
-                  ))}
-                  <div className={`mr-2 small ${styles.profilePic}`}>
-                    <span>+3</span>
                   </div>
                 </div>
-              </div>
-              <div className={`py-4 ${styles.dropContentItem}`}>
-                <ProfileDisplay
-                  image="/images/me.jpg"
-                  imageSize={50}
-                  title="Jenson Kent"
-                  subtitle="published an article: 'What to do for'"
-                />
-              </div>
-              <div className={`py-4 ${styles.dropContentItem}`}>
-                <ProfileDisplay
-                  image="/images/me.jpg"
-                  imageSize={50}
-                  title="Emily Kilimanjaro"
-                  subtitle="is now a connection"
-                />
-              </div>
-              <div className={`py-4 ${styles.dropContentItem}`}>
-                <ProfileDisplay
-                  image="/images/me.jpg"
-                  imageSize={50}
-                  title="Daniel Estienne"
-                  subtitle="is now a connection"
-                />
-              </div>
-              <div className={`py-4 ${styles.dropContentItem}`}>
-                <ProfileDisplay
-                  image="/images/me.jpg"
-                  imageSize={50}
-                  title="Daniel Estienne"
-                  subtitle="is now a connection"
-                />
-              </div>
+              )}
+              {(notifications.data
+              && notifications.data.length > 0)
+              && (
+                <>
+                  {notifications.data.map((item) => (
+                    <div className={`py-4 ${styles.dropContentItem}`} key={item.id}>
+                      <Link href={`${item.type === 'connection' ? `/profile/${item.User.username}/details` : `/profile/${item.User.username}/posts`}`}>
+                        <a title={item.User.name}>
+                          <ProfileDisplay
+                            image={item.User.photo}
+                            imageSize={50}
+                            title={item.User.name}
+                            subtitle={item.message}
+                          />
+                        </a>
+                      </Link>
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
             <div className={`px-4 ${styles.dropContent}`}>
-              <div className={`py-4 ${styles.dropContentItem}`}>
-                <ProfileDisplay
-                  image="/images/me.jpg"
-                  imageSize={50}
-                  title="Jenson Kent"
-                  subtitle="published an article: 'What to do for'"
-                />
-              </div>
-              <div className={`py-4 ${styles.dropContentItem}`}>
-                <ProfileDisplay
-                  image="/images/me.jpg"
-                  imageSize={50}
-                  title="Emily Kilimanjaro"
-                  subtitle="is now a connection"
-                />
-              </div>
-              <div className={`py-4 ${styles.dropContentItem}`}>
-                <ProfileDisplay
-                  image="/images/me.jpg"
-                  imageSize={50}
-                  title="Daniel Estienne"
-                  subtitle="is now a connection"
-                />
-              </div>
-              <div className={`py-4 ${styles.dropContentItem}`}>
-                <ProfileDisplay
-                  image="/images/me.jpg"
-                  imageSize={50}
-                  title="Daniel Estienne"
-                  subtitle="is now a connection"
-                />
-              </div>
+              {(requests.data
+              && requests.data.length > 0)
+              && (
+                <>
+                  {requests.data.map((item) => (
+                    <div className={`py-4 ${styles.dropContentItem}`} key={item.id}>
+                      <Link href={`/profile/${item.User.username}/details`}>
+                        <a title={item.User.name}>
+                          <ProfileDisplay
+                            image={item.User.photo}
+                            imageSize={50}
+                            title={item.User.name}
+                            subtitle={item.message}
+                          />
+                        </a>
+                      </Link>
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
           </div>
         </div>

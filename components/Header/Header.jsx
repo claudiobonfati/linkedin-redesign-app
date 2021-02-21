@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ApolloProvider } from '@apollo/client';
+import ApolloClient from '../../graphql/apollo';
 import styles from './Header.module.sass';
 import Search from './Search';
 import DiscoverMenu from './DiscoverMenu';
@@ -46,7 +48,9 @@ const header = () => {
           </div>
           <div className="col-md-3 col-6 position-static d-flex justify-content-end py-2 py-sm-3 pl-0">
             <MessagesMenu />
-            <NotificationsMenu />
+            <ApolloProvider client={ApolloClient}>
+              <NotificationsMenu />
+            </ApolloProvider>
             <Link href="/me/details" scroll={false}>
               <a className={`ml-3 ${styles.navBarButtons}`}>
                 <Image
