@@ -175,7 +175,12 @@ class CreatePost extends React.Component {
                   <div className={`color-blue ${styles.icon}`}>
                     <span className="lnr lnr-pencil" />
                   </div>
-                  Share an updade
+                  <span className="d-none d-md-inline">
+                    Share an updade
+                  </span>
+                  <span className="d-inline d-md-none">
+                    Updade
+                  </span>
                 </button>
               </li>
               <li className={this.state.currentTab === 'upload' ? styles.activeItem : ''}>
@@ -183,7 +188,12 @@ class CreatePost extends React.Component {
                   <div className={`color-yellow ${styles.icon}`}>
                     <span className="lnr lnr-camera" />
                   </div>
-                  Upload a photo
+                  <span className="d-none d-md-inline">
+                    Upload a photo
+                  </span>
+                  <span className="d-inline d-md-none">
+                    Upload
+                  </span>
                 </button>
               </li>
               <li className={this.state.currentTab === 'article' ? styles.activeItem : ''}>
@@ -191,7 +201,12 @@ class CreatePost extends React.Component {
                   <div className={`color-green ${styles.icon}`}>
                     <span className="lnr lnr-bookmark" />
                   </div>
-                  Write an article
+                  <span className="d-none d-md-inline">
+                    Write an article
+                  </span>
+                  <span className="d-inline d-md-none">
+                    Article
+                  </span>
                 </button>
               </li>
             </ul>
