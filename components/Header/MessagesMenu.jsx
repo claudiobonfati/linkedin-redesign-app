@@ -1,13 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { TweenMax, Power3 } from 'gsap';
+import Link from 'next/link';
 import styles from './MessagesMenu.module.sass';
 import ProfileDisplay from '../ProfileDisplay';
 import { useHeader } from '../../context/Header';
+import { useNotificationMessages } from '../../graphql/hooks';
 
 const messagesButton = () => {
   const context = useHeader();
-  let dropRef = useRef(null);
   const [alert, setAlert] = useState(true);
+  const messages = useNotificationMessages(0, 10);
+  let dropRef = useRef(null);
 
   const onClickButton = () => {
     if (context.data.tab === 'messages') {
@@ -72,37 +75,33 @@ const messagesButton = () => {
             Messages
           </div>
           <div className={styles.dropHeaderButton}>
-            <button type="button" onClick={onClickButton}>
-              <span className="lnr lnr-cross" />
-            </button>
+            <Link href="/messages/all" scroll={false}>
+              <a title="New message">
+                <span className="lnr lnr-cross" />
+              </a>
+            </Link>
           </div>
         </div>
-        <div className="px-4">
-          <div className={`py-4 ${styles.dropContentItem}`}>
-            <ProfileDisplay
-              image="/images/me.jpg"
-              imageSize={50}
-              title="Robert Tayler"
-              subtitle="Hi Claudio, would you mind sharing"
-            />
+        {(messages.data
+        && messages.data.length > 0)
+        && (
+          <div className="px-4">
+            {messages.data.map((item) => (
+              <div className={`py-4 ${styles.dropContentItem}`}>
+                <Link href="/messages/all" scroll={false}>
+                  <a title="Open messages">
+                    <ProfileDisplay
+                      image={item.User.photo}
+                      imageSize={50}
+                      title={item.User.name}
+                      subtitle={item.message}
+                    />
+                  </a>
+                </Link>
+              </div>
+            ))}
           </div>
-          <div className={`py-4 ${styles.dropContentItem}`}>
-            <ProfileDisplay
-              image="/images/me.jpg"
-              imageSize={50}
-              title="James Daniel"
-              subtitle="Im available now if its convenient?"
-            />
-          </div>
-          <div className={`py-4 ${styles.dropContentItem}`}>
-            <ProfileDisplay
-              image="/images/me.jpg"
-              imageSize={50}
-              title="Jenny Gossuin"
-              subtitle="Im waiting for your Floor 6"
-            />
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

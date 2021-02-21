@@ -65,7 +65,7 @@ function MeContacts() {
           <div className="col-lg-9 col-md-8 py-4">
             <SimpleCard
               title="People"
-              rightText="685 connections"
+              rightText="1,808 connections"
             >
               {jsxContactsList}
             </SimpleCard>

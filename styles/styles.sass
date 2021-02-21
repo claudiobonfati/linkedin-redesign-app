@@ -181,6 +181,15 @@ a
   text-decoration: none
   font-weight: 500
 
+a,
+button
+  &:focus,
+  &:focus-visible
+    outline: none
+    box-shadow: none
+  &:focus-visible
+    box-shadow: 0 0 0 3px rgba($color-blue, .25)
+
 // TinyMCE override
 .tox-statusbar__branding
   display: none

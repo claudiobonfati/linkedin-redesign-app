@@ -47,8 +47,8 @@ const header = () => {
             <Search />
           </div>
           <div className="col-md-3 col-6 position-static d-flex justify-content-end py-2 py-sm-3 pl-0">
-            <MessagesMenu />
             <ApolloProvider client={ApolloClient}>
+              <MessagesMenu />
               <NotificationsMenu />
             </ApolloProvider>
             <Link href="/me/details" scroll={false}>

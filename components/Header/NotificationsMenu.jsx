@@ -1,7 +1,7 @@
 import React, {
   useEffect, useState, useRef,
 } from 'react';
-import Image from 'next/image';
+import { Image } from 'react-image-and-background-image-fade';
 import { TweenMax, Power3 } from 'gsap';
 import Link from 'next/link';
 import styles from './NotificationsMenu.module.sass';
@@ -130,7 +130,7 @@ const notificationsMenu = () => {
                 <>
                   {notifications.data.map((item) => (
                     <div className={`py-4 ${styles.dropContentItem}`} key={item.id}>
-                      <Link href={`${item.type === 'connection' ? `/profile/${item.User.username}/details` : `/profile/${item.User.username}/posts`}`}>
+                      <Link href={`${item.type === 'connection' ? `/profile/${item.User.username}/details` : `/profile/${item.User.username}/posts`}`} scroll={false}>
                         <a title={item.User.name}>
                           <ProfileDisplay
                             image={item.User.photo}
