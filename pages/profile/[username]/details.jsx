@@ -64,7 +64,7 @@ const profileDetails = (props) => {
             && (
               <div className="mb-4">
                 <SimpleCard title="Summary">
-                  <p>{user.data.summary}</p>
+                  <p className="m-0">{user.data.summary}</p>
                 </SimpleCard>
               </div>
             )}
@@ -150,7 +150,7 @@ const profileDetails = (props) => {
                         title={item.Author.name}
                         subtitle={item.Author.headline}
                       />
-                      <p className="pl-5 ml-3 mt-3">
+                      <p className="pl-5 ml-3 mt-3 mb-0">
                         {item.description}
                       </p>
                     </div>

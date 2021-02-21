@@ -127,7 +127,7 @@ function MeDetails() {
                         title={item.Author.name}
                         subtitle={item.Author.headline}
                       />
-                      <p className="pl-5 ml-3 mt-3">
+                      <p className="pl-5 ml-3 mt-3 mb-0">
                         {item.description}
                       </p>
                     </div>
