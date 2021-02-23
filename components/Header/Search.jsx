@@ -40,21 +40,27 @@ const search = (props) => {
    * Function to fetch bests results while user is typing
    */
   const quickSearch = async () => {
-    let response = await ApolloClient.query({
-      query: SEARCH_USERS_COMPANIES,
-      variables: {
-        search: field,
-        page: 0,
-        limit: resultsLimit,
-      },
-    });
+    try {
+      let response = await ApolloClient.query({
+        query: SEARCH_USERS_COMPANIES,
+        variables: {
+          search: field,
+          page: 0,
+          limit: resultsLimit,
+        },
+      });
 
-    if (response.data.allUsers.length > 0 || response.data.allCompanies.length) {
-      setResult(response.data);
+      if (response.data.allUsers.length > 0 || response.data.allCompanies.length) {
+        setResult(response.data);
 
+        context.dispatch({
+          type: 'SET_TAB',
+          payload: 'search',
+        });
+      }
+    } catch (e) {
       context.dispatch({
-        type: 'SET_TAB',
-        payload: 'search',
+        type: 'CLOSE_TAB',
       });
     }
   };

@@ -4,6 +4,7 @@ import Sticky from 'react-sticky-el';
 import SimpleCard from '../../components/SimpleCard';
 import CurrentProfileOverview from '../../components/CurrentProfileOverview';
 import ProfileDisplay from '../../components/ProfileDisplay';
+import NothingFound from '../../components/NothingFound';
 import { useContacts } from '../../graphql/hooks';
 import defaultVariants from '../../utils/FramerMotionDefault';
 
@@ -63,12 +64,28 @@ function MeContacts() {
             </div>
           </div>
           <div className="col-lg-9 col-md-8 py-4">
-            <SimpleCard
-              title="People"
-              rightText="1,808 connections"
-            >
-              {jsxContactsList}
-            </SimpleCard>
+            {(contacts
+            && contacts.error
+            && !contacts.loading)
+            && (
+              <div className="mb-4">
+                <NothingFound
+                  title="Yikes... It looks like our server is not responding."
+                  subtitle="Relax, breath, and try reloading the page."
+                />
+              </div>
+            )}
+            {(contacts
+            && !contacts.error
+            && !contacts.loading)
+            && (
+              <SimpleCard
+                title="People"
+                rightText="1,808 connections"
+              >
+                {jsxContactsList}
+              </SimpleCard>
+            )}
           </div>
         </main>
       </div>

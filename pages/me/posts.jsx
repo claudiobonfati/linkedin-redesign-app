@@ -8,6 +8,7 @@ import Post from '../../components/Post';
 import SimpleCard from '../../components/SimpleCard';
 import { fetchMoreUserPosts } from '../../graphql/hooks';
 import ProfileDisplay from '../../components/ProfileDisplay';
+import NothingFound from '../../components/NothingFound';
 import defaultVariants from '../../utils/FramerMotionDefault';
 
 class MePosts extends React.Component {
@@ -95,6 +96,20 @@ class MePosts extends React.Component {
             </div>
           ))}
         </>
+      );
+    } else if (
+      (this.state.feed.data
+      && Array.isArray(this.state.feed.data)
+      && this.state.feed.data.length === 0)
+      || (this.state.feed.error)
+    ) {
+      jsxPostsList = (
+        <div className="mb-4">
+          <NothingFound
+            title="Yikes... It looks like our server is not responding."
+            subtitle="Relax, breath, and try reloading the page."
+          />
+        </div>
       );
     }
 

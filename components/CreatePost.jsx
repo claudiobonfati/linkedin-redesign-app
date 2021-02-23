@@ -77,7 +77,6 @@ class CreatePost extends React.Component {
       this.setState({
         user: oldUser.data,
       });
-      console.log('here', oldUser)
     } else {
       let userData = await getSimpleUser('claudiobonfati');
 
@@ -210,8 +209,6 @@ class CreatePost extends React.Component {
     }));
 
     this.removeFile();
-
-    console.log(this.state.publishedPosts)
   }
 
   render() {

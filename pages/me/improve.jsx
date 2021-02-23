@@ -5,6 +5,7 @@ import SimpleCard from '../../components/SimpleCard';
 import FormAddDetail from '../../components/FormAddDetail';
 import Polaroid from '../../components/Polaroid';
 import CurrentProfileOverview from '../../components/CurrentProfileOverview';
+import NothingFound from '../../components/NothingFound';
 import ProfileDisplay from '../../components/ProfileDisplay';
 import { useUser } from '../../graphql/hooks';
 import defaultVariants from '../../utils/FramerMotionDefault';
@@ -35,32 +36,53 @@ function MeImprove() {
             </div>
           </div>
           <div className="col-lg-6 col-md-8 py-4">
-            <div className="mb-4">
-              <FormAddDetail
-                title="Add volunteering experience"
-                subtitle="1 in 5 manager hired someone becouse of that"
-                color="green"
-                button="Save experience"
-              />
-            </div>
-            <div className="mb-4">
-              <FormAddDetail
-                title="Add volunteering opportunities"
-                subtitle="Non profit organizations could be looking for you"
-                color="yellow"
-                button="Create opportunity"
-              />
-            </div>
-            <div className="mb-4">
-              <SimpleCard title="Summary">
-                {(user
-                && !user.error
-                && !user.loading)
-                && (
+            {(user
+            && user.error
+            && !user.loading)
+            && (
+              <div className="mb-4">
+                <NothingFound
+                  title="Yikes... It looks like our server is not responding."
+                  subtitle="Relax, breath, and try reloading the page."
+                />
+              </div>
+            )}
+            {(user
+            && !user.error
+            && !user.loading)
+            && (
+              <div className="mb-4">
+                <FormAddDetail
+                  title="Add volunteering experience"
+                  subtitle="1 in 5 manager hired someone becouse of that"
+                  color="green"
+                  button="Save experience"
+                />
+              </div>
+            )}
+            {(user
+            && !user.error
+            && !user.loading)
+            && (
+              <div className="mb-4">
+                <FormAddDetail
+                  title="Add volunteering opportunities"
+                  subtitle="Non profit organizations could be looking for you"
+                  color="yellow"
+                  button="Create opportunity"
+                />
+              </div>
+            )}
+            {(user
+            && !user.error
+            && !user.loading)
+            && (
+              <div className="mb-4">
+                <SimpleCard title="Summary">
                   <p className="mb-0">{user.data.summary}</p>
-                )}
-              </SimpleCard>
-            </div>
+                </SimpleCard>
+              </div>
+            )}
             {(user
             && !user.error
             && !user.loading

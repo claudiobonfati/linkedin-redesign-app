@@ -5,6 +5,7 @@ import Sticky from 'react-sticky-el';
 import CurrentProfileOverview from '../components/CurrentProfileOverview';
 import CreatePost from '../components/CreatePost';
 import Post from '../components/Post';
+import NothingFound from '../components/NothingFound';
 import { fetchMorePosts } from '../graphql/hooks';
 import defaultVariants from '../utils/FramerMotionDefault';
 
@@ -92,6 +93,21 @@ class Home extends React.Component {
             </div>
           ))}
         </>
+      );
+    } else if (
+      (this.state.feed.data
+      && Array.isArray(this.state.feed.data)
+      && this.state.feed.data.length === 0)
+      ||
+      (this.state.feed.error)
+    ) {
+      jsxPostsList = (
+        <div className="mb-4">
+          <NothingFound 
+            title="Yikes... It looks like our server is not responding."
+            subtitle="Relax, breath, and try reloading the page."
+          />
+        </div>
       );
     }
 

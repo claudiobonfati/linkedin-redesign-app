@@ -5,6 +5,7 @@ import SimpleCard from '../../components/SimpleCard';
 import Polaroid from '../../components/Polaroid';
 import CurrentProfileOverview from '../../components/CurrentProfileOverview';
 import ProfileDisplay from '../../components/ProfileDisplay';
+import NothingFound from '../../components/NothingFound';
 import { useUser } from '../../graphql/hooks';
 import defaultVariants from '../../utils/FramerMotionDefault';
 
@@ -34,6 +35,17 @@ function MeDetails() {
             </div>
           </div>
           <div className="col-lg-6 col-md-8 py-4">
+            {(user
+            && user.error
+            && !user.loading)
+            && (
+              <div className="mb-4">
+                <NothingFound
+                  title="Yikes... It looks like our server is not responding."
+                  subtitle="Relax, breath, and try reloading the page."
+                />
+              </div>
+            )}
             {(user
             && user.data
             && !user.error

@@ -18,8 +18,6 @@ const notificationsMenu = () => {
   const viewers = useViewers(0, 10);
   const requests = useRequests(0, 10);
 
-  console.log(notifications);
-
   const onClickButton = () => {
     if (context.data.tab === 'notifications') {
       context.dispatch({ type: 'CLOSE_TAB' });

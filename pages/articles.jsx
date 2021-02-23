@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Sticky from 'react-sticky-el';
 import CurrentProfileOverview from '../components/CurrentProfileOverview';
 import Post from '../components/Post';
+import NothingFound from '../components/NothingFound';
 import { fetchMoreArticles } from '../graphql/hooks';
 import defaultVariants from '../utils/FramerMotionDefault';
 
@@ -95,6 +96,21 @@ class Articles extends React.Component {
             </div>
           ))}
         </>
+      );
+    } else if (
+      (this.state.feed.data
+      && Array.isArray(this.state.feed.data)
+      && this.state.feed.data.length === 0)
+      ||
+      (this.state.feed.error)
+    ) {
+      jsxArticlesList = (
+        <div className="mb-4">
+          <NothingFound 
+            title="Yikes... It looks like our server is not responding."
+            subtitle="Relax, breath, and try reloading the page."
+          />
+        </div>
       );
     }
 
