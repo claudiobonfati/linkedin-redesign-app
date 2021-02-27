@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { TweenMax, Power3 } from 'gsap';
 import Link from 'next/link';
+import FeatherIcon from 'feather-icons-react';
 import styles from './MessagesMenu.module.sass';
 import ProfileDisplay from '../ProfileDisplay';
 import { useHeader } from '../../context/Header';
@@ -67,7 +68,7 @@ const messagesButton = () => {
         type="button"
         onClick={onClickButton}
       >
-        <span className="lnr lnr-bubble" />
+        <FeatherIcon icon="message-square" size="20" strokeWidth="1.2" />
       </button>
       <div className={styles.wrapperDrop} ref={(ref) => { dropRef = ref; }}>
         <div className={styles.dropHeader}>
@@ -77,7 +78,7 @@ const messagesButton = () => {
           <div className={styles.dropHeaderButton}>
             <Link href="/messages/all" scroll={false}>
               <a title="New message">
-                <span className="lnr lnr-cross" />
+                <FeatherIcon icon="plus" size="20" strokeWidth="1.2" />
               </a>
             </Link>
           </div>
@@ -87,7 +88,7 @@ const messagesButton = () => {
         && (
           <div className="px-4">
             {messages.data.map((item) => (
-              <div className={`py-4 ${styles.dropContentItem}`}>
+              <div className={`py-4 ${styles.dropContentItem}`} key={item.id}>
                 <Link href="/messages/all" scroll={false}>
                   <a title="Open messages">
                     <ProfileDisplay

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Image } from 'react-image-and-background-image-fade';
+import FeatherIcon from 'feather-icons-react';
 import styles from './ProfileOverview.module.sass';
 import MaskNumber from '../utils/MaskNumber';
 
@@ -55,22 +56,22 @@ const profileOverview = (props) => (
       <div className={styles.socialNetworks}>
         {props.email
         && (
-          <a href="https://google.com" className={styles.item}>
-            <span className="lnr lnr-earth" />
+          <a href={`mailto:${props.email}`} className={styles.item}>
+            <FeatherIcon icon="globe" size="16" strokeWidth="1" fill />
             {props.email}
           </a>
         )}
         {props.twitter
         && (
-          <a href="https://google.com" className={styles.item}>
-            <span className="lnr lnr-earth" />
+          <a href="https://twitter.com" target="_blank" rel="noreferrer" className={styles.item}>
+            <FeatherIcon icon="twitter" size="16" strokeWidth="1" fill />
             {props.twitter}
           </a>
         )}
         {props.skype
         && (
-          <a href="https://google.com" className={styles.item}>
-            <span className="lnr lnr-earth" />
+          <a href="https://facebook.com" target="_blank" rel="noreferrer" className={styles.item}>
+            <FeatherIcon icon="facebook" size="16" strokeWidth="1" fill />
             {props.skype}
           </a>
         )}

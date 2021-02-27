@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import FeatherIcon from 'feather-icons-react';
 import styles from './LikeButton.module.sass';
 import MaskNumber from '../utils/MaskNumber';
 
@@ -16,7 +17,7 @@ const likeButton = (props) => {
       type="button"
       onClick={likeHandle}
     >
-      <span className="lnr lnr-heart" />
+      <FeatherIcon icon="heart" size="20" strokeWidth="1.2" />
       <div className={styles.buttonLabel}>
         {liked ? MaskNumber(props.likes + 1) : MaskNumber(props.likes) }
       </div>

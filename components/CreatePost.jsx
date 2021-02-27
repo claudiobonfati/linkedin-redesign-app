@@ -6,6 +6,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import styles from './CreatePost.module.sass';
 import Post from './Post';
 import { getSimpleUser } from '../graphql/hooks';
+import FeatherIcon from 'feather-icons-react';
 
 class CreatePost extends React.Component {
   constructor(props) {
@@ -221,7 +222,7 @@ class CreatePost extends React.Component {
                 <li className={this.state.currentTab === 'update' ? styles.activeItem : ''}>
                   <button type="button" onClick={() => this.activateTab('update')}>
                     <div className={`color-blue ${styles.icon}`}>
-                      <span className="lnr lnr-pencil" />
+                      <FeatherIcon icon="edit-2" size="18" strokeWidth="1.2" />
                     </div>
                     <span className="d-none d-md-inline">
                       Share an updade
@@ -234,7 +235,7 @@ class CreatePost extends React.Component {
                 <li className={this.state.currentTab === 'upload' ? styles.activeItem : ''}>
                   <button type="button" onClick={() => this.activateTab('upload')}>
                     <div className={`color-yellow ${styles.icon}`}>
-                      <span className="lnr lnr-camera" />
+                      <FeatherIcon icon="camera" size="18" strokeWidth="1.2" />
                     </div>
                     <span className="d-none d-md-inline">
                       Upload a photo
@@ -247,7 +248,7 @@ class CreatePost extends React.Component {
                 <li className={this.state.currentTab === 'article' ? styles.activeItem : ''}>
                   <button type="button" onClick={() => this.activateTab('article')}>
                     <div className={`color-green ${styles.icon}`}>
-                      <span className="lnr lnr-bookmark" />
+                      <FeatherIcon icon="book-open" size="18" strokeWidth="1.2" />
                     </div>
                     <span className="d-none d-md-inline">
                       Write an article
@@ -288,7 +289,7 @@ class CreatePost extends React.Component {
                 aria-expanded="false"
                 type="button"
               >
-                x
+                <FeatherIcon icon="x" size="16" strokeWidth="1.2" />
               </button>
               {this.state.imageFiles.map((file) => <img src={file.preview} alt="Upload" className="w-100 rounded" />)}
             </div>

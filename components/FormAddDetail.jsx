@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { TimelineMax, Power3 } from 'gsap';
+import FeatherIcon from 'feather-icons-react';
 import styles from './FormAddDetail.module.sass';
 
 const formAddDetail = (props) => {
@@ -71,7 +72,7 @@ const formAddDetail = (props) => {
               onClick={() => { toggleForm('open'); }}
               ref={(ref) => { openButtonRef = ref; }}
             >
-              <span className={`${styles.icon} lnr lnr-heart`} />
+              <FeatherIcon icon="heart" size="40" strokeWidth="1" className={styles.icon} />
             </button>
             <section
               className={styles.formContentWrapper}
@@ -84,7 +85,7 @@ const formAddDetail = (props) => {
                   type="button"
                   onClick={() => { toggleForm('close'); }}
                 >
-                  X
+                  <FeatherIcon icon="x" size="20" strokeWidth="1" className={styles.icon} />
                 </button>
               </header>
               <div className={styles.form}>

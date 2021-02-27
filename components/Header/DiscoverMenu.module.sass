@@ -13,20 +13,15 @@
   cursor: pointer
   outline: inherit
   transition: color .1s ease-out
+  user-select: none
   &:hover,
   &.buttonActive
     color: $color-blue
   &.buttonActive
-    span
+    svg
       transform: scaleY(-1)
-  span
-    display: inline-block
-    transform-origin: 0px 4px
-    width: 15px
-    height: 15px
-    font-size: 10px
-    font-weight: bold
-    padding-left: 8px
+  svg
+    margin-left: 5px
     transition: transform .1s ease-out
 
 .wrapperDrop

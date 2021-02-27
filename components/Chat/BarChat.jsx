@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import { motion } from 'framer-motion';
+import FeatherIcon from 'feather-icons-react';
 import ProfileDisplay from '../ProfileDisplay';
 import styles from './BarChat.module.sass';
 import { useChat } from '../../context/Chat';
@@ -56,7 +57,7 @@ const barChat = () => {
             type="button"
             onClick={() => context.dispatch({ type: 'SET_PAGE', payload: 'Contacts' })}
           >
-            <span className="lnr lnr-chevron-left" />
+            <FeatherIcon icon="chevron-left" size="20" strokeWidth="1.2" />
           </button>
           <button
             className={styles.profileButton}
@@ -76,7 +77,14 @@ const barChat = () => {
           type="button"
           onClick={() => context.dispatch({ type: 'TOGGLE_FULLSCREEN' })}
         >
-          <span className="lnr lnr-frame-expand" />
+          {!context.data.fullScreen
+          && (
+            <FeatherIcon icon="maximize" size="20" strokeWidth="1.2" />
+          )}
+          {context.data.fullScreen
+          && (
+            <FeatherIcon icon="minimize" size="20" strokeWidth="1.2" />
+          )}
         </button>
       </div>
       <div className={styles.conversationWrapper}>
@@ -151,7 +159,7 @@ const barChat = () => {
             type="submit"
             onClick={sendMessage}
           >
-            <span className="lnr lnr-location" />
+            <FeatherIcon icon="send" size="20" strokeWidth="1.2" />
           </button>
         </div>
       </div>

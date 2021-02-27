@@ -90,16 +90,20 @@
     color: $color-gray-medium
     text-decoration: none
     padding: 10px 15px
-
+    text-overflow: ellipsis
+    overflow: hidden
+    white-space: nowrap
     &:active,
     &:visited,
     &:hover
       color: $color-gray-medium
       text-decoration: none
-    span
+    svg
       font-weight: bold
       vertical-align: text-bottom
       margin-right: 10px
+      color: white
+      fill: $color-gray-medium
 
 
 @media (max-width: map-get($breakpoints, 'md'))

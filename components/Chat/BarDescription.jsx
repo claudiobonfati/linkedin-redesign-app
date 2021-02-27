@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image } from 'react-image-and-background-image-fade';
 import Link from 'next/link';
+import FeatherIcon from 'feather-icons-react';
 import styles from './BarDescription.module.sass';
 import { useChat } from '../../context/Chat';
 
@@ -20,7 +21,7 @@ const barDescription = () => {
           type="button"
           onClick={() => context.dispatch({ type: 'SET_PAGE', payload: 'Chat' })}
         >
-          <span className="lnr lnr-cross" />
+          <FeatherIcon icon="x" size="20" strokeWidth="1.2" />
         </button>
       </div>
       <div className={styles.content}>
@@ -43,16 +44,16 @@ const barDescription = () => {
           {`Active ${context.data.contact.User.lastOnline}`}
         </div>
         <div className={styles.socialNetworks}>
-          <a href="https://google.com" className={styles.item}>
-            <span className="lnr lnr-earth" />
+          <a href={`mailto:${context.data.contact.User.email}`} className={styles.item}>
+            <FeatherIcon icon="globe" size="16" strokeWidth="1" fill />
             {context.data.contact.User.email}
           </a>
-          <a href="https://google.com" className={styles.item}>
-            <span className="lnr lnr-earth" />
+          <a href="https://twitter.com" target="_blank" rel="noreferrer" className={styles.item}>
+            <FeatherIcon icon="twitter" size="16" strokeWidth="1" fill />
             {context.data.contact.User.twitter}
           </a>
-          <a href="https://google.com" className={styles.item}>
-            <span className="lnr lnr-earth" />
+          <a href="https://facebook.com" target="_blank" rel="noreferrer" className={styles.item}>
+            <FeatherIcon icon="facebook" size="16" strokeWidth="1" fill />
             {context.data.contact.User.skype}
           </a>
         </div>

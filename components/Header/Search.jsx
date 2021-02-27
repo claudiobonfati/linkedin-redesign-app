@@ -4,6 +4,7 @@ import React, {
 import { useRouter } from 'next/router';
 import { TimelineMax, Power3 } from 'gsap';
 import PropTypes from 'prop-types';
+import FeatherIcon from 'feather-icons-react';
 import ProfileDisplay from '../ProfileDisplay';
 import styles from './Search.module.sass';
 import { useHeader } from '../../context/Header';
@@ -171,7 +172,7 @@ const search = (props) => {
             type="button"
             onClick={handleClearTerm}
           >
-            <span className="lnr lnr-cross" />
+            <FeatherIcon icon="x" size="20" strokeWidth="1.2" />
           </button>
         </div>
         <input
@@ -190,7 +191,7 @@ const search = (props) => {
           aria-label="Search"
           type="text"
         />
-        <span className={`lnr lnr-magnifier ${styles.searchIcon}`} />
+        <FeatherIcon icon="search" size="20" strokeWidth="1.2" className={styles.searchIcon} />
       </div>
       <div className={styles.wrapperDrop} ref={(ref) => { dropRef = ref; }}>
         <div className="container py-2 py-sm-5">

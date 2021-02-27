@@ -4,6 +4,7 @@ import React, {
 import { TimelineMax, Power3 } from 'gsap';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import FeatherIcon from 'feather-icons-react';
 import styles from './DiscoverMenu.module.sass';
 import Search from './Search';
 import { useHeader } from '../../context/Header';
@@ -82,12 +83,15 @@ const discoverMenu = () => {
     <div className={`${styles.wrapper}`}>
       <button
         aria-expanded="false"
-        className={`${styles.buttonSelect} ${context.data.tab === 'discover' ? styles.buttonActive : ''}`}
+        className={`
+          ${styles.buttonSelect} 
+          ${context.data.tab === 'discover' ? styles.buttonActive : ''}
+        `}
         type="button"
         onClick={onClickButton}
       >
         {title}
-        <span className="lnr lnr-chevron-down" />
+        <FeatherIcon icon="chevron-down" size="20" strokeWidth="1.2" />
       </button>
       <div className={styles.wrapperDrop} ref={(ref) => { dropRef = ref; }}>
         <div className="container py-2 py-sm-5">

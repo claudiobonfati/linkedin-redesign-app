@@ -10,8 +10,10 @@
   align-items: center
   font-weight: 300
   position: relative
-  span
-    font-size: 20px
+  svg
+    opacity: 1
+    margin-right: 5px
+    transition: opacity .2s ease-out
   .buttonLabel
     margin-left: 5px
   &::before 
@@ -29,9 +31,12 @@
     opacity: .001
     transition: opacity .1s ease-out
 
-.heartAnimation::before
-  opacity: 1
-  animation: heart-burst .8s steps(28) forwards
+.heartAnimation
+  svg
+    opacity: 0
+  &::before
+    opacity: 1
+    animation: heart-burst .8s steps(28) forwards
 
 @keyframes heart-burst
   0%

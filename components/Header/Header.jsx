@@ -52,7 +52,7 @@ const header = () => {
               <NotificationsMenu />
             </ApolloProvider>
             <Link href="/me/details" scroll={false}>
-              <a className={`ml-3 ${styles.navBarButtons}`}>
+              <a title="My profile" className={`ml-3 ${styles.navBarButtons}`}>
                 <Image
                   src="/images/me.jpg"
                   alt="Profile picture"

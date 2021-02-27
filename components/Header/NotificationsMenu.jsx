@@ -4,6 +4,7 @@ import React, {
 import { Image } from 'react-image-and-background-image-fade';
 import { TweenMax, Power3 } from 'gsap';
 import Link from 'next/link';
+import FeatherIcon from 'feather-icons-react';
 import styles from './NotificationsMenu.module.sass';
 import ProfileDisplay from '../ProfileDisplay';
 import { useHeader } from '../../context/Header';
@@ -73,7 +74,7 @@ const notificationsMenu = () => {
         type="button"
         onClick={onClickButton}
       >
-        <span className="lnr lnr-flag" />
+        <FeatherIcon icon="flag" size="20" strokeWidth="1.2" />
       </button>
       <div className={styles.wrapperDrop} ref={(ref) => { dropRef = ref; }}>
         <nav className={styles.dropHeader}>
