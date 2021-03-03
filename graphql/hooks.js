@@ -3,21 +3,22 @@ import {
   GET_POSTS,
   GET_USERS,
   GET_USERS_POSTS,
-  GET_COMPANIES_POSTS,
+  GET_USER_POSTS,
   GET_PROFILE,
   GET_SIMPLE_USER,
   GET_ARTICLES,
-  GET_USER_POSTS,
   GET_COMPANY,
+  GET_COMPANIES,
+  GET_COMPANIES_POSTS,
   GET_CHAT_USERS_LIST,
   GET_CHAT_UNREAD_USERS_LIST,
   GET_CHAT_CONVERSATION,
-  SEARCH_USERS_COMPANIES,
-  SEARCH_POSTS,
   GET_NOTIFICATIONS,
   GET_VIEWERS,
   GET_REQUESTS,
   GET_NOTIFICATION_MESSAGES,
+  SEARCH_USERS_COMPANIES,
+  SEARCH_POSTS,
 } from './queries';
 import ApolloClient from './apollo';
 
@@ -164,6 +165,117 @@ export const useContacts = (page, perPage, exclude) => {
       loading,
       error,
       data: data.allUsers.filter((user) => user.id !== exclude),
+    };
+  }
+
+  return {
+    loading,
+    error,
+    data,
+  };
+};
+
+export const getRandomUsers = async (limit, exclude) => {
+  let result = await ApolloClient.query({
+    query: GET_USERS,
+    variables: {
+      page: 0,
+      perPage: 100,
+    },
+  });
+
+  let newResult = result.data.allUsers.filter((user) => user.id != exclude);
+  newResult = newResult.map((x) => x);
+  newResult = newResult.sort(() => Math.random() - 0.5);
+  newResult = newResult.slice(0, limit);
+
+  return newResult;
+};
+
+export const useRandomUsers = (limit, exclude = null) => {
+  const { loading, error, data } = useQuery(GET_USERS, {
+    variables: {
+      page: 0,
+      perPage: 100,
+    },
+  });
+
+  if (!loading && data) {
+    let newResult;
+
+    if (exclude) {
+      newResult = data.allUsers.filter((company) => company.id != exclude);
+      newResult = newResult.map((x) => x);
+    } else {
+      newResult = data.allUsers.map((x) => x);
+    }
+
+    newResult = newResult.sort(() => Math.random() - 0.5);
+    newResult = newResult.slice(0, limit);
+
+    return {
+      loading,
+      error,
+      data: newResult,
+    };
+  }
+
+  return {
+    loading,
+    error,
+    data,
+  };
+};
+
+export const getRandomCompanies = async (limit, exclude = null) => {
+  let result = await ApolloClient.query({
+    query: GET_COMPANIES,
+    variables: {
+      page: 0,
+      perPage: 100,
+    },
+  });
+
+  let newResult;
+
+  if (exclude) {
+    newResult = result.data.allCompanies.filter((company) => company.id != exclude);
+    newResult = newResult.map((x) => x);
+  } else {
+    newResult = result.data.allCompanies.map((x) => x);
+  }
+
+  newResult = newResult.sort(() => Math.random() - 0.5);
+  newResult = newResult.slice(0, limit);
+
+  return newResult;
+};
+
+export const useRandomCompanies = (limit, exclude = null) => {
+  const { loading, error, data } = useQuery(GET_COMPANIES, {
+    variables: {
+      page: 0,
+      perPage: 100,
+    },
+  });
+
+  if (!loading && data) {
+    let newResult;
+
+    if (exclude) {
+      newResult = data.allCompanies.filter((company) => company.id != exclude);
+      newResult = newResult.map((x) => x);
+    } else {
+      newResult = data.allCompanies.map((x) => x);
+    }
+
+    newResult = newResult.sort(() => Math.random() - 0.5);
+    newResult = newResult.slice(0, limit);
+
+    return {
+      loading,
+      error,
+      data: newResult,
     };
   }
 

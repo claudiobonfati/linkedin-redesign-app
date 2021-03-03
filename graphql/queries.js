@@ -275,6 +275,18 @@ export const GET_USERS = gql`
   }
 `;
 
+export const GET_COMPANIES = gql`
+  query GetCompanies($page: Int!, $perPage: Int!) {
+    allCompanies(page: $page, perPage: $perPage) {
+      id
+      name
+      nameslug
+      logo
+      industry
+    }
+  }
+`;
+
 export const GET_COMPANY = gql`
   query GetCompany($nameslug: String!) {
     allCompanies(page: 0, perPage: 1, filter: { 
