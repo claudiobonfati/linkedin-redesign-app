@@ -136,6 +136,7 @@ class ProfilePosts extends React.Component {
                 && (
                   <Sticky topOffset={-20} scrollElement=".stickyArea">
                     <ProfileOverview
+                      pro={this.state.user.data.pro}
                       photo={this.state.user.data.photo}
                       name={this.state.user.data.name}
                       position={this.state.user.data.headline}

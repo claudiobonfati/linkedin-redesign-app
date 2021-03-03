@@ -44,6 +44,7 @@ const profileDetails = (props) => {
               && (
                 <Sticky topOffset={-20} scrollElement=".stickyArea">
                   <ProfileOverview
+                    pro={user.data.pro}
                     photo={user.data.photo}
                     name={user.data.name}
                     position={user.data.headline}

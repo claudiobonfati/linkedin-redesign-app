@@ -4,6 +4,8 @@ import Sticky from 'react-sticky-el';
 import SimpleCard from '../../components/SimpleCard';
 import Polaroid from '../../components/Polaroid';
 import CurrentProfileOverview from '../../components/CurrentProfileOverview';
+import ChartStats from '../../components/ChartStats';
+
 import ProfileDisplay from '../../components/ProfileDisplay';
 import NothingFound from '../../components/NothingFound';
 import { useUser } from '../../graphql/hooks';
@@ -172,25 +174,8 @@ function MeDetails() {
             )}
           </div>
           <div className="col-lg-3 col-md-4 py-4 d-none d-lg-block">
-            <SimpleCard title="Keep in touch">
-              <div className="w-100">
-                <div className="pb-3">
-                  <ProfileDisplay
-                    image="/images/me.jpg"
-                    imageSize={50}
-                    title="Jenson Kent"
-                    subtitle="CEO and founder"
-                  />
-                </div>
-                <div className="py-3">
-                  <ProfileDisplay
-                    image="/images/me.jpg"
-                    imageSize={50}
-                    title="Emily Kilimanjaro"
-                    subtitle="UI designer"
-                  />
-                </div>
-              </div>
+            <SimpleCard title="My stats">
+              <ChartStats views="653" visitors="325" />
             </SimpleCard>
           </div>
         </main>
