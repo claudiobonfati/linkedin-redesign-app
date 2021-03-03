@@ -4,9 +4,11 @@ import { motion } from 'framer-motion';
 import Sticky from 'react-sticky-el';
 import CurrentProfileOverview from '../components/CurrentProfileOverview';
 import CreatePost from '../components/CreatePost';
+import SimpleCard from '../components/SimpleCard';
+import ProfileDisplay from '../components/ProfileDisplay';
 import Post from '../components/Post';
 import NothingFound from '../components/NothingFound';
-import { fetchMorePosts } from '../graphql/hooks';
+import { fetchMorePosts, getRandomUsers } from '../graphql/hooks';
 import defaultVariants from '../utils/FramerMotionDefault';
 
 class Home extends React.Component {
@@ -17,6 +19,7 @@ class Home extends React.Component {
       feedPage: 0,
       feedPerPage: 5,
       feedEnded: false,
+      keepInTouch: [],
       feed: {
         loading: false,
         error: false,
@@ -31,7 +34,11 @@ class Home extends React.Component {
     // Reseting scroll manually (FramerMotion dependency)
     window.scrollTo(0, 0);
 
+    // Request initial feed
     this.fetchPosts();
+
+    // Request "keep in touch" profiles
+    this.fetchKeepInTouch();
   }
 
   async fetchPosts() {
@@ -60,6 +67,16 @@ class Home extends React.Component {
     } catch (e) {
       console.error(e);
     }
+  }
+
+  async fetchKeepInTouch() {
+    try {
+      let result = await getRandomUsers(4, 1);
+
+      this.setState(() => ({
+        keepInTouch: result,
+      }));
+    } catch (e) { }
   }
 
   render() {
@@ -111,6 +128,29 @@ class Home extends React.Component {
       );
     }
 
+    // "Keep in touch" profiles
+    let jsxKeepInTouchList = null;
+
+    if (this.state.keepInTouch
+        && Array.isArray(this.state.keepInTouch)
+        && this.state.keepInTouch.length > 0) {
+      jsxKeepInTouchList = (
+        <>
+          {this.state.keepInTouch.map((profile, index) => (
+            <div className={`${index + 1 === this.state.keepInTouch.length ? '' : 'pb-3'}`} key={profile.id}>
+              <ProfileDisplay
+                image={profile.photo}
+                imageSize={50}
+                title={profile.name}
+                subtitle={profile.headline}
+                link={`/profile/${profile.username}/details`}
+              />
+            </div>
+          ))}
+        </>
+      );
+    }
+
     return (
       <motion.div
         className="w-100"
@@ -137,7 +177,11 @@ class Home extends React.Component {
             <div className="col-lg-3 col-md-4 col-sm-6 pt-4 order-md-3 order-sm-2 d-none d-sm-block">
               <div className="sticky-aside-content">
                 <Sticky topOffset={-20} scrollElement=".stickyArea">
-                  <CurrentProfileOverview simple />
+                  <SimpleCard title="Keep in touch">
+                    <div className="w-100">
+                      {jsxKeepInTouchList}
+                    </div>
+                  </SimpleCard>
                 </Sticky>
               </div>
             </div>

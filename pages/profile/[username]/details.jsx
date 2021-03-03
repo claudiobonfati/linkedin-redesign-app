@@ -6,7 +6,7 @@ import SimpleCard from '../../../components/SimpleCard';
 import Polaroid from '../../../components/Polaroid';
 import ProfileOverview from '../../../components/ProfileOverview';
 import ProfileDisplay from '../../../components/ProfileDisplay';
-import { useUser } from '../../../graphql/hooks';
+import { useUser, useRandomUsers } from '../../../graphql/hooks';
 import defaultVariants from '../../../utils/FramerMotionDefault';
 
 const checkRouterRerender = (prevProps, nextProps) => {
@@ -19,6 +19,7 @@ const checkRouterRerender = (prevProps, nextProps) => {
 const profileDetails = (props) => {
   const { username } = props.router.query;
   const user = useUser(username);
+  let similarProfiles = useRandomUsers(4, user?.data?.id);
 
   useEffect(() => {
     // Reseting scroll manually (FramerMotion dependency)
@@ -184,42 +185,33 @@ const profileDetails = (props) => {
             )}
           </div>
           <div className="col-lg-3 col-md-4 py-4 d-none d-lg-block">
-            <SimpleCard title="Keep in touch">
-              <div className="w-100">
-                <div className="pb-3">
-                  <ProfileDisplay
-                    image="/images/me.jpg"
-                    imageSize={50}
-                    title="Jenson Kent"
-                    subtitle="CEO and founder"
-                  />
-                </div>
-                <div className="py-3">
-                  <ProfileDisplay
-                    image="/images/me.jpg"
-                    imageSize={50}
-                    title="Emily Kilimanjaro"
-                    subtitle="UI designer"
-                  />
-                </div>
-                <div className="py-3">
-                  <ProfileDisplay
-                    image="/images/me.jpg"
-                    imageSize={50}
-                    title="James Johns"
-                    subtitle="Project manager"
-                  />
-                </div>
-                <div className="pt-3">
-                  <ProfileDisplay
-                    image="/images/me.jpg"
-                    imageSize={50}
-                    title="CTO"
-                    subtitle="is now a connection"
-                  />
-                </div>
-              </div>
-            </SimpleCard>
+            <div className="sticky-aside-content">
+              <Sticky topOffset={-20} scrollElement=".stickyArea">
+                <SimpleCard title="Similar profiles">
+                  {(similarProfiles
+                  && !similarProfiles.error
+                  && !similarProfiles.loading
+                  && similarProfiles.data
+                  && Array.isArray(similarProfiles.data)
+                  && similarProfiles.data.length > 0)
+                  && (
+                    <div className="w-100">
+                      {similarProfiles.data.map((item, index) => (
+                        <div className={`${index + 1 === similarProfiles.data.length ? '' : 'pb-3'}`} key={item.id}>
+                          <ProfileDisplay
+                            image={item.photo}
+                            imageSize={50}
+                            title={item.name}
+                            subtitle={item.headline}
+                            link={`/profile/${item.username}/details`}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </SimpleCard>
+              </Sticky>
+            </div>
           </div>
         </main>
       </div>

@@ -6,7 +6,7 @@ import Sticky from 'react-sticky-el';
 import ProfileOverview from '../../../components/ProfileOverview';
 import Post from '../../../components/Post';
 import SimpleCard from '../../../components/SimpleCard';
-import { fetchMoreUserPosts, getSimpleUser } from '../../../graphql/hooks';
+import { fetchMoreUserPosts, getSimpleUser, getRandomUsers } from '../../../graphql/hooks';
 import ProfileDisplay from '../../../components/ProfileDisplay';
 import defaultVariants from '../../../utils/FramerMotionDefault';
 
@@ -24,6 +24,7 @@ class ProfilePosts extends React.Component {
         data: [],
       },
       user: null,
+      keepInTouch: []
     };
 
     this.fetchPosts = this.fetchPosts.bind(this);
@@ -33,9 +34,13 @@ class ProfilePosts extends React.Component {
     // Reseting scroll manually (FramerMotion dependency)
     window.scrollTo(0, 0);
 
+    // Request initial feed
     if (this.props.router.query.username) {
       this.getInitialPosts();
     }
+
+    // Request "keep in touch" profiles
+    this.fetchKeepInTouch();
   }
 
   componentDidUpdate(prevProps) {
@@ -43,6 +48,16 @@ class ProfilePosts extends React.Component {
     && this.props.router.query.username !== undefined) {
       this.getInitialPosts();
     }
+  }
+
+  async fetchKeepInTouch() {
+    try {
+      let result = await getRandomUsers(4);
+
+      this.setState(() => ({
+        keepInTouch: result,
+      }));
+    } catch (e) { }
   }
 
   async getInitialPosts() {
@@ -118,6 +133,29 @@ class ProfilePosts extends React.Component {
       );
     }
 
+    // "Keep in touch" profiles
+    let jsxKeepInTouchList = null;
+
+    if (this.state.keepInTouch
+        && Array.isArray(this.state.keepInTouch)
+        && this.state.keepInTouch.length > 0) {
+      jsxKeepInTouchList = (
+        <>
+          {this.state.keepInTouch.map((profile, index) => (
+            <div className={`${index + 1 === this.state.keepInTouch.length ? '' : 'pb-3'}`} key={profile.id}>
+              <ProfileDisplay
+                image={profile.photo}
+                imageSize={50}
+                title={profile.name}
+                subtitle={profile.headline}
+                link={`/profile/${profile.username}/details`}
+              />
+            </div>
+          ))}
+        </>
+      );
+    }
+
     return (
       <motion.div
         className="w-100"
@@ -153,42 +191,15 @@ class ProfilePosts extends React.Component {
               {jsxPostsList}
             </div>
             <div className="col-lg-3 col-md-4 pt-4 d-none d-md-block">
-              <SimpleCard title="Keep in touch">
-                <div className="w-100">
-                  <div className="pb-3">
-                    <ProfileDisplay
-                      image="/images/me.jpg"
-                      imageSize={50}
-                      title="Jenson Kent"
-                      subtitle="CEO and founder"
-                    />
-                  </div>
-                  <div className="py-3">
-                    <ProfileDisplay
-                      image="/images/me.jpg"
-                      imageSize={50}
-                      title="Emily Kilimanjaro"
-                      subtitle="UI designer"
-                    />
-                  </div>
-                  <div className="py-3">
-                    <ProfileDisplay
-                      image="/images/me.jpg"
-                      imageSize={50}
-                      title="James Johns"
-                      subtitle="Project manager"
-                    />
-                  </div>
-                  <div className="pt-3">
-                    <ProfileDisplay
-                      image="/images/me.jpg"
-                      imageSize={50}
-                      title="CTO"
-                      subtitle="is now a connection"
-                    />
-                  </div>
-                </div>
-              </SimpleCard>
+              <div className="sticky-aside-content">
+                <Sticky topOffset={-20} scrollElement=".stickyArea">
+                  <SimpleCard title="Keep in touch">
+                    <div className="w-100">
+                      {jsxKeepInTouchList}
+                    </div>
+                  </SimpleCard>
+                </Sticky>
+              </div>
             </div>
           </main>
         </div>

@@ -5,7 +5,6 @@ import SimpleCard from '../../components/SimpleCard';
 import Polaroid from '../../components/Polaroid';
 import CurrentProfileOverview from '../../components/CurrentProfileOverview';
 import ChartStats from '../../components/ChartStats';
-
 import ProfileDisplay from '../../components/ProfileDisplay';
 import NothingFound from '../../components/NothingFound';
 import { useUser } from '../../graphql/hooks';

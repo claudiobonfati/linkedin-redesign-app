@@ -137,7 +137,7 @@ class MePosts extends React.Component {
               {jsxPostsList}
             </div>
             <div className="col-lg-3 col-md-4 py-4 d-none d-lg-block">
-              <SimpleCard title="Keep in touch">
+              <SimpleCard title="Most engaged">
                 <div className="w-100">
                   <div className="pb-3">
                     <ProfileDisplay

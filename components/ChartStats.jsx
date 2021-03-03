@@ -42,12 +42,18 @@ const chartStats = (props) => {
             gridLines: {
               display: false,
             },
+            ticks: {
+              fontColor: '#939495',
+            },
           }],
           yAxes: [{
             color: 'rgba(0, 0, 0, 0)',
             display: false,
             gridLines: {
               display: false,
+            },
+            ticks: {
+              min: 18,
             },
           }],
         },

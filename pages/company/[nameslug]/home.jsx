@@ -7,7 +7,7 @@ import SimpleCard from '../../../components/SimpleCard';
 import Jumbotron from '../../../components/Jumbotron';
 import Post from '../../../components/Post';
 import ProfileDisplay from '../../../components/ProfileDisplay';
-import { useCompany } from '../../../graphql/hooks';
+import { useCompany, useRandomCompanies } from '../../../graphql/hooks';
 import defaultVariants from '../../../utils/FramerMotionDefault';
 
 const checkRouterRerender = (prevProps, nextProps) => {
@@ -20,6 +20,7 @@ const checkRouterRerender = (prevProps, nextProps) => {
 const companyHome = (props) => {
   const { nameslug } = props.router.query;
   const company = useCompany(nameslug);
+  const alsoViewed = useRandomCompanies(5);
 
   useEffect(() => {
     // Reseting scroll manually (FramerMotion dependency)
@@ -137,42 +138,33 @@ const companyHome = (props) => {
             )}
           </div>
           <div className="col-lg-3 col-md-4 py-4 d-none d-lg-block">
-            <SimpleCard title="Keep in touch">
-              <div className="w-100">
-                <div className="pb-3">
-                  <ProfileDisplay
-                    image="/images/me.jpg"
-                    imageSize={50}
-                    title="Jenson Kent"
-                    subtitle="CEO and founder"
-                  />
-                </div>
-                <div className="py-3">
-                  <ProfileDisplay
-                    image="/images/me.jpg"
-                    imageSize={50}
-                    title="Emily Kilimanjaro"
-                    subtitle="UI designer"
-                  />
-                </div>
-                <div className="py-3">
-                  <ProfileDisplay
-                    image="/images/me.jpg"
-                    imageSize={50}
-                    title="James Johns"
-                    subtitle="Project manager"
-                  />
-                </div>
-                <div className="pt-3">
-                  <ProfileDisplay
-                    image="/images/me.jpg"
-                    imageSize={50}
-                    title="CTO"
-                    subtitle="is now a connection"
-                  />
-                </div>
-              </div>
-            </SimpleCard>
+            <div className="sticky-aside-content">
+              <Sticky topOffset={-20} scrollElement=".stickyArea">
+                <SimpleCard title="People also viewed">
+                  {(alsoViewed
+                  && !alsoViewed.error
+                  && !alsoViewed.loading
+                  && alsoViewed.data
+                  && Array.isArray(alsoViewed.data)
+                  && alsoViewed.data.length > 0)
+                  && (
+                    <div className="w-100">
+                      {alsoViewed.data.map((item, index) => (
+                        <div className={`${index + 1 === alsoViewed.data.length ? '' : 'pb-3'}`} key={item.id}>
+                          <ProfileDisplay
+                            image={item.logo}
+                            imageSize={50}
+                            title={item.name}
+                            subtitle={item.industry}
+                            link={`/company/${item.nameslug}/home`}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </SimpleCard>
+              </Sticky>
+            </div>
           </div>
         </main>
       </div>

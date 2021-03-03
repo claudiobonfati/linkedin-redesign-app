@@ -31,7 +31,7 @@ function MeContacts() {
                   title={contact.name}
                   subtitle={contact.headline}
                   rightButtonText="Message"
-                  rightButtonLink="https://www.google.com/"
+                  rightButtonLink="/messages/all"
                 />
               </div>
             ))}
