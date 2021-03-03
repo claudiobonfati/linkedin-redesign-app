@@ -117,6 +117,7 @@ export const GET_PROFILE = gql`
       username: $username 
     }) {
       id
+      pro
       name
       username
       photo
@@ -181,6 +182,7 @@ export const GET_SIMPLE_USER = gql`
       username: $username 
     }) {
       id
+      pro
       name
       username
       photo
@@ -234,6 +236,7 @@ export const GET_USER_POSTS = gql`
       likes
       User {
         id
+        pro
         name
         username
         photo
