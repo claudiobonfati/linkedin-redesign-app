@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import FeatherIcon from 'feather-icons-react';
 import ProfileDisplay from '../ProfileDisplay';
 import styles from './BarContacts.module.sass';
 import { useChat } from '../../context/Chat';
@@ -95,7 +96,7 @@ const barContacts = (props) => {
           aria-label="Search contact"
           type="text"
         />
-        <span className={`lnr lnr-magnifier ${styles.searchIcon}`} />
+        <FeatherIcon icon="search" size="20" strokeWidth="1.2" className={styles.searchIcon} />
       </div>
       <div className={styles.userListBox}>
         {jsxContactList}
