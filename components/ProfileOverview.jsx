@@ -8,18 +8,26 @@ import MaskNumber from '../utils/MaskNumber';
 
 const profileOverview = (props) => (
   <div className={styles.wrapper}>
-    <div className={styles.topInfoWrapper}>
+    <div
+      className={`
+        ${styles.topInfoWrapper}
+        ${props.pro ? styles.fullImage : ''}
+        ${props.pro ? styles.proTag : ''}
+      `}
+    >
       <div className={styles.photoWrapper}>
         <Image
           src={props.photo}
           alt="Profile"
         />
       </div>
-      <div className={styles.name}>
-        {props.name}
-      </div>
-      <div className={styles.position}>
-        {props.position}
+      <div className={styles.info}>
+        <div className={styles.name}>
+          {props.name}
+        </div>
+        <div className={styles.position}>
+          {props.position}
+        </div>
       </div>
     </div>
     <div className={styles.infoWrapper}>
@@ -81,6 +89,7 @@ const profileOverview = (props) => (
 );
 
 profileOverview.propTypes = {
+  pro: PropTypes.string,
   photo: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   position: PropTypes.string.isRequired,
@@ -93,6 +102,7 @@ profileOverview.propTypes = {
 };
 
 profileOverview.defaultProps = {
+  pro: false,
   actionMyProfile: false,
   views: null,
   email: null,
