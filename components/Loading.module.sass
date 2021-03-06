@@ -1,0 +1,42 @@
+@import ../styles/_variables
+
+.wrapper
+  display: inline-block
+  position: relative
+  width: 100%
+  height: 40px
+
+  div
+    position: absolute
+    top: 16px
+    width: 8px
+    height: 8px
+    border-radius: 50%
+    background: $color-gray-semilight
+    animation-timing-function: cubic-bezier(0, 1, 1, 0)
+
+    &:nth-child(1)
+      left: 50%
+      margin-left: -20px
+      animation: ellipsis 1.5s infinite
+      animation-delay: 0s
+
+    &:nth-child(2)
+      left: 50%
+      margin-left: -4px
+      animation: ellipsis 1.5s infinite
+      animation-delay: .4s
+
+    &:nth-child(3)
+      left: 50%
+      margin-left: 12px
+      animation: ellipsis 1.5s infinite
+      animation-delay: .8s
+
+@keyframes ellipsis
+  0%
+    opacity: .5
+  50%
+    opacity: 1
+  100%
+    opacity: .5
