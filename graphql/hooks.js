@@ -124,32 +124,54 @@ export const getSimpleUser = async (username) => {
 };
 
 export const fetchMoreArticles = async (page, perPage) => {
-  let result = await ApolloClient.query({
-    query: GET_ARTICLES,
-    variables: {
-      page,
-      perPage,
-    },
-  });
+  try {
+    let result = await ApolloClient.query({
+      query: GET_ARTICLES,
+      variables: {
+        page,
+        perPage,
+      },
+    });
 
-  result.data = result.data.allArticles;
+    result.data = result.data.allArticles;
+    result.loading = false;
+    result.error = false;
 
-  return result;
+    return result;
+  } catch (e) {
+    let result = {
+      loading: false,
+      error: true,
+    };
+
+    return result;
+  }
 };
 
 export const fetchMoreUserPosts = async (page, perPage, userId) => {
-  let result = await ApolloClient.query({
-    query: GET_USER_POSTS,
-    variables: {
-      page,
-      perPage,
-      userId,
-    },
-  });
+  try {
+    let result = await ApolloClient.query({
+      query: GET_USER_POSTS,
+      variables: {
+        page,
+        perPage,
+        userId,
+      },
+    });
 
-  result.data = result.data.allPosts;
+    result.data = result.data.allPosts;
+    result.loading = false;
+    result.error = false;
 
-  return result;
+    return result;
+  } catch (e) {
+    let result = {
+      loading: false,
+      error: true,
+    };
+
+    return result;
+  }
 };
 
 export const useContacts = (page, perPage, exclude) => {

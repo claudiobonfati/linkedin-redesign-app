@@ -1,7 +1,8 @@
 import React, { Fragment, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { withRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import Sticky from 'react-sticky-el';
+import Loading from '../../components/Loading';
 import SimpleCard from '../../components/SimpleCard';
 import CurrentProfileOverview from '../../components/CurrentProfileOverview';
 import ProfileDisplay from '../../components/ProfileDisplay';
@@ -9,18 +10,22 @@ import { useSearchUsersCompanies } from '../../graphql/hooks';
 import defaultVariants from '../../utils/FramerMotionDefault';
 import NothingFound from '../../components/NothingFound';
 
-function searchAll() {
-  const router = useRouter();
-  const result = useSearchUsersCompanies(router.query.keywords, 0, 30);
+const searchAll = (props) => {
+  const { keywords } = props.router.query;
+  const result = useSearchUsersCompanies(keywords, 0, 30);
 
   let jsxContactsList = null;
   let jsxCompaniesList = null;
   let jsxNothingFound = null;
+  let jsxLoading = null;
 
-  if (result
-  && !result.error
-  && !result.loading) { // Check if useSearchUsersCompanies hook is complete
-    if (result?.data?.allUsers
+  if (result.loading) {
+    jsxLoading = (
+      <Loading />
+    );
+  } else if (result
+  && !result.error) { // Check if useSearchUsersCompanies hook is complete
+    if (result.data.allUsers
     && result.data.allUsers.length > 0) { // Check if Users array exists
       jsxContactsList = (
         <>
@@ -38,15 +43,15 @@ function searchAll() {
                 imageSize={60}
                 title={contact.name}
                 subtitle={contact.headline}
-                rightButtonText="Message"
-                rightButtonLink="https://www.google.com/"
+                rightButtonText="See profile"
+                rightButtonLink={`/profile/${contact.username}/details`}
               />
             </div>
           ))}
         </>
       );
     }
-    if (result?.data?.allCompanies
+    if (result.data.allCompanies
     && result.data.allCompanies.length > 0) { // Check if Companies array exists
       jsxCompaniesList = (
         <>
@@ -71,7 +76,7 @@ function searchAll() {
       );
     }
     if (result.data.allUsers.length === 0
-    && result.data.allCompanies.length === 0) { // Check if Users array exists
+    && result.data.allCompanies.length === 0) {
       jsxNothingFound = (
         <NothingFound
           title="Sorry, but nothing matched your search criteria."
@@ -104,14 +109,17 @@ function searchAll() {
             </div>
           </div>
           <div className="col-lg-9 col-md-8 py-4">
-            {jsxNothingFound
-            && (
+            {jsxLoading && (
+              <div className="mb-4">
+                {jsxLoading}
+              </div>
+            )}
+            {jsxNothingFound && (
               <div className="mb-4">
                 {jsxNothingFound}
               </div>
             )}
-            {jsxContactsList
-            && (
+            {jsxContactsList && (
               <div className="mb-4">
                 <SimpleCard
                   title="People"
@@ -121,8 +129,7 @@ function searchAll() {
                 </SimpleCard>
               </div>
             )}
-            {jsxCompaniesList
-            && (
+            {jsxCompaniesList && (
               <div className="mb-4">
                 <SimpleCard
                   title="Companies"
@@ -137,6 +144,6 @@ function searchAll() {
       </div>
     </motion.div>
   );
-}
+};
 
-export default searchAll;
+export default withRouter(React.memo(searchAll, () => true));

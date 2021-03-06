@@ -5,7 +5,23 @@ import { ApolloProvider } from '@apollo/client';
 import { AnimatePresence } from 'framer-motion';
 import ApolloClient from '../graphql/apollo';
 import Layout from '../components/Layout';
+import { useTransitionFix } from '../utils/useTransitionFix';
 import '../styles/styles.sass';
+
+function LayoutWrapper({ children }) {
+  const transitionCallback = useTransitionFix();
+
+  // You can use hooks here
+  return (
+    <Layout>
+      <ApolloProvider client={ApolloClient}>
+        <AnimatePresence exitBeforeEnter onExitComplete={transitionCallback}>
+          {children}
+        </AnimatePresence>
+      </ApolloProvider>
+    </Layout>
+  );
+}
 
 class App extends NextApp {
   render() {
@@ -32,13 +48,9 @@ class App extends NextApp {
           <meta name="theme-color" content="#007FB2" />
           <title>Linkedin Redesign</title>
         </Head>
-        <Layout>
-          <ApolloProvider client={ApolloClient}>
-            <AnimatePresence exitBeforeEnter>
-              <Component {...pageProps} key={router.route} />
-            </AnimatePresence>
-          </ApolloProvider>
-        </Layout>
+        <LayoutWrapper>
+          <Component {...pageProps} key={router.asPath} />
+        </LayoutWrapper>
       </>
     );
   }

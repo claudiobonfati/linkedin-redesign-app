@@ -65,21 +65,21 @@ const profileOverview = (props) => (
         {props.email
         && (
           <a href={`mailto:${props.email}`} className={styles.item}>
-            <FeatherIcon icon="globe" size="16" strokeWidth="1" fill />
+            <FeatherIcon icon="globe" size="16" strokeWidth="1" fill="black" />
             {props.email}
           </a>
         )}
         {props.twitter
         && (
           <a href="https://twitter.com" target="_blank" rel="noreferrer" className={styles.item}>
-            <FeatherIcon icon="twitter" size="16" strokeWidth="1" fill />
+            <FeatherIcon icon="twitter" size="16" strokeWidth="1" fill="black" />
             {props.twitter}
           </a>
         )}
         {props.skype
         && (
           <a href="https://facebook.com" target="_blank" rel="noreferrer" className={styles.item}>
-            <FeatherIcon icon="facebook" size="16" strokeWidth="1" fill />
+            <FeatherIcon icon="facebook" size="16" strokeWidth="1" fill="black" />
             {props.skype}
           </a>
         )}
@@ -89,7 +89,7 @@ const profileOverview = (props) => (
 );
 
 profileOverview.propTypes = {
-  pro: PropTypes.string,
+  pro: PropTypes.bool,
   photo: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   position: PropTypes.string.isRequired,

@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Sticky from 'react-sticky-el';
+import Loading from '../../components/Loading';
 import SimpleCard from '../../components/SimpleCard';
 import CurrentProfileOverview from '../../components/CurrentProfileOverview';
 import ProfileDisplay from '../../components/ProfileDisplay';
@@ -14,8 +15,8 @@ function MeContacts() {
   let jsxContactsList = null;
 
   if (contacts
-      && !contacts.error
-      && !contacts.loading) {
+  && !contacts.error
+  && !contacts.loading) {
     jsxContactsList = (
       <>
         {(Array.isArray(contacts.data)
@@ -65,6 +66,12 @@ function MeContacts() {
           </div>
           <div className="col-lg-9 col-md-8 py-4">
             {(contacts
+            && !contacts.error
+            && contacts.loading)
+            && (
+              <Loading />
+            )}
+            {(contacts
             && contacts.error
             && !contacts.loading)
             && (
@@ -75,9 +82,7 @@ function MeContacts() {
                 />
               </div>
             )}
-            {(contacts
-            && !contacts.error
-            && !contacts.loading)
+            {(jsxContactsList)
             && (
               <SimpleCard
                 title="People"

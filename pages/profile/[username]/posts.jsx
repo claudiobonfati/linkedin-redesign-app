@@ -3,6 +3,7 @@ import { Waypoint } from 'react-waypoint';
 import { withRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import Sticky from 'react-sticky-el';
+import Loading from '../../../components/Loading';
 import ProfileOverview from '../../../components/ProfileOverview';
 import Post from '../../../components/Post';
 import SimpleCard from '../../../components/SimpleCard';
@@ -94,18 +95,16 @@ class ProfilePosts extends React.Component {
           }));
         }
       }
-    } catch (e) {
-      console.error(e);
-    }
+    } catch (e) { }
   }
 
   render() {
     // Main posts list
-    let jsxPostsList = null;
+    let jsxPostsList = (<Loading />);
 
     if (this.state.feed.data
-        && Array.isArray(this.state.feed.data)
-        && this.state.feed.data.length > 0) {
+    && Array.isArray(this.state.feed.data)
+    && this.state.feed.data.length > 0) {
       jsxPostsList = (
         <>
           {this.state.feed.data.map((post, index) => (
@@ -134,11 +133,11 @@ class ProfilePosts extends React.Component {
     }
 
     // "Keep in touch" profiles
-    let jsxKeepInTouchList = null;
+    let jsxKeepInTouchList = (<Loading />);
 
     if (this.state.keepInTouch
-        && Array.isArray(this.state.keepInTouch)
-        && this.state.keepInTouch.length > 0) {
+    && Array.isArray(this.state.keepInTouch)
+    && this.state.keepInTouch.length > 0) {
       jsxKeepInTouchList = (
         <>
           {this.state.keepInTouch.map((profile, index) => (
@@ -168,6 +167,12 @@ class ProfilePosts extends React.Component {
           <main className="row">
             <div className="col-lg-3 col-md-4 d-none d-md-block">
               <div className="sticky-aside-content">
+                {(this.state.user
+                && !this.state.user.error
+                && this.state.user.loading)
+                && (
+                  <Loading />
+                )}
                 {(this.state.user
                 && !this.state.user.error
                 && !this.state.user.loading)
@@ -208,4 +213,4 @@ class ProfilePosts extends React.Component {
   }
 }
 
-export default withRouter(ProfilePosts);
+export default withRouter(React.memo(ProfilePosts, () => true));

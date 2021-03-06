@@ -22,7 +22,11 @@ const notFound = () => (
           <h2 className="subheading">
             Uh oh, we can’t seem to find the page you’re looking for. Try going back to the previous page.
           </h2>
-          <Link href="/"><a className="not-found-cta">Go to your feed</a></Link>
+          <Link href="/">
+            <a className="not-found-cta">
+              Go to your feed
+            </a>
+          </Link>
         </div>
       </main>
     </div>

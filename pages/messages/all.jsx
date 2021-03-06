@@ -1,18 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import Loading from '../../components/Loading';
 import Chat from '../../components/Chat/Chat';
 import { useChatUsersList } from '../../graphql/hooks';
 import { ChatProvider } from '../../context/Chat';
 
 function messagesAll() {
   const contacts = useChatUsersList(1);
-  let contactsList = null;
-
-  if (!contacts.loading
-      && !contacts.error
-      && contacts.data) {
-    contactsList = contacts.data;
-  }
 
   return (
     <motion.div
@@ -24,10 +18,18 @@ function messagesAll() {
       <div className="container full-screen">
         <main className="row h-100">
           <div className="col-12 py-0 py-sm-4 px-0 py-sm-3 h-100 position-static">
-            {contactsList
+            {(contacts
+            && !contacts.error
+            && contacts.loading)
+            && (
+              <Loading />
+            )}
+            {(contacts
+            && !contacts.loading
+            && !contacts.error)
             && (
               <ChatProvider>
-                <Chat contacts={contactsList} />
+                <Chat contacts={contacts.data} />
               </ChatProvider>
             )}
           </div>

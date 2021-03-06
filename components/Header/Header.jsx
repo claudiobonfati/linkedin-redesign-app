@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
+import { Image } from 'react-image-and-background-image-fade';
 import Link from 'next/link';
 import { ApolloProvider } from '@apollo/client';
 import ApolloClient from '../../graphql/apollo';
@@ -14,12 +14,18 @@ import { useHeader } from '../../context/Header';
 const header = () => {
   const router = useRouter();
   const context = useHeader();
+  const [user, setUser] = useState();
 
   const closeTabs = () => {
     context.dispatch({ type: 'CLOSE_TAB' });
   };
 
   useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem('current-user-preview'));
+    if (currentUser) {
+      setUser(currentUser);
+    }
+
     router.events.on('routeChangeStart', closeTabs);
 
     return () => {
@@ -51,17 +57,18 @@ const header = () => {
               <MessagesMenu />
               <NotificationsMenu />
             </ApolloProvider>
-            <Link href="/me/details" scroll={false}>
-              <a title="My profile" className={`ml-3 ${styles.navBarButtons}`}>
-                <Image
-                  src="/images/me.jpg"
-                  alt="Profile picture"
-                  className={`circle-image ${styles.profilePic}`}
-                  width={35}
-                  height={35}
-                />
-              </a>
-            </Link>
+            {user?.data?.photo
+            && (
+              <Link href="/me/details" scroll={false}>
+                <a title="My profile" className={`ml-3 ${styles.navBarButtons} ${styles.profilePic}`}>
+                  <Image
+                    src={user.data.photo}
+                    alt="Profile picture"
+                    className={`circle-image ${styles.profilePic}`}
+                  />
+                </a>
+              </Link>
+            )}
           </div>
         </div>
       </div>

@@ -12,5 +12,6 @@ module.exports = {
       'media-exp1.licdn.com',
       'linkedinconcept.s3.amazonaws.com',
     ],
+    loader: 'imgix',
   },
 };

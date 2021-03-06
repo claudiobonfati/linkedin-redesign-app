@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Waypoint } from 'react-waypoint';
 import { motion } from 'framer-motion';
 import Sticky from 'react-sticky-el';
+import Loading from '../components/Loading';
 import CurrentProfileOverview from '../components/CurrentProfileOverview';
 import Post from '../components/Post';
 import SimpleCard from '../components/SimpleCard';
@@ -78,11 +79,11 @@ class Articles extends React.Component {
 
   render() {
     // Main articles list
-    let jsxArticlesList = null;
+    let jsxArticlesList = (<Loading />);
 
     if (this.state.feed.data
-        && Array.isArray(this.state.feed.data)
-        && this.state.feed.data.length > 0) {
+    && Array.isArray(this.state.feed.data)
+    && this.state.feed.data.length > 0) {
       jsxArticlesList = (
         <>
           {this.state.feed.data.map((post, index) => (
@@ -104,37 +105,25 @@ class Articles extends React.Component {
               />
               {(index === this.state.feed.data.length - 1 && !this.state.feedEnded)
               && (
-                <Waypoint
-                  onEnter={() => (!this.state.feedEnded ? this.fetchArticles() : null)}
-                />
+                <>
+                  <Loading />
+                  <Waypoint
+                    onEnter={() => (!this.state.feedEnded ? this.fetchArticles() : null)}
+                  />
+                </>
               )}
             </div>
           ))}
         </>
       );
-    } else if (
-      (this.state.feed.data
-      && Array.isArray(this.state.feed.data)
-      && this.state.feed.data.length === 0)
-      ||
-      (this.state.feed.error)
-    ) {
-      jsxArticlesList = (
-        <div className="mb-4">
-          <NothingFound 
-            title="Yikes... It looks like our server is not responding."
-            subtitle="Relax, breath, and try reloading the page."
-          />
-        </div>
-      );
     }
 
     // "Keep in touch" profiles
-    let jsxKeepInTouchList = null;
+    let jsxKeepInTouchList = (<Loading />);
 
     if (this.state.keepInTouch
-        && Array.isArray(this.state.keepInTouch)
-        && this.state.keepInTouch.length > 0) {
+    && Array.isArray(this.state.keepInTouch)
+    && this.state.keepInTouch.length > 0) {
       jsxKeepInTouchList = (
         <>
           {this.state.keepInTouch.map((profile, index) => (

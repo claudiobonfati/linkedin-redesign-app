@@ -76,7 +76,7 @@ const chartStats = (props) => {
   }, []);
 
   return (
-    <div className={styles.wrapper}>
+    <div>
       <div className={styles.infoWrapper}>
         <div className={styles.item}>
           <div className={styles.value}>

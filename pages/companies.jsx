@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Waypoint } from 'react-waypoint';
 import { motion } from 'framer-motion';
 import Sticky from 'react-sticky-el';
+import Loading from '../components/Loading';
 import CurrentProfileOverview from '../components/CurrentProfileOverview';
 import Post from '../components/Post';
 import SimpleCard from '../components/SimpleCard';
@@ -78,11 +79,11 @@ class Companies extends React.Component {
 
   render() {
     // Main posts list
-    let jsxPostsList = null;
+    let jsxPostsList = (<Loading />);
 
     if (this.state.feed.data
-        && Array.isArray(this.state.feed.data)
-        && this.state.feed.data.length > 0) {
+    && Array.isArray(this.state.feed.data)
+    && this.state.feed.data.length > 0) {
       jsxPostsList = (
         <>
           {this.state.feed.data.map((post, index) => (
@@ -100,37 +101,25 @@ class Companies extends React.Component {
                 postComments={post.Comments}
               />
               {(index === this.state.feed.data.length - 1 && !this.state.feedEnded) && (
-                <Waypoint
-                  onEnter={() => (!this.state.feedEnded ? this.fetchPosts() : null)}
-                />
+                <>
+                  <Loading />
+                  <Waypoint
+                    onEnter={() => (!this.state.feedEnded ? this.fetchPosts() : null)}
+                  />
+                </>
               )}
             </div>
           ))}
         </>
       );
-    } else if (
-      (this.state.feed.data
-      && Array.isArray(this.state.feed.data)
-      && this.state.feed.data.length === 0)
-      ||
-      (this.state.feed.error)
-    ) {
-      jsxPostsList = (
-        <div className="mb-4">
-          <NothingFound 
-            title="Yikes... It looks like our server is not responding."
-            subtitle="Relax, breath, and try reloading the page."
-          />
-        </div>
-      );
     }
 
     // "Recently viewed" companies
-    let jsxRecentlyViewed = null;
+    let jsxRecentlyViewed = (<Loading />);
 
     if (this.state.recentlyViewed
-        && Array.isArray(this.state.recentlyViewed)
-        && this.state.recentlyViewed.length > 0) {
+    && Array.isArray(this.state.recentlyViewed)
+    && this.state.recentlyViewed.length > 0) {
       jsxRecentlyViewed = (
         <>
           {this.state.recentlyViewed.map((company, index) => (

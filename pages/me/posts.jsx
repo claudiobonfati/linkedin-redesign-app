@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Waypoint } from 'react-waypoint';
 import { motion } from 'framer-motion';
 import Sticky from 'react-sticky-el';
+import Loading from '../../components/Loading';
 import CurrentProfileOverview from '../../components/CurrentProfileOverview';
 import CreatePost from '../../components/CreatePost';
 import Post from '../../components/Post';
@@ -33,6 +34,7 @@ class MePosts extends React.Component {
     // Reseting scroll manually (FramerMotion dependency)
     window.scrollTo(0, 0);
 
+    // Request initial posts
     this.fetchPosts();
   }
 
@@ -60,57 +62,51 @@ class MePosts extends React.Component {
           }));
         }
       }
-    } catch (e) {
-      console.error(e);
-    }
+    } catch (e) { }
   }
 
   render() {
     // Main posts list
-    let jsxPostsList = null;
+    let jsxPostsList = (<Loading />);
 
     if (this.state.feed.data
-        && Array.isArray(this.state.feed.data)
-        && this.state.feed.data.length > 0) {
-      jsxPostsList = (
-        <>
-          {this.state.feed.data.map((post, index) => (
-            <div className="mb-4" key={post.id}>
-              <Post
-                opPhoto={post.User ? post.User.photo : post.Company.logo}
-                opName={post.User ? post.User.name : post.Company.name}
-                opSubtitle={post.User ? post.User.headline : null}
-                opLink="/me/details"
-                postTime={post.time}
-                postBody={post.body}
-                postImage={post.image}
-                postVimeo={post.video}
-                postLikes={post.likes}
-                postComments={post.Comments}
-              />
-              {(index === this.state.feed.data.length - 1 && !this.state.feedEnded) && (
-                <Waypoint
-                  onEnter={() => (!this.state.feedEnded ? this.fetchPosts() : null)}
+    && Array.isArray(this.state.feed.data)) {
+      if (this.state.feed.data.length > 0) {
+        jsxPostsList = (
+          <>
+            {this.state.feed.data.map((post, index) => (
+              <div className="mb-4" key={post.id}>
+                <Post
+                  opPhoto={post.User ? post.User.photo : post.Company.logo}
+                  opName={post.User ? post.User.name : post.Company.name}
+                  opSubtitle={post.User ? post.User.headline : null}
+                  opLink="/me/details"
+                  postTime={post.time}
+                  postBody={post.body}
+                  postImage={post.image}
+                  postVimeo={post.video}
+                  postLikes={post.likes}
+                  postComments={post.Comments}
                 />
-              )}
-            </div>
-          ))}
-        </>
-      );
-    } else if (
-      (this.state.feed.data
-      && Array.isArray(this.state.feed.data)
-      && this.state.feed.data.length === 0)
-      || (this.state.feed.error)
-    ) {
-      jsxPostsList = (
-        <div className="mb-4">
-          <NothingFound
-            title="Yikes... It looks like our server is not responding."
-            subtitle="Relax, breath, and try reloading the page."
-          />
-        </div>
-      );
+                {(index === this.state.feed.data.length - 1 && !this.state.feedEnded) && (
+                  <Waypoint
+                    onEnter={() => (!this.state.feedEnded ? this.fetchPosts() : null)}
+                  />
+                )}
+              </div>
+            ))}
+          </>
+        );
+      } else {
+        jsxPostsList = (
+          <div className="mb-4">
+            <NothingFound
+              title="Yikes... It looks like our server is not responding."
+              subtitle="Relax, breath, and try reloading the page."
+            />
+          </div>
+        );
+      }
     }
 
     return (

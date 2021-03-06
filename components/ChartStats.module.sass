@@ -1,27 +1,21 @@
 @import ../styles/_variables
 
-.wrapper
-  canvas  
+.infoWrapper
+  width: 100%
+  display: flex
+  flex-direction: row
+  flex-wrap: nowrap
+  justify-content: flex-start
+  align-content: stretch
+  align-items: stretch
 
-  .infoWrapper
-    width: 100%
-    display: flex
-    flex-direction: row
-    flex-wrap: nowrap
-    justify-content: flex-start
-    align-content: stretch
-    align-items: stretch
-
-    .item
-      flex: 0 1 50%
-      text-align: center 
-      .title
-        color: $color-gray-medium
-      .value
-        font-weight: 500
-        color: $color-gray-dark
-      &:last-child
-        border-left: 1px solid $color-gray-semilight
-
-@media (max-width: map-get($breakpoints, 'sm'))
-  .wrapper
+  .item
+    flex: 0 1 50%
+    text-align: center 
+    .title
+      color: $color-gray-medium
+    .value
+      font-weight: 500
+      color: $color-gray-dark
+    &:last-child
+      border-left: 1px solid $color-gray-semilight
