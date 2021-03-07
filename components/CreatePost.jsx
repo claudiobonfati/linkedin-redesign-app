@@ -1,115 +1,149 @@
-import React, { Fragment } from 'react';
+import React, {
+  Fragment, useState, useRef, useEffect,
+} from 'react';
 import { TimelineMax, Power3 } from 'gsap';
 import TextareaAutosize from 'react-textarea-autosize';
 import Dropzone from 'react-dropzone';
 import { Editor } from '@tinymce/tinymce-react';
+import FeatherIcon from 'feather-icons-react';
+import { useStoreState } from 'easy-peasy';
 import styles from './CreatePost.module.sass';
 import Post from './Post';
-import { getSimpleUser } from '../graphql/hooks';
-import FeatherIcon from 'feather-icons-react';
 
-class CreatePost extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentTab: '',
-      postBody: '',
-      articleBody: '',
-      imageFiles: [],
-      publishedPosts: [],
-      user: null,
-    };
+const createPost = () => {
+  const [currentTab, setCurrentTab] = useState('update');
+  const [postBody, setPostBody] = useState('');
+  const [articleBody, setArticleBody] = useState('');
+  const [imageFiles, setImageFiles] = useState([]);
+  const [publishedPosts, setPublishedPosts] = useState([]);
+  const profile = useStoreState((state) => state.user.profile);
 
-    this.activateTab = this.activateTab.bind(this);
-    this.handleChangeTextarea = this.handleChangeTextarea.bind(this);
-    this.handleDropFile = this.handleDropFile.bind(this);
-    this.removeFile = this.removeFile.bind(this);
-    this.handleTinyEditorChange = this.handleTinyEditorChange.bind(this);
-    this.showFooterActions = this.showFooterActions.bind(this);
-    this.publishNow = this.publishNow.bind(this);
-  }
+  let tabContentUpdateRef = useRef(null);
+  let tabContentUploadRef = useRef(null);
+  let imageUploadRef = useRef(null);
+  let tabContentArticleRef = useRef(null);
+  let footerActionsRef = useRef(null);
 
-  async componentDidMount() {
+  let [tlShowTabUpdate, setTlShowTabUpdate] = useState(null);
+  let [tlShowTabUpload, setTlShowTabUpload] = useState(null);
+  let [tlShowUploadPreview, setTlShowUploadPreview] = useState(null);
+  let [tlShowTabArticle, setTlShowTabArticle] = useState(null);
+  let [tlShowFooterActions, setTlShowFooterActions] = useState(null);
+
+  const activateTab = (tab) => {
+    // Return if tab is already active
+    if (currentTab === tab) { return; }
+
+    setCurrentTab(tab);
+  };
+
+  useEffect(() => {
     // Init all TimelineMax necessary
-    this.tlShowTabUpdate = new TimelineMax({ paused: true });
-    this.tlShowTabUpdate
-      .from(this.tabContentUpdateRef, 0.2, {
-        opacity: 0,
-        display: 'none',
-        transform: 'translateY(-30px)',
-      });
-    this.tlShowTabUpload = new TimelineMax({ paused: true });
-    this.tlShowTabUpload
-      .from(this.tabContentUploadRef, 0.4, {
-        opacity: 0,
-        display: 'none',
-        height: 0,
-        ease: Power3.easeOut,
-      });
-    this.tlShowUploadPreview = new TimelineMax({ paused: true });
-    this.tlShowUploadPreview
-      .from(this.imageUploadRef, 0.4, {
-        opacity: 0,
-        display: 'none',
-        transform: 'translateY(+30px)',
-        ease: Power3.easeOut,
-      });
-    this.tlShowTabArticle = new TimelineMax({ paused: true });
-    this.tlShowTabArticle
-      .from(this.tabContentArticleRef, 0.4, {
-        opacity: 0,
-        display: 'none',
-        height: 0,
-        ease: Power3.easeOut,
-      });
-    this.tlShowFooterActions = new TimelineMax({ paused: true });
-    this.tlShowFooterActions
-      .from(this.footerActionsRef, 0.4, {
-        opacity: 0,
-        height: 0,
-        ease: Power3.easeOut,
-      });
+    let tabUpdate = new TimelineMax({ paused: false });
+    tabUpdate.from(tabContentUpdateRef, 0.2, {
+      opacity: 0,
+      display: 'none',
+      transform: 'translateY(-30px)',
+    });
+    setTlShowTabUpdate(tabUpdate);
 
-    this.activateTab('update');
+    let tabUpload = new TimelineMax({ paused: true });
+    tabUpload.from(tabContentUploadRef, 0.4, {
+      opacity: 0,
+      display: 'none',
+      height: 0,
+      ease: Power3.easeOut,
+    });
+    setTlShowTabUpload(tabUpload);
 
-    const oldUser = JSON.parse(localStorage.getItem('current-user-preview'));
+    let uploadPreview = new TimelineMax({ paused: true });
+    uploadPreview.from(imageUploadRef, 0.4, {
+      opacity: 0,
+      display: 'none',
+      transform: 'scaleY(.5)',
+      ease: Power3.easeOut,
+    });
+    setTlShowUploadPreview(uploadPreview);
 
-    if (oldUser) {
-      this.setState({
-        user: oldUser.data,
-      });
-    } else {
-      let userData = await getSimpleUser('claudiobonfati');
+    let tabArticle = new TimelineMax({ paused: true });
+    tabArticle.from(tabContentArticleRef, 0.4, {
+      opacity: 0,
+      display: 'none',
+      height: 0,
+      ease: Power3.easeOut,
+    });
+    setTlShowTabArticle(tabArticle);
 
-      this.setState({
-        user: userData,
-      });
+    let footerActions = new TimelineMax({ paused: true });
+    footerActions.from(footerActionsRef, 0.4, {
+      opacity: 0,
+      height: 0,
+      ease: Power3.easeOut,
+    });
+    setTlShowFooterActions(footerActions);
+  }, [footerActionsRef]);
 
-      localStorage.setItem('current-user-preview', JSON.stringify(userData));
+  // Handle showing/hiding form pieces based on actived tab
+  useEffect(() => {
+    switch (currentTab) {
+      case 'update':
+        tlShowTabUpdate?.play();
+        tlShowTabUpload?.reverse();
+        tlShowUploadPreview?.reverse();
+        tlShowTabArticle?.reverse();
+        break;
+      case 'upload':
+        tlShowTabUpdate?.play();
+        if (imageFiles.length === 0) {
+          tlShowTabUpload?.play();
+        } else {
+          tlShowUploadPreview?.play();
+        }
+        tlShowTabArticle?.reverse();
+        break;
+      case 'article':
+        tlShowTabUpdate?.reverse();
+        if (imageFiles.length === 0) {
+          tlShowTabUpload?.play();
+        } else {
+          tlShowUploadPreview?.play();
+        }
+        tlShowTabArticle?.play();
+        break;
+      default:
+        break;
     }
-  }
+  }, [currentTab]);
 
-  handleChangeTextarea({ target }) {
-    this.setState({
-      postBody: target.value,
-      articleBody: `<p>${target.value}</p>`,
-    }, this.showFooterActions());
-  }
+  const handleChangeTextarea = ({ target }) => {
+    setPostBody(target.value);
+    setArticleBody(`<p>${target.value}</p>`);
+  };
 
-  handleTinyEditorChange(content) {
-    const newState = {
-      articleBody: content,
-    };
-
+  const handleTinyEditorChange = (content) => {
     // Only update retroactive postBody if user is writing an article
-    if (this.state.currentTab === 'article') {
-      newState.postBody = content.replace(/<\/?[^>]+(>|$)/g, '').replace(/&nbsp;/g, ''); // Strip HTML tags from content
+    if (currentTab === 'article') {
+      const post = content.replace(/<\/?[^>]+(>|$)/g, '').replace(/&nbsp;/g, ''); // Strip HTML tags from content
+      setPostBody(post);
     }
 
-    this.setState(newState, this.showFooterActions());
-  }
+    setArticleBody(content);
+  };
 
-  handleDropFile(acceptedFiles) {
+  const showFooterActions = () => {
+    // Only show footer actions when post length > 5
+    if (postBody.length > 5) {
+      tlShowFooterActions?.play();
+    } else {
+      tlShowFooterActions?.reverse();
+    }
+  };
+
+  useEffect(() => {
+    showFooterActions();
+  }, [postBody, articleBody]);
+
+  const handleDropFile = (acceptedFiles) => {
     // Return if there isn't any accepted files
     if (acceptedFiles.length === 0) { return; }
 
@@ -118,242 +152,188 @@ class CreatePost extends React.Component {
       preview: URL.createObjectURL(file),
     }));
 
-    this.setState(() => ({
-      imageFiles: acceptedFiles,
-    }), () => {
-      this.tlShowTabUpload.reverse();
-      this.tlShowUploadPreview.play();
-    });
-  }
+    setImageFiles(acceptedFiles);
+  };
 
-  activateTab(tab) {
-    // Return if tab is already active
-    if (this.state.currentTab === tab) { return; }
-
-    this.setState({
-      currentTab: tab,
-    }, () => {
-      // Handle showing/hiding form pieces based on actived tab
-      switch (tab) {
-        case 'update':
-          this.tlShowTabUpdate.play();
-          if (this.state.imageFiles.length === 0) {
-            this.tlShowTabUpload.reverse();
-          } else {
-            this.tlShowUploadPreview.reverse();
-          }
-          this.tlShowTabArticle.reverse();
-          break;
-        case 'upload':
-          this.tlShowTabUpdate.play();
-          if (this.state.imageFiles.length === 0) {
-            this.tlShowTabUpload.play();
-          } else {
-            this.tlShowUploadPreview.play();
-          }
-          this.tlShowTabArticle.reverse();
-          break;
-        case 'article':
-          this.tlShowTabUpdate.reverse();
-          if (this.state.imageFiles.length === 0) {
-            this.tlShowTabUpload.play();
-          } else {
-            this.tlShowUploadPreview.play();
-          }
-          this.tlShowTabArticle.play();
-          break;
-        default:
-          break;
-      }
-    });
-  }
-
-  removeFile() {
-    this.setState(() => ({
-      imageFiles: [],
-    }), () => {
-      this.tlShowUploadPreview.reverse();
-      this.tlShowTabUpload.play();
-    });
-  }
-
-  showFooterActions() {
-    // Only show footer actions when post length > 5
-    if (this.state.postBody.length > 5) {
-      this.tlShowFooterActions.play();
+  useEffect(() => {
+    if (imageFiles.length > 0) {
+      tlShowTabUpload?.reverse();
+      tlShowUploadPreview?.play();
     } else {
-      this.tlShowFooterActions.reverse();
+      tlShowTabUpload?.play();
+      tlShowUploadPreview?.reverse();
     }
-  }
+  }, [imageFiles]);
 
-  publishNow() {
+  const removeFile = () => {
+    setImageFiles([]);
+  };
+
+  const publishNow = () => {
     // Simulate post being publish
     const newPost = {
-      id: Math.random().toString(36).substr(2, 9),
+      id: Math.random().toString(36).substr(2, 9), // Random unique key
       User: {
-        name: this.state.user.name,
-        photo: this.state.user.photo,
-        username: this.state.user.username,
-        headline: this.state.user.headline,
+        name: profile.data.name,
+        photo: profile.data.photo,
+        username: profile.data.username,
+        headline: profile.data.headline,
       },
       time: 'just now',
-      body: this.state.postBody,
-      image: this.state.imageFiles[0]?.preview || null,
-      likes: 0, 
-      Comments: []
-    }
+      body: postBody,
+      image: imageFiles[0]?.preview || null,
+      likes: 0,
+      Comments: [],
+    };
 
-    this.setState((prevState) => ({
-      publishedPosts: [newPost, ...prevState.publishedPosts],
-      postBody: '',
-      articleBody: '',
-    }));
+    setPublishedPosts((prevArray) => [newPost, ...prevArray]);
+    setArticleBody('');
+    setPostBody('');
+    setCurrentTab('update');
+    removeFile();
+  };
 
-    this.removeFile();
-  }
-
-  render() {
-    return (
-      <div className={styles.wrapper}>
-        <div className={styles.formWrapper}>
-          <div className={`px-4 ${styles.header}`}>
-            <nav className={styles.headerNav}>
-              <ul>
-                <li className={this.state.currentTab === 'update' ? styles.activeItem : ''}>
-                  <button type="button" onClick={() => this.activateTab('update')}>
-                    <div className={`color-blue ${styles.icon}`}>
-                      <FeatherIcon icon="edit-2" size="18" strokeWidth="1.2" />
-                    </div>
-                    <span className="d-none d-md-inline">
-                      Share an updade
-                    </span>
-                    <span className="d-inline d-md-none">
-                      Updade
-                    </span>
-                  </button>
-                </li>
-                <li className={this.state.currentTab === 'upload' ? styles.activeItem : ''}>
-                  <button type="button" onClick={() => this.activateTab('upload')}>
-                    <div className={`color-yellow ${styles.icon}`}>
-                      <FeatherIcon icon="camera" size="18" strokeWidth="1.2" />
-                    </div>
-                    <span className="d-none d-md-inline">
-                      Upload a photo
-                    </span>
-                    <span className="d-inline d-md-none">
-                      Upload
-                    </span>
-                  </button>
-                </li>
-                <li className={this.state.currentTab === 'article' ? styles.activeItem : ''}>
-                  <button type="button" onClick={() => this.activateTab('article')}>
-                    <div className={`color-green ${styles.icon}`}>
-                      <FeatherIcon icon="book-open" size="18" strokeWidth="1.2" />
-                    </div>
-                    <span className="d-none d-md-inline">
-                      Write an article
-                    </span>
-                    <span className="d-inline d-md-none">
-                      Article
-                    </span>
-                  </button>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div className="px-4">
-            <div className="my-4" ref={(ref) => { this.tabContentUpdateRef = ref; }}>
-              <TextareaAutosize
-                className={styles.textarea}
-                minRows={1}
-                maxRows={15}
-                placeholder="Write something..."
-                onChange={this.handleChangeTextarea}
-                value={this.state.postBody}
-              />
-            </div>
-            <div className="my-4" ref={(ref) => { this.tabContentUploadRef = ref; }}>
-              <Dropzone onDrop={this.handleDropFile} multiple={false} accept="image/jpeg, image/png">
-                {({ getRootProps, getInputProps }) => (
-                  <div {...getRootProps({ className: styles.dropzone })}>
-                    <input {...getInputProps()} />
-                    <p>Drop your image here, or click to select a photo</p>
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.formWrapper}>
+        <div className={`px-4 ${styles.header}`}>
+          <nav className={styles.headerNav}>
+            <ul>
+              <li className={currentTab === 'update' ? styles.activeItem : ''}>
+                <button type="button" onClick={() => activateTab('update')}>
+                  <div className={`color-blue ${styles.icon}`}>
+                    <FeatherIcon icon="edit-2" size="18" strokeWidth="1.2" />
                   </div>
-                )}
-              </Dropzone>
-            </div>
-            <div className={`my-4 ${styles.imagePreview}`} ref={(ref) => { this.imageUploadRef = ref; }}>
-              <button
-                className={styles.removeImage}
-                onClick={this.removeFile}
-                aria-expanded="false"
-                type="button"
-              >
-                <FeatherIcon icon="x" size="16" strokeWidth="1.2" />
-              </button>
-              {this.state.imageFiles.map((file) => <img src={file.preview} alt="Upload" className="w-100 rounded" />)}
-            </div>
-            <div className={`my-4 ${styles.articleContent}`} ref={(ref) => { this.tabContentArticleRef = ref; }}>
-              <Editor
-                id="myCoolEditor"
-                apiKey={process.env.NEXT_PUBLIC_TINYMCE_KEY}
-                value={this.state.articleBody}
-                init={{
-                  height: 400,
-                  skin_url: '/tinymce/skins/ui/linkedin',
-                  menubar: false,
-                  plugins: ['advlist autolink lists link image charmap print preview anchor', 'searchreplace visualblocks code fullscreen', 'insertdatetime media table paste code wordcount'],
-                  toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat',
-                  resize: false,
-                }}
-                onEditorChange={this.handleTinyEditorChange}
-              />
-            </div>
+                  <span className="d-none d-md-inline">
+                    Share an updade
+                  </span>
+                  <span className="d-inline d-md-none">
+                    Updade
+                  </span>
+                </button>
+              </li>
+              <li className={currentTab === 'upload' ? styles.activeItem : ''}>
+                <button type="button" onClick={() => activateTab('upload')}>
+                  <div className={`color-yellow ${styles.icon}`}>
+                    <FeatherIcon icon="camera" size="18" strokeWidth="1.2" />
+                  </div>
+                  <span className="d-none d-md-inline">
+                    Upload a photo
+                  </span>
+                  <span className="d-inline d-md-none">
+                    Upload
+                  </span>
+                </button>
+              </li>
+              <li className={currentTab === 'article' ? styles.activeItem : ''}>
+                <button type="button" onClick={() => activateTab('article')}>
+                  <div className={`color-green ${styles.icon}`}>
+                    <FeatherIcon icon="book-open" size="18" strokeWidth="1.2" />
+                  </div>
+                  <span className="d-none d-md-inline">
+                    Write an article
+                  </span>
+                  <span className="d-inline d-md-none">
+                    Article
+                  </span>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div className="px-4">
+          <div className="my-4" ref={(ref) => { tabContentUpdateRef = ref; }}>
+            <TextareaAutosize
+              className={styles.textarea}
+              minRows={1}
+              maxRows={15}
+              placeholder="Write something..."
+              onChange={handleChangeTextarea}
+              value={postBody}
+            />
           </div>
-          <div
-            className={styles.footerActions}
-            ref={(ref) => { this.footerActionsRef = ref; }}
-          >
+          <div className="my-4" ref={(ref) => { tabContentUploadRef = ref; }}>
+            <Dropzone onDrop={handleDropFile} multiple={false} accept="image/jpeg, image/png">
+              {({ getRootProps, getInputProps }) => (
+                <div {...getRootProps({ className: styles.dropzone })}>
+                  <input {...getInputProps()} />
+                  <p>Drop your image here, or click to select a photo</p>
+                </div>
+              )}
+            </Dropzone>
+          </div>
+          <div className={`my-4 ${styles.imagePreview}`} ref={(ref) => { imageUploadRef = ref; }}>
             <button
-              className={styles.button}
+              className={styles.removeImage}
+              onClick={removeFile}
+              aria-expanded="false"
               type="button"
-              onClick={this.onClickButton}
             >
-              Save as draft
+              <FeatherIcon icon="x" size="16" strokeWidth="1.2" />
             </button>
-            <button
-              className={styles.button}
-              type="submit"
-              onClick={this.publishNow}
-            >
-              Publish now
-            </button>
+            {imageFiles.map((file) => (
+              <img src={file.preview} alt="Upload" className="w-100 rounded" key={file.lastModified} />
+            ))}
+          </div>
+          <div className={`my-4 ${styles.articleContent}`} ref={(ref) => { tabContentArticleRef = ref; }}>
+            <Editor
+              id="myCoolEditor"
+              apiKey={process.env.NEXT_PUBLIC_TINYMCE_KEY}
+              value={articleBody}
+              init={{
+                height: 400,
+                skin_url: '/tinymce/skins/ui/linkedin',
+                menubar: false,
+                plugins: ['advlist autolink lists link image charmap print preview anchor', 'searchreplace visualblocks code fullscreen', 'insertdatetime media table paste code wordcount'],
+                toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat',
+                resize: false,
+              }}
+              onEditorChange={handleTinyEditorChange}
+            />
           </div>
         </div>
-        {this.state.publishedPosts.length > 0
-        && (
-          <>
-            {this.state.publishedPosts.map((post) => (
-              <div className="mt-4">
-                <Post
-                  opPhoto={post.User.photo}
-                  opName={post.User.name}
-                  opSubtitle={post.User.headline}
-                  opLink={`/profile/${post.User.username}/details`}
-                  postTime={post.time}
-                  postBody={post.body}
-                  postImage={post.image}
-                  postVimeo={post.video}
-                  postLikes={post.likes}
-                  postComments={post.Comments}
-                />
-              </div>
-            ))}
-          </>
-        )}
+        <div
+          className={styles.footerActions}
+          ref={(ref) => { footerActionsRef = ref; }}
+        >
+          <button
+            className={styles.button}
+            type="button"
+            onClick={() => {}}
+          >
+            Save as draft
+          </button>
+          <button
+            className={styles.button}
+            type="submit"
+            onClick={publishNow}
+          >
+            Publish now
+          </button>
+        </div>
       </div>
-    );
-  }
-}
+      {publishedPosts.length > 0 && (
+        <>
+          {publishedPosts.map((post) => (
+            <div className="mt-4" key={post.id}>
+              <Post
+                opPhoto={post.User.photo}
+                opName={post.User.name}
+                opSubtitle={post.User.headline}
+                opLink={`/profile/${post.User.username}/details`}
+                postTime={post.time}
+                postBody={post.body}
+                postImage={post.image}
+                postVimeo={post.video}
+                postLikes={post.likes}
+                postComments={post.Comments}
+              />
+            </div>
+          ))}
+        </>
+      )}
+    </div>
+  );
+};
 
-export default CreatePost;
+export default createPost;
