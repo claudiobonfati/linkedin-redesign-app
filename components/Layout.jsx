@@ -12,7 +12,7 @@ const layout = (props) => {
 
   useEffect(() => {
     TweenMax.to(appRef, 0.5, { css: { opacity: 1 } }).delay(0.3);
-  });
+  }, []);
 
   return (
     <div className={styles.layoutWrapper} ref={(ref) => { appRef = ref; }}>

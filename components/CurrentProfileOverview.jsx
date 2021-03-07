@@ -35,8 +35,7 @@ const currentProfileOverview = (props) => {
             twitter={!props.simple ? profile.data.twitter : null}
             skype={!props.simple ? profile.data.skype : null}
           />
-          {!props.simple
-          && (
+          {!props.simple && (
             <div className="mt-4">
               <SimpleButton
                 text="Connect with me"

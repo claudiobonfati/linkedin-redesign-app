@@ -8,7 +8,11 @@ import ConditionalWrapper from '../utils/ConditionalWrapper';
 const profileDisplay = (props) => (
   <div className={`${styles.wrapper}`}>
     <div
-      className={`${styles.imageAside} ${props.imageOnTop ? 'align-self-start mt-1' : ''} ${props.imageSide === 'right' ? styles.imageRight : ''}`}
+      className={`
+        ${styles.imageAside} 
+        ${props.imageOnTop ? 'align-self-start mt-1' : ''} 
+        ${props.imageSide === 'right' ? styles.imageRight : ''}
+      `}
       style={{ flexBasis: props.imageSize }}
     >
       <ConditionalWrapper
@@ -24,7 +28,12 @@ const profileDisplay = (props) => (
         />
       </ConditionalWrapper>
     </div>
-    <div className={`${styles.infoWrapper} ${props.imageSide === 'left' ? `ml-${props.imagePadding}` : `mr-${props.imagePadding}`}`}>
+    <div
+      className={`
+        ${styles.infoWrapper} 
+        ${props.imageSide === 'left' ? `ml-${props.imagePadding}` : `mr-${props.imagePadding}`}
+      `}
+    >
       <ConditionalWrapper
         condition={props.link}
         wrapper={(children) => <Link href={props.link} scroll={false}><a>{children}</a></Link>}
@@ -33,14 +42,12 @@ const profileDisplay = (props) => (
           {props.title}
         </div>
       </ConditionalWrapper>
-      {props.blueLine
-      && (
+      {props.blueLine && (
         <div className={styles.infoBlueLine}>
           {props.blueLine}
         </div>
       )}
-      {props.subtitle
-      && (
+      {props.subtitle && (
         <ConditionalWrapper
           condition={props.imageSide === 'right'}
           wrapper={(children) => <i>{children}</i>}
@@ -56,13 +63,19 @@ const profileDisplay = (props) => (
         </ConditionalWrapper>
       )}
     </div>
-    {props.sideContent
-    && (
-      <div className={`ml-3 ${styles.rightWrapper} ${props.sideContentOnTop ? 'align-self-start' : ''}`}>
+    {props.sideContent && (
+      <div
+        className={`
+          ml-3 
+          ${styles.rightWrapper} 
+          ${props.sideContentOnTop ? 'align-self-start' : ''}
+        `}
+      >
         {props.sideContent}
       </div>
     )}
-    {(props.rightButtonText && props.rightButtonLink)
+    {(props.rightButtonText
+    && props.rightButtonLink)
     && (
       <div className={`ml-3 ${styles.rightWrapper}`}>
         <Link href={props.rightButtonLink} scroll={false}>

@@ -6,8 +6,10 @@ import Sticky from 'react-sticky-el';
 import Loading from '../../components/Loading';
 import CurrentProfileOverview from '../../components/CurrentProfileOverview';
 import NothingFound from '../../components/NothingFound';
+import SimpleCard from '../../components/SimpleCard';
+import ProfileDisplay from '../../components/ProfileDisplay';
 import Post from '../../components/Post';
-import { fetchMoreSearchPosts } from '../../graphql/hooks';
+import { fetchMoreSearchPosts, getRandomCompanies } from '../../graphql/hooks';
 import defaultVariants from '../../utils/FramerMotionDefault';
 
 class SearchPosts extends React.Component {
@@ -23,6 +25,7 @@ class SearchPosts extends React.Component {
         error: false,
         data: [],
       },
+      recentlyViewed: []
     };
 
     this.fetchPosts = this.fetchPosts.bind(this);
@@ -34,6 +37,9 @@ class SearchPosts extends React.Component {
 
     // Request posts
     this.fetchPosts();
+
+    // Request "recently viewed" companies
+    this.fetchRecentlyViewed();
   }
 
   async fetchPosts() {
@@ -63,6 +69,16 @@ class SearchPosts extends React.Component {
           }));
         }
       }
+    } catch (e) { }
+  }
+
+  async fetchRecentlyViewed() {
+    try {
+      let result = await getRandomCompanies(4);
+
+      this.setState(() => ({
+        recentlyViewed: result,
+      }));
     } catch (e) { }
   }
 
@@ -103,6 +119,30 @@ class SearchPosts extends React.Component {
       );
     }
 
+    // "Recently viewed" companies
+    let jsxRecentlyViewed = (<Loading />);
+
+    if (this.state.recentlyViewed
+    && Array.isArray(this.state.recentlyViewed)
+    && this.state.recentlyViewed.length > 0) {
+      jsxRecentlyViewed = (
+        <>
+          {this.state.recentlyViewed.map((company, index) => (
+            <div className={`${index + 1 === this.state.recentlyViewed.length ? '' : 'pb-3'}`} key={company.id}>
+              <ProfileDisplay
+                image={company.logo}
+                imageSize={50}
+                title={company.name}
+                subtitle={company.industry}
+                link={`/company/${company.nameslug}/home`}
+                imageOnTop
+              />
+            </div>
+          ))}
+        </>
+      );
+    }
+   
     return (
       <motion.div
         className="w-100"
@@ -126,7 +166,11 @@ class SearchPosts extends React.Component {
             <div className="col-lg-3 col-md-4 col-sm-6 pt-4 d-none d-md-block">
               <div className="sticky-aside-content">
                 <Sticky topOffset={-20} scrollElement=".stickyArea">
-                  <CurrentProfileOverview simple />
+                  <SimpleCard title="Recently viewed">
+                    <div className="w-100">
+                      {jsxRecentlyViewed}
+                    </div>
+                  </SimpleCard>
                 </Sticky>
               </div>
             </div>

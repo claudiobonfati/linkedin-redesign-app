@@ -30,16 +30,14 @@ const search = (props) => {
 
   useEffect(() => {
     if (router.query.keywords !== null
-        && router.query.keywords !== undefined
-        && router.query.keywords !== '') {
+    && router.query.keywords !== undefined
+    && router.query.keywords !== '') {
       setTerm(router.query.keywords);
       tlShowTerm.play();
     }
   }, [router.query.keywords]);
 
-  /**
-   * Function to fetch bests results while user is typing
-   */
+  // Fetch best results while user is typing
   const quickSearch = async () => {
     try {
       let response = await ApolloClient.query({
@@ -164,7 +162,13 @@ const search = (props) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.searchInputWrapper}>
-        <div className={`${styles.termBox} ${term ? styles.termBoxShow : ''}`} ref={(ref) => { termBoxRef = ref; }}>
+        <div
+          className={`
+            ${styles.termBox} 
+            ${term ? styles.termBoxShow : ''}
+          `}
+          ref={(ref) => { termBoxRef = ref; }}
+        >
           <span>{ term }</span>
           <button
             aria-expanded="false"
@@ -208,10 +212,9 @@ const search = (props) => {
                   </div>
                   <div className="col-md-6 border-left-gray pl-4">
                     {result.allUsers.map((user, index) => (
-                      <>
-                        {user.id !== '1'
-                        && (
-                          <div className={`${index !== result.allUsers.length - 1 ? 'pb-4' : ''}`} key={`user_${user.id}`}>
+                      <div key={`user_${user.id}`}>
+                        {user.id !== '1' && (
+                          <div className={`${index !== result.allUsers.length - 1 ? 'pb-4' : ''}`}>
                             <ProfileDisplay
                               image={user.photo}
                               imageSize={50}
@@ -221,7 +224,7 @@ const search = (props) => {
                             />
                           </div>
                         )}
-                      </>
+                      </div>
                     ))}
                   </div>
                 </div>

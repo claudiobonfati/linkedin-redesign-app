@@ -11,40 +11,52 @@ import ProfileDisplay from './ProfileDisplay';
 import LikeButton from './LikeButton';
 
 const post = (props) => (
-  <div className={`${styles.wrapper} ${props.noBorder ? styles.noBorder : ''}`}>
+  <div
+    className={`
+      ${styles.wrapper} 
+      ${props.noBorder ? styles.noBorder : ''}
+    `}
+  >
     <div className={`${!props.noPadding ? 'px-4' : ''}`}>
-      {props.opPhoto
-        && props.opName
-        && (
-          <div className={`${!props.noPadding ? 'py-4' : ''} ${styles.header}`}>
-            <ProfileDisplay
-              link={props.opLink}
-              image={props.opPhoto}
-              imageSize={60}
-              title={props.opName}
-              subtitle={props.opSubtitle}
-              sideContent={props.postTime}
-            />
-          </div>
-        )}
-      <section className={`${!props.noPadding ? 'py-4' : ''} ${styles.content} ${styles.withMedia}`}>
-        {(props.postTitle)
-        && (
+      {(props.opPhoto
+      && props.opName)
+      && (
+        <div
+          className={`
+            ${!props.noPadding ? 'py-4' : ''} 
+            ${styles.header}
+          `}
+        >
+          <ProfileDisplay
+            link={props.opLink}
+            image={props.opPhoto}
+            imageSize={60}
+            title={props.opName}
+            subtitle={props.opSubtitle}
+            sideContent={props.postTime}
+          />
+        </div>
+      )}
+      <section
+        className={`
+          ${!props.noPadding ? 'py-4' : ''} 
+          ${styles.content} 
+          ${styles.withMedia}
+        `}
+      >
+        {(props.postTitle) && (
           <h3 className="h5 mb-3 color-gray-dark">{props.postTitle}</h3>
         )}
         <p>{ReactHtmlParser(props.postBody)}</p>
-        {(props.postImage || props.postVimeo)
-        && (
+        {(props.postImage || props.postVimeo) && (
           <div className={`${styles.contentMedia}`}>
-            {props.postImage
-            && (
+            {props.postImage && (
               <Image
                 src={props.postImage}
                 alt="Post banner"
               />
             )}
-            {props.postVimeo
-            && (
+            {props.postVimeo && (
               <div className={styles.playerWrapper}>
                 <Plyr
                   source={{
@@ -63,18 +75,20 @@ const post = (props) => (
             )}
           </div>
         )}
-        {props.postBottomLink
-        && (
+        {props.postBottomLink && (
           <div className={styles.bottomLinkWrapper}>
             <Link href={props.postBottomLink}>
-              <a target="_blank">{props.postBottomLinkText ? props.postBottomLinkText : 'Read more'}</a>
+              <a title={props.postBottomLinkText ? props.postBottomLinkText : 'Read more'} target="_blank">
+                {props.postBottomLinkText ? props.postBottomLinkText : 'Read more'}
+              </a>
             </Link>
           </div>
         )}
       </section>
       <div className={`${styles.footer}`}>
         <LikeButton likes={props.postLikes} />
-        {(Array.isArray(props.postComments) && props.postComments.length > 0)
+        {(Array.isArray(props.postComments)
+        && props.postComments.length > 0)
         && (
           <div className={`py-4 pl-3 ${styles.footerInfo}`}>
             <FeatherIcon icon="message-square" size="20" strokeWidth="1.2" />
@@ -85,9 +99,15 @@ const post = (props) => (
         )}
       </div>
     </div>
-    {(Array.isArray(props.postComments) && props.postComments.length > 0)
+    {(Array.isArray(props.postComments)
+    && props.postComments.length > 0)
     && (
-      <div className={`${!props.noPadding ? 'px-4' : ''} ${styles.commentsSection}`}>
+      <div
+        className={`
+          ${!props.noPadding ? 'px-4' : ''} 
+          ${styles.commentsSection}
+        `}
+      >
         {props.postComments.map((comment) => (
           <div className={`py-4 ${styles.commentItem}`} key={comment.id}>
             <ProfileDisplay

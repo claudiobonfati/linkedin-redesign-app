@@ -10,11 +10,14 @@ const polaroid = (props) => (
     <ConditionalWrapper
       condition={props.link}
       wrapper={
-        (inner) => (<Link href={props.link} scroll={false}><a className={styles.linkWrapper}>{inner}</a></Link>)
+        (inner) => (
+          <Link href={props.link} scroll={false}>
+            <a className={styles.linkWrapper}>{inner}</a>
+          </Link>
+        )
       }
     >
-      {props.image
-      && (
+      {props.image && (
         <div className={styles.imageWrapper} style={{ padding: props.imagePadding }}>
           <div className={styles.imageBox}>
             <Image
@@ -25,8 +28,7 @@ const polaroid = (props) => (
           </div>
         </div>
       )}
-      {props.title
-      && (
+      {props.title && (
         <div className={`py-3 px-2 text-center ${styles.title}`}>
           {props.title}
         </div>

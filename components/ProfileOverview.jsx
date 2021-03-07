@@ -31,7 +31,12 @@ const profileOverview = (props) => (
       </div>
     </div>
     <div className={styles.infoWrapper}>
-      <div className={`${!props.views ? styles.fullWidth : ''} ${styles.infoLeft}`}>
+      <div
+        className={`
+          ${!props.views ? styles.fullWidth : ''} 
+          ${styles.infoLeft}
+        `}
+      >
         <div className={styles.value}>
           {MaskNumber(props.connections)}
         </div>
@@ -39,8 +44,7 @@ const profileOverview = (props) => (
           {props.views ? 'Connections' : 'Followers'}
         </span>
       </div>
-      {props.views
-      && (
+      {props.views && (
       <div className={styles.infoRight}>
         <div className={styles.value}>
           {MaskNumber(props.views)}
@@ -51,34 +55,29 @@ const profileOverview = (props) => (
       </div>
       )}
     </div>
-    {props.actionMyProfile
-    && (
+    {props.actionMyProfile && (
       <Link href="/me/details" scroll={false}>
         <a className={styles.footerAction} title="View my profile">
           View my profile
         </a>
       </Link>
     )}
-    {!props.actionMyProfile
-    && (
+    {!props.actionMyProfile && (
       <div className={styles.socialNetworks}>
-        {props.email
-        && (
-          <a href={`mailto:${props.email}`} className={styles.item}>
-            <FeatherIcon icon="globe" size="16" strokeWidth="1" fill="black" />
+        {props.email && (
+          <a title="Send email" href={`mailto:${props.email}`} className={styles.item}>
+            <FeatherIcon icon="mail" size="16" strokeWidth="1" fill="black" />
             {props.email}
           </a>
         )}
-        {props.twitter
-        && (
-          <a href="https://twitter.com" target="_blank" rel="noreferrer" className={styles.item}>
+        {props.twitter && (
+          <a title="Open Twitter profile" href="https://twitter.com" target="_blank" rel="noreferrer" className={styles.item}>
             <FeatherIcon icon="twitter" size="16" strokeWidth="1" fill="black" />
             {props.twitter}
           </a>
         )}
-        {props.skype
-        && (
-          <a href="https://facebook.com" target="_blank" rel="noreferrer" className={styles.item}>
+        {props.skype && (
+          <a title="Open Facebook profile" href="https://facebook.com" target="_blank" rel="noreferrer" className={styles.item}>
             <FeatherIcon icon="facebook" size="16" strokeWidth="1" fill="black" />
             {props.skype}
           </a>

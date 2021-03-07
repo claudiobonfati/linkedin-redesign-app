@@ -111,15 +111,6 @@ class MePosts extends React.Component {
             ))}
           </>
         );
-      } else {
-        jsxPostsList = (
-          <div className="mb-4">
-            <NothingFound
-              title="Yikes... It looks like our server is not responding."
-              subtitle="Relax, breath, and try reloading the page."
-            />
-          </div>
-        );
       }
     }
 

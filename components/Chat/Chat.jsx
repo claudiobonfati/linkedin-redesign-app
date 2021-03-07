@@ -22,14 +22,12 @@ const myChat = (props) => {
         <BarContacts contacts={props.contacts} />
       </div>
       <div className={styles.center}>
-        {context.data.contact
-        && (
+        {context.data.contact && (
           <BarChat />
         )}
       </div>
       <div className={styles.sideBarRight}>
-        {context.data.contact
-        && (
+        {context.data.contact && (
           <BarDescription />
         )}
       </div>

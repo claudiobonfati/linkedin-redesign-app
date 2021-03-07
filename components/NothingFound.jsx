@@ -6,8 +6,7 @@ const nothingFound = (props) => (
   <div className={styles.wrapper}>
     <p className="text-center">
       {props.title}
-      {props.subtitle
-      && (
+      {props.subtitle && (
         <>
           <br />
           {props.subtitle}

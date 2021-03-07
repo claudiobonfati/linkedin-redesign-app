@@ -91,7 +91,12 @@ const notificationsMenu = () => {
             </li>
           </ul>
         </nav>
-        <div className={`${styles.dropContentOuter} ${tab === 'notifications' ? styles.tabNotifications : styles.tabRequests}`}>
+        <div
+          className={`
+            ${styles.dropContentOuter} 
+            ${tab === 'notifications' ? styles.tabNotifications : styles.tabRequests}
+          `}
+        >
           <div className={styles.dropContentInner}>
             <div className={`px-4 ${styles.dropContent}`}>
               {(viewers.data
@@ -110,8 +115,8 @@ const notificationsMenu = () => {
                               src={item.User.photo}
                               alt="Profile picture"
                               className={`circle-image ${styles.profilePic}`}
-                              width={40}
-                              height={40}
+                              width="40px"
+                              height="40px"
                             />
                           </a>
                         </Link>

@@ -77,12 +77,9 @@ const barChat = () => {
           type="button"
           onClick={() => context.dispatch({ type: 'TOGGLE_FULLSCREEN' })}
         >
-          {!context.data.fullScreen
-          && (
+          {!context.data.fullScreen ? (
             <FeatherIcon icon="maximize" size="20" strokeWidth="1.2" />
-          )}
-          {context.data.fullScreen
-          && (
+          ) : (
             <FeatherIcon icon="minimize" size="20" strokeWidth="1.2" />
           )}
         </button>
@@ -110,15 +107,13 @@ const barChat = () => {
                   key={item.id}
                 >
                   <div className={styles.userPhoto}>
-                    {(item.from === 'target')
-                    && (
+                    {(item.from === 'target') && (
                       <img
                         src={context.data.contact.User.photo}
                         alt={context.data.contact.User.name}
                       />
                     )}
-                    {(item.from === 'me')
-                    && (
+                    {(item.from === 'me') && (
                       <img
                         src={currentUser.data.photo}
                         alt={currentUser.data.name}

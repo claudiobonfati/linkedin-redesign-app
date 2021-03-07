@@ -43,7 +43,7 @@ const searchAll = (props) => {
                 imageSize={60}
                 title={contact.name}
                 subtitle={contact.headline}
-                rightButtonText="See profile"
+                rightButtonText="View profile"
                 rightButtonLink={`/profile/${contact.username}/details`}
               />
             </div>
