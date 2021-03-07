@@ -1,6 +1,8 @@
 const path = require('path');
 
 module.exports = {
+  basePath: '/linkedin-redesign-app',
+  assetPrefix: '/linkedin-redesign-app/',
   sassOptions: {
     includePaths: [
       path.join(__dirname, 'styles'),
