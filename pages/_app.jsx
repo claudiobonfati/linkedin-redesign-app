@@ -11,7 +11,6 @@ import '../styles/styles.sass';
 function LayoutWrapper({ children }) {
   const transitionCallback = useTransitionFix();
 
-  // You can use hooks here
   return (
     <Layout>
       <ApolloProvider client={ApolloClient}>
@@ -46,7 +45,7 @@ class App extends NextApp {
           <meta name="msapplication-TileColor" content="#007FB2" />
           <meta name="msapplication-TileImage" content="/images/favicon/ms-icon-144x144.png" />
           <meta name="theme-color" content="#007FB2" />
-          <title>Linkedin Redesign</title>
+          <title>LinkedIn Redesign</title>
         </Head>
         <LayoutWrapper>
           <Component {...pageProps} key={router.asPath} />

@@ -123,6 +123,28 @@ export const getSimpleUser = async (username) => {
   return result;
 };
 
+export const useSimpleUser = (username) => {
+  const { loading, error, data } = useQuery(GET_SIMPLE_USER, {
+    variables: {
+      username,
+    },
+  });
+
+  if (!loading && data) {
+    return {
+      loading,
+      error,
+      data: data.allUsers[0],
+    };
+  }
+
+  return {
+    loading,
+    error,
+    data,
+  };
+};
+
 export const fetchMoreArticles = async (page, perPage) => {
   try {
     let result = await ApolloClient.query({

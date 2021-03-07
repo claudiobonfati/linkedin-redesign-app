@@ -1,76 +1,62 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 import ProfileOverview from './ProfileOverview';
 import { getSimpleUser } from '../graphql/hooks';
 import SimpleButton from './SimpleButton';
 
-class CurrentProfileOverview extends React.Component {
-  constructor(props) {
-    super(props);
+const currentProfileOverview = (props) => {
+  const profile = useStoreState((state) => state.user.profile);
+  const setProfile = useStoreActions((actions) => actions.user.setProfile);
 
-    this.state = {
-      user: null,
-    };
-  }
+  (async () => {
+    if (!profile) {
+      let data = await getSimpleUser('claudiobonfati');
 
-  async componentDidMount() {
-    const oldUser = JSON.parse(localStorage.getItem('current-user-preview'));
-
-    if (oldUser) {
-      this.setState({
-        user: oldUser,
-      });
-    } else {
-      let userData = await getSimpleUser('claudiobonfati');
-
-      this.setState({
-        user: userData,
-      });
-
-      localStorage.setItem('current-user-preview', JSON.stringify(userData));
+      setProfile(data);
     }
-  }
+  })();
 
-  render() {
-    return (
-      <>
-        {(this.state.user && !this.state.user.error && !this.state.user.loading)
-        && (
-          <>
-            <ProfileOverview
-              photo={this.state.user.data.photo}
-              name={this.state.user.data.name}
-              position={this.state.user.data.headline}
-              connections={this.state.user.data.connections}
-              views={653}
-              actionMyProfile={this.props.simple}
-              email={!this.props.simple ? this.state.user.data.email : null}
-              twitter={!this.props.simple ? this.state.user.data.twitter : null}
-              skype={!this.props.simple ? this.state.user.data.skype : null}
-            />
-            {!this.props.simple
-            && (
-              <div className="mt-4">
-                <SimpleButton
-                  text="Connect with me"
-                  to="https://www.linkedin.com/in/claudiobonfati/"
-                  outside
-                />
-              </div>
-            )}
-          </>
-        )}
-      </>
-    );
-  }
-}
+  return (
+    <>
+      {(profile
+      && !profile.error
+      && !profile.loading)
+      && (
+        <>
+          <ProfileOverview
+            photo={profile.data.photo}
+            name={profile.data.name}
+            position={profile.data.headline}
+            connections={profile.data.connections}
+            views={653}
+            actionMyProfile={props.simple}
+            email={!props.simple ? profile.data.email : null}
+            twitter={!props.simple ? profile.data.twitter : null}
+            skype={!props.simple ? profile.data.skype : null}
+          />
+          {!props.simple
+          && (
+            <div className="mt-4">
+              <SimpleButton
+                text="Connect with me"
+                to="https://www.linkedin.com/in/claudiobonfati/"
+                outside
+              />
+            </div>
+          )}
+        </>
+      )}
+    </>
+  );
+};
 
-CurrentProfileOverview.propTypes = {
+currentProfileOverview.propTypes = {
   simple: PropTypes.bool,
 };
 
-CurrentProfileOverview.defaultProps = {
+currentProfileOverview.defaultProps = {
   simple: false,
 };
 
-export default CurrentProfileOverview;
+export default currentProfileOverview;

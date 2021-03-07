@@ -1,5 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { TweenMax } from 'gsap';
+import { StoreProvider } from 'easy-peasy';
+import ProfileStore from '../redux/profileStore';
 import Header from './Header/Header';
 import MenuTab from './MenuTab/Tab';
 import styles from './Layout.module.sass';
@@ -14,15 +16,17 @@ const layout = (props) => {
 
   return (
     <div className={styles.layoutWrapper} ref={(ref) => { appRef = ref; }}>
-      <HeaderProvider>
-        <Header />
-      </HeaderProvider>
-      <MenuTab />
-      <div className={styles.contentWrapper}>
-        <div className={`${styles.scrollWrapper} stickyArea`}>
-          {props.children}
+      <StoreProvider store={ProfileStore}>
+        <HeaderProvider>
+          <Header />
+        </HeaderProvider>
+        <MenuTab />
+        <div className={styles.contentWrapper}>
+          <div className={`${styles.scrollWrapper} stickyArea`}>
+            {props.children}
+          </div>
         </div>
-      </div>
+      </StoreProvider>
     </div>
   );
 };
