@@ -3,6 +3,7 @@ import { Waypoint } from 'react-waypoint';
 import { withRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import Sticky from 'react-sticky-el';
+import NothingFound from '../../../components/NothingFound';
 import Loading from '../../../components/Loading';
 import ProfileOverview from '../../../components/ProfileOverview';
 import Post from '../../../components/Post';
@@ -22,10 +23,10 @@ class ProfilePosts extends React.Component {
       feed: {
         loading: false,
         error: false,
-        data: [],
+        data: null,
       },
       user: null,
-      keepInTouch: []
+      similarProfiles: []
     };
 
     this.fetchPosts = this.fetchPosts.bind(this);
@@ -40,8 +41,8 @@ class ProfilePosts extends React.Component {
       this.getInitialPosts();
     }
 
-    // Request "keep in touch" profiles
-    this.fetchKeepInTouch();
+    // Request "similar profiles" list
+    this.fetchSimilarProfiles();
   }
 
   componentDidUpdate(prevProps) {
@@ -51,12 +52,12 @@ class ProfilePosts extends React.Component {
     }
   }
 
-  async fetchKeepInTouch() {
+  async fetchSimilarProfiles() {
     try {
-      let result = await getRandomUsers(4);
+      let result = await getRandomUsers(4, [`${this.state.user?.data?.id || null}`, '1']);
 
       this.setState(() => ({
-        keepInTouch: result,
+        similarProfiles: result,
       }));
     } catch (e) { }
   }
@@ -80,16 +81,23 @@ class ProfilePosts extends React.Component {
       );
 
       if (!result.loading && !result.error) {
+        const currentFeed = this.state.feed.data ? this.state.feed.data : [];
+        
         if (!result.data || result.data.length === 0) {
           this.setState({
+            feed: {
+              loading: result.loading,
+              error: result.error,
+              data: currentFeed.concat(result.data),
+            },
             feedEnded: true,
           });
-        } else {
+        } else {        
           this.setState((prevState) => ({
             feed: {
               loading: result.loading,
               error: result.error,
-              data: prevState.feed.data.concat(result.data),
+              data: currentFeed.concat(result.data),
             },
             feedPage: prevState.feedPage + 1,
           }));
@@ -103,51 +111,60 @@ class ProfilePosts extends React.Component {
     let jsxPostsList = (<Loading />);
 
     if (this.state.feed.data
-    && Array.isArray(this.state.feed.data)
-    && this.state.feed.data.length > 0) {
-      jsxPostsList = (
-        <>
-          {this.state.feed.data.map((post, index) => (
-            <div className="mb-4" key={post.id}>
-              <Post
-                opPhoto={post.User ? post.User.photo : post.Company.logo}
-                opName={post.User ? post.User.name : post.Company.name}
-                opSubtitle={post.User ? post.User.headline : null}
-                opLink={`/profile/${post.User.username}/details`}
-                postTime={post.time}
-                postBody={post.body}
-                postImage={post.image}
-                postVimeo={post.video}
-                postLikes={post.likes}
-                postComments={post.Comments}
-              />
-              {(index === this.state.feed.data.length - 1 && !this.state.feedEnded) && (
-                <Waypoint
-                  onEnter={() => (!this.state.feedEnded ? this.fetchPosts() : null)}
+    && Array.isArray(this.state.feed.data)) {
+      if (this.state.feed.data.length > 0) {
+        jsxPostsList = (
+          <>
+            {this.state.feed.data.map((post, index) => (
+              <div className="mb-4" key={post.id}>
+                <Post
+                  opPhoto={post.User ? post.User.photo : post.Company.logo}
+                  opName={post.User ? post.User.name : post.Company.name}
+                  opSubtitle={post.User ? post.User.headline : null}
+                  opLink={`/profile/${post.User.username}/details`}
+                  postTime={post.time}
+                  postBody={post.body}
+                  postImage={post.image}
+                  postVimeo={post.video}
+                  postLikes={post.likes}
+                  postComments={post.Comments}
                 />
-              )}
-            </div>
-          ))}
-        </>
-      );
+                {(index === this.state.feed.data.length - 1 && !this.state.feedEnded) && (
+                  <Waypoint
+                    onEnter={() => (!this.state.feedEnded ? this.fetchPosts() : null)}
+                  />
+                )}
+              </div>
+            ))}
+          </>
+        );
+      } else {
+        jsxPostsList = (
+          <NothingFound
+            title={`It looks like ${this.state.user?.data?.name?.split(' ')[0] || 'the profile'} didn't post anything yet.`}
+          />
+        );
+      }
+        console.log("here?")
     }
 
-    // "Keep in touch" profiles
-    let jsxKeepInTouchList = (<Loading />);
+    // "Similar profiles" list
+    let jsxSimilarProfilesList = (<Loading />);
 
-    if (this.state.keepInTouch
-    && Array.isArray(this.state.keepInTouch)
-    && this.state.keepInTouch.length > 0) {
-      jsxKeepInTouchList = (
+    if (this.state.similarProfiles
+    && Array.isArray(this.state.similarProfiles)
+    && this.state.similarProfiles.length > 0) {
+      jsxSimilarProfilesList = (
         <>
-          {this.state.keepInTouch.map((profile, index) => (
-            <div className={`${index + 1 === this.state.keepInTouch.length ? '' : 'pb-3'}`} key={profile.id}>
+          {this.state.similarProfiles.map((profile, index) => (
+            <div className={`${index + 1 === this.state.similarProfiles.length ? '' : 'pb-3'}`} key={profile.id}>
               <ProfileDisplay
                 image={profile.photo}
                 imageSize={50}
                 title={profile.name}
                 subtitle={profile.headline}
                 link={`/profile/${profile.username}/details`}
+                imageOnTop
               />
             </div>
           ))}
@@ -195,12 +212,12 @@ class ProfilePosts extends React.Component {
             <div className="col-lg-6 col-md-8 py-4">
               {jsxPostsList}
             </div>
-            <div className="col-lg-3 col-md-4 pt-4 d-none d-md-block">
+            <div className="col-lg-3 col-md-4 pt-4 d-none d-lg-block">
               <div className="sticky-aside-content">
                 <Sticky topOffset={-20} scrollElement=".stickyArea">
-                  <SimpleCard title="Keep in touch">
+                  <SimpleCard title="Similar profiles">
                     <div className="w-100">
-                      {jsxKeepInTouchList}
+                      {jsxSimilarProfilesList}
                     </div>
                   </SimpleCard>
                 </Sticky>

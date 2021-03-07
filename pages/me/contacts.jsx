@@ -33,6 +33,7 @@ function MeContacts() {
                   subtitle={contact.headline}
                   rightButtonText="Message"
                   rightButtonLink="/messages/all"
+                  imageOnTop
                 />
               </div>
             ))}

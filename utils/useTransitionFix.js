@@ -20,15 +20,12 @@ export const useTransitionFix = () => {
 
         // Add duplicated nodes to the DOM.
         document.head.appendChild(copy);
-        console.log('here - CLONE');
       }
 
       cleanupRef.current = () => {
         for (let copy of copies) {
           // Remove previous page's styles after the transition has finalized.
           document.head.removeChild(copy);
-
-          console.log('here - DELETE');
         }
       };
     };

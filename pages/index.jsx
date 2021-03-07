@@ -8,7 +8,6 @@ import CreatePost from '../components/CreatePost';
 import SimpleCard from '../components/SimpleCard';
 import ProfileDisplay from '../components/ProfileDisplay';
 import Post from '../components/Post';
-import NothingFound from '../components/NothingFound';
 import { fetchMorePosts, getRandomUsers } from '../graphql/hooks';
 import defaultVariants from '../utils/FramerMotionDefault';
 
@@ -72,7 +71,7 @@ class Home extends React.Component {
 
   async fetchKeepInTouch() {
     try {
-      let result = await getRandomUsers(4, 1);
+      let result = await getRandomUsers(4, ['1']);
 
       this.setState(() => ({
         keepInTouch: result,
@@ -133,6 +132,7 @@ class Home extends React.Component {
                 title={profile.name}
                 subtitle={profile.headline}
                 link={`/profile/${profile.username}/details`}
+                imageOnTop
               />
             </div>
           ))}

@@ -7,7 +7,6 @@ import CurrentProfileOverview from '../components/CurrentProfileOverview';
 import Post from '../components/Post';
 import SimpleCard from '../components/SimpleCard';
 import ProfileDisplay from '../components/ProfileDisplay';
-import NothingFound from '../components/NothingFound';
 import { fetchMoreCompaniesPosts, getRandomCompanies } from '../graphql/hooks';
 import defaultVariants from '../utils/FramerMotionDefault';
 
@@ -130,6 +129,7 @@ class Companies extends React.Component {
                 title={company.name}
                 subtitle={company.industry}
                 link={`/company/${company.nameslug}/home`}
+                imageOnTop
               />
             </div>
           ))}

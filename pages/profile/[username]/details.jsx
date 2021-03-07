@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { withRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import Sticky from 'react-sticky-el';
@@ -7,17 +7,21 @@ import SimpleCard from '../../../components/SimpleCard';
 import Polaroid from '../../../components/Polaroid';
 import ProfileOverview from '../../../components/ProfileOverview';
 import ProfileDisplay from '../../../components/ProfileDisplay';
-import { useUser, useRandomUsers } from '../../../graphql/hooks';
+import { useUser, getRandomUsers } from '../../../graphql/hooks';
 import defaultVariants from '../../../utils/FramerMotionDefault';
 
 const profileDetails = (props) => {
   const { username } = props.router.query;
   const user = useUser(username);
-  let similarProfiles = useRandomUsers(4, user?.data?.id);
+  const [similarProfiles, setSimilarProfiles] = useState([]);
 
-  useEffect(() => {
+  useEffect(async () => {
     // Reseting scroll manually (FramerMotion dependency)
     window.scrollTo(0, 0);
+
+    // Request "Similar progiles" list
+    const profiles = await getRandomUsers(4, [`${user?.data?.id || null}`, '1']);
+    setSimilarProfiles(profiles);
   }, []);
 
   return (
@@ -176,26 +180,22 @@ const profileDetails = (props) => {
             <div className="sticky-aside-content">
               <Sticky topOffset={-20} scrollElement=".stickyArea">
                 <SimpleCard title="Similar profiles">
-                  {(similarProfiles
-                  && !similarProfiles.error
-                  && similarProfiles.loading) && (
+                  {similarProfiles.length === 0 && (
                     <Loading />
                   )}
-                  {(similarProfiles
-                  && !similarProfiles.error
-                  && !similarProfiles.loading
-                  && Array.isArray(similarProfiles.data)
-                  && similarProfiles.data.length > 0)
+                  {(Array.isArray(similarProfiles)
+                  && similarProfiles.length > 0)
                   && (
                     <div className="w-100">
-                      {similarProfiles.data.map((item, index) => (
-                        <div className={`${index + 1 === similarProfiles.data.length ? '' : 'pb-3'}`} key={item.id}>
+                      {similarProfiles.map((item, index) => (
+                        <div className={`${index + 1 === similarProfiles.length ? '' : 'pb-3'}`} key={item.id}>
                           <ProfileDisplay
                             image={item.photo}
                             imageSize={50}
                             title={item.name}
                             subtitle={item.headline}
                             link={`/profile/${item.username}/details`}
+                            imageOnTop
                           />
                         </div>
                       ))}

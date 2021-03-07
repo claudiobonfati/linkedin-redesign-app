@@ -7,7 +7,7 @@ import CurrentProfileOverview from '../../components/CurrentProfileOverview';
 import CreatePost from '../../components/CreatePost';
 import Post from '../../components/Post';
 import SimpleCard from '../../components/SimpleCard';
-import { fetchMoreUserPosts } from '../../graphql/hooks';
+import { fetchMoreUserPosts, getRandomUsers } from '../../graphql/hooks';
 import ProfileDisplay from '../../components/ProfileDisplay';
 import NothingFound from '../../components/NothingFound';
 import defaultVariants from '../../utils/FramerMotionDefault';
@@ -25,6 +25,7 @@ class MePosts extends React.Component {
         error: false,
         data: [],
       },
+      mostEngaged: [],
     };
 
     this.fetchPosts = this.fetchPosts.bind(this);
@@ -36,6 +37,9 @@ class MePosts extends React.Component {
 
     // Request initial posts
     this.fetchPosts();
+
+    // Request "Most engaged" profiles
+    this.fetchMostEngaged();
   }
 
   async fetchPosts() {
@@ -62,6 +66,16 @@ class MePosts extends React.Component {
           }));
         }
       }
+    } catch (e) { }
+  }
+
+  async fetchMostEngaged() {
+    try {
+      let result = await getRandomUsers(4, ['1']);
+
+      this.setState(() => ({
+        mostEngaged: result,
+      }));
     } catch (e) { }
   }
 
@@ -109,6 +123,29 @@ class MePosts extends React.Component {
       }
     }
 
+    // "Most engaged" profiles
+    let jsxMostEngagedList = (<Loading />);
+
+    if (this.state.mostEngaged
+    && Array.isArray(this.state.mostEngaged)
+    && this.state.mostEngaged.length > 0) {
+      jsxMostEngagedList = (
+        <>
+          {this.state.mostEngaged.map((profile, index) => (
+            <div className={`${index + 1 === this.state.mostEngaged.length ? '' : 'pb-3'}`} key={profile.id}>
+              <ProfileDisplay
+                image={profile.photo}
+                imageSize={50}
+                title={profile.name}
+                subtitle={profile.headline}
+                link={`/profile/${profile.username}/details`}
+              />
+            </div>
+          ))}
+        </>
+      );
+    }
+
     return (
       <motion.div
         className="w-100"
@@ -134,40 +171,7 @@ class MePosts extends React.Component {
             </div>
             <div className="col-lg-3 col-md-4 py-4 d-none d-lg-block">
               <SimpleCard title="Most engaged">
-                <div className="w-100">
-                  <div className="pb-3">
-                    <ProfileDisplay
-                      image="/images/me.jpg"
-                      imageSize={50}
-                      title="Jenson Kent"
-                      subtitle="CEO and founder"
-                    />
-                  </div>
-                  <div className="py-3">
-                    <ProfileDisplay
-                      image="/images/me.jpg"
-                      imageSize={50}
-                      title="Emily Kilimanjaro"
-                      subtitle="UI designer"
-                    />
-                  </div>
-                  <div className="py-3">
-                    <ProfileDisplay
-                      image="/images/me.jpg"
-                      imageSize={50}
-                      title="James Johns"
-                      subtitle="Project manager"
-                    />
-                  </div>
-                  <div className="pt-3">
-                    <ProfileDisplay
-                      image="/images/me.jpg"
-                      imageSize={50}
-                      title="CTO"
-                      subtitle="is now a connection"
-                    />
-                  </div>
-                </div>
+                {jsxMostEngagedList}
               </SimpleCard>
             </div>
           </main>

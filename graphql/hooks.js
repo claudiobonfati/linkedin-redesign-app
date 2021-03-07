@@ -206,7 +206,9 @@ export const getRandomUsers = async (limit, exclude) => {
     },
   });
 
-  let newResult = result.data.allUsers.filter((user) => user.id != exclude);
+  const excludeArray = [...exclude];
+
+  let newResult = result.data.allUsers.filter((user) => !excludeArray.includes(user.id));
   newResult = newResult.map((x) => x);
   newResult = newResult.sort(() => Math.random() - 0.5);
   newResult = newResult.slice(0, limit);

@@ -7,7 +7,6 @@ import CurrentProfileOverview from '../components/CurrentProfileOverview';
 import Post from '../components/Post';
 import SimpleCard from '../components/SimpleCard';
 import ProfileDisplay from '../components/ProfileDisplay';
-import NothingFound from '../components/NothingFound';
 import { fetchMoreArticles, getRandomUsers } from '../graphql/hooks';
 import defaultVariants from '../utils/FramerMotionDefault';
 
@@ -69,7 +68,7 @@ class Articles extends React.Component {
 
   async fetchKeepInTouch() {
     try {
-      let result = await getRandomUsers(4, 1);
+      let result = await getRandomUsers(4, ['1']);
 
       this.setState(() => ({
         keepInTouch: result,
@@ -134,6 +133,7 @@ class Articles extends React.Component {
                 title={profile.name}
                 subtitle={profile.headline}
                 link={`/profile/${profile.username}/details`}
+                imageOnTop
               />
             </div>
           ))}
