@@ -5,6 +5,9 @@ import Link from 'next/link';
 const notFound = () => (
   <motion.div
     className="wrapper-not-found"
+    style={{
+      backgroundImage: `url(${process.env.BASE_PATH}/images/404.svg)`
+    }}
     initial={{
       opacity: 0,
     }}

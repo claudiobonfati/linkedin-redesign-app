@@ -65,7 +65,7 @@ const barContacts = (props) => {
           className={`
             ${styles.userButton}
             ${contact.unread ? styles.messageUnread : ''}
-            ${contact.id === context.data?.contact?.id ? styles.userActive : ''}
+            ${contact.id === context?.data?.contact?.id ? styles.userActive : ''}
           `}
           key={contact.id}
           onClick={() => { selectContact(contact); }}

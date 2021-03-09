@@ -12,7 +12,7 @@ const barDescription = () => {
     <div
       className={`
         ${styles.wrapper}
-        ${context.data.fullScreen ? styles.fullScreen : ''} 
+        ${context?.data.fullScreen ? styles.fullScreen : ''} 
       `}
     >
       <div className={styles.mobileHeader}>
@@ -25,36 +25,36 @@ const barDescription = () => {
         </button>
       </div>
       <div className={styles.content}>
-        <Link href={`/profile/${context.data.contact.User.username}/details`}>
+        <Link href={`/profile/${context?.data.contact.User.username}/details`}>
           <a title="See profile" className="cursor-pointer">
             <div className={styles.userPhoto}>
               <Image
-                src={context.data.contact.User.photo}
-                alt={context.data.contact.User.name}
+                src={context?.data.contact.User.photo}
+                alt={context?.data.contact.User.name}
               />
             </div>
           </a>
         </Link>
-        <Link href={`/profile/${context.data.contact.User.username}/details`}>
+        <Link href={`/profile/${context?.data.contact.User.username}/details`}>
           <a title="See profile" className={styles.userName}>
-            {context.data.contact.User.name}
+            {context?.data.contact.User.name}
           </a>
         </Link>
         <div className={styles.userSubtitle}>
-          {`Active ${context.data.contact.User.lastOnline}`}
+          {`Active ${context?.data.contact.User.lastOnline}`}
         </div>
         <div className={styles.socialNetworks}>
-          <a title="Send email" href={`mailto:${context.data.contact.User.email}`} className={styles.item}>
+          <a title="Send email" href={`mailto:${context?.data.contact.User.email}`} className={styles.item}>
             <FeatherIcon icon="mail" size="16" strokeWidth="1" fill="black" />
-            {context.data.contact.User.email}
+            {context?.data.contact.User.email}
           </a>
           <a title="Open Twitter profile" href="https://twitter.com" target="_blank" rel="noreferrer" className={styles.item}>
             <FeatherIcon icon="twitter" size="16" strokeWidth="1" fill="black" />
-            {context.data.contact.User.twitter}
+            {context?.data.contact.User.twitter}
           </a>
           <a title="Open Facebook profile" href="https://facebook.com" target="_blank" rel="noreferrer" className={styles.item}>
             <FeatherIcon icon="facebook" size="16" strokeWidth="1" fill="black" />
-            {context.data.contact.User.skype}
+            {context?.data.contact.User.skype}
           </a>
         </div>
       </div>

@@ -65,9 +65,9 @@ const barChat = () => {
             onClick={() => context.dispatch({ type: 'SET_PAGE', payload: 'Description' })}
           >
             <ProfileDisplay
-              image={context.data.contact.User.photo}
+              image={context?.data.contact.User.photo}
               imageSize={30}
-              title={context.data.contact.User.name}
+              title={context?.data.contact.User.name}
               imagePadding="2"
             />
           </button>
@@ -77,7 +77,7 @@ const barChat = () => {
           type="button"
           onClick={() => context.dispatch({ type: 'TOGGLE_FULLSCREEN' })}
         >
-          {!context.data.fullScreen ? (
+          {!context?.data.fullScreen ? (
             <FeatherIcon icon="maximize" size="20" strokeWidth="1.2" />
           ) : (
             <FeatherIcon icon="minimize" size="20" strokeWidth="1.2" />
@@ -88,14 +88,14 @@ const barChat = () => {
         <div>
           <div className={styles.timeBreaker}>
             <span className={styles.timeTag}>
-              {context.data.contact.User.lastOnline}
+              {context?.data.contact.User.lastOnline}
             </span>
           </div>
-          {(context.data.dialogue
-          && context.data.dialogue.length > 0)
+          {(context?.data.dialogue
+          && context?.data.dialogue.length > 0)
           && (
             <>
-              {context.data.dialogue.map((item) => (
+              {context?.data.dialogue.map((item) => (
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
@@ -109,14 +109,14 @@ const barChat = () => {
                   <div className={styles.userPhoto}>
                     {(item.from === 'target') && (
                       <img
-                        src={context.data.contact.User.photo}
-                        alt={context.data.contact.User.name}
+                        src={context?.data.contact.User.photo}
+                        alt={context?.data.contact.User.name}
                       />
                     )}
                     {(item.from === 'me') && (
                       <img
-                        src={currentUser.data.photo}
-                        alt={currentUser.data.name}
+                        src={currentUser?.data.photo}
+                        alt={currentUser?.data.name}
                       />
                     )}
                   </div>

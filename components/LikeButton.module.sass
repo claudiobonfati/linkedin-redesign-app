@@ -16,13 +16,12 @@
     transition: opacity .2s ease-out
   .buttonLabel
     margin-left: 5px
-  &::before 
+  .heartEffect 
     display: block
     content: ""
     position: absolute
     left: -23px
     top: 4px
-    background-image: url(/images/heart-animation.png)
     background-repeat: no-repeat
     background-size: 2900%
     background-position: left
@@ -34,7 +33,7 @@
 .heartAnimation
   svg
     opacity: 0
-  &::before
+  .heartEffect
     opacity: 1
     animation: heart-burst .8s steps(28) forwards
 

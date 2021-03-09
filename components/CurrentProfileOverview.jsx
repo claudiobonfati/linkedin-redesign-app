@@ -4,6 +4,7 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 import ProfileOverview from './ProfileOverview';
 import { getSimpleUser } from '../graphql/hooks';
 import SimpleButton from './SimpleButton';
+import Loading from './Loading';
 
 const currentProfileOverview = (props) => {
   const profile = useStoreState((state) => state.user.profile);
@@ -17,35 +18,41 @@ const currentProfileOverview = (props) => {
     }
   })();
 
+  // Main articles list
+  let jsxDisplay = (<Loading />);
+
+  if (profile
+      && !profile.error
+      && !profile.loading) {
+    jsxDisplay = (
+      <>
+        <ProfileOverview
+          photo={profile.data.photo}
+          name={profile.data.name}
+          position={profile.data.headline}
+          connections={profile.data.connections}
+          views={653}
+          actionMyProfile={props.simple}
+          email={!props.simple ? profile.data.email : null}
+          twitter={!props.simple ? profile.data.twitter : null}
+          skype={!props.simple ? profile.data.skype : null}
+        />
+        {!props.simple && (
+        <div className="mt-4">
+          <SimpleButton
+            text="Connect with me"
+            to="https://www.linkedin.com/in/claudiobonfati/"
+            outside
+          />
+        </div>
+        )}
+      </>
+    );
+  }
+
   return (
     <>
-      {(profile
-      && !profile.error
-      && !profile.loading)
-      && (
-        <>
-          <ProfileOverview
-            photo={profile.data.photo}
-            name={profile.data.name}
-            position={profile.data.headline}
-            connections={profile.data.connections}
-            views={653}
-            actionMyProfile={props.simple}
-            email={!props.simple ? profile.data.email : null}
-            twitter={!props.simple ? profile.data.twitter : null}
-            skype={!props.simple ? profile.data.skype : null}
-          />
-          {!props.simple && (
-            <div className="mt-4">
-              <SimpleButton
-                text="Connect with me"
-                to="https://www.linkedin.com/in/claudiobonfati/"
-                outside
-              />
-            </div>
-          )}
-        </>
-      )}
+      {jsxDisplay}
     </>
   );
 };

@@ -18,6 +18,7 @@ const myChat = (props) => {
         ${styles[`Page${context.data.page}`]}
       `}
     >
+      <span className={styles.imagePlaceholder} style={{backgroundImage: `url(${process.env.BASE_PATH}/images/chat.svg)`}}/>
       <div className={styles.sideBarLeft}>
         <BarContacts contacts={props.contacts} />
       </div>

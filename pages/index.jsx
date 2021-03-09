@@ -64,9 +64,7 @@ class Home extends React.Component {
           }));
         }
       }
-    } catch (e) {
-      console.error(e);
-    }
+    } catch (e) { }
   }
 
   async fetchKeepInTouch() {

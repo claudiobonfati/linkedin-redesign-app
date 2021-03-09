@@ -60,7 +60,7 @@ With all dependencies installed and the environment properly configured, you can
 $ npm run dev
 ```
 
-Access the application at http://localhost:3001/.
+Access the application at http://localhost:3001/linkedin-redesign-app/.
 
 ## Contributing
 

@@ -282,7 +282,7 @@ const createPost = () => {
               value={articleBody}
               init={{
                 height: 400,
-                skin_url: '/tinymce/skins/ui/linkedin',
+                skin_url: `${process.env.BASE_PATH}/tinymce/skins/ui/linkedin`,
                 menubar: false,
                 plugins: ['advlist autolink lists link image charmap print preview anchor', 'searchreplace visualblocks code fullscreen', 'insertdatetime media table paste code wordcount'],
                 toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat',

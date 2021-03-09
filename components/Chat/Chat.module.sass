@@ -25,7 +25,7 @@
   align-content: stretch
   align-items: stretch
   position: relative
-  &::before 
+  .imagePlaceholder 
     display: block
     position: absolute
     width: calc(100% - var(--width-bar-left))
@@ -35,7 +35,6 @@
     content: ''
     z-index: 0
     background-color: #f6fcff
-    background-image: url('/images/chat.svg')
     background-repeat: no-repeat
     background-position: center bottom
     background-size: cover 
@@ -48,7 +47,7 @@
     left: 0
     z-index: 20
   &.noUser
-    &::before 
+    .imagePlaceholder 
       opacity: 1
     .center,
     .sideBarRight
@@ -135,7 +134,7 @@
   .wrapper
     border-left: 0
     border-right: 0
-    &::before
+    .imagePlaceholder
       display: none
     .sideBarLeft,
     .center,

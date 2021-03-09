@@ -13,7 +13,8 @@ import nthIndex from '../../utils/nthIndex';
 class Tab extends React.Component {
   // Find correct tab menu to display based on pathname
   static findMenuName(url) {
-    const pathName = url.substring(0, nthIndex(url, '/', 2));
+    const path = url.replace(process.env.BASE_PATH, '');
+    const pathName = path.substring(0, nthIndex(path, '/', 2));
     let menu;
 
     switch (pathName) {

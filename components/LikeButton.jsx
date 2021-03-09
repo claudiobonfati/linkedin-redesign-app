@@ -17,6 +17,7 @@ const likeButton = (props) => {
       type="button"
       onClick={likeHandle}
     >
+      <span className={styles.heartEffect} style={{backgroundImage: `url(${process.env.BASE_PATH}/images/heart-animation.png)`}}/>
       <FeatherIcon icon="heart" size="20" strokeWidth="1.2" />
       <div className={styles.buttonLabel}>
         {liked ? MaskNumber(props.likes + 1) : MaskNumber(props.likes) }
