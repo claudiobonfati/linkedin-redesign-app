@@ -22,8 +22,8 @@ const currentProfileOverview = (props) => {
   let jsxDisplay = (<Loading />);
 
   if (profile
-      && !profile.error
-      && !profile.loading) {
+  && !profile.error
+  && !profile.loading) {
     jsxDisplay = (
       <>
         <ProfileOverview

@@ -46,45 +46,57 @@ export const usePosts = (page, perPage) => {
 };
 
 export const fetchMorePosts = async (page, perPage) => {
-  let result = await ApolloClient.query({
-    query: GET_POSTS,
-    variables: {
-      page,
-      perPage,
-    },
-  });
+  try {
+    let result = await ApolloClient.query({
+      query: GET_POSTS,
+      variables: {
+        page,
+        perPage,
+      },
+    });
 
-  result.data = result.data.allPosts;
+    result.data = result.data.allPosts;
 
-  return result;
+    return result;
+  } catch (e) {
+    return null;
+  }
 };
 
 export const fetchMoreUsersPosts = async (page, perPage) => {
-  let result = await ApolloClient.query({
-    query: GET_USERS_POSTS,
-    variables: {
-      page,
-      perPage,
-    },
-  });
+  try {
+    let result = await ApolloClient.query({
+      query: GET_USERS_POSTS,
+      variables: {
+        page,
+        perPage,
+      },
+    });
 
-  result.data = result.data.allPosts;
+    result.data = result.data.allPosts;
 
-  return result;
+    return result;
+  } catch (e) {
+    return null;
+  }
 };
 
 export const fetchMoreCompaniesPosts = async (page, perPage) => {
-  let result = await ApolloClient.query({
-    query: GET_COMPANIES_POSTS,
-    variables: {
-      page,
-      perPage,
-    },
-  });
+  try {
+    let result = await ApolloClient.query({
+      query: GET_COMPANIES_POSTS,
+      variables: {
+        page,
+        perPage,
+      },
+    });
 
-  result.data = result.data.allPosts;
+    result.data = result.data.allPosts;
 
-  return result;
+    return result;
+  } catch (e) {
+    return null;
+  }
 };
 
 export const useUser = (username) => {
@@ -110,17 +122,21 @@ export const useUser = (username) => {
 };
 
 export const getSimpleUser = async (username) => {
-  let result = await ApolloClient.query({
-    query: GET_SIMPLE_USER,
-    variables: {
-      username,
-    },
-  });
+  try {
+    let result = await ApolloClient.query({
+      query: GET_SIMPLE_USER,
+      variables: {
+        username,
+      },
+    });
 
-  let data = result.data.allUsers[0];
-  result.data = data;
+    let data = result.data.allUsers[0] || {};
+    result.data = data;
 
-  return result;
+    return result;
+  } catch (e) {
+    return null;
+  }
 };
 
 export const useSimpleUser = (username) => {
@@ -220,22 +236,26 @@ export const useContacts = (page, perPage, exclude) => {
 };
 
 export const getRandomUsers = async (limit, exclude) => {
-  let result = await ApolloClient.query({
-    query: GET_USERS,
-    variables: {
-      page: 0,
-      perPage: 100,
-    },
-  });
+  try {
+    let result = await ApolloClient.query({
+      query: GET_USERS,
+      variables: {
+        page: 0,
+        perPage: 100,
+      },
+    });
 
-  const excludeArray = [...exclude];
+    const excludeArray = [...exclude];
 
-  let newResult = result.data.allUsers.filter((user) => !excludeArray.includes(user.id));
-  newResult = newResult.map((x) => x);
-  newResult = newResult.sort(() => Math.random() - 0.5);
-  newResult = newResult.slice(0, limit);
+    let newResult = result.data.allUsers.filter((user) => !excludeArray.includes(user.id));
+    newResult = newResult.map((x) => x);
+    newResult = newResult.sort(() => Math.random() - 0.5);
+    newResult = newResult.slice(0, limit);
 
-  return newResult;
+    return newResult;
+  } catch (e) {
+    return null;
+  }
 };
 
 export const useRandomUsers = (limit, exclude = null) => {
@@ -274,27 +294,31 @@ export const useRandomUsers = (limit, exclude = null) => {
 };
 
 export const getRandomCompanies = async (limit, exclude = null) => {
-  let result = await ApolloClient.query({
-    query: GET_COMPANIES,
-    variables: {
-      page: 0,
-      perPage: 100,
-    },
-  });
+  try {
+    let result = await ApolloClient.query({
+      query: GET_COMPANIES,
+      variables: {
+        page: 0,
+        perPage: 100,
+      },
+    });
 
-  let newResult;
+    let newResult;
 
-  if (exclude) {
-    newResult = result.data.allCompanies.filter((company) => company.id != exclude);
-    newResult = newResult.map((x) => x);
-  } else {
-    newResult = result.data.allCompanies.map((x) => x);
+    if (exclude) {
+      newResult = result.data.allCompanies.filter((company) => company.id != exclude);
+      newResult = newResult.map((x) => x);
+    } else {
+      newResult = result.data.allCompanies.map((x) => x);
+    }
+
+    newResult = newResult.sort(() => Math.random() - 0.5);
+    newResult = newResult.slice(0, limit);
+
+    return newResult;
+  } catch (e) {
+    return null;
   }
-
-  newResult = newResult.sort(() => Math.random() - 0.5);
-  newResult = newResult.slice(0, limit);
-
-  return newResult;
 };
 
 export const useRandomCompanies = (limit, exclude = null) => {
@@ -446,18 +470,22 @@ export const useSearchUsersCompanies = (search, page = 0, limit = 100) => {
 };
 
 export const fetchMoreSearchPosts = async (page, perPage, search) => {
-  let result = await ApolloClient.query({
-    query: SEARCH_POSTS,
-    variables: {
-      page,
-      perPage,
-      search,
-    },
-  });
+  try {
+    let result = await ApolloClient.query({
+      query: SEARCH_POSTS,
+      variables: {
+        page,
+        perPage,
+        search,
+      },
+    });
 
-  result.data = result.data.allPosts;
+    result.data = result.data.allPosts;
 
-  return result;
+    return result;
+  } catch (e) {
+    return null;
+  }
 };
 
 export const useNotifications = (page, perPage) => {
