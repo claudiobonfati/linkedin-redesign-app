@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { withRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import Sticky from 'react-sticky-el';
@@ -8,17 +8,21 @@ import SimpleCard from '../../../components/SimpleCard';
 import Jumbotron from '../../../components/Jumbotron';
 import Post from '../../../components/Post';
 import ProfileDisplay from '../../../components/ProfileDisplay';
-import { useCompany, useRandomCompanies } from '../../../graphql/hooks';
+import { useCompany, getRandomCompanies } from '../../../graphql/hooks';
 import defaultVariants from '../../../utils/FramerMotionDefault';
 
 const companyHome = (props) => {
   const { nameslug } = props.router.query;
   const company = useCompany(nameslug);
-  const alsoViewed = useRandomCompanies(5);
+  const [alsoViewed, setAlsoViewed] = useState([]);
 
-  useEffect(() => {
+  useEffect(async () => {
     // Reseting scroll manually (FramerMotion dependency)
     window.scrollTo(0, 0);
+
+    // Request "People also viewed" list
+    const companies = await getRandomCompanies(4, [`${company?.data?.id || '0'}`]);
+    setAlsoViewed(companies);
   }, []);
 
   return (
@@ -143,22 +147,15 @@ const companyHome = (props) => {
             <div className="sticky-aside-content">
               <Sticky topOffset={-20} scrollElement=".stickyArea">
                 <SimpleCard title="People also viewed">
-                  {(alsoViewed
-                  && !alsoViewed.error
-                  && alsoViewed.loading)
-                  && (
+                  {alsoViewed.length === 0 && (
                     <Loading />
                   )}
-                  {(alsoViewed
-                  && !alsoViewed.error
-                  && !alsoViewed.loading
-                  && alsoViewed.data
-                  && Array.isArray(alsoViewed.data)
-                  && alsoViewed.data.length > 0)
+                  {(Array.isArray(alsoViewed)
+                  && alsoViewed.length > 0)
                   && (
                     <div className="w-100">
-                      {alsoViewed.data.map((item, index) => (
-                        <div className={`${index + 1 === alsoViewed.data.length ? '' : 'pb-3'}`} key={item.id}>
+                      {alsoViewed.map((item, index) => (
+                        <div className={`${index + 1 === alsoViewed.length ? '' : 'pb-3'}`} key={item.id}>
                           <ProfileDisplay
                             image={item.logo}
                             imageSize={50}

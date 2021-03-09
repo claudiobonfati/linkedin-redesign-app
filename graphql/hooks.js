@@ -293,7 +293,7 @@ export const useRandomUsers = (limit, exclude = null) => {
   };
 };
 
-export const getRandomCompanies = async (limit, exclude = null) => {
+export const getRandomCompanies = async (limit, exclude = '0') => {
   try {
     let result = await ApolloClient.query({
       query: GET_COMPANIES,
@@ -303,14 +303,14 @@ export const getRandomCompanies = async (limit, exclude = null) => {
       },
     });
 
-    let newResult;
+    const excludeArray = [...exclude];
 
-    if (exclude) {
-      newResult = result.data.allCompanies.filter((company) => company.id != exclude);
-      newResult = newResult.map((x) => x);
-    } else {
-      newResult = result.data.allCompanies.map((x) => x);
-    }
+    let newResult = result.data.allCompanies.filter(
+      (company) => !excludeArray.includes(company.id),
+    );
+    newResult = newResult.map((x) => x);
+    newResult = newResult.sort(() => Math.random() - 0.5);
+    newResult = newResult.slice(0, limit);
 
     newResult = newResult.sort(() => Math.random() - 0.5);
     newResult = newResult.slice(0, limit);
