@@ -163,7 +163,7 @@ class SearchPosts extends React.Component {
             <div className="col-lg-6 col-md-9 py-4">
               {jsxPostsList}
             </div>
-            <div className="col-lg-3 col-md-4 col-sm-6 pt-4 d-none d-md-block">
+            <div className="col-lg-3 col-md-4 col-sm-6 pt-4 d-none d-lg-block">
               <div className="sticky-aside-content">
                 <Sticky topOffset={-20} scrollElement=".stickyArea">
                   <SimpleCard title="Recently viewed">

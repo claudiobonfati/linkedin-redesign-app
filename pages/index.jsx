@@ -161,7 +161,7 @@ class Home extends React.Component {
               </div>
               {jsxPostsList}
             </div>
-            <div className="col-lg-3 col-md-4 col-sm-6 pt-4 order-md-3 order-sm-2 d-none d-sm-block">
+            <div className="col-lg-3 col-md-4 col-sm-6 pt-4 order-md-3 order-sm-2 d-none d-lg-block">
               <div className="sticky-aside-content">
                 <Sticky topOffset={-20} scrollElement=".stickyArea">
                   <SimpleCard title="Keep in touch">

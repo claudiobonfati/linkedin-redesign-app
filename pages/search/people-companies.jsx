@@ -101,7 +101,7 @@ const searchAll = (props) => {
     >
       <div className="container">
         <main className="row">
-          <div className="col-lg-3 col-md-4 pt-4 d-none d-md-block">
+          <div className="col-lg-3 col-md-4 pt-4 d-none d-lg-block">
             <div className="sticky-aside-content">
               <Sticky topOffset={-20} scrollElement=".stickyArea">
                 <CurrentProfileOverview simple />
