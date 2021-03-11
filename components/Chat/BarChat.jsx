@@ -5,11 +5,12 @@ import FeatherIcon from 'feather-icons-react';
 import ProfileDisplay from '../ProfileDisplay';
 import styles from './BarChat.module.sass';
 import { useChat } from '../../context/Chat';
+import { useStoreState } from 'easy-peasy';
 
 const barChat = () => {
   const context = useChat();
-  const currentUser = JSON.parse(localStorage.getItem('current-user-preview'));
   const [field, setField] = useState('');
+  const profile = useStoreState((state) => state.user.profile);
 
   const sendMessage = () => {
     const cleanedField = field.replace(/(\r\n|\n|\r)/gm, '');
@@ -107,16 +108,16 @@ const barChat = () => {
                   key={item.id}
                 >
                   <div className={styles.userPhoto}>
-                    {(item.from === 'target') && (
+                    {item.from === 'target' && (
                       <img
                         src={context?.data.contact.User.photo}
                         alt={context?.data.contact.User.name}
                       />
                     )}
-                    {(item.from === 'me') && (
+                    {item.from === 'me' && (
                       <img
-                        src={currentUser?.data.photo}
-                        alt={currentUser?.data.name}
+                        src={profile?.data?.photo}
+                        alt={profile?.data?.name}
                       />
                     )}
                   </div>

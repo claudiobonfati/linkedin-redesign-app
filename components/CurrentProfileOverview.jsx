@@ -1,22 +1,12 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { useStoreState, useStoreActions } from 'easy-peasy';
+import { useStoreState } from 'easy-peasy';
 import ProfileOverview from './ProfileOverview';
-import { getSimpleUser } from '../graphql/hooks';
 import SimpleButton from './SimpleButton';
 import Loading from './Loading';
 
 const currentProfileOverview = (props) => {
   const profile = useStoreState((state) => state.user.profile);
-  const setProfile = useStoreActions((actions) => actions.user.setProfile);
-
-  (async () => {
-    if (!profile) {
-      let data = await getSimpleUser('claudiobonfati');
-
-      setProfile(data);
-    }
-  })();
 
   // Main articles list
   let jsxDisplay = (<Loading />);
@@ -38,13 +28,13 @@ const currentProfileOverview = (props) => {
           skype={!props.simple ? profile.data.skype : null}
         />
         {!props.simple && (
-        <div className="mt-4">
-          <SimpleButton
-            text="Connect with me"
-            to="https://www.linkedin.com/in/claudiobonfati/"
-            outside
-          />
-        </div>
+          <div className="mt-4">
+            <SimpleButton
+              text="Connect with me"
+              to="https://www.linkedin.com/in/claudiobonfati/"
+              outside
+            />
+          </div>
         )}
       </>
     );

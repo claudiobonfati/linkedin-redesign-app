@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Image } from 'react-image-and-background-image-fade';
 import Link from 'next/link';
 import { ApolloProvider } from '@apollo/client';
-import { useStoreState } from 'easy-peasy';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 import ApolloClient from '../../graphql/apollo';
 import { useHeader } from '../../context/Header';
 import styles from './Header.module.sass';
@@ -11,11 +11,22 @@ import Search from './Search';
 import DiscoverMenu from './DiscoverMenu';
 import NotificationsMenu from './NotificationsMenu';
 import MessagesMenu from './MessagesMenu';
+import { getSimpleUser } from '../../graphql/hooks';
 
 const header = () => {
   const router = useRouter();
   const context = useHeader();
   const profile = useStoreState((state) => state.user.profile);
+
+  const setProfile = useStoreActions((actions) => actions.user.setProfile);
+
+  (async () => {
+    if (!profile) {
+      let response = await getSimpleUser('claudiobonfati');
+
+      setProfile(response);
+    }
+  })();
 
   const closeTabs = () => {
     context.dispatch({ type: 'CLOSE_TAB' });
