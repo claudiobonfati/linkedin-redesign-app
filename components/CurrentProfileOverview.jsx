@@ -1,12 +1,22 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { useStoreState } from 'easy-peasy';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 import ProfileOverview from './ProfileOverview';
+import { getSimpleUser } from '../graphql/hooks';
 import SimpleButton from './SimpleButton';
 import Loading from './Loading';
 
 const currentProfileOverview = (props) => {
   const profile = useStoreState((state) => state.user.profile);
+  const setProfile = useStoreActions((actions) => actions.user.setProfile);
+
+  (async () => {
+    if (!profile) {
+      let response = await getSimpleUser('claudiobonfati');
+
+      setProfile(response);
+    }
+  })();
 
   // Main articles list
   let jsxDisplay = (<Loading />);
