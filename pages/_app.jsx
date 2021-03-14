@@ -29,6 +29,9 @@ class App extends NextApp {
     return (
       <>
         <Head>
+          <meta charset="utf-8">
+          <title>LinkedIn Redesign</title>
+          <meta name="description" content="What if LinkedIn was beautiful? - LinkedIn Redesign is a new interface concept for LinkedIn web. Coded by Claudio Bonfati / Designed by Gregoire Vella" />
           <link rel="apple-touch-icon" sizes="57x57" href={`${process.env.BASE_PATH}/images/favicon/apple-icon-57x57.png`} />
           <link rel="apple-touch-icon" sizes="60x60" href={`${process.env.BASE_PATH}/images/favicon/apple-icon-60x60.png`} />
           <link rel="apple-touch-icon" sizes="72x72" href={`${process.env.BASE_PATH}/images/favicon/apple-icon-72x72.png`} />
@@ -45,7 +48,11 @@ class App extends NextApp {
           <meta name="msapplication-TileColor" content="#007FB2" />
           <meta name="msapplication-TileImage" content={`${process.env.BASE_PATH}/images/favicon/ms-icon-144x144.png`} />
           <meta name="theme-color" content="#007FB2" />
-          <title>LinkedIn Redesign</title>
+          <meta property="og:url" content="https://claudiobonfati.github.io/linkedin-redesign-app">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="LinkedIn Redesign. What if LinkedIn was beautiful?">
+          <meta property="og:description" content="LinkedIn Redesign is a new interface concept for LinkedIn web. Coded by Claudio Bonfati / Designed by Gregoire Vella">
+          <meta property="og:image" content="https://claudiobonfati.github.io/linkedin-redesign-app/images/og-image.png">
         </Head>
         <LayoutWrapper>
           <Component {...pageProps} key={router.asPath} />
