@@ -5,7 +5,7 @@
   width: 100%
   background-color: white
   border: 1px solid $color-border
-  
+
 .topInfoWrapper
   padding: 40px 20px
   border-bottom: 1px solid $color-border
@@ -68,7 +68,6 @@
       padding: 1px 5px
       border-radius: 3px
 
-    
 .infoWrapper
   display: flex
   flex-direction: row
@@ -154,6 +153,23 @@
       color: white
       fill: $color-gray-medium
 
+@media (max-width: map-get($breakpoints, 'xl'))
+  .topInfoWrapper
+    padding: 20px
+
+  .infoWrapper
+    .infoLeft
+      padding: 10px
+    .infoRight
+      padding: 10px
+
+  .socialNetworks
+    padding: 10px
+    .item 
+      padding: 10px
+
+  .photoWrapper
+    margin-bottom: 10px 
 
 @media (max-width: map-get($breakpoints, 'md'))
   .photoWrapper

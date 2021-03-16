@@ -204,6 +204,14 @@ button
   height: 100%
   overflow: hidden
 
+@media (max-width: map-get($breakpoints, 'xl'))
+  body
+    --header-height: 132px
+
+  .sticky-aside-content
+    .sticky
+      top: 155px !important
+
 @media (max-width: map-get($breakpoints, 'md'))
   body
     --header-height: 152px

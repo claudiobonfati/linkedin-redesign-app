@@ -66,12 +66,17 @@
       
 
 @media (max-width: map-get($breakpoints, 'xl'))
+  .wrapper
+    --header-height: 68px
+  .menu
+    li
+      span,
+      a
+        padding: 20px
 
 @media (max-width: map-get($breakpoints, 'lg'))
 
 @media (max-width: map-get($breakpoints, 'md'))
-  .wrapper
-    --header-height: 68px
 
 @media (max-width: map-get($breakpoints, 'sm'))
   .wrapper

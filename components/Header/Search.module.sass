@@ -104,6 +104,10 @@
     font-weight: 500
     color: $color-blue
 
+@media (max-width: map-get($breakpoints, 'xl'))
+  .searchInputWrapper
+    height: 35px
+
 @media (max-width: map-get($breakpoints, 'sm'))
   .wrapperDrop
     --header-height: 67px

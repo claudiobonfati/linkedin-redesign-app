@@ -38,13 +38,12 @@ const currentProfileOverview = (props) => {
           skype={!props.simple ? profile.data.skype : null}
         />
         {!props.simple && (
-          <div className="mt-4">
-            <SimpleButton
-              text="Connect with me"
-              to="https://www.linkedin.com/in/claudiobonfati/"
-              outside
-            />
-          </div>
+          <SimpleButton
+            text="Connect with me"
+            to="https://www.linkedin.com/in/claudiobonfati/"
+            outside
+            noBorderTop
+          />
         )}
       </>
     );

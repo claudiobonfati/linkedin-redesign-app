@@ -7,13 +7,13 @@ const simpleButton = (props) => (
   <>
     {!props.outside ? (
       <Link to={props.to} as={props.as} scroll={false}>
-        <a title={props.text} className={styles.button}>
+        <a title={props.text} className={`${styles.button} ${props.noBorderTop ? styles.noBorderTop : null}`}>
           {props.text}
         </a>
       </Link>
     ) : (
       <a
-        className={styles.button}
+        className={`${styles.button} ${props.noBorderTop ? styles.noBorderTop : null}`}
         href={props.to}
         target="_blank"
         rel="noreferrer"
@@ -29,12 +29,14 @@ simpleButton.propTypes = {
   to: PropTypes.string.isRequired,
   as: PropTypes.string,
   outside: PropTypes.bool.isRequired,
+  noBorderTop: PropTypes.bool,
 };
 
 simpleButton.defaultProps = {
   text: 'Click here',
   to: '/',
   outside: false,
+  noBorderTop: false,
 };
 
 export default simpleButton;

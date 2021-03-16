@@ -29,7 +29,6 @@ class App extends NextApp {
     return (
       <>
         <Head>
-          <meta charset="utf-8" />
           <title>LinkedIn Redesign</title>
           <meta name="description" content="What if LinkedIn was beautiful? - LinkedIn Redesign is a new interface concept for LinkedIn web. Coded by Claudio Bonfati / Designed by Gregoire Vella" />
           <link rel="apple-touch-icon" sizes="57x57" href={`${process.env.BASE_PATH}/images/favicon/apple-icon-57x57.png`} />
