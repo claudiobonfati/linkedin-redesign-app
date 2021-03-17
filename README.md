@@ -1,6 +1,7 @@
 # LinkedIn Redesign
 
 An attractive and interactable user interface created with [React.js](https://reactjs.org).
+
 You can check the **LIVE project** [here](https://claudiobonfati.github.io/linkedin-redesign-app).
 
 [![Video presentation](https://i.imgur.com/1gi06IS.png)](https://vimeo.com/522611975 "Play")
@@ -19,7 +20,7 @@ Connect with me at the real [LinkedIn](https://www.linkedin.com/in/claudiobonfat
 
 ## Some notes about the project
 
-1 - The [API](https://github.com/claudiobonfati/linkedin-redesign-api) is a populated with with sample and static data for displaying purpose only. 
+1 - The [API](https://github.com/claudiobonfati/linkedin-redesign-api) was created with sample and static data for displaying purpose only, without any INSERT, DELETE or UPDATE methods. 
 
 2 - The new design concept was created by [Gregoire Vella](https://www.linkedin.com/in/gregoirevella/), and it's not intended to be shown as my personal work. See more at [Authors](#authors) section.
 
