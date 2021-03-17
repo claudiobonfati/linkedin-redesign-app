@@ -1,8 +1,9 @@
-# LinkedIn Redesign (in progress)
+# LinkedIn Redesign
 
-An attractive and interactable user interface created with [React.js](https://reactjs.org/).
+An attractive and interactable user interface created with [React.js](https://reactjs.org).
+You can check the **LIVE project** [here](https://claudiobonfati.github.io/linkedin-redesign-app).
 
-[![Video presentation](http://i.imgur.com/MHWhIUT.png)](https://vimeo.com/187173098 "Play")
+[![Video presentation](https://i.imgur.com/1gi06IS.png)](https://vimeo.com/522611975 "Play")
 
 ## About this project
 
@@ -14,13 +15,13 @@ _"What if LinkedIn was beautiful?"_
 
 This project is part of my personal portfolio, I'll be more than happy if you could provide me any feedback about the project, code, code structure and so on!
 
-Connect with me at the real [LinkedIn](https://www.linkedin.com/in/claudiobonfati/).
+Connect with me at the real [LinkedIn](https://www.linkedin.com/in/claudiobonfati).
 
 ## Some notes about the project
 
-1 - The [API](https://github.com/claudiobonfati/linkedin-redesign-api) is a sample API with static data for displaying purpose only. 
+1 - The [API](https://github.com/claudiobonfati/linkedin-redesign-api) is a populated with with sample and static data for displaying purpose only. 
 
-2 - The new redesign concept was created by [Gregoire Vella](https://www.linkedin.com/in/gregoirevella/), and it's not intended to be shown as my personal work. See more at [Authors](#authors) section.
+2 - The new design concept was created by [Gregoire Vella](https://www.linkedin.com/in/gregoirevella/), and it's not intended to be shown as my personal work. See more at [Authors](#authors) section.
 
 ## Getting Started
 
@@ -28,16 +29,16 @@ Connect with me at the real [LinkedIn](https://www.linkedin.com/in/claudiobonfat
 
 To run this project in the development mode, you'll need to have a basic environment to run an React.js application, that can be found [here](https://reactjs.org/docs/getting-started.html).
 
-Also, you'll need the [API](https://github.com/claudiobonfati/linkedin-redesign-api) running locally on your machine. You can find the [API](https://github.com/claudiobonfati/linkedin-redesign-api) and all the instructions to start the local server [here](https://github.com/claudiobonfati/linkedin-redesign-api).
+Also, you'll need the API running locally on your machine. You can find the API and all the instructions to start the local server [here](https://github.com/claudiobonfati/linkedin-redesign-api).
 
 ### Installing
 
 **Cloning the repository**
 
 ```
-$ git clone https://github.com/claudiobonfati/linkedin-redesign-concept.git
+$ git clone https://github.com/claudiobonfati/linkedin-redesign-app.git
 
-$ cd linkedin-redesign-concept
+$ cd linkedin-redesign-app
 ```
 
 **Installing dependencies**
@@ -66,18 +67,18 @@ Access the application at http://localhost:3001/linkedin-redesign-app/.
 
 You can send how many PR's you want, I'll be glad to analyse and accept them!
 
-Connect with me at the real [LinkedIn](https://www.linkedin.com/in/claudiobonfati/)
+Connect with me at the real [LinkedIn](https://www.linkedin.com/in/claudiobonfati).
 
 Thank you!
 
 ## Authors
 
-* **Claudio Bonfati** - *The one who coded it* - [LinkedIn Profile](https://www.linkedin.com/in/claudiobonfati/)
+* **Claudio Bonfati** - *The one who coded it* - [LinkedIn Profile](https://www.linkedin.com/in/claudiobonfati)
 
 * **Gregoire Vella** - *The one who designed it* - [LinkedIn Profile](https://www.linkedin.com/in/gregoirevella/)
 
 ## License
 
-This project is licensed under the [MIT License](https://choosealicense.com/licenses/mit/)
+This project is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
 
-The design may also have its own copyright details
+The design may also have its own copyright details.
