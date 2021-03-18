@@ -49,7 +49,7 @@ class App extends NextApp {
           <meta name="theme-color" content="#007FB2" />
           <meta name="author" content="Claudio Bonfati" />
           <meta property="og:url" content="https://claudiobonfati.github.io/linkedin-redesign-app" />
-          <meta property="og:type" content="article" />
+          <meta property="og:type" content="website" />
           <meta property="og:title" content="LinkedIn Redesign. What if LinkedIn was beautiful?" />
           <meta property="og:description" content="LinkedIn Redesign is a new interface concept for LinkedIn web. Coded by Claudio Bonfati / Designed by Gregoire Vella" />
           <meta property="og:image" content="https://claudiobonfati.github.io/linkedin-redesign-app/images/og-image.png" />
