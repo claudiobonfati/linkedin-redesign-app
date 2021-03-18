@@ -47,6 +47,7 @@ class App extends NextApp {
           <meta name="msapplication-TileColor" content="#007FB2" />
           <meta name="msapplication-TileImage" content={`${process.env.BASE_PATH}/images/favicon/ms-icon-144x144.png`} />
           <meta name="theme-color" content="#007FB2" />
+          <meta name="author" content="Claudio Bonfati" />
           <meta property="og:url" content="https://claudiobonfati.github.io/linkedin-redesign-app" />
           <meta property="og:type" content="article" />
           <meta property="og:title" content="LinkedIn Redesign. What if LinkedIn was beautiful?" />
