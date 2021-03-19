@@ -16,7 +16,7 @@ const menuCompany = () => {
       </li>
       <li>
         <span className={styles.disabled}>
-          Carrers
+          Careers
         </span>
       </li>
     </ul>
